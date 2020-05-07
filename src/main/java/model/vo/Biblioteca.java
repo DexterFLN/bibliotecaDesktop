@@ -2,6 +2,7 @@ package model.vo;
 
 public class Biblioteca {
 	private String nome;
+	private String cnpj;
 
 	public Biblioteca(String nome) {
 		super();
