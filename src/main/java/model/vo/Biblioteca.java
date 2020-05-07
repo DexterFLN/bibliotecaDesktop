@@ -2,8 +2,6 @@ package model.vo;
 
 public class Biblioteca {
 	private String nome;
-	private String cnpj;
-	private int contador;
 
 	public Biblioteca(String nome) {
 		super();
