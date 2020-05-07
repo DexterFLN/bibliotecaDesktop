@@ -2,12 +2,14 @@ package model.vo;
 
 public class Biblioteca {
 	private String nome;
-
-	public Biblioteca(String nome) {
+	private String cnpj;
+	
+	public Biblioteca(String nome, String cnpj) {
 		super();
 		this.nome = nome;
+		this.cnpj = cnpj;
 	}
-	
+
 	public Biblioteca() {
 		super();
 	}
@@ -20,4 +22,11 @@ public class Biblioteca {
 		this.nome = nome;
 	}
 	
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 }
