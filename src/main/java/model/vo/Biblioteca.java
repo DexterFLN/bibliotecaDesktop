@@ -3,7 +3,7 @@ package model.vo;
 public class Biblioteca {
 	private String nome;
 	private String cnpj;
-
+//alterei dnv (Arthur)
 	public Biblioteca(String nome) {
 		super();
 		this.nome = nome;
