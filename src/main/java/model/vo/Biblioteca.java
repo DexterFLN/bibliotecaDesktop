@@ -2,12 +2,15 @@ package model.vo;
 
 public class Biblioteca {
 	private String nome;
-	private String cnpj;
+	private Usuario[] usuarios;
+	private Sessao[] sessoes;
 	
-	public Biblioteca(String nome, String cnpj) {
+	
+	public Biblioteca(String nome, Usuario[] usuarios, Sessao[] sessoes) {
 		super();
 		this.nome = nome;
-		this.cnpj = cnpj;
+		this.usuarios = usuarios;
+		this.sessoes = sessoes;
 	}
 
 	public Biblioteca() {
@@ -21,12 +24,24 @@ public class Biblioteca {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getCnpj() {
-		return cnpj;
+
+	public Usuario[] getUsuarios() {
+		return usuarios;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setUsuarios(Usuario[] usuarios) {
+		this.usuarios = usuarios;
 	}
+
+	public Sessao[] getSessoes() {
+		return sessoes;
+	}
+
+	public void setSessoes(Sessao[] sessoes) {
+		this.sessoes = sessoes;
+	}
+	
+	
+
+	
 }
