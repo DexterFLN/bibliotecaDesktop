@@ -18,12 +18,13 @@ public class Usuario {
 	private String dddFixo;
 	private String dddMovel;
 	private String foneMovel;
+	private String foneFixo;
 	private List<Livro> livros;
 	private List<Aluguel> alugueis;
 	
-	public Usuario(String nome, String sobrenome, Date dataNascimento, String rua, int numeroRua,
-			String bairro, String cidade, String uf, String cep, String email, String dddFixo, String dddMovel,
-			String foneMovel, List<Livro> livros, List<Aluguel> alugueis) {
+	public Usuario(String nome, String sobrenome, Date dataNascimento, String rua, int numeroRua, String bairro,
+			String cidade, String uf, String cep, String email, String dddFixo, String dddMovel, String foneMovel,
+			String foneFixo, List<Livro> livros, List<Aluguel> alugueis) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -38,6 +39,7 @@ public class Usuario {
 		this.dddFixo = dddFixo;
 		this.dddMovel = dddMovel;
 		this.foneMovel = foneMovel;
+		this.foneFixo = foneFixo;
 		this.livros = livros;
 		this.alugueis = alugueis;
 	}
@@ -201,6 +203,18 @@ public class Usuario {
 
 	public void setAlugueis(List<Aluguel> alugueis) {
 		this.alugueis = alugueis;
+	}
+
+
+
+	public String getFoneFixo() {
+		return foneFixo;
+	}
+
+
+
+	public void setFoneFixo(String foneFixo) {
+		this.foneFixo = foneFixo;
 	}
 	
 	
