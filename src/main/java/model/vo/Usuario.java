@@ -7,7 +7,6 @@ public class Usuario {
 	
 	private String nome;
 	private String sobrenome;
-	private int tipo;
 	private Date dataNascimento;
 	private String rua;
 	private int numeroRua;
@@ -22,18 +21,12 @@ public class Usuario {
 	private List<Livro> livros;
 	private List<Aluguel> alugueis;
 	
-	
-	
-	
-	
-	
-	public Usuario(String nome, String sobrenome, int tipo, Date dataNascimento, String rua, int numeroRua,
+	public Usuario(String nome, String sobrenome, Date dataNascimento, String rua, int numeroRua,
 			String bairro, String cidade, String uf, String cep, String email, String dddFixo, String dddMovel,
 			String foneMovel, List<Livro> livros, List<Aluguel> alugueis) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		this.tipo = tipo;
 		this.dataNascimento = dataNascimento;
 		this.rua = rua;
 		this.numeroRua = numeroRua;
@@ -74,16 +67,6 @@ public class Usuario {
 	
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
-	}
-	
-	
-	public int getTipo() {
-		return tipo;
-	}
-	
-	
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
 	}
 	
 	

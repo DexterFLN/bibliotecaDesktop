@@ -10,10 +10,9 @@ public class Livro {
 	private int ano;
 	private boolean alugado;
 	private Sessao sessao;
-	private Date dataLancamento;
 	
-	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado, Sessao sessao,
-			Date dataLancamento) {
+	
+	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado, Sessao sessao) {
 		super();
 		this.nome = nome;
 		this.autor = autor;
@@ -22,7 +21,7 @@ public class Livro {
 		this.ano = ano;
 		this.alugado = alugado;
 		this.sessao = sessao;
-		this.dataLancamento = dataLancamento;
+		
 	}
 	
 
@@ -88,13 +87,7 @@ public class Livro {
 		this.sessao = sessao;
 	}
 
-	public Date getDataLancamento() {
-		return dataLancamento;
-	}
 
-	public void setDataLancamento(Date dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
 	
 	
 }
