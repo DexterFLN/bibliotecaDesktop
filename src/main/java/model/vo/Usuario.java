@@ -1,6 +1,7 @@
 package model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Usuario {
 	
@@ -18,13 +19,17 @@ public class Usuario {
 	private String dddFixo;
 	private String dddMovel;
 	private String foneMovel;
-	private Livro[] livros;
-	private Aluguel[] alugueis;
+	private List<Livro> livros;
+	private List<Aluguel> alugueis;
+	
+	
+	
+	
 	
 	
 	public Usuario(String nome, String sobrenome, int tipo, Date dataNascimento, String rua, int numeroRua,
 			String bairro, String cidade, String uf, String cep, String email, String dddFixo, String dddMovel,
-			String foneMovel, Livro[] livros, Aluguel[] alugueis) {
+			String foneMovel, List<Livro> livros, List<Aluguel> alugueis) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -43,9 +48,9 @@ public class Usuario {
 		this.livros = livros;
 		this.alugueis = alugueis;
 	}
-	
-	
-	
+
+
+
 	public Usuario() {
 		super();
 	}
@@ -190,26 +195,33 @@ public class Usuario {
 	public void setFoneMovel(String foneMovel) {
 		this.foneMovel = foneMovel;
 	}
-	
-	
-	public Livro[] getLivros() {
+
+
+
+	public List<Livro> getLivros() {
 		return livros;
 	}
-	
-	
-	public void setLivros(Livro[] livros) {
+
+
+
+	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
-	
-	
-	public Aluguel[] getAlugueis() {
+
+
+
+	public List<Aluguel> getAlugueis() {
 		return alugueis;
 	}
-	
-	
-	public void setAlugueis(Aluguel[] alugueis) {
+
+
+
+	public void setAlugueis(List<Aluguel> alugueis) {
 		this.alugueis = alugueis;
 	}
+	
+	
+
 	
 	
 	

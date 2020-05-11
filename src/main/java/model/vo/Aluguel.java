@@ -1,19 +1,17 @@
 package model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Aluguel {
 	private Date dataLocacao;
 	private Date devovlucaoPrevista;
 	private Date devolucaoEfetiva;
 	private Usuario usuario;
-	private Livro[] livros;
+	private List<Livro> livros;
 	
-	
-	
-
-
-	public Aluguel(Date dataLocacao, Date devovlucaoPrevista, Date devolucaoEfetiva, Usuario usuario, Livro[] livros) {
+	public Aluguel(Date dataLocacao, Date devovlucaoPrevista, Date devolucaoEfetiva, Usuario usuario,
+			List<Livro> livros) {
 		super();
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devovlucaoPrevista;
@@ -21,7 +19,7 @@ public class Aluguel {
 		this.usuario = usuario;
 		this.livros = livros;
 	}
-	
+
 
 
 	public Aluguel() {
@@ -70,14 +68,19 @@ public class Aluguel {
 	}
 
 
-	public Livro[] getLivros() {
+
+	public List<Livro> getLivros() {
 		return livros;
 	}
 
 
-	public void setLivros(Livro[] livros) {
+
+	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
+
+
+	
 
 
 	

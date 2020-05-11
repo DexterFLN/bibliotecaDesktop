@@ -1,19 +1,25 @@
 package model.vo;
 
+import java.util.List;
+
 public class Sessao {
 	private String nome;
-	private Livro[] livros;
+	private List<Livro> livros;
 	
 	
 	
 
 
-	public Sessao(String nome, Livro[] livros) {
+	
+	
+
+
+	public Sessao(String nome, List<Livro> livros) {
 		super();
 		this.nome = nome;
 		this.livros = livros;
 	}
-	
+
 
 
 	public Sessao() {
@@ -32,14 +38,19 @@ public class Sessao {
 	}
 
 
-	public Livro[] getLivros() {
+
+	public List<Livro> getLivros() {
 		return livros;
 	}
 
 
-	public void setLivros(Livro[] livros) {
+
+	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
+
+
+	
 
 
 

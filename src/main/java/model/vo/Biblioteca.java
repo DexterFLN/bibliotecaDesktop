@@ -1,12 +1,16 @@
 package model.vo;
 
+import java.util.List;
+
 public class Biblioteca {
 	private String nome;
-	private Usuario[] usuarios;
-	private Sessao[] sessoes;
+	private List<Usuario> usuarios;
+	private List<Sessao> sessoes;
 	
 	
-	public Biblioteca(String nome, Usuario[] usuarios, Sessao[] sessoes) {
+	
+
+	public Biblioteca(String nome, List<Usuario> usuarios, List<Sessao> sessoes) {
 		super();
 		this.nome = nome;
 		this.usuarios = usuarios;
@@ -25,21 +29,23 @@ public class Biblioteca {
 		this.nome = nome;
 	}
 
-	public Usuario[] getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(Usuario[] usuarios) {
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
-	public Sessao[] getSessoes() {
+	public List<Sessao> getSessoes() {
 		return sessoes;
 	}
 
-	public void setSessoes(Sessao[] sessoes) {
+	public void setSessoes(List<Sessao> sessoes) {
 		this.sessoes = sessoes;
 	}
+
+	
 	
 	
 
