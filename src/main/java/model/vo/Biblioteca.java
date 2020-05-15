@@ -1,13 +1,20 @@
 package model.vo;
 
+import java.util.List;
+
 public class Biblioteca {
 	private String nome;
-	private String cnpj;
+	private List<Usuario> usuarios;
+	private List<Sessao> sessoes;
 	
-	public Biblioteca(String nome, String cnpj) {
+	
+	
+
+	public Biblioteca(String nome, List<Usuario> usuarios, List<Sessao> sessoes) {
 		super();
 		this.nome = nome;
-		this.cnpj = cnpj;
+		this.usuarios = usuarios;
+		this.sessoes = sessoes;
 	}
 
 	public Biblioteca() {
@@ -21,12 +28,26 @@ public class Biblioteca {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getCnpj() {
-		return cnpj;
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
+
+	public List<Sessao> getSessoes() {
+		return sessoes;
+	}
+
+	public void setSessoes(List<Sessao> sessoes) {
+		this.sessoes = sessoes;
+	}
+
+	
+	
+	
+
+	
 }
