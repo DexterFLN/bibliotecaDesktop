@@ -8,12 +8,6 @@ public class Usuario {
 	private String nome;
 	private String sobrenome;
 	private Date dataNascimento;
-	private String rua;
-	private int numeroRua;
-	private String bairro;
-	private String cidade;
-	private String uf;
-	private String cep;
 	private String email;
 	private String dddFixo;
 	private String dddMovel;
@@ -22,19 +16,13 @@ public class Usuario {
 	private List<Livro> livros;
 	private List<Aluguel> alugueis;
 	
-	public Usuario(String nome, String sobrenome, Date dataNascimento, String rua, int numeroRua, String bairro,
-			String cidade, String uf, String cep, String email, String dddFixo, String dddMovel, String foneMovel,
-			String foneFixo, List<Livro> livros, List<Aluguel> alugueis) {
+
+	public Usuario(String nome, String sobrenome, Date dataNascimento, String email, String dddFixo, String dddMovel,
+			String foneMovel, String foneFixo, List<Livro> livros, List<Aluguel> alugueis) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
-		this.rua = rua;
-		this.numeroRua = numeroRua;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.uf = uf;
-		this.cep = cep;
 		this.email = email;
 		this.dddFixo = dddFixo;
 		this.dddMovel = dddMovel;
@@ -79,66 +67,6 @@ public class Usuario {
 	
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-	
-	
-	public String getRua() {
-		return rua;
-	}
-	
-	
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-	
-	
-	public int getNumeroRua() {
-		return numeroRua;
-	}
-	
-	
-	public void setNumeroRua(int numeroRua) {
-		this.numeroRua = numeroRua;
-	}
-	
-	
-	public String getBairro() {
-		return bairro;
-	}
-	
-	
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	
-	
-	public String getCidade() {
-		return cidade;
-	}
-	
-	
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	
-	
-	public String getUf() {
-		return uf;
-	}
-	
-	
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-	
-	
-	public String getCep() {
-		return cep;
-	}
-	
-	
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 	
 	
