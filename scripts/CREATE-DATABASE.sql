@@ -58,7 +58,7 @@ CREATE TABLE ALUGUEL (
     idUsuario INT NOT NULL,
     dataLocacao DATE NOT NULL,
     devolucaoPrevista DATE NOT NULL,
-    devolucaoEfetiva DATE NOT NULL,
+    devolucaoEfetiva DATE,
     PRIMARY KEY(id),
     FOREIGN KEY (idUsuario) REFERENCES USUARIO(id)
 );

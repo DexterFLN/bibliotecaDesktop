@@ -1,51 +1,45 @@
 package model.vo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Sessao {
+	
+	private int id;
 	private String nome;
-	private List<Livro> livros;
+	private ArrayList<Livro> livros;
 	
-	
-	
-
-
-	
-	
-
-
-	public Sessao(String nome, List<Livro> livros) {
+	public Sessao(int id, String nome, ArrayList<Livro> livros) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.livros = livros;
 	}
 
-
-
 	public Sessao() {
 		super();
 	}
-
-
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
-
-	public List<Livro> getLivros() {
+	public ArrayList<Livro> getLivros() {
 		return livros;
 	}
 
-
-
-	public void setLivros(List<Livro> livros) {
+	public void setLivros(ArrayList<Livro> livros) {
 		this.livros = livros;
 	}
 
