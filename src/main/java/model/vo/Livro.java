@@ -1,7 +1,7 @@
 package model.vo;
 
 public class Livro {
-	
+
 	private int id;
 	private String nome;
 	private String autor;
@@ -10,9 +10,9 @@ public class Livro {
 	private int ano;
 	private boolean alugado;
 	private Sessao sessao;
-	
-	
-	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, boolean alugado, Sessao sessao) {
+
+	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, boolean alugado,
+			Sessao sessao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -22,13 +22,12 @@ public class Livro {
 		this.ano = ano;
 		this.alugado = alugado;
 		this.sessao = sessao;
-		
 	}
-	
+
 	public Livro() {
 		super();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -93,7 +92,4 @@ public class Livro {
 		this.sessao = sessao;
 	}
 
-
-	
-	
 }

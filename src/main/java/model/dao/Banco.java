@@ -76,7 +76,7 @@ public class Banco {
 			return null;
 		}
 	}
-	
+
 	public static PreparedStatement getPreparedStatement(Connection conn, String sql, int tipoRetorno) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql, tipoRetorno);

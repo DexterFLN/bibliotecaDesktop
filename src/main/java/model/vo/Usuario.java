@@ -2,7 +2,6 @@ package model.vo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Usuario {
@@ -18,9 +17,11 @@ public class Usuario {
 	private String foneFixo;
 	private ArrayList<Livro> livros;
 	private ArrayList<Aluguel> alugueis;
+	private Endereco endereco;
 
 	public Usuario(int id, String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
-			String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis) {
+			String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
+			Endereco endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -33,6 +34,7 @@ public class Usuario {
 		this.foneFixo = foneFixo;
 		this.livros = livros;
 		this.alugueis = alugueis;
+		this.endereco = endereco;
 	}
 
 	public Usuario() {
@@ -42,11 +44,11 @@ public class Usuario {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -125,6 +127,14 @@ public class Usuario {
 
 	public void setFoneFixo(String foneFixo) {
 		this.foneFixo = foneFixo;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 }

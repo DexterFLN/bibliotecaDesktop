@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Aluguel {
-	
+
 	private int id;
 	private LocalDate dataLocacao;
 	private LocalDate devovlucaoPrevista;

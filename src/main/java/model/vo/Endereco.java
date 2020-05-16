@@ -10,7 +10,7 @@ public class Endereco {
 	private String uf;
 	private String cep;
 
-	public Endereco(int id,String rua, int numeroRua, String bairro, String cidade, String uf, String cep) {
+	public Endereco(int id, String rua, int numeroRua, String bairro, String cidade, String uf, String cep) {
 		super();
 		this.id = id;
 		this.rua = rua;
@@ -24,11 +24,11 @@ public class Endereco {
 	public Endereco() {
 		super();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}

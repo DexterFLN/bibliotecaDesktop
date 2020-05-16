@@ -10,7 +10,7 @@ import model.vo.Aluguel;
 public class AluguelDAO {
 
 	public Aluguel salvar(Aluguel aluguel) {
-		//TODO inserir dados na tabela ALUGUEL_LIVRO
+		// TODO inserir dados na tabela ALUGUEL_LIVRO
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO ALUGUEL (idUsuario, dataLocacao, devolucaoPrevista, devolucaoEfetiva) values (?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -67,14 +67,14 @@ public class AluguelDAO {
 
 		if (excluiu) {
 			// TODO atualizar tabelas de livros (trocar o atributo de alugado para false)
-			//TODO excluir dados na tabela ALUGUEL_LIVRO
+			// TODO excluir dados na tabela ALUGUEL_LIVRO
 		}
-		
+
 		return excluiu;
 	}
 
 	public boolean alterar(Aluguel aluguel) {
-		//TODO alterar dados na tabela ALUGUEL_LIVRO
+		// TODO alterar dados na tabela ALUGUEL_LIVRO
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET id=?, idUsuario=?, dataLocacao=?, devolucaoPrevista=?, devolucaoEfetiva=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -97,5 +97,8 @@ public class AluguelDAO {
 		}
 		return registrosAlterados > 0;
 	}
+
+	// TODO método de listagem de aluguel (consultarAluguel)
+	// TODO método de listagem de alugeis (consultarTodos)
 
 }

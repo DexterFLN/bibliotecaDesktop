@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-	
+
 	private int id;
 	private String nome;
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<Sessao> sessoes;
 
-	public Biblioteca(int id,String nome, ArrayList<Usuario> usuarios, ArrayList<Sessao> sessoes) {
+	public Biblioteca(int id, String nome, ArrayList<Usuario> usuarios, ArrayList<Sessao> sessoes) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -20,6 +20,14 @@ public class Biblioteca {
 
 	public Biblioteca() {
 		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -46,9 +54,4 @@ public class Biblioteca {
 		this.sessoes = sessoes;
 	}
 
-	
-	
-	
-
-	
 }
