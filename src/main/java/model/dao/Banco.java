@@ -16,6 +16,9 @@ public class Banco {
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
 
+	public static final int CODIGO_RETORNO_ERRO_EXCLUSAO = 0;
+	public static final int CODIGO_RETORNO_SUCESSO_EXCLUSAO = 1;
+
 	public static Connection getConnection() {
 		try {
 			Connection conn = null;
