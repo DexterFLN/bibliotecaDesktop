@@ -13,10 +13,9 @@ public class Aluguel {
 	private Usuario usuario;
 	private ArrayList<Livro> livros;
 
-	public Aluguel(int id, LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
+	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
 			Usuario usuario, ArrayList<Livro> livros) {
 		super();
-		this.id = id;
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;

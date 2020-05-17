@@ -11,10 +11,9 @@ public class Livro {
 	private boolean alugado;
 	private Sessao sessao;
 
-	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, boolean alugado,
+	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado,
 			Sessao sessao) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.autor = autor;
 		this.editora = editora;

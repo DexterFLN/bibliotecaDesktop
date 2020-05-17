@@ -8,9 +8,8 @@ public class Sessao {
 	private String nome;
 	private ArrayList<Livro> livros;
 
-	public Sessao(int id, String nome, ArrayList<Livro> livros) {
+	public Sessao(String nome, ArrayList<Livro> livros) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.livros = livros;
 	}

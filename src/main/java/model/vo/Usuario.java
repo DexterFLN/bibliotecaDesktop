@@ -19,11 +19,10 @@ public class Usuario {
 	private ArrayList<Aluguel> alugueis;
 	private Endereco endereco;
 
-	public Usuario(int id, String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
+	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
 			String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
 			Endereco endereco) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;

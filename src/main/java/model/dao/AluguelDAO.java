@@ -12,13 +12,12 @@ public class AluguelDAO {
 	public Aluguel salvar(Aluguel aluguel) {
 		// TODO inserir dados na tabela ALUGUEL_LIVRO
 		Connection connection = Banco.getConnection();
-		String sql = "INSERT INTO ALUGUEL (idUsuario, dataLocacao, devolucaoPrevista, devolucaoEfetiva) values (?,?,?,?)";
+		String sql = "INSERT INTO ALUGUEL (dataLocacao, devolucaoPrevista, devolucaoEfetiva) values (?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
 
 		try {
-			preparedStatement.setInt(1, aluguel.getUsuario().getId());
 			preparedStatement.setDate(2, java.sql.Date.valueOf(aluguel.getDataLocacao()));
 			preparedStatement.setDate(3, java.sql.Date.valueOf(aluguel.getDevovlucaoPrevista()));
 			if (aluguel.getDevolucaoEfetiva() != null) {

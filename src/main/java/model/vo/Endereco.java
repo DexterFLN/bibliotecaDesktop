@@ -10,9 +10,8 @@ public class Endereco {
 	private String uf;
 	private String cep;
 
-	public Endereco(int id, String rua, int numeroRua, String bairro, String cidade, String uf, String cep) {
+	public Endereco(String rua, int numeroRua, String bairro, String cidade, String uf, String cep) {
 		super();
-		this.id = id;
 		this.rua = rua;
 		this.numeroRua = numeroRua;
 		this.bairro = bairro;

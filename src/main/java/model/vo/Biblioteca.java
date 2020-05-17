@@ -10,9 +10,8 @@ public class Biblioteca {
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<Sessao> sessoes;
 
-	public Biblioteca(int id, String nome, ArrayList<Usuario> usuarios, ArrayList<Sessao> sessoes) {
+	public Biblioteca(String nome, ArrayList<Usuario> usuarios, ArrayList<Sessao> sessoes) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.usuarios = usuarios;
 		this.sessoes = sessoes;
