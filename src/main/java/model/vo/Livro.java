@@ -1,8 +1,8 @@
 package model.vo;
 
-import java.util.Date;
-
 public class Livro {
+
+	private int id;
 	private String nome;
 	private String autor;
 	private String editora;
@@ -10,9 +10,9 @@ public class Livro {
 	private int ano;
 	private boolean alugado;
 	private Sessao sessao;
-	
-	
-	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado, Sessao sessao) {
+
+	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado,
+			Sessao sessao) {
 		super();
 		this.nome = nome;
 		this.autor = autor;
@@ -21,15 +21,19 @@ public class Livro {
 		this.ano = ano;
 		this.alugado = alugado;
 		this.sessao = sessao;
-		
 	}
-	
 
 	public Livro() {
 		super();
 	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -87,7 +91,4 @@ public class Livro {
 		this.sessao = sessao;
 	}
 
-
-	
-	
 }
