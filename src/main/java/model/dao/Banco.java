@@ -9,13 +9,17 @@ import java.sql.Statement;
 
 public class Banco {
 
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String BANCODADOS = "";
-	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS + "?useSSL=false";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static final String BANCODADOS = "Atlas";
+	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS
+			+ "?useTimezone=true&serverTimezone=UTC&useSSL=false";
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
-	
-	public static Connection getConnection(){
+
+	public static final int CODIGO_RETORNO_ERRO_EXCLUSAO = 0;
+	public static final int CODIGO_RETORNO_SUCESSO_EXCLUSAO = 1;
+
+	public static Connection getConnection() {
 		try {
 			Connection conn = null;
 			Class.forName(DRIVER);
@@ -31,19 +35,19 @@ public class Banco {
 			return null;
 		}
 	}
-	
-	public static void closeConnection(Connection conn){
+
+	public static void closeConnection(Connection conn) {
 		try {
-			if(conn != null){
+			if (conn != null) {
 				conn.close();
 			}
 		} catch (SQLException e) {
 			System.out.println("Problema no fechamento da conexão.");
 			System.out.println("Erro: " + e.getMessage());
-		}	
+		}
 	}
-	
-	public static Statement getStatement(Connection conn){
+
+	public static Statement getStatement(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
 			return stmt;
@@ -53,19 +57,19 @@ public class Banco {
 			return null;
 		}
 	}
-		
-	public static void closeStatement(Statement stmt){
+
+	public static void closeStatement(Statement stmt) {
 		try {
-			if(stmt != null){
+			if (stmt != null) {
 				stmt.close();
 			}
 		} catch (SQLException e) {
 			System.out.println("Problema no fechamento do Statement.");
 			System.out.println("Erro: " + e.getMessage());
-		}	
+		}
 	}
-	
-	public static PreparedStatement getPreparedStatement(Connection conn, String sql){
+
+	public static PreparedStatement getPreparedStatement(Connection conn, String sql) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			return stmt;
@@ -76,20 +80,30 @@ public class Banco {
 		}
 	}
 
-	public static void closePreparedStatement(Statement stmt){
+	public static PreparedStatement getPreparedStatement(Connection conn, String sql, int tipoRetorno) {
 		try {
-			if(stmt != null){
+			PreparedStatement stmt = conn.prepareStatement(sql, tipoRetorno);
+			return stmt;
+		} catch (Exception e) {
+			System.out.println("Erro ao obter o PreparedStatement.");
+			return null;
+		}
+	}
+
+	public static void closePreparedStatement(Statement stmt) {
+		try {
+			if (stmt != null) {
 				stmt.close();
 			}
 		} catch (SQLException e) {
 			System.out.println("Problema no fechamento do PreparedStatement.");
 			System.out.println("Erro: " + e.getMessage());
-		}	
+		}
 	}
-	
-	public static void closeResultSet(ResultSet result){
+
+	public static void closeResultSet(ResultSet result) {
 		try {
-			if(result != null){
+			if (result != null) {
 				result.close();
 			}
 		} catch (SQLException e) {
