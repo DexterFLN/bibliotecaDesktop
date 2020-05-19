@@ -7,6 +7,7 @@ import java.util.List;
 public class Usuario {
 
 	private int id;
+	private Biblioteca biblioteca;
 	private String nome;
 	private String sobrenome;
 	private LocalDate dataNascimento;
@@ -19,10 +20,11 @@ public class Usuario {
 	private ArrayList<Aluguel> alugueis;
 	private Endereco endereco;
 
-	public Usuario(String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
+	public Usuario(Biblioteca biblioteca, String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
 			String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
 			Endereco endereco) {
 		super();
+		this.biblioteca = biblioteca;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
@@ -46,6 +48,14 @@ public class Usuario {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+	
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 	public String getNome() {
