@@ -90,9 +90,12 @@ public class SessaoDAO {
 		Sessao sessao = new Sessao();
 		sessao.setBiblioteca(biblioteca);
 		try {
-			sessao.setId(resultSet.getInt(1));
-			sessao.setNome(resultSet.getString(2));
-			sessao.getBiblioteca().setId(resultSet.getInt("idBiblioteca"));
+			if(resultSet != null && resultSet.next()) {
+				sessao.setId(resultSet.getInt(1));
+				sessao.setNome(resultSet.getString(2));
+				sessao.getBiblioteca().setId(resultSet.getInt("idBiblioteca")); //3
+				sessao.getBiblioteca().setNome(resultSet.getString(5));
+			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir sessao do resultSet.");
 			System.out.println("Erro: " + e.getMessage());
@@ -103,7 +106,7 @@ public class SessaoDAO {
 
 	public Sessao consultarSessao(Sessao sessao) {
 		Connection connection = Banco.getConnection();
-		String sql = "SELECT * FROM SESSAO WHERE id=?";
+		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id WHERE SESSAO.id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
@@ -126,7 +129,7 @@ public class SessaoDAO {
 	}
 
 	public ArrayList<Sessao> consultarTodasSessoes(int limit) {
-		String sql = "SELECT * FROM SESSAO LIMIT ?";
+		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id LIMIT ?";
 
 		Connection connection = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
