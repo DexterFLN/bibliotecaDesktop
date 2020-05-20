@@ -142,5 +142,32 @@ public class BibliotecaDAO {
 		}
 		return biblioteca;
 	}
+	
+	public Biblioteca consultarBibliotecaPorId(int id) {
+		Connection connection = Banco.getConnection();
+		String sql = " SELECT * FROM BIBLIOTECA WHERE id=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+		Biblioteca biblioteca = null;
+
+		try {
+			biblioteca = new Biblioteca();
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				biblioteca.setId(resultSet.getInt(1));
+				biblioteca.setNome(resultSet.getString(2));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		return biblioteca;
+	}
 
 }

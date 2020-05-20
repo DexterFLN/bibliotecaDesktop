@@ -127,6 +127,31 @@ public class SessaoDAO {
 
 		return sessao;
 	}
+	
+	public Sessao consultarSessaoPorId(int id) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id WHERE SESSAO.id=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		Sessao sessao = null;
+
+		try {
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+
+			sessao = construirSessaoDoResultset(resultSet);
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar sessão.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return sessao;
+	}
 
 	public ArrayList<Sessao> consultarTodasSessoes(int limit) {
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id LIMIT ?";
