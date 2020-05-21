@@ -11,17 +11,20 @@ public class Livro {
 	private int edicao;
 	private int ano;
 	private Sessao sessao;
+	private ArrayList<Exemplar> exemplares;
 
 
-	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado,
-			Sessao sessao) {
+	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, Sessao sessao,
+			ArrayList<Exemplar> exemplares) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.autor = autor;
 		this.editora = editora;
 		this.edicao = edicao;
 		this.ano = ano;
 		this.sessao = sessao;
+		this.exemplares = exemplares;
 	}
 
 	public Livro() {

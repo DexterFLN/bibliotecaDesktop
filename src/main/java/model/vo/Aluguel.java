@@ -12,13 +12,14 @@ public class Aluguel {
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
-	private ArrayList<Livro> livros;
+	private Exemplar exemplar;
 
-	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
-			Usuario usuario, ArrayList<Livro> livros) {
+	
+	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
+			Usuario usuario, Exemplar exemplar) {
 		super();
 		this.dataLocacao = dataLocacao;
-		this.devovlucaoPrevista = devolucaoPrevista;
+		this.devovlucaoPrevista = devovlucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
 		this.exemplar = exemplar;
@@ -28,12 +29,12 @@ public class Aluguel {
 		super();
 	}
 
+
 	public int getId() {
 		return id;
 	}
 
-
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -70,12 +71,14 @@ public class Aluguel {
 		this.usuario = usuario;
 	}
 
-	public List<Livro> getLivros() {
-		return livros;
+	public Exemplar getExemplar() {
+		return exemplar;
 	}
 
-	public void setLivros(ArrayList<Livro> livros) {
-		this.livros = livros;
+	public void setExemplar(Exemplar exemplar) {
+		this.exemplar = exemplar;
 	}
+
+	
 
 }
