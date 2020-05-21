@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Aluguel {
 
 	private int id;
@@ -11,27 +12,29 @@ public class Aluguel {
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
-	private ArrayList<Livro> livros;
+	private Exemplar exemplar;
 
-	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
-			Usuario usuario, ArrayList<Livro> livros) {
+	
+	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
+			Usuario usuario, Exemplar exemplar) {
 		super();
 		this.dataLocacao = dataLocacao;
-		this.devovlucaoPrevista = devolucaoPrevista;
+		this.devovlucaoPrevista = devovlucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
-		this.livros = livros;
+		this.exemplar = exemplar;
 	}
 
 	public Aluguel() {
 		super();
 	}
 
+
 	public int getId() {
 		return id;
 	}
 
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -56,6 +59,7 @@ public class Aluguel {
 	}
 
 	public void setDevolucaoEfetiva(LocalDate devolucaoEfetiva) {
+
 		this.devolucaoEfetiva = devolucaoEfetiva;
 	}
 
@@ -67,12 +71,14 @@ public class Aluguel {
 		this.usuario = usuario;
 	}
 
-	public List<Livro> getLivros() {
-		return livros;
+	public Exemplar getExemplar() {
+		return exemplar;
 	}
 
-	public void setLivros(ArrayList<Livro> livros) {
-		this.livros = livros;
+	public void setExemplar(Exemplar exemplar) {
+		this.exemplar = exemplar;
 	}
+
+	
 
 }
