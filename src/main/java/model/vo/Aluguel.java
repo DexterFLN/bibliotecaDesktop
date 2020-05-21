@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Aluguel {
 
 	private int id;
@@ -20,7 +21,7 @@ public class Aluguel {
 		this.devovlucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
-		this.livros = livros;
+		this.exemplar = exemplar;
 	}
 
 	public Aluguel() {
@@ -30,6 +31,7 @@ public class Aluguel {
 	public int getId() {
 		return id;
 	}
+
 
 	public void setID(int id) {
 		this.id = id;
@@ -56,6 +58,7 @@ public class Aluguel {
 	}
 
 	public void setDevolucaoEfetiva(LocalDate devolucaoEfetiva) {
+
 		this.devolucaoEfetiva = devolucaoEfetiva;
 	}
 

@@ -1,5 +1,7 @@
 package model.vo;
 
+import java.util.ArrayList;
+
 public class Livro {
 
 	private int id;
@@ -8,8 +10,8 @@ public class Livro {
 	private String editora;
 	private int edicao;
 	private int ano;
-	private boolean alugado;
 	private Sessao sessao;
+
 
 	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado,
 			Sessao sessao) {
@@ -19,7 +21,6 @@ public class Livro {
 		this.editora = editora;
 		this.edicao = edicao;
 		this.ano = ano;
-		this.alugado = alugado;
 		this.sessao = sessao;
 	}
 
@@ -75,14 +76,6 @@ public class Livro {
 		this.ano = ano;
 	}
 
-	public boolean isAlugado() {
-		return alugado;
-	}
-
-	public void setAlugado(boolean alugado) {
-		this.alugado = alugado;
-	}
-
 	public Sessao getSessao() {
 		return sessao;
 	}
@@ -91,4 +84,12 @@ public class Livro {
 		this.sessao = sessao;
 	}
 
+	public ArrayList<Exemplar> getExemplares() {
+		return exemplares;
+	}
+
+	public void setExemplares(ArrayList<Exemplar> exemplares) {
+		this.exemplares = exemplares;
+	}
+	
 }
