@@ -25,7 +25,7 @@ public class UsuarioDAO {
 			preparedStatement.setInt(2, usuario.getEndereco().getId());
 			preparedStatement.setString(3, usuario.getNome());
 			preparedStatement.setString(4, usuario.getSobrenome());
-			preparedStatement.setInt(5, 1); // TODO Modificar logo após a inserção do atributo tipo ne entidade USUARIO;
+			preparedStatement.setInt(5, usuario.getTipo());
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
@@ -91,7 +91,7 @@ public class UsuarioDAO {
 		return excluiu;
 	}
 
-	// TODO pensar nas regras de negócio por trás do método.
+	// TODO pensar nas regras de negócio por trás do método (verificar quais atributos podem ser nulos, e quais são obrigatórios).
 	public boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"

@@ -10,6 +10,7 @@ public class Usuario {
 	private Biblioteca biblioteca;
 	private String nome;
 	private String sobrenome;
+	private int tipo;
 	private LocalDate dataNascimento;
 	private String email;
 	private String dddFixo;
@@ -20,13 +21,14 @@ public class Usuario {
 	private ArrayList<Aluguel> alugueis;
 	private Endereco endereco;
 
-	public Usuario(Biblioteca biblioteca, String nome, String sobrenome, LocalDate dataNascimento, String email, String dddFixo,
-			String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
-			Endereco endereco) {
+	public Usuario(Biblioteca biblioteca, String nome, String sobrenome, int tipo, LocalDate dataNascimento,
+			String email, String dddFixo, String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros,
+			ArrayList<Aluguel> alugueis, Endereco endereco) {
 		super();
 		this.biblioteca = biblioteca;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
+		this.tipo = tipo;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.dddFixo = dddFixo;
@@ -49,11 +51,11 @@ public class Usuario {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Biblioteca getBiblioteca() {
 		return biblioteca;
 	}
-	
+
 	public void setBiblioteca(Biblioteca biblioteca) {
 		this.biblioteca = biblioteca;
 	}
@@ -68,6 +70,14 @@ public class Usuario {
 
 	public String getSobrenome() {
 		return sobrenome;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	public void setSobrenome(String sobrenome) {
@@ -137,11 +147,11 @@ public class Usuario {
 	public void setFoneFixo(String foneFixo) {
 		this.foneFixo = foneFixo;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
-	
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
