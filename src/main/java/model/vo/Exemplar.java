@@ -2,8 +2,9 @@ package model.vo;
 
 public class Exemplar {
 
+	private int id;
 	private Livro livro;
-
+	
 	
 	public Exemplar(Livro livro) {
 		super();
@@ -15,6 +16,14 @@ public class Exemplar {
 	}
 
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+			
 	public Livro getLivro() {
 		return livro;
 	}
@@ -22,7 +31,5 @@ public class Exemplar {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-		
-	
 	
 }

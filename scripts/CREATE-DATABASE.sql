@@ -1,0 +1,80 @@
+DROP DATABASE IF EXISTS ATLAS;
+CREATE DATABASE ATLAS;
+USE ATLAS;
+
+CREATE TABLE BIBLIOTECA (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE SESSAO (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    idBiblioteca INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(ID)
+);
+
+CREATE TABLE ENDERECO (
+	id INT NOT NULL AUTO_INCREMENT,
+	rua VARCHAR(40) NOT NULL,
+    numeroRua INT NOT NULL,
+    bairro VARCHAR(25) NOT NULL,
+    cidade VARCHAR(20) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    cep VARCHAR(8) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE LIVRO (
+    id INT NOT NULL AUTO_INCREMENT,
+    idSessao INT NOT NULL,
+    nome VARCHAR(40) NOT NULL,
+    autor VARCHAR(40) NOT NULL,
+    editora VARCHAR(30) NOT NULL,
+    edicao INT NOT NULL,
+    ano INT NOT NULL,
+    alugado BOOLEAN NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idSessao) REFERENCES SESSAO(id)
+);
+
+CREATE TABLE USUARIO (
+    id INT NOT NULL AUTO_INCREMENT,
+    idBiblioteca INT NOT NULL,
+    idEndereco INT NOT NULL,
+    nome VARCHAR(30) NOT NULL,
+    sobrenome VARCHAR(40) NOT NULL,
+    tipo INT NOT NULL,
+    login VARCHAR(20) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
+    dataNascimento DATE NOT NULL,
+    email VARCHAR(40) NOT NULL,
+    dddFixo VARCHAR(2),
+    foneFixo VARCHAR(8),
+    dddMovel VARCHAR(2),
+    foneMovel VARCHAR(9),
+    PRIMARY KEY(id),
+    FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(id),
+    FOREIGN KEY(idEndereco) REFERENCES ENDERECO(id)
+);
+
+CREATE TABLE ALUGUEL (
+    id INT NOT NULL AUTO_INCREMENT,
+    idUsuario INT NOT NULL,
+    dataLocacao DATE NOT NULL,
+    devolucaoPrevista DATE NOT NULL,
+    devolucaoEfetiva DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY (idUsuario) REFERENCES USUARIO(id)
+);
+
+CREATE TABLE ALUGUEL_LIVRO (
+    id INT NOT NULL AUTO_INCREMENT,
+    idAluguel INT NOT NULL,
+    idLivro INT NOT NULL,
+    PRIMARY KEY(id, idAluguel, idLivro),
+    FOREIGN KEY(idAluguel) REFERENCES ALUGUEL(id),
+    FOREIGN KEY(idLivro) REFERENCES LIVRO(id)
+);

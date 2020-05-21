@@ -3,6 +3,8 @@ package model.vo;
 import java.util.ArrayList;
 
 public class Livro {
+
+	private int id;
 	private String nome;
 	private String autor;
 	private String editora;
@@ -11,10 +13,11 @@ public class Livro {
 	private Sessao sessao;
 	private ArrayList<Exemplar> exemplares;
 
-	
-	public Livro(String nome, String autor, String editora, int edicao, int ano, Sessao sessao,
+
+	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, Sessao sessao,
 			ArrayList<Exemplar> exemplares) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.autor = autor;
 		this.editora = editora;
@@ -28,6 +31,13 @@ public class Livro {
 		super();
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -84,7 +94,5 @@ public class Livro {
 	public void setExemplares(ArrayList<Exemplar> exemplares) {
 		this.exemplares = exemplares;
 	}
-	
-	
 	
 }

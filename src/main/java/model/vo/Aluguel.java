@@ -1,17 +1,22 @@
 package model.vo;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Aluguel {
-	private Date dataLocacao;
-	private Date devovlucaoPrevista;
-	private Date devolucaoEfetiva;
+
+	private int id;
+	private LocalDate dataLocacao;
+	private LocalDate devovlucaoPrevista;
+	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
 	private Exemplar exemplar;
-	
 
-	public Aluguel(Date dataLocacao, Date devovlucaoPrevista, Date devolucaoEfetiva, Usuario usuario,
-			Exemplar exemplar) {
+	
+	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
+			Usuario usuario, Exemplar exemplar) {
 		super();
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devovlucaoPrevista;
@@ -25,27 +30,36 @@ public class Aluguel {
 	}
 
 
-	public Date getDataLocacao() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDate getDataLocacao() {
 		return dataLocacao;
 	}
 
-	public void setDataLocacao(Date dataLocacao) {
+	public void setDataLocacao(LocalDate dataLocacao) {
 		this.dataLocacao = dataLocacao;
 	}
 
-	public Date getDevovlucaoPrevista() {
+	public LocalDate getDevovlucaoPrevista() {
 		return devovlucaoPrevista;
 	}
 
-	public void setDevovlucaoPrevista(Date devovlucaoPrevista) {
+	public void setDevovlucaoPrevista(LocalDate devovlucaoPrevista) {
 		this.devovlucaoPrevista = devovlucaoPrevista;
 	}
 
-	public Date getDevolucaoEfetiva() {
+	public LocalDate getDevolucaoEfetiva() {
 		return devolucaoEfetiva;
 	}
 
-	public void setDevolucaoEfetiva(Date devolucaoEfetiva) {
+	public void setDevolucaoEfetiva(LocalDate devolucaoEfetiva) {
+
 		this.devolucaoEfetiva = devolucaoEfetiva;
 	}
 
@@ -65,6 +79,6 @@ public class Aluguel {
 		this.exemplar = exemplar;
 	}
 
-
 	
+
 }
