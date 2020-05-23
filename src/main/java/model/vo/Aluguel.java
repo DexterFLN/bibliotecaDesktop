@@ -7,15 +7,17 @@ import java.util.List;
 public class Aluguel {
 
 	private int id;
+	private Exemplar idExemplar;
 	private LocalDate dataLocacao;
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
 	private ArrayList<Livro> livros;
 
-	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
+	public Aluguel(Exemplar idExemplar, LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
 			Usuario usuario, ArrayList<Livro> livros) {
 		super();
+		this.idExemplar = idExemplar;
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
@@ -29,6 +31,14 @@ public class Aluguel {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setIdExemplar(Exemplar idExemplar) {
+		this.idExemplar = idExemplar;
+	}
+	
+	public Exemplar getIdExemplar() {
+		return idExemplar;
 	}
 
 	public void setID(int id) {

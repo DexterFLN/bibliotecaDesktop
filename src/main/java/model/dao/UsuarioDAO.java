@@ -104,7 +104,7 @@ public class UsuarioDAO {
 			preparedStatement.setInt(2, usuario.getEndereco().getId());
 			preparedStatement.setString(3, usuario.getNome());
 			preparedStatement.setString(4, usuario.getSobrenome());
-			preparedStatement.setInt(5, 2); // TODO Modificar logo após a inserção do atributo tipo ne entidade USUARIO;
+			preparedStatement.setInt(5, usuario.getTipo());
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
