@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 public class PainelPesquisaGeral extends JPanel {
 	
@@ -19,46 +20,37 @@ public class PainelPesquisaGeral extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelPesquisaGeral() {
-		setLayout(null);
-//		setBounds(500, 500, 116, 159);
 		setBackground(new java.awt.Color(229, 229, 229));
-		// teste git
+		setLayout(new MigLayout("", "[254px][18px][1px][55px][309px][27px][279px]", "[61px][29px][24px][397px]"));
+		
 		txtPesquisa = new JTextField();
 		txtPesquisa.setText("Digite um termo para Pesquisa");
-		txtPesquisa.setBounds(50, 68, 615, 28);
-		add(txtPesquisa);
+		add(txtPesquisa, "cell 0 1 5 1,grow");
 		txtPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(692, 67, 162, 28);
-		add(btnPesquisar);
+		add(btnPesquisar, "cell 6 1,alignx left,growy");
 		
 		JLabel lblPesquisa = new JLabel("Pesquisa Geral");
 		lblPesquisa.setFont(new Font("Roboto", Font.PLAIN, 30));
-		lblPesquisa.setBounds(28, 0, 273, 61);
-		add(lblPesquisa);
+		add(lblPesquisa, "cell 0 0 3 1,grow");
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(165, 108, 117, 24);
-		add(comboBox);
+		add(comboBox, "cell 0 2,alignx right,aligny top");
 		
 		JLabel lblBuscarPor = new JLabel("Buscar por: ");
 		lblBuscarPor.setFont(new Font("Roboto", Font.PLAIN, 16));
-		lblBuscarPor.setBounds(60, 110, 130, 19);
-		add(lblBuscarPor);
+		add(lblBuscarPor, "cell 0 2,alignx center,aligny top");
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(356, 108, 99, 24);
-		add(comboBox_1);
+		add(comboBox_1, "cell 4 2,alignx left,aligny top");
 		
 		JLabel lblAno = new JLabel("Ano: ");
 		lblAno.setFont(new Font("Roboto", Font.PLAIN, 16));
-		lblAno.setBounds(300, 112, 70, 15);
-		add(lblAno);
+		add(lblAno, "cell 2 2 3 1,alignx left,aligny top");
 		
 		table = new JTable();
-		table.setBounds(28, 162, 943, 397);
-		add(table);
+		add(table, "cell 0 3 7 1,grow");
 
 	}
 

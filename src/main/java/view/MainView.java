@@ -1,58 +1,52 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.ImageIcon;
 
 public class MainView extends JFrame {
 
-	private JFrame frame;
-	private static JLayeredPane layeredPane;
-	private JPanel contentPane;
-	private JPanel panelMenuLateral;
-	private JPanel painelDireito;
-	private JMenuBar menuBar;
-	private JMenuItem mntmMenu;
-	private JMenuItem mntmAcervo;
-	private PainelPesquisaGeral painelPesquisaGeral = null;
 	private static final PainelTelefone painelTelefone = new PainelTelefone();
-	
-	/**
-	 * Create the application.
-	 */
+	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
+	private static JLayeredPane layeredPane;
+	private JPanel panelMenuLateral;
+	private JButton btnAcervo;
+	private JButton btnPesquisaGeral;
+	private JButton buttonEmprestimos;
+
 	public MainView() {
-		
+
 		this.setTitle("Principal Menu");
-        this.setBounds(100, 100, 1163, 739);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(Color.WHITE);
-        this.getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
+		this.setBounds(100, 100, 1163, 739);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setBackground(Color.WHITE);
+		this.getContentPane().setLayout(new MigLayout("", "[75px][grow]", "[grow]"));
 
-        layeredPane = new JLayeredPane();
-        layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
-        this.getContentPane().add(layeredPane, "cell 0 0,grow");
-        painelTelefone.setBorder(null);
-        layeredPane.add(painelTelefone, "grow");
+		layeredPane = new JLayeredPane();
+		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
+		layeredPane.add(painelTelefone, "cell 0 0");
+		getContentPane().add(layeredPane, "cell 1 0, grow");
 
-        this.initialize();
+		this.initialize();
 	}
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -66,88 +60,83 @@ public class MainView extends JFrame {
 			}
 		});
 	}
-	public static void swithPanel(JPanel panel) {
 
-        layeredPane.removeAll();
-        panel.setBorder(null);
-        panel.setBackground(Color.WHITE);
-        panel.repaint();
-        panel.revalidate();
-        layeredPane.add(panel, "grow");
-        layeredPane.repaint();
-        layeredPane.revalidate();
+	public static void switchPanel(JPanel panel) {
 
-    }
+		layeredPane.removeAll();
+		panel.setBackground(Color.WHITE);
+		panel.repaint();
+		panel.revalidate();
+		layeredPane.add(panel, "grow");
+		layeredPane.repaint();
+		layeredPane.revalidate();
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	}
+
 	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 450, 300);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1294, 769);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
+		panelMenuLateral = new JPanel();
+		panelMenuLateral.setBackground(Color.GRAY);
+		panelMenuLateral.setLayout(null);
+		this.getContentPane().add(panelMenuLateral, "cell 0 0,grow");
+
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(229, 229, 229, 240));
+		menuBar.setLayout(new GridLayout(10, 1));
+		menuBar.setBounds(0, 0, 75, 758);
+		panelMenuLateral.add(menuBar);
+
+		btnPesquisaGeral = new JButton("");
+		ImageIcon iconSearchMenu = new ImageIcon(MenuAtlas.class.getResource("/icons/searchFine.png"));
+		Image imageSearchMenu = iconSearchMenu.getImage();
+		Image newimgIconSearchMenu= imageSearchMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		iconSearchMenu = new ImageIcon(newimgIconSearchMenu);
+		btnPesquisaGeral.setBackground(new Color(229, 229, 229, 240));
+		btnPesquisaGeral.setIcon(iconSearchMenu);
+		menuBar.add(btnPesquisaGeral);
+
+		ImageIcon iconBooksMenu = new ImageIcon(MenuAtlas.class.getResource("/icons/books.png"));
+		Image imageIconBooksMenu = iconBooksMenu.getImage();
+		Image newimgIconBooksMenu = imageIconBooksMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		iconBooksMenu = new ImageIcon(newimgIconBooksMenu);
+
+		btnAcervo = new JButton("");
+		btnAcervo.setBackground(new Color(229, 229, 229, 240));
+		btnAcervo.setIcon(iconBooksMenu);
+		menuBar.add(btnAcervo);
+		
+		buttonEmprestimos = new JButton("");
+		ImageIcon iconEmprestimoMenu = new ImageIcon(MenuAtlas.class.getResource("/icons/verify.png"));
+		Image imageEmprestimoMenu = iconEmprestimoMenu.getImage();
+		Image newimgIconEmprestimoMenu = imageEmprestimoMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		iconEmprestimoMenu = new ImageIcon(newimgIconEmprestimoMenu);
+		buttonEmprestimos.setIcon(iconEmprestimoMenu);
+		menuBar.add(buttonEmprestimos);
+
+		this.addListeners();
+	}
+
+	private void addListeners() {
+
+		btnPesquisaGeral.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelPesquisaGeral);
+
+			}
+		});
+
+		btnAcervo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelTelefone);
+			}
+		});
+	}
+
+	private void arrumarTela() {
 		Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
 		int larguraDosPaineis = (int) ((dimensoesTela.getWidth()) / 20);
 		int alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
 		System.out.println(larguraDosPaineis);
 		System.out.println(alturaDaTela);
-
-		panelMenuLateral = new JPanel();
-		panelMenuLateral.setBackground(Color.GRAY);
-		panelMenuLateral.setLayout(null);
-//		panelMenuLateral.setBounds(0, 0, larguraDosPaineis, alturaDaTela);
-		panelMenuLateral.setBounds(0, 0, 75, 758);
-		contentPane.add(panelMenuLateral);
-
-		menuBar = new JMenuBar();
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(new java.awt.Color(229, 229, 229, 240));
-		menuBar.setLayout(new GridLayout(10, 1));
-		menuBar.setBounds(0, 0, 75, 758);
-
-		
-		
-		mntmAcervo = new JMenuItem("Acervo");
-		mntmAcervo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				swithPanel(painelTelefone);
-//				setContentPane(painelTelefone);
-//				revalidate();
-				
-//				painelPesquisaGeral = new PainelPesquisaGeral();
-//				setContentPane(painelPesquisaGeral);
-//				getContentPane().add(painelPesquisaGeral);
-//				revalidate();
-//				if(painelPesquisaGeral == null) {
-//					painelPesquisaGeral = new PainelPesquisaGeral();
-//					painelDireito.add(painelPesquisaGeral);
-//					painelDireito.revalidate();
-//				}else {
-//					painelDireito.setVisible(true);
-//				}
-			}
-		});
-		menuBar.add(mntmAcervo);
-//		setJMenuBar(menuBar);
-//		contentPane.add(menuBar);
-
-		mntmMenu = new JMenuItem("Menu");
-		menuBar.add(mntmMenu);
-		panelMenuLateral.add(menuBar);
-
-		painelDireito = new JPanel();
-		painelDireito.setBorder(new EmptyBorder(2, 2, 2, 2));
-		painelDireito.setBounds(larguraDosPaineis, 0, larguraDosPaineis * 19, alturaDaTela);
-		getContentPane().add(painelDireito);
-
 	}
-
 }

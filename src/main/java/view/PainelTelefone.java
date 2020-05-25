@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 
 public class PainelTelefone extends JPanel {
@@ -25,55 +26,45 @@ public class PainelTelefone extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelTelefone() {
-		setLayout(null);
+		setLayout(new MigLayout("", "[129px][237px]", "[21px][21px][21px][15px][23px][25px]"));
 		
 		JLabel lblCodigoDoPas = new JLabel("Código do País:");
-		lblCodigoDoPas.setBounds(34, 32, 110, 15);
-		add(lblCodigoDoPas);
+		add(lblCodigoDoPas, "cell 0 0,alignx left,aligny center");
 		
 		textCodPais = new JTextField();
-		textCodPais.setBounds(163, 29, 237, 21);
-		add(textCodPais);
+		add(textCodPais, "cell 1 0,grow");
 		textCodPais.setColumns(10);
 		
 		txtDdd = new JTextField();
-		txtDdd.setBounds(163, 68, 237, 21);
 		txtDdd.setColumns(10);
-		add(txtDdd);
+		add(txtDdd, "cell 1 1,grow");
 		
 		JLabel lblNumero = new JLabel("Número:");
-		lblNumero.setBounds(34, 108, 146, 15);
-		add(lblNumero);
+		add(lblNumero, "cell 0 2 2 1,alignx left,aligny center");
 		
 		JLabel lblDdd = new JLabel("DDD:");
-		lblDdd.setBounds(34, 71, 35, 15);
-		add(lblDdd);
+		add(lblDdd, "cell 0 1,alignx left,aligny center");
 		
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(163, 105, 237, 21);
-		add(txtNumero);
+		add(txtNumero, "cell 1 2,grow");
 		
 		chckbxMovel = new JCheckBox("Móvel");
-		chckbxMovel.setBounds(163, 171, 129, 23);
-		add(chckbxMovel);
+		add(chckbxMovel, "cell 1 4,alignx left,aligny top");
 		
 		
 		JLabel lblDonoopcional = new JLabel("Dono:  (opcional)");
-		lblDonoopcional.setBounds(34, 140, 129, 15);
-		add(lblDonoopcional);
+		add(lblDonoopcional, "cell 0 3,growx,aligny top");
 		
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(163, 224, 237, 25);
-		add(btnLimpar);
+		add(btnLimpar, "cell 1 5,growx,aligny top");
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSalvar.setBounds(34, 224, 117, 25);
-		add(btnSalvar);
+		add(btnSalvar, "cell 0 5,growx,aligny top");
 
 	}
 }

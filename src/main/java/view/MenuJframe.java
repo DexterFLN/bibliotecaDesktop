@@ -13,6 +13,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import net.miginfocom.swing.MigLayout;
 
 public class MenuJframe extends JFrame {
 
@@ -20,10 +22,9 @@ public class MenuJframe extends JFrame {
 	private JPanel panelMenuLateral;
 	private JPanel painelDireito;
 	private JMenuBar menuBar;
-	private JMenuItem mntmMenu;
-	private JMenuItem mntmAcervo;
 	private PainelPesquisaGeral painelPesquisaGeral = null;
 	private static final PainelTelefone painelTelefone = new PainelTelefone() ;
+	private JButton btnAcervo;
 
 	/**
 	 * Launch the application.
@@ -41,6 +42,8 @@ public class MenuJframe extends JFrame {
 			}
 		});
 	}
+	
+	
 
 	/**
 	 * Create the frame.
@@ -51,61 +54,37 @@ public class MenuJframe extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
 		Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
 		int larguraDosPaineis = (int) ((dimensoesTela.getWidth()) / 20);
 		int alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
 		System.out.println(larguraDosPaineis);
 		System.out.println(alturaDaTela);
+		contentPane.setLayout(new MigLayout("", "[131.00px][627.00]", "[758px]"));
 
 		panelMenuLateral = new JPanel();
 		panelMenuLateral.setBackground(Color.GRAY);
 		panelMenuLateral.setLayout(null);
-//		panelMenuLateral.setBounds(0, 0, larguraDosPaineis, alturaDaTela);
-		panelMenuLateral.setBounds(0, 0, 75, 758);
-		contentPane.add(panelMenuLateral);
+		contentPane.add(panelMenuLateral, "cell 0 0,grow");
 
 		menuBar = new JMenuBar();
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new java.awt.Color(229, 229, 229, 240));
 		menuBar.setLayout(new GridLayout(10, 1));
-		menuBar.setBounds(0, 0, 75, 758);
-
+		menuBar.setBounds(0, 0, 109, 758);
+		panelMenuLateral.add(menuBar);
 		
-		
-		mntmAcervo = new JMenuItem("Acervo");
-		mntmAcervo.addActionListener(new ActionListener() {
+		btnAcervo = new JButton("acervo");
+		btnAcervo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				setContentPane(painelTelefone);
-				revalidate();
-				
-//				painelPesquisaGeral = new PainelPesquisaGeral();
-//				setContentPane(painelPesquisaGeral);
-//				getContentPane().add(painelPesquisaGeral);
-//				revalidate();
-//				if(painelPesquisaGeral == null) {
-//					painelPesquisaGeral = new PainelPesquisaGeral();
-//					painelDireito.add(painelPesquisaGeral);
-//					painelDireito.revalidate();
-//				}else {
-//					painelDireito.setVisible(true);
-//				}
 			}
 		});
-		menuBar.add(mntmAcervo);
-//		setJMenuBar(menuBar);
-//		contentPane.add(menuBar);
-
-		mntmMenu = new JMenuItem("Menu");
-		menuBar.add(mntmMenu);
-		panelMenuLateral.add(menuBar);
+		menuBar.add(btnAcervo);
 
 		painelDireito = new JPanel();
 		painelDireito.setBorder(new EmptyBorder(2, 2, 2, 2));
-		painelDireito.setBounds(larguraDosPaineis, 0, larguraDosPaineis * 19, alturaDaTela);
-		getContentPane().add(painelDireito);
+		getContentPane().add(painelDireito, "cell 0 0,alignx left,aligny top");
 
 	}
 }
