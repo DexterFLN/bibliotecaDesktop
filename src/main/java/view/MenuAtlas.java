@@ -3,6 +3,8 @@ package view;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
@@ -11,13 +13,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MenuAtlas extends JFrame {
 
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
+	private TelaInternaPesquisaGeral telaInternaPesquisaGeral;
+	private PainelPesquisaGeral painelPesquisaGeral;
+	private PainelTelefone painelTelefone;
 
 	/**
 	 * Launch the application.
@@ -41,22 +44,35 @@ public class MenuAtlas extends JFrame {
 	 */
 	public MenuAtlas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(1300, 100, 1050, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		getContentPane().setBackground(new java.awt.Color(2, 83, 83));
+		setContentPane(contentPane);
+		setBackground(new java.awt.Color(2, 83, 83));
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new java.awt.Color(229, 229, 229, 240));
 		menuBar.setLayout(new GridLayout(10,1, 0, -50));
 		menuBar.setBounds(0, 0, 66, 1200);
+		setJMenuBar(menuBar);
 		contentPane.add(menuBar);
 			
 			JMenuItem mntmPesquisa = new JMenuItem("");
 		mntmPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+//				if (painelPesquisaGeral == null) {
+//				painelPesquisaGeral = new PainelPesquisaGeral();
+//				}
+//				 if(!painelPesquisaGeral.isVisible()) {
+//					setContentPane(painelPesquisaGeral);
+//					revalidate();
+//					painelPesquisaGeral.setVisible(true);
+//				}
+					
+					painelTelefone = new PainelTelefone();
+					setContentPane(painelTelefone);
+					revalidate();
 				
 			}
 		});
@@ -80,7 +96,7 @@ public class MenuAtlas extends JFrame {
 		menuBar.add(mntmLivros);
 		
 //		desktopPane = new JDesktopPane();
-//		desktopPane.setBounds(5, 5, 1000, 800);
+//		desktopPane.setBounds(100, 50, 1000, 800);
 //		getContentPane().add(desktopPane);
 	}
 }
