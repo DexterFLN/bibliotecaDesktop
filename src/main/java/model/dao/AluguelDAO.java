@@ -32,7 +32,7 @@ public class AluguelDAO {
 
 			if (resultSet.next()) {
 				int idGerado = resultSet.getInt(1);
-				aluguel.setID(idGerado);
+				aluguel.setId(idGerado);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo aluguel.");
@@ -97,7 +97,7 @@ public class AluguelDAO {
 		return registrosAlterados > 0;
 	}
 
-	// TODO método de listagem de aluguel (consultarAluguel)
-	// TODO método de listagem de alugeis (consultarTodos)
+	// TODO mï¿½todo de listagem de aluguel (consultarAluguel)
+	// TODO mï¿½todo de listagem de alugeis (consultarTodos)
 
 }
