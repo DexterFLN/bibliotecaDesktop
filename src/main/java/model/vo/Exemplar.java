@@ -1,6 +1,8 @@
 package model.vo;
 
+
 import java.util.ArrayList;
+
 
 public class Exemplar {
 
@@ -12,6 +14,7 @@ public class Exemplar {
 		super();
 		this.livro = livro;
 		this.alugueis = alugueis;
+
 	}
 
 	public Exemplar() {
@@ -43,3 +46,4 @@ public class Exemplar {
 	}
 
 }
+

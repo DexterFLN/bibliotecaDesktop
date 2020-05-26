@@ -101,7 +101,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
-	// TODO método de listagem de aluguel (consultarAluguel)
-	// TODO método de listagem de alugeis (consultarTodos)
+	// TODO mï¿½todo de listagem de aluguel (consultarAluguel)
+	// TODO mï¿½todo de listagem de alugeis (consultarTodos)
 
 }
