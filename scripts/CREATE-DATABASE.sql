@@ -35,7 +35,6 @@ CREATE TABLE LIVRO (
     editora VARCHAR(30) NOT NULL,
     edicao INT NOT NULL,
     ano INT NOT NULL,
-    alugado BOOLEAN NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(idSessao) REFERENCES SESSAO(id)
 );
@@ -54,8 +53,6 @@ CREATE TABLE USUARIO (
     nome VARCHAR(30) NOT NULL,
     sobrenome VARCHAR(40) NOT NULL,
     tipo INT NOT NULL,
-    login VARCHAR(20) NOT NULL,
-    senha VARCHAR(20) NOT NULL,
     dataNascimento DATE NOT NULL,
     email VARCHAR(40) NOT NULL,
     dddFixo VARCHAR(2),

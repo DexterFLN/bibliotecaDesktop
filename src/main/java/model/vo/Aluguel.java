@@ -1,28 +1,24 @@
 package model.vo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Aluguel {
 
 	private int id;
-	private Exemplar idExemplar;
+	private Exemplar exemplar;
 	private LocalDate dataLocacao;
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
-	private ArrayList<Livro> livros;
 
 	public Aluguel(Exemplar idExemplar, LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva,
-			Usuario usuario, ArrayList<Livro> livros) {
+			Usuario usuario) {
 		super();
-		this.idExemplar = idExemplar;
+		this.exemplar = idExemplar;
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
-		this.livros = livros;
 	}
 
 	public Aluguel() {
@@ -33,15 +29,15 @@ public class Aluguel {
 		return id;
 	}
 
-	public void setIdExemplar(Exemplar idExemplar) {
-		this.idExemplar = idExemplar;
-	}
-	
-	public Exemplar getIdExemplar() {
-		return idExemplar;
+	public void setExemplar(Exemplar idExemplar) {
+		this.exemplar = idExemplar;
 	}
 
-	public void setID(int id) {
+	public Exemplar getExemplar() {
+		return exemplar;
+	}
+
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -75,14 +71,6 @@ public class Aluguel {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public List<Livro> getLivros() {
-		return livros;
-	}
-
-	public void setLivros(ArrayList<Livro> livros) {
-		this.livros = livros;
 	}
 
 }

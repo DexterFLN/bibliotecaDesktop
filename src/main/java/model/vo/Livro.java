@@ -13,7 +13,6 @@ public class Livro {
 	private Sessao sessao;
 	private ArrayList<Exemplar> exemplares;
 
-
 	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, Sessao sessao,
 			ArrayList<Exemplar> exemplares) {
 		super();
@@ -94,5 +93,5 @@ public class Livro {
 	public void setExemplares(ArrayList<Exemplar> exemplares) {
 		this.exemplares = exemplares;
 	}
-	
+
 }
