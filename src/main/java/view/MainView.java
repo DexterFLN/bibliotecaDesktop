@@ -40,6 +40,7 @@ public class MainView extends JFrame {
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		layeredPane.setBackground(new Color(64, 64, 64));
 		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		layeredPane.add(painelTelefone, "cell 0 0");
 		getContentPane().add(layeredPane, "cell 1 0, grow");
@@ -53,6 +54,7 @@ public class MainView extends JFrame {
 				try {
 					MainView window = new MainView();
 					window.setExtendedState(MAXIMIZED_BOTH);
+					window.setBackground(new Color(64, 64, 64));
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
