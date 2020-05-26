@@ -6,11 +6,13 @@ public class Sessao {
 
 	private int id;
 	private String nome;
+	private Biblioteca biblioteca;
 	private ArrayList<Livro> livros;
 
-	public Sessao(String nome, ArrayList<Livro> livros) {
+	public Sessao(String nome, Biblioteca biblioteca, ArrayList<Livro> livros) {
 		super();
 		this.nome = nome;
+		this.biblioteca = biblioteca;
 		this.livros = livros;
 	}
 
@@ -32,6 +34,14 @@ public class Sessao {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+	
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 	public ArrayList<Livro> getLivros() {

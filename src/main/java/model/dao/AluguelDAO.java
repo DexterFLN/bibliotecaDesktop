@@ -10,7 +10,6 @@ import model.vo.Aluguel;
 public class AluguelDAO {
 
 	public Aluguel salvar(Aluguel aluguel) {
-		// TODO inserir dados na tabela ALUGUEL_LIVRO
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO ALUGUEL (dataLocacao, devolucaoPrevista, devolucaoEfetiva) values (?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -64,16 +63,10 @@ public class AluguelDAO {
 
 		boolean excluiu = quantidadeLinhasAfetadas > 0;
 
-		if (excluiu) {
-			// TODO atualizar tabelas de livros (trocar o atributo de alugado para false)
-			// TODO excluir dados na tabela ALUGUEL_LIVRO
-		}
-
 		return excluiu;
 	}
 
 	public boolean alterar(Aluguel aluguel) {
-		// TODO alterar dados na tabela ALUGUEL_LIVRO
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET id=?, idUsuario=?, dataLocacao=?, devolucaoPrevista=?, devolucaoEfetiva=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -95,6 +88,17 @@ public class AluguelDAO {
 			Banco.closeConnection(connection);
 		}
 		return registrosAlterados > 0;
+	}
+	
+	public Aluguel construirAluguelDoResultSet(ResultSet resultset) {
+		Aluguel aluguel;
+		aluguel = new Aluguel();
+		
+		try {
+			
+		} 
+		
+		return aluguel;
 	}
 
 	// TODO m�todo de listagem de aluguel (consultarAluguel)

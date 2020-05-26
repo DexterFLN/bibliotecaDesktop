@@ -1,13 +1,12 @@
 package model.vo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Aluguel {
 
 	private int id;
+	private Exemplar exemplar;
 	private LocalDate dataLocacao;
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
@@ -18,6 +17,7 @@ public class Aluguel {
 	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
 			Usuario usuario, Exemplar exemplar) {
 		super();
+		this.exemplar = idExemplar;
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devovlucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
@@ -71,6 +71,7 @@ public class Aluguel {
 		this.usuario = usuario;
 	}
 
+
 	public Exemplar getExemplar() {
 		return exemplar;
 	}
@@ -78,7 +79,5 @@ public class Aluguel {
 	public void setExemplar(Exemplar exemplar) {
 		this.exemplar = exemplar;
 	}
-
-	
 
 }
