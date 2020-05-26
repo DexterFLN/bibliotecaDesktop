@@ -1,35 +1,43 @@
 package model.vo;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Livro {
+
+	private int id;
 	private String nome;
 	private String autor;
 	private String editora;
 	private int edicao;
 	private int ano;
-	private boolean alugado;
 	private Sessao sessao;
-	
-	
-	public Livro(String nome, String autor, String editora, int edicao, int ano, boolean alugado, Sessao sessao) {
+	private ArrayList<Exemplar> exemplares;
+
+
+	public Livro(int id, String nome, String autor, String editora, int edicao, int ano, Sessao sessao,
+			ArrayList<Exemplar> exemplares) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.autor = autor;
 		this.editora = editora;
 		this.edicao = edicao;
 		this.ano = ano;
-		this.alugado = alugado;
 		this.sessao = sessao;
-		
+		this.exemplares = exemplares;
 	}
-	
 
 	public Livro() {
 		super();
 	}
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -71,14 +79,6 @@ public class Livro {
 		this.ano = ano;
 	}
 
-	public boolean isAlugado() {
-		return alugado;
-	}
-
-	public void setAlugado(boolean alugado) {
-		this.alugado = alugado;
-	}
-
 	public Sessao getSessao() {
 		return sessao;
 	}
@@ -87,7 +87,12 @@ public class Livro {
 		this.sessao = sessao;
 	}
 
+	public ArrayList<Exemplar> getExemplares() {
+		return exemplares;
+	}
 
-	
+	public void setExemplares(ArrayList<Exemplar> exemplares) {
+		this.exemplares = exemplares;
+	}
 	
 }

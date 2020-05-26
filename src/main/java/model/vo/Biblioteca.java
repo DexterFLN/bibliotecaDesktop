@@ -1,16 +1,16 @@
 package model.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-	private String nome;
-	private List<Usuario> usuarios;
-	private List<Sessao> sessoes;
-	
-	
-	
 
-	public Biblioteca(String nome, List<Usuario> usuarios, List<Sessao> sessoes) {
+	private int id;
+	private String nome;
+	private ArrayList<Usuario> usuarios;
+	private ArrayList<Sessao> sessoes;
+
+	public Biblioteca(String nome, ArrayList<Usuario> usuarios, ArrayList<Sessao> sessoes) {
 		super();
 		this.nome = nome;
 		this.usuarios = usuarios;
@@ -19,6 +19,14 @@ public class Biblioteca {
 
 	public Biblioteca() {
 		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -33,7 +41,7 @@ public class Biblioteca {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
@@ -41,13 +49,8 @@ public class Biblioteca {
 		return sessoes;
 	}
 
-	public void setSessoes(List<Sessao> sessoes) {
+	public void setSessoes(ArrayList<Sessao> sessoes) {
 		this.sessoes = sessoes;
 	}
 
-	
-	
-	
-
-	
 }
