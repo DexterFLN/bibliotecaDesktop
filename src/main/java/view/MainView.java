@@ -78,7 +78,6 @@ public class MainView extends JFrame {
 		panel_1.setLayout(new MigLayout("", "[985.00px,grow,fill]", "[168px,grow,fill]"));
 		panel_1.add(panel, "cell 0 0,alignx center,aligny top");
 		layeredPane.revalidate();
-		
 
 //		layeredPane.removeAll();
 //		panel.setBackground(Color.WHITE);
