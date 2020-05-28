@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -20,35 +20,35 @@ public class PainelDevolucaoLivro extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelDevolucaoLivro() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("101px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(178dlu;default):grow"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("22px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+//		setLayout(new FormLayout(new ColumnSpec[] {
+//				FormSpecs.UNRELATED_GAP_COLSPEC,
+//				ColumnSpec.decode("101px"),
+//				FormSpecs.RELATED_GAP_COLSPEC,
+//				FormSpecs.DEFAULT_COLSPEC,
+//				FormSpecs.RELATED_GAP_COLSPEC,
+//				FormSpecs.DEFAULT_COLSPEC,
+//				FormSpecs.RELATED_GAP_COLSPEC,
+//				ColumnSpec.decode("max(178dlu;default):grow"),},
+//			new RowSpec[] {
+//				FormSpecs.UNRELATED_GAP_ROWSPEC,
+//				RowSpec.decode("22px"),
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,}));
+//		
 		JMenuBar menuBar = new JMenuBar();
 		add(menuBar, "2, 2, fill, top");
 		
