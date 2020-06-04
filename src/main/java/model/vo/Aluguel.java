@@ -11,13 +11,12 @@ public class Aluguel {
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
-	private Exemplar exemplar;
-
+	
 	
 	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
 			Usuario usuario, Exemplar exemplar) {
 		super();
-		this.exemplar = idExemplar;
+		//this.exemplar = idExemplar;
 		this.dataLocacao = dataLocacao;
 		this.devovlucaoPrevista = devovlucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;

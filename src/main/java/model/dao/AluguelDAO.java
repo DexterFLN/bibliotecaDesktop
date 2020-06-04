@@ -94,9 +94,7 @@ public class AluguelDAO {
 		Aluguel aluguel;
 		aluguel = new Aluguel();
 		
-		try {
-			
-		} 
+		
 		
 		return aluguel;
 	}
