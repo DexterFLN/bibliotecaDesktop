@@ -22,6 +22,7 @@ public class MainView extends JFrame {
 
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final PainelAcervoCadastro painelAcervoCadastro = new PainelAcervoCadastro();
+	private static final MainAcervo mainAcervo = new MainAcervo();
 	private static JLayeredPane layeredPane;
 	private JPanel panelMenuLateral;
 	private JButton btnAcervo;
@@ -138,15 +139,15 @@ public class MainView extends JFrame {
 		btnPesquisaGeral.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(painelPesquisaGeral);
-
 			}
 		});
 
 		btnAcervo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoCadastro);
+				switchPanel(mainAcervo);
 			}
 		});
+		
 	}
 
 	private void arrumarTela() {

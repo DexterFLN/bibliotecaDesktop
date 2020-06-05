@@ -82,24 +82,21 @@ public class PainelAcervoConsulta extends JPanel {
 		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[58.00px][31.00px][30.00px][544.00px]"));
 		
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
-		add(menuBar, "cell 1 0,grow");
-		
-		JMenu mnAcervo = new JMenu("Acervo");
-		menuBar.add(mnAcervo);
-		
-		JMenu mnCadastro = new JMenu("Cadastro");
-		menuBar.add(mnCadastro);
-		
-		JMenu mnConsulta = new JMenu("Consulta");
-		menuBar.add(mnConsulta);
-		
-		JMenu mnExcluir = new JMenu("Excluir");
-		menuBar.add(mnExcluir);
-		
-
-		
+//		JMenuBar menuBar = new JMenuBar();
+//		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
+//		add(menuBar, "cell 1 0,grow");
+//		
+//		JMenu mnAcervo = new JMenu("Acervo");
+//		menuBar.add(mnAcervo);
+//		
+//		JMenu mnCadastro = new JMenu("Cadastro");
+//		menuBar.add(mnCadastro);
+//		
+//		JMenu mnConsulta = new JMenu("Consulta");
+//		menuBar.add(mnConsulta);
+//		
+//		JMenu mnExcluir = new JMenu("Excluir");
+//		menuBar.add(mnExcluir);
 		
 		txtPesquisar = new JTextField();
 		txtPesquisar.setText("Digite um termo para Pesquisa");
