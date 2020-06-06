@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.seletor.PesquisaGeralSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
 
 public class LivroDAO {
 
-	// TODO criar métodos
-	public Livro salvar(Livro livro) { 		//MÉTODO SALVAR ESTÁ FUNCIONANDO
+	// TODO criar mï¿½todos
+	public Livro salvar(Livro livro) { 		//Mï¿½TODO SALVAR ESTï¿½ FUNCIONANDO
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO LIVRO (nome, autor, editora, edicao, ano, idSessao) VALUES (?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -48,7 +49,7 @@ public class LivroDAO {
 		return livro;
 	}
 
-	public boolean alterar(Livro livro) { 		//MÉTODO ALTERAR ESTÁ EM CONSTRUÇÃO
+	public boolean alterar(Livro livro) { 		//Mï¿½TODO ALTERAR ESTï¿½ EM CONSTRUï¿½ï¿½O
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
 		Connection connection = Banco.getConnection();
@@ -64,13 +65,13 @@ public class LivroDAO {
 			preparedStatement.setInt(7, livro.getId());
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao alterar endereço. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao alterar endereï¿½o. Causa: " + ex.getMessage());
 		}
 
 		return registrosAlterados > 0;
 	}
 	
-	public boolean excluir(Livro livro) {		// MÉTODO EXCLUIR ESTÁ FUNCIONANDO
+	public boolean excluir(Livro livro) {		// Mï¿½TODO EXCLUIR ESTï¿½ FUNCIONANDO
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM LIVRO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -91,7 +92,7 @@ public class LivroDAO {
 		return excluiu;
 	}
 
-	// TODO inserir exemplares na construção do objeto livro
+	// TODO inserir exemplares na construï¿½ï¿½o do objeto livro
 	private Livro construirLivroDoResultSet(ResultSet resultSet) {
 		Livro livro = new Livro();
 		
@@ -118,6 +119,41 @@ public class LivroDAO {
 		} 
 
 		return livro;
+	}
+	
+	public Livro consultarLivrosPorSeletor(PesquisaGeralSeletor seletor) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM LIVRO";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		Livro livro = null;
+
+		sql = criarFiltros(sql, seletor);
+		
+		try {
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet != null && resultSet.next()) {
+				livro = construirLivroDoResultSet(resultSet);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar livro.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return livro;
+	}
+	
+	
+
+	private String criarFiltros(String sql, PesquisaGeralSeletor seletor) {
+		boolean primeiro = true;
+		
+		return null;
 	}
 
 	public Livro consultarLivroPorId(int id) {
