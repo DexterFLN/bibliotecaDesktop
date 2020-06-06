@@ -35,9 +35,15 @@ CREATE TABLE LIVRO (
     editora VARCHAR(30) NOT NULL,
     edicao INT NOT NULL,
     ano INT NOT NULL,
-    alugado BOOLEAN NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(idSessao) REFERENCES SESSAO(id)
+);
+
+CREATE TABLE EXEMPLAR (
+    id INT NOT NULL AUTO_INCREMENT,
+    idLivro INT NOT NULL,
+    PRIMARY KEY(id, idLivro),
+    FOREIGN KEY(idLivro) REFERENCES LIVRO(id)
 );
 
 CREATE TABLE USUARIO (
@@ -47,8 +53,6 @@ CREATE TABLE USUARIO (
     nome VARCHAR(30) NOT NULL,
     sobrenome VARCHAR(40) NOT NULL,
     tipo INT NOT NULL,
-    login VARCHAR(20) NOT NULL,
-    senha VARCHAR(20) NOT NULL,
     dataNascimento DATE NOT NULL,
     email VARCHAR(40) NOT NULL,
     dddFixo VARCHAR(2),
@@ -62,19 +66,12 @@ CREATE TABLE USUARIO (
 
 CREATE TABLE ALUGUEL (
     id INT NOT NULL AUTO_INCREMENT,
+    idExemplar INT NOT NULL,
     idUsuario INT NOT NULL,
     dataLocacao DATE NOT NULL,
     devolucaoPrevista DATE NOT NULL,
     devolucaoEfetiva DATE,
     PRIMARY KEY(id),
-    FOREIGN KEY (idUsuario) REFERENCES USUARIO(id)
-);
-
-CREATE TABLE ALUGUEL_LIVRO (
-    id INT NOT NULL AUTO_INCREMENT,
-    idAluguel INT NOT NULL,
-    idLivro INT NOT NULL,
-    PRIMARY KEY(id, idAluguel, idLivro),
-    FOREIGN KEY(idAluguel) REFERENCES ALUGUEL(id),
-    FOREIGN KEY(idLivro) REFERENCES LIVRO(id)
+    FOREIGN KEY (idUsuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (idExemplar) REFERENCES EXEMPLAR(id)
 );
