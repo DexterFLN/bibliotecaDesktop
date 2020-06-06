@@ -2,32 +2,36 @@ package view;
 
 
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import javax.swing.JMenuItem;
 
 public class MainAcervo extends JPanel {
+	
 	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
-	private static JPanel panel_1;
+	private JPanel painelAcervoCadastro = new PainelAcervoCadastro();
+	private JPanel painelAcervoEditar = new PainelAcervoEditar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmConsultar;
 	private JMenuItem mntmExcluir;
+	private JMenuItem mntmEditar;
 
 
 	/**
 	 * Create the panel.
 	 */
 	public MainAcervo() {
-		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px,grow][grow]"));
+		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
 		
         this.initialize();
 		
@@ -47,30 +51,57 @@ public class MainAcervo extends JPanel {
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 		
+		mntmEditar = new JMenuItem("Editar");
+		menuBar.add(mntmEditar);
+		
 		mntmExcluir = new JMenuItem("Excluir");
 		menuBar.add(mntmExcluir);
+		
 		layeredPane = new JLayeredPane();
         layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
         add(layeredPane, "cell 0 1 15 11,grow");
         
         layeredPane.add(painelAcervoConsulta, "cell 0 0,grow");
+        
+        this.addListeners();
     }
 	
 	private void addListeners() {
+		
+		mntmCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelAcervoCadastro);
+			}
+		});
+		
+		mntmConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelAcervoConsulta);
+			}
+		});
+		
+		mntmEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelAcervoEditar);
+			}
+		});
+		
+		mntmExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 	}
 	
-//	private boolean switchPanel(JPanel panel) {
-//		panel_1.removeAll();
-//		layeredPane.removeAll();
-//		
-//		layeredPane.setLayout(new MigLayout("", "[][grow][]", "[][grow][]"));
-//		panel_1.setBackground(new Color(2, 83, 83));
-//		panel_1.revalidate();
-//		layeredPane.add(panel_1, "cell 1 1,grow");
-//		panel_1.setLayout(new MigLayout("", "[985.00px,grow,fill]", "[168px,grow,fill]"));
-//		panel_1.add(panel, "cell 0 0,alignx center,aligny top");
-//		layeredPane.revalidate();
-//    }
+	private static void switchPanel(JPanel panel) {
+		
+		layeredPane.removeAll();
+		panel.setBackground(Color.WHITE);
+		panel.repaint();
+		panel.revalidate();
+		layeredPane.add(panel, "grow");
+		layeredPane.repaint();
+		layeredPane.revalidate();
+    }
 
 }

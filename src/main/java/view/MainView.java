@@ -21,14 +21,13 @@ import net.miginfocom.swing.MigLayout;
 public class MainView extends JFrame {
 
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
-	private static final PainelAcervoCadastro painelAcervoCadastro = new PainelAcervoCadastro();
 	private static final MainAcervo mainAcervo = new MainAcervo();
 	private static JLayeredPane layeredPane;
+	private static JPanel panel_1;
 	private JPanel panelMenuLateral;
 	private JButton btnAcervo;
 	private JButton btnPesquisaGeral;
 	private JButton buttonEmprestimos;
-	private static JPanel panel_1;
 
 	public MainView() {
 
@@ -79,14 +78,6 @@ public class MainView extends JFrame {
 		panel_1.setLayout(new MigLayout("", "[985.00px,grow,fill]", "[168px,grow,fill]"));
 		panel_1.add(panel, "cell 0 0,alignx center,aligny top");
 		layeredPane.revalidate();
-
-//		layeredPane.removeAll();
-//		panel.setBackground(Color.WHITE);
-//		panel.repaint();
-//		panel.revalidate();
-//		layeredPane.add(panel, "grow");
-//		layeredPane.repaint();
-//		layeredPane.revalidate();
 
 	}
 
@@ -150,11 +141,4 @@ public class MainView extends JFrame {
 		
 	}
 
-	private void arrumarTela() {
-		Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
-		int larguraDosPaineis = (int) ((dimensoesTela.getWidth()) / 20);
-		int alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
-		System.out.println(larguraDosPaineis);
-		System.out.println(alturaDaTela);
-	}
 }

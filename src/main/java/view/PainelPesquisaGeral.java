@@ -29,13 +29,15 @@ public class PainelPesquisaGeral extends JPanel {
 	private JButton btnPesquisar;
 	private String[] nomesColunas = {"Título", "Autor", "Ano", "Exemplares"};
 	private ArrayList<Livro> livros;
+	private JComboBox cbAno;
+	private JComboBox cbBuscar;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelPesquisaGeral() {
 		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[58.00px][31.00px][30.00px][544.00px]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px]"));
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
@@ -53,15 +55,16 @@ public class PainelPesquisaGeral extends JPanel {
 		JLabel lblBuscar = new JLabel("Buscar por");
 		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
 		
-		JComboBox cbBuscar = new JComboBox();
+		cbBuscar = new JComboBox();
+		this.preenchercbBuscarPor();
 		add(cbBuscar, "cell 2 2,grow");
 		
 		JLabel lblAno = new JLabel("Ano");
 		add(lblAno, "cell 3 2,alignx right,growy");
 		
-		JComboBox cbAno = new JComboBox();
+		cbAno = new JComboBox();
+		this.preenchercbAno();
 		add(cbAno, "cell 4 2,grow");
-		
 		
 		btnPesquisar = new JButton("Pesquisar");
 		
@@ -76,7 +79,6 @@ public class PainelPesquisaGeral extends JPanel {
 		
 		tableResultadoPesquisa = new JTable();
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
-		
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 		
 		this.addListeners();
@@ -84,24 +86,43 @@ public class PainelPesquisaGeral extends JPanel {
 	}
 	
 	
+	private void preenchercbAno() {
+		//TODO combo ano de dois em dois?
+		for (int i = 2020; i >= 1500; i--) {
+			cbAno.addItem(i);
+		}
+	}
+	
+	private void preenchercbBuscarPor() {
+		// TODO verificar se são só essas opções
+		cbBuscar.addItem("Autor");
+		cbBuscar.addItem("Título");
+		cbBuscar.addItem("Editora");
+		cbBuscar.addItem("Sessão");
+		
+		
+	}
+
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sessao sessao = new Sessao("Mitologia", null);
-				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
 				
-				Exemplar exemplar = new Exemplar();
-				exemplar.setId(30);
-				exemplar.setLivro(livro);
-				
-				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
-				exemplares.add(exemplar);
-				
-				livro.setExemplares(exemplares);
-				
-				System.out.println(livro.toString());
-				livros.add(livro);
 				atualizarTabelaResultadoPesquisa();
+//				Sessao sessao = new Sessao("Mitologia", null);
+//				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
+//				
+//				Exemplar exemplar = new Exemplar();
+//				exemplar.setId(30);
+//				exemplar.setLivro(livro);
+//				
+//				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+//				exemplares.add(exemplar);
+//				
+//				livro.setExemplares(exemplares);
+//				
+//				System.out.println(livro.toString());
+//				livros.add(livro);
+//				atualizarTabelaResultadoPesquisa();
 			}
 		});
 	}
