@@ -1,89 +1,65 @@
 package view;
 
-import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import net.miginfocom.swing.MigLayout;
 
 public class PainelAcervoCadastro extends JPanel {
 	private JTextField txtTitulo;
-	private JTextField txtAutor;
-	private JTextField txtEditora;
 	private JTextField txtSessao;
+	private JTextField textAutor;
+	private JTextField textEditora;
+	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelAcervoCadastro() {
-		setLayout(null);
+		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][55.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 		
 		JLabel lblTitulo = new JLabel("Titulo");
-		lblTitulo.setBounds(56, 70, 26, 14);
-		add(lblTitulo);
+		add(lblTitulo, "cell 1 2,alignx left,aligny center");
 		
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(120, 67, 393, 20);
-		add(txtTitulo);
+		add(txtTitulo, "cell 1 3 3 1,grow");
 		txtTitulo.setColumns(10);
 		
 		JLabel lblAutor = new JLabel("Autor");
-		lblAutor.setBounds(56, 116, 46, 14);
-		add(lblAutor);
+		add(lblAutor, "cell 1 4,alignx left,aligny center");
+		
+		textAutor = new JTextField();
+		add(textAutor, "cell 1 5 2 1,grow");
+		textAutor.setColumns(10);
 		
 		JLabel lblEditora = new JLabel("Editora");
-		lblEditora.setBounds(56, 164, 46, 14);
-		add(lblEditora);
+		add(lblEditora, "cell 1 6,alignx left,aligny top");
+		
+		textEditora = new JTextField();
+		add(textEditora, "cell 1 7 2 1,grow");
+		textEditora.setColumns(10);
 		
 		JLabel lblSessao = new JLabel("Sesssao");
-		lblSessao.setBounds(56, 220, 46, 14);
-		add(lblSessao);
+		add(lblSessao, "cell 1 8,alignx left,aligny center");
 		
 		JLabel lblNewLabel_3 = new JLabel("Ano");
-		lblNewLabel_3.setBounds(375, 116, 46, 14);
-		add(lblNewLabel_3);
+		add(lblNewLabel_3, "cell 3 4,alignx left,aligny center");
 		
 		JComboBox cbAno = new JComboBox();
-		cbAno.setBounds(375, 141, 122, 22);
-		add(cbAno);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(10, 11, 285, 22);
-		add(menuBar);
-		
-		JMenu mnAcervo = new JMenu("Acervo");
-		menuBar.add(mnAcervo);
-		
-		JMenu mnCadastro = new JMenu("Cadastro");
-		menuBar.add(mnCadastro);
-		
-		JMenu mnConsultar = new JMenu("Consultar ");
-		menuBar.add(mnConsultar);
-		
-		JMenu mnExcluir = new JMenu("Excluir");
-		menuBar.add(mnExcluir);
-		
-		txtAutor = new JTextField();
-		txtAutor.setBounds(120, 113, 193, 20);
-		add(txtAutor);
-		txtAutor.setColumns(10);
-		
-		txtEditora = new JTextField();
-		txtEditora.setBounds(120, 161, 193, 20);
-		add(txtEditora);
-		txtEditora.setColumns(10);
+		add(cbAno, "cell 3 5,grow");
 		
 		txtSessao = new JTextField();
-		txtSessao.setBounds(120, 217, 399, 20);
-		add(txtSessao);
+		add(txtSessao, "cell 1 9 3 1,grow");
 		txtSessao.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -91,8 +67,7 @@ public class PainelAcervoCadastro extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCadastrar.setBounds(249, 271, 89, 23);
-		add(btnCadastrar);
+		add(btnCadastrar, "cell 2 11,grow");
 
 	}
 }
