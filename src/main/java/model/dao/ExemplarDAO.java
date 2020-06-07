@@ -10,7 +10,9 @@ import model.vo.Exemplar;
 import model.vo.Livro;
 
 public class ExemplarDAO {
-
+	
+	// CONSULTA DE ALUGUEL "SELECT * FROM EXEMPLAR INNER JOIN ALUGUEL ON EXEMPLAR.id = ALUGUEL.idExemplar WHERE idLivro=1;"
+	
 	public Exemplar construirExemplarDoResultSet(ResultSet resultSet) {
 		Exemplar exemplar = new Exemplar();
 
@@ -28,6 +30,50 @@ public class ExemplarDAO {
 		return exemplar;
 	}
 
+	public Exemplar construirExemplaresDoResultSet(ResultSet resultSet) {
+		Exemplar exemplar = new Exemplar();
+
+		try {
+			exemplar.setId(resultSet.getInt("id"));
+
+			LivroDAO livroDAO = new LivroDAO();
+			Livro livro = livroDAO.consultarLivroPorId(resultSet.getInt("idLivro"));
+			exemplar.setLivro(livro);
+		} catch (SQLException ex) {
+			System.out.println("Erro ao construir exemplar do resultSet.");
+			System.out.println("Erro: " + ex.getMessage());
+		} 
+
+		return exemplar;
+	}
+	
+	public Exemplar consultarExemplarLivro(int idLivro) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		Exemplar exemplar = null;
+
+		try {
+			preparedStatement.setInt(1, idLivro);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet != null && resultSet.next()) {
+				exemplar = construirExemplarDoResultSet(resultSet);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar exemplar.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return exemplar;
+	}
+	
 	public Exemplar consultarExemplar(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE id=?";
@@ -54,6 +100,7 @@ public class ExemplarDAO {
 
 		return exemplar;
 	}
+
 
 	public ArrayList<Exemplar> construirExemplaresDoLivro(int idLivro) {
 		Connection connection = Banco.getConnection();
