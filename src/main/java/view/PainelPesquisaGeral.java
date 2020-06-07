@@ -1,80 +1,154 @@
 package view;
 
-import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import model.vo.Exemplar;
+import model.vo.Livro;
+import model.vo.Sessao;
+import net.miginfocom.swing.MigLayout;
 
 public class PainelPesquisaGeral extends JPanel {
+	
 	private JTextField txtPesquisar;
-	private JTable tblPesquisaGeral;
+	private JTable tableResultadoPesquisa;
+	private JButton btnPesquisar;
+	private String[] nomesColunas = {"Título", "Autor", "Ano", "Exemplares"};
+	private ArrayList<Livro> livros;
+	private JComboBox cbAno;
+	private JComboBox cbBuscar;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelPesquisaGeral() {
-		setLayout(null);
-		
-		JLabel lblPesquisa = new JLabel("Digite um termo para pesquisa");
-		lblPesquisa.setBounds(10, 58, 145, 14);
-		add(lblPesquisa);
-		
-		txtPesquisar = new JTextField();
-		txtPesquisar.setBounds(165, 55, 243, 20);
-		add(txtPesquisar);
-		txtPesquisar.setColumns(10);
-		
-		JLabel lblBuscar = new JLabel("Buscar por");
-		lblBuscar.setBounds(36, 101, 59, 15);
-		add(lblBuscar);
-		
-		JComboBox cbBuscar = new JComboBox();
-		cbBuscar.setBounds(105, 97, 81, 22);
-		add(cbBuscar);
-		
-		JLabel lblAno = new JLabel("Ano");
-		lblAno.setBounds(223, 97, 41, 22);
-		add(lblAno);
-		
-		JComboBox cbAno = new JComboBox();
-		cbAno.setBounds(264, 97, 81, 23);
-		add(cbAno);
-		
+		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px]"));
+
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(6, 6, 89, 22);
-		add(menuBar);
+		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
+		add(menuBar, "cell 1 0,alignx leading,growy");
 		
 		JMenu mnPesquisaGeral = new JMenu("Pesquisa Geral");
 		mnPesquisaGeral.setForeground(Color.BLACK);
 		menuBar.add(mnPesquisaGeral);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnPesquisar.setBounds(438, 54, 89, 23);
-		add(btnPesquisar);
+		txtPesquisar = new JTextField();
+		txtPesquisar.setText("Digite um termo para Pesquisa");
+		add(txtPesquisar, "cell 1 1 6 1,grow");
+		txtPesquisar.setColumns(10);
+		
+		JLabel lblBuscar = new JLabel("Buscar por");
+		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
+		
+		cbBuscar = new JComboBox();
+		this.preenchercbBuscarPor();
+		add(cbBuscar, "cell 2 2,grow");
+		
+		JLabel lblAno = new JLabel("Ano");
+		add(lblAno, "cell 3 2,alignx right,growy");
+		
+		cbAno = new JComboBox();
+		this.preenchercbAno();
+		add(cbAno, "cell 4 2,grow");
+		
+		btnPesquisar = new JButton("Pesquisar");
+		
+		add(btnPesquisar, "cell 7 1,grow");
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		add(scrollPane_1, "cell 1 3 8 1,grow");
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 127, 520, 162);
-		add(panel);
+		scrollPane_1.setViewportView(panel);
+		panel.setLayout(new MigLayout("", "[1145.00px,grow,fill]", "[58.00px,grow,fill]"));
 		
-		tblPesquisaGeral = new JTable();
-		panel.add(tblPesquisaGeral);
-
+		tableResultadoPesquisa = new JTable();
+		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
+		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
+		
+		this.addListeners();
+		
 	}
+	
+	
+	private void preenchercbAno() {
+		//TODO combo ano de dois em dois?
+		for (int i = 2020; i >= 1500; i--) {
+			cbAno.addItem(i);
+		}
+	}
+	
+	private void preenchercbBuscarPor() {
+		// TODO verificar se são só essas opções
+		cbBuscar.addItem("Autor");
+		cbBuscar.addItem("Título");
+		cbBuscar.addItem("Editora");
+		cbBuscar.addItem("Sessão");
+		
+		
+	}
+
+	private void addListeners() {
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				atualizarTabelaResultadoPesquisa();
+//				Sessao sessao = new Sessao("Mitologia", null);
+//				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
+//				
+//				Exemplar exemplar = new Exemplar();
+//				exemplar.setId(30);
+//				exemplar.setLivro(livro);
+//				
+//				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+//				exemplares.add(exemplar);
+//				
+//				livro.setExemplares(exemplares);
+//				
+//				System.out.println(livro.toString());
+//				livros.add(livro);
+//				atualizarTabelaResultadoPesquisa();
+			}
+		});
+	}
+	
+	private void limparTabelaResultadoPesquisa() {
+		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+	}
+	
+	private void atualizarTabelaResultadoPesquisa() {
+		limparTabelaResultadoPesquisa();
+		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
+		
+		for (int i = 0; i < 3; i++) {
+			
+			Object[] novaLinhaDaTabela = new Object[4];
+			novaLinhaDaTabela[0] = "teste";
+			novaLinhaDaTabela[1] = "teste";
+			novaLinhaDaTabela[2] = "teste";
+			novaLinhaDaTabela[3] = "teste";
+			
+			model.addRow(novaLinhaDaTabela);
+		}
+		
+	}
+	
+	
+	
+
 }
