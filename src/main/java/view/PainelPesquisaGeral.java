@@ -44,7 +44,7 @@ public class PainelPesquisaGeral extends JPanel {
 		add(menuBar, "cell 1 0,alignx leading,growy");
 		
 		JMenu mnPesquisaGeral = new JMenu("Pesquisa Geral");
-		mnPesquisaGeral.setForeground(Color.BLACK);
+		mnPesquisaGeral.setBackground(new Color(2,  83, 83));
 		menuBar.add(mnPesquisaGeral);
 		
 		txtPesquisar = new JTextField();
@@ -108,21 +108,6 @@ public class PainelPesquisaGeral extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				atualizarTabelaResultadoPesquisa();
-//				Sessao sessao = new Sessao("Mitologia", null);
-//				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
-//				
-//				Exemplar exemplar = new Exemplar();
-//				exemplar.setId(30);
-//				exemplar.setLivro(livro);
-//				
-//				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
-//				exemplares.add(exemplar);
-//				
-//				livro.setExemplares(exemplares);
-//				
-//				System.out.println(livro.toString());
-//				livros.add(livro);
-//				atualizarTabelaResultadoPesquisa();
 			}
 		});
 	}
@@ -138,10 +123,11 @@ public class PainelPesquisaGeral extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			
 			Object[] novaLinhaDaTabela = new Object[4];
-			novaLinhaDaTabela[0] = "teste";
+			novaLinhaDaTabela[0] = "Deuses Do Olimpo";
 			novaLinhaDaTabela[1] = "teste";
 			novaLinhaDaTabela[2] = "teste";
-			novaLinhaDaTabela[3] = "teste";
+			novaLinhaDaTabela[3] = btnPesquisar;
+			
 			
 			model.addRow(novaLinhaDaTabela);
 		}
