@@ -1,11 +1,9 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,11 +16,13 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import view.acervo.MainAcervo;
+import view.aluguel.MainAluguel;
 
 public class MainView extends JFrame {
 
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final MainAcervo mainAcervo = new MainAcervo();
+	private static final MainAluguel mainAluguel = new MainAluguel();
 	private static JLayeredPane layeredPane;
 	private static JPanel panel_1;
 	private JPanel panelMenuLateral;
@@ -116,6 +116,7 @@ public class MainView extends JFrame {
 		menuBar.add(btnAcervo);
 		
 		buttonEmprestimos = new JButton("");
+		
 		ImageIcon iconEmprestimoMenu = new ImageIcon(MainView.class.getResource("/icons/verify.png"));
 		Image imageEmprestimoMenu = iconEmprestimoMenu.getImage();
 		Image newimgIconEmprestimoMenu = imageEmprestimoMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
@@ -137,6 +138,12 @@ public class MainView extends JFrame {
 		btnAcervo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainAcervo);
+			}
+		});
+		
+		buttonEmprestimos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(mainAluguel);
 			}
 		});
 		

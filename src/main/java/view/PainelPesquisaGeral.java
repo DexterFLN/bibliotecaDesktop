@@ -44,7 +44,6 @@ public class PainelPesquisaGeral extends JPanel {
 		add(menuBar, "cell 1 0,alignx leading,growy");
 		
 		JMenu mnPesquisaGeral = new JMenu("Pesquisa Geral");
-//		mnPesquisaGeral.setForeground(Color.BLACK);
 		mnPesquisaGeral.setBackground(new Color(2,  83, 83));
 		menuBar.add(mnPesquisaGeral);
 		
@@ -124,7 +123,7 @@ public class PainelPesquisaGeral extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			
 			Object[] novaLinhaDaTabela = new Object[4];
-			novaLinhaDaTabela[0] = "teste";
+			novaLinhaDaTabela[0] = "Deuses Do Olimpo";
 			novaLinhaDaTabela[1] = "teste";
 			novaLinhaDaTabela[2] = "teste";
 			novaLinhaDaTabela[3] = btnPesquisar;

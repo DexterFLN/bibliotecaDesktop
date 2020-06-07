@@ -1,4 +1,4 @@
-package view.acervo;
+package view.aluguel;
 
 
 import java.awt.Color;
@@ -14,22 +14,22 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainAcervo extends JPanel {
+public class MainAluguel extends JPanel {
 	
-	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
-	private JPanel painelAcervoCadastro = new PainelAcervoCadastro();
-	private JPanel painelAcervoAlterar = new PainelAcervoAlterar();
+	private JPanel painelAluguelConsulta = new PainelAluguelConsulta();
+	private JPanel painelAluguelCadastro = new PainelAluguelNovo();	
+	private JPanel painelAluguelAlterar = new PainelAluguelAlterar();
 	private static JLayeredPane layeredPane;
-	private JMenuBar menuBar;
-	private JMenuItem mntmCadastro;
+	private JMenuBar menuBar;	
+	private JMenuItem mntmNovo;
 	private JMenuItem mntmConsultar;
-	private JMenuItem mntmAlterar;
+	private JMenuItem mntmRenovarDevolver;
 
 
 	/**
 	 * Create the panel.
 	 */
-	public MainAcervo() {
+	public MainAluguel() {
 		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
 		
         this.initialize();
@@ -44,48 +44,49 @@ public class MainAcervo extends JPanel {
 		menuBar = new JMenuBar();
 		panel.add(menuBar);
 		
-		mntmCadastro = new JMenuItem("Cadastro");
-		menuBar.add(mntmCadastro);
-		
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 		
-		mntmAlterar = new JMenuItem("Alterar");
-		menuBar.add(mntmAlterar);
+		mntmNovo = new JMenuItem("Novo");
+		menuBar.add(mntmNovo);
+		
+		mntmRenovarDevolver = new JMenuItem("Renovar/Devolver");
+		
+		menuBar.add(mntmRenovarDevolver);
 		
 		layeredPane = new JLayeredPane();
         layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
         add(layeredPane, "cell 0 1 15 11,grow");
         
-        layeredPane.add(painelAcervoConsulta, "cell 0 0,grow");
+        layeredPane.add(painelAluguelConsulta, "cell 0 0,grow");
         
         this.addListeners();
     }
 	
 	private void addListeners() {
 		
-		mntmCadastro.addActionListener(new ActionListener() {
+		mntmNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoCadastro);
+				switchPanel(painelAluguelCadastro);
 			}
 		});
 		
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoConsulta);
+				switchPanel(painelAluguelConsulta);
 			}
 		});
 		
-		mntmAlterar.addActionListener(new ActionListener() {
+		mntmRenovarDevolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoAlterar);
+				switchPanel(painelAluguelAlterar);
 			}
 		});
-		
 	}
 	
 	private static void switchPanel(JPanel panel) {
+		
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
@@ -93,6 +94,6 @@ public class MainAcervo extends JPanel {
 		layeredPane.add(panel, "grow");
 		layeredPane.repaint();
 		layeredPane.revalidate();
-		
     }
+
 }

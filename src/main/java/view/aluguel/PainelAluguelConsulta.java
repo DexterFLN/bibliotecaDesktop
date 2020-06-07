@@ -1,4 +1,4 @@
-package view.acervo;
+package view.aluguel;
 
 import java.util.ArrayList;
 
@@ -13,41 +13,33 @@ import javax.swing.JTextField;
 import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
 
-public class PainelAcervoConsulta extends JPanel {
+public class PainelAluguelConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
 	private String[] nomesColunas = {"Título", "Autor", "Ano", "Exemplares"};
 	private ArrayList<Livro> livros;
-	private JComboBox cbAno;
-	private JComboBox cbBuscar;
 
 	/**
 	 * Create the panel.
 	 */
-	public PainelAcervoConsulta() {
+	public PainelAluguelConsulta() {
 		
 		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px]"));
 		
 		txtPesquisar = new JTextField();
-		txtPesquisar.setText("Digite um termo para Pesquisa");
+		txtPesquisar.setText("Digite o termo para Pesquisa");
 		add(txtPesquisar, "cell 1 0 6 1,grow");
 		txtPesquisar.setColumns(10);
 		
 		JLabel lblBuscar = new JLabel("Buscar por");
 		add(lblBuscar, "cell 1 1,alignx right,aligny center");
 		
-		cbBuscar = new JComboBox();
-		this.preenchercbBuscarPor();
+		JComboBox cbBuscar = new JComboBox();
+		cbBuscar.addItem("Atrasados");
+		cbBuscar.addItem("Código Usuário");
+		cbBuscar.addItem("Código Livro");
 		add(cbBuscar, "cell 2 1,grow");
-		
-		JLabel lblAno = new JLabel("Ano");
-		add(lblAno, "cell 3 1,alignx right,growy");
-		
-		cbAno = new JComboBox();
-		this.preenchercbAno();
-		add(cbAno, "cell 4 1,grow");
-		
 		
 		btnPesquisar = new JButton("Pesquisar");
 		
@@ -67,22 +59,4 @@ public class PainelAcervoConsulta extends JPanel {
 		
 
 	}
-	
-	private void preenchercbAno() {
-		//TODO combo ano de dois em dois?
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
-	
-	private void preenchercbBuscarPor() {
-		// TODO verificar se são só essas opções
-		cbBuscar.addItem("Autor");
-		cbBuscar.addItem("Título");
-		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
-		
-		
-	}
-
 }
