@@ -29,46 +29,49 @@ public class PainelPesquisaGeral extends JPanel {
 	private JButton btnPesquisar;
 	private String[] nomesColunas = {"Título", "Autor", "Ano", "Exemplares"};
 	private ArrayList<Livro> livros;
+	private JComboBox cbAno;
+	private JComboBox cbBuscar;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelPesquisaGeral() {
-		setLayout(new MigLayout("", "[161.00px,grow][50px,grow][21px,grow][41px,grow][144px,grow][92px,grow]", "[58.00px][50.00px][30.00px][544.00px]"));
-		
-		JLabel lblPesquisa = new JLabel("Digite um termo para pesquisa");
-		add(lblPesquisa, "cell 0 1 2 1,growx,aligny center");
-		
-		txtPesquisar = new JTextField();
-		add(txtPesquisar, "cell 2 1 3 1,growx,aligny center");
-		txtPesquisar.setColumns(10);
-		
-		JLabel lblBuscar = new JLabel("Buscar por");
-		add(lblBuscar, "cell 0 2,alignx right,aligny center");
-		
-		JComboBox cbBuscar = new JComboBox();
-		add(cbBuscar, "cell 1 2 2 1,grow");
-		
-		JLabel lblAno = new JLabel("Ano");
-		add(lblAno, "cell 3 2,grow");
-		
-		JComboBox cbAno = new JComboBox();
-		add(cbAno, "cell 4 2,grow");
-		
+		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px]"));
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
-		add(menuBar, "cell 0 0,grow");
+		add(menuBar, "cell 1 0,alignx leading,growy");
 		
 		JMenu mnPesquisaGeral = new JMenu("Pesquisa Geral");
 		mnPesquisaGeral.setForeground(Color.BLACK);
 		menuBar.add(mnPesquisaGeral);
 		
+		txtPesquisar = new JTextField();
+		txtPesquisar.setText("Digite um termo para Pesquisa");
+		add(txtPesquisar, "cell 1 1 6 1,grow");
+		txtPesquisar.setColumns(10);
+		
+		JLabel lblBuscar = new JLabel("Buscar por");
+		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
+		
+		cbBuscar = new JComboBox();
+		this.preenchercbBuscarPor();
+		add(cbBuscar, "cell 2 2,grow");
+		
+		JLabel lblAno = new JLabel("Ano");
+		add(lblAno, "cell 3 2,alignx right,growy");
+		
+		cbAno = new JComboBox();
+		this.preenchercbAno();
+		add(cbAno, "cell 4 2,grow");
+		
 		btnPesquisar = new JButton("Pesquisar");
 		
-		add(btnPesquisar, "cell 5 1,grow");
+		add(btnPesquisar, "cell 7 1,grow");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, "cell 0 3 6 1,grow");
+		add(scrollPane_1, "cell 1 3 8 1,grow");
 		
 		JPanel panel = new JPanel();
 		scrollPane_1.setViewportView(panel);
@@ -76,7 +79,6 @@ public class PainelPesquisaGeral extends JPanel {
 		
 		tableResultadoPesquisa = new JTable();
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
-		
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 		
 		this.addListeners();
@@ -84,24 +86,43 @@ public class PainelPesquisaGeral extends JPanel {
 	}
 	
 	
+	private void preenchercbAno() {
+		//TODO combo ano de dois em dois?
+		for (int i = 2020; i >= 1500; i--) {
+			cbAno.addItem(i);
+		}
+	}
+	
+	private void preenchercbBuscarPor() {
+		// TODO verificar se são só essas opções
+		cbBuscar.addItem("Autor");
+		cbBuscar.addItem("Título");
+		cbBuscar.addItem("Editora");
+		cbBuscar.addItem("Sessão");
+		
+		
+	}
+
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sessao sessao = new Sessao("Mitologia", null);
-				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
 				
-				Exemplar exemplar = new Exemplar();
-				exemplar.setId(30);
-				exemplar.setLivro(livro);
-				
-				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
-				exemplares.add(exemplar);
-				
-				livro.setExemplares(exemplares);
-				
-				System.out.println(livro.toString());
-				livros.add(livro);
 				atualizarTabelaResultadoPesquisa();
+//				Sessao sessao = new Sessao("Mitologia", null);
+//				Livro livro = new Livro(1,"Atlas", "Atlas", "Arqueiro", 20, 2019, sessao, null);
+//				
+//				Exemplar exemplar = new Exemplar();
+//				exemplar.setId(30);
+//				exemplar.setLivro(livro);
+//				
+//				ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+//				exemplares.add(exemplar);
+//				
+//				livro.setExemplares(exemplares);
+//				
+//				System.out.println(livro.toString());
+//				livros.add(livro);
+//				atualizarTabelaResultadoPesquisa();
 			}
 		});
 	}
