@@ -1,4 +1,4 @@
-package view;
+package view.acervo;
 
 
 import java.awt.Color;
@@ -18,13 +18,12 @@ public class MainAcervo extends JPanel {
 	
 	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
 	private JPanel painelAcervoCadastro = new PainelAcervoCadastro();
-	private JPanel painelAcervoEditar = new PainelAcervoEditar();
+	private JPanel painelAcervoAlterar = new PainelAcervoAlterar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmConsultar;
-	private JMenuItem mntmExcluir;
-	private JMenuItem mntmEditar;
+	private JMenuItem mntmAlterar;
 
 
 	/**
@@ -51,11 +50,8 @@ public class MainAcervo extends JPanel {
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 		
-		mntmEditar = new JMenuItem("Editar");
-		menuBar.add(mntmEditar);
-		
-		mntmExcluir = new JMenuItem("Excluir");
-		menuBar.add(mntmExcluir);
+		mntmAlterar = new JMenuItem("Alterar");
+		menuBar.add(mntmAlterar);
 		
 		layeredPane = new JLayeredPane();
         layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -81,20 +77,15 @@ public class MainAcervo extends JPanel {
 			}
 		});
 		
-		mntmEditar.addActionListener(new ActionListener() {
+		mntmAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoEditar);
+				switchPanel(painelAcervoAlterar);
 			}
 		});
 		
-		mntmExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 	}
 	
 	private static void switchPanel(JPanel panel) {
-		
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
@@ -102,6 +93,6 @@ public class MainAcervo extends JPanel {
 		layeredPane.add(panel, "grow");
 		layeredPane.repaint();
 		layeredPane.revalidate();
+		
     }
-
 }
