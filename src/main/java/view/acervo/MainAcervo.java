@@ -1,4 +1,4 @@
-package view;
+package view.acervo;
 
 
 import java.awt.Color;

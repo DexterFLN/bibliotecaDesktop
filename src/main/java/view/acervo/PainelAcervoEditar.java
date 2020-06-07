@@ -1,4 +1,4 @@
-package view;
+package view.acervo;
 
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;

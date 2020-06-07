@@ -1,4 +1,4 @@
-package view;
+package view.acervo;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -79,7 +79,7 @@ public class PainelAcervoConsulta extends JPanel {
 //		panel.add(table);
 		
 		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[58.00px][31.00px][30.00px][544.00px]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px]"));
 		
 		
 //		JMenuBar menuBar = new JMenuBar();
@@ -100,28 +100,28 @@ public class PainelAcervoConsulta extends JPanel {
 		
 		txtPesquisar = new JTextField();
 		txtPesquisar.setText("Digite um termo para Pesquisa");
-		add(txtPesquisar, "cell 1 1 6 1,grow");
+		add(txtPesquisar, "cell 1 0 6 1,grow");
 		txtPesquisar.setColumns(10);
 		
 		JLabel lblBuscar = new JLabel("Buscar por");
-		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
+		add(lblBuscar, "cell 1 1,alignx right,aligny center");
 		
 		JComboBox cbBuscar = new JComboBox();
-		add(cbBuscar, "cell 2 2,grow");
+		add(cbBuscar, "cell 2 1,grow");
 		
 		JLabel lblAno = new JLabel("Ano");
-		add(lblAno, "cell 3 2,alignx right,growy");
+		add(lblAno, "cell 3 1,alignx right,growy");
 		
 		JComboBox cbAno = new JComboBox();
-		add(cbAno, "cell 4 2,grow");
+		add(cbAno, "cell 4 1,grow");
 		
 		
 		btnPesquisar = new JButton("Pesquisar");
 		
-		add(btnPesquisar, "cell 7 1,grow");
+		add(btnPesquisar, "cell 7 0,grow");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, "cell 1 3 8 1,grow");
+		add(scrollPane_1, "cell 1 2 8 1,grow");
 		
 		JPanel panel = new JPanel();
 		scrollPane_1.setViewportView(panel);

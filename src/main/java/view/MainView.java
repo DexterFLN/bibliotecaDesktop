@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import view.acervo.MainAcervo;
 
 public class MainView extends JFrame {
 
@@ -32,7 +33,7 @@ public class MainView extends JFrame {
 	public MainView() {
 
 		this.setTitle("Principal Menu");
-		this.setBounds(0, 0, 1163, 739);
+		this.setBounds(0, 0, 1384, 791);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(new Color(2, 83, 83));
 		this.getContentPane().setLayout(new MigLayout("", "[96.00,fill][grow]", "[grow]"));
