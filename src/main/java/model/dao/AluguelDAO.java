@@ -102,7 +102,6 @@ public class AluguelDAO {
 		return registrosAlterados > 0;
 	}
 
-	// TODO fazer a verificação de os campos de data vão vir no resultSet para não
 	public Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
 		
 		Aluguel aluguel;
