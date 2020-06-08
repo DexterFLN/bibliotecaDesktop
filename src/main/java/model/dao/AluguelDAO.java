@@ -83,7 +83,13 @@ public class AluguelDAO {
 			preparedStatement.setInt(2, aluguel.getExemplar().getId());
 			preparedStatement.setDate(3, java.sql.Date.valueOf(aluguel.getDataLocacao()));
 			preparedStatement.setDate(4, java.sql.Date.valueOf(aluguel.getDevolucaoPrevista()));
-			preparedStatement.setDate(5, java.sql.Date.valueOf(aluguel.getDevolucaoEfetiva()));
+			
+			if(aluguel.getDevolucaoEfetiva() == null) {
+				preparedStatement.setDate(5, null);
+			} else {
+				preparedStatement.setDate(5, java.sql.Date.valueOf(aluguel.getDevolucaoEfetiva()));
+			}
+			
 			preparedStatement.setInt(6, aluguel.getId());
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -98,6 +104,7 @@ public class AluguelDAO {
 
 	// TODO fazer a verificação de os campos de data vão vir no resultSet para não
 	public Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
+		
 		Aluguel aluguel;
 		aluguel = new Aluguel();
 
@@ -126,7 +133,9 @@ public class AluguelDAO {
 				aluguel.setDevolucaoPrevista(resultSet.getDate("devolucaoPrevista").toLocalDate());
 			}
 			if (resultSet.next()) {
-				aluguel.setDevolucaoEfetiva(resultSet.getDate("devolucaoEfetiva").toLocalDate());
+				if (resultSet.getDate("devolucaoEfetiva") != null) {
+					aluguel.setDevolucaoEfetiva(resultSet.getDate("devolucaoEfetiva").toLocalDate());
+				}
 			}
 
 		} catch (SQLException ex) {
@@ -198,7 +207,7 @@ public class AluguelDAO {
 
 		try {
 
-			preparedStatement.setInt(1, 1);
+			preparedStatement.setInt(1, limit);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet != null && resultSet.next()) {
