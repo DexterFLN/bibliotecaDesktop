@@ -196,7 +196,6 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
-	// TODO arrumar, a consulta só mostra 1 aluguel.
 	public ArrayList<Aluguel> consultarTodos(int limit) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL LIMIT ?";
