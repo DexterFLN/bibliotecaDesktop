@@ -59,7 +59,7 @@ public class UsuarioDAO {
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro ao cadastrar usuário.");
+			System.out.println("Erro ao cadastrar usuï¿½rio.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
@@ -80,7 +80,7 @@ public class UsuarioDAO {
 			preparedStatement.setInt(1, usuario.getId());
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println("Erro ao excluir usuário.");
+			System.out.println("Erro ao excluir usuï¿½rio.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -91,7 +91,7 @@ public class UsuarioDAO {
 		return excluiu;
 	}
 
-	// TODO pensar nas regras de negócio por trás do método (verificar quais atributos podem ser nulos, e quais são obrigatórios).
+	// TODO pensar nas regras de negï¿½cio por trï¿½s do mï¿½todo (verificar quais atributos podem ser nulos, e quais sï¿½o obrigatï¿½rios).
 	public boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"
@@ -133,7 +133,7 @@ public class UsuarioDAO {
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 
 		} catch (SQLException ex) {
-			System.out.println("Erro ao alterar usuário.");
+			System.out.println("Erro ao alterar usuï¿½rio.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -170,7 +170,7 @@ public class UsuarioDAO {
 			Endereco endereco = enderecoDAO.consultarEnderecoPorId(resultSet.getInt("idEndereco"));
 			usuario.setEndereco(endereco);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao construir Endereço do ResultSet");
+			System.out.println("Erro ao construir Endereï¿½o do ResultSet");
 		}
 
 		return usuario;
@@ -191,7 +191,7 @@ public class UsuarioDAO {
 				usuario = construirUsuarioDoResultSet(resultSet);
 			}
 		} catch (SQLException ex) {
-			System.out.println("Erro ao consultar usuário.");
+			System.out.println("Erro ao consultar usuï¿½rio.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
@@ -221,7 +221,7 @@ public class UsuarioDAO {
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro consultar todas as sessões.");
+			System.out.println("Erro consultar todos os usuÃ¡rios.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
