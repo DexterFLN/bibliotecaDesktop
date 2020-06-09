@@ -12,8 +12,9 @@ import model.vo.Sessao;
 
 public class LivroDAO {
 
-	// TODO criar métodos
+
 	public Livro salvar(Livro livro) { 		//MÉTODO SALVAR ESTÁ FUNCIONANDO
+    
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO LIVRO (nome, autor, editora, edicao, ano, idSessao) VALUES (?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -48,7 +49,9 @@ public class LivroDAO {
 		return livro;
 	}
 
+
 	public boolean alterar(Livro livro) { 		//MÉTODO ALTERAR ESTÁ EM CONSTRUÇÃO
+
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
 		Connection connection = Banco.getConnection();
@@ -64,13 +67,17 @@ public class LivroDAO {
 			preparedStatement.setInt(7, livro.getId());
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
+
 			System.out.println(" Erro ao alterar endereço. Causa: " + ex.getMessage());
+
 		}
 
 		return registrosAlterados > 0;
 	}
 	
+
 	public boolean excluir(Livro livro) {		// MÉTODO EXCLUIR ESTÁ FUNCIONANDO
+
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM LIVRO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -91,7 +98,7 @@ public class LivroDAO {
 		return excluiu;
 	}
 
-	// TODO inserir exemplares na construção do objeto livro
+	// TODO inserir exemplares na construÃ§Ã£o do objeto livro
 	private Livro construirLivroDoResultSet(ResultSet resultSet) {
 		Livro livro = new Livro();
 		
