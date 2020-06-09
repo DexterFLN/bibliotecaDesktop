@@ -76,17 +76,22 @@ public class ExemplarDAO {
 	public Exemplar consultarExemplar(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE id=?";
-		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
-				PreparedStatement.RETURN_GENERATED_KEYS);
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 		ResultSet resultSet = null;
-		Exemplar exemplar = null;
+		Exemplar exemplar = new Exemplar();
 
 		try {
-			exemplar.setId(resultSet.getInt("id"));
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet != null && resultSet.next()) {
+				exemplar.setId(resultSet.getInt("id"));
 
-			LivroDAO livroDAO = new LivroDAO();
-			Livro livro = livroDAO.consultarLivroPorIdParaExemplares(resultSet.getInt("idLivro"));
-			exemplar.setLivro(livro);
+				LivroDAO livroDAO = new LivroDAO();
+				Livro livro = livroDAO.consultarLivroPorIdParaExemplares(resultSet.getInt("idLivro"));
+				exemplar.setLivro(livro);
+			}
+			
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir exemplar do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
