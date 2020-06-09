@@ -44,7 +44,7 @@ public class EnderecoDAO {
 	}
 
 	public boolean excluir(Endereco endereco) {
-		String sql = " DELETE FROM endereco WHERE id = ?";
+		String sql = " DELETE FROM ENDERECO WHERE id = ?";
 		Connection connection = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 		boolean excluiu = false;
@@ -54,7 +54,7 @@ public class EnderecoDAO {
 
 			excluiu = (codigoRetornoUpdate == Banco.CODIGO_RETORNO_SUCESSO_EXCLUSAO);
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao excluir endereço. Id: " + endereco.getId() + " .Causa: " + ex.getMessage());
+			System.out.println(" Erro ao excluir endereï¿½o. Id: " + endereco.getId() + " .Causa: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
@@ -73,13 +73,13 @@ public class EnderecoDAO {
 			endereco.setUf(resultSet.getString("uf"));
 			endereco.setCep(resultSet.getString("cep"));
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao construir endereço a partir do ResultSet. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao construir endereï¿½o a partir do ResultSet. Causa: " + ex.getMessage());
 		}
 		return endereco;
 	}
 
 	public Endereco consultarEnderecoPorId(int id) {
-		String sql = " SELECT * FROM endereco WHERE id = ?";
+		String sql = " SELECT * FROM ENDERECO WHERE id = ?";
 
 		Connection conn = Banco.getConnection();
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
@@ -93,7 +93,7 @@ public class EnderecoDAO {
 				enderecoConsultado = construirEnderecoDoResultSet(rs);
 			}
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao consultar endereço. Id: " + id + " .Causa: " + ex.getMessage());
+			System.out.println(" Erro ao consultar endereï¿½o. Id: " + id + " .Causa: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(rs);
 			Banco.closePreparedStatement(stmt);
@@ -103,7 +103,7 @@ public class EnderecoDAO {
 	}
 
 	public ArrayList<Endereco> consultarTodos(int limit) {
-		String sql = " SELECT * FROM endereco LIMIT ?";
+		String sql = " SELECT * FROM ENDERECO LIMIT ?";
 
 		Connection connection = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -118,7 +118,7 @@ public class EnderecoDAO {
 				enderecos.add(enderecoConsultado);
 			}
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao consultar endereços. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao consultar endereï¿½os. Causa: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
 			Banco.closePreparedStatement(preparedStatement);
@@ -143,7 +143,7 @@ public class EnderecoDAO {
 			preparedStatement.setInt(7, endereco.getId());
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao alterar endereço. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao alterar endereï¿½o. Causa: " + ex.getMessage());
 		}
 
 		return registrosAlterados > 0;
