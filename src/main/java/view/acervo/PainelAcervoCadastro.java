@@ -9,14 +9,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import controller.LivroController;
 import net.miginfocom.swing.MigLayout;
 
 public class PainelAcervoCadastro extends JPanel {
 	private JTextField txtTitulo;
-	private JTextField textAutor;
-	private JTextField textEditora;
+	private JTextField txtAutor;
+	private JTextField txtEditora;
 	private JButton btnCadastrar;
+	private JTextField txtEdicao;
+	private JComboBox cbSessao;
+	private JComboBox cbAno;
 
 	/**
 	 * Create the panel.
@@ -35,18 +38,25 @@ public class PainelAcervoCadastro extends JPanel {
 		JLabel lblAutor = new JLabel("Autor");
 		add(lblAutor, "cell 1 3,alignx left,aligny center");
 		
-		textAutor = new JTextField();
-		textAutor.setText("Neil Gaiman");
-		add(textAutor, "cell 1 4 2 1,grow");
-		textAutor.setColumns(10);
+		txtAutor = new JTextField();
+		txtAutor.setText("Neil Gaiman");
+		add(txtAutor, "cell 1 4 2 1,grow");
+		txtAutor.setColumns(10);
 		
 		JLabel lblEditora = new JLabel("Editora");
 		add(lblEditora, "cell 1 5,alignx left,aligny center");
 		
-		textEditora = new JTextField();
-		textEditora.setText("Intr√≠nseca");
-		add(textEditora, "cell 1 6 2 1,grow");
-		textEditora.setColumns(10);
+		JLabel lblEdicao = new JLabel("Edi\u00E7\u00E3o");
+		add(lblEdicao, "cell 3 5");
+		
+		txtEditora = new JTextField();
+		txtEditora.setText("Intr√≠nseca");
+		add(txtEditora, "cell 1 6 2 1,grow");
+		txtEditora.setColumns(10);
+		
+		txtEdicao = new JTextField();
+		add(txtEdicao, "cell 3 6,growx");
+		txtEdicao.setColumns(10);
 		
 		JLabel lblSessao = new JLabel("Sesssao");
 		add(lblSessao, "cell 1 7,alignx left,aligny center");
@@ -54,14 +64,21 @@ public class PainelAcervoCadastro extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Ano");
 		add(lblNewLabel_3, "cell 3 3,alignx left,aligny center");
 		
-		JComboBox cbAno = new JComboBox();
-		cbAno.addItem("2019");
-		add(cbAno, "cell 3 4,grow");
+		cbAno = new JComboBox();
+		for(int i = 1990; i <= 2020; i++) {
+			cbAno.addItem("" + i + "");
+			add(cbAno, "cell 3 4,grow");
+		}
+		//cbAno.addItem("2019");
+		//add(cbAno, "cell 3 4,grow");
 		
-		JComboBox cbSessao = new JComboBox();
-		cbSessao.addItem("Fic√ß√£o");
-		cbSessao.addItem("Literatura Cl√°ssica");
+		cbSessao = new JComboBox();
+		cbSessao.addItem("FicÁ„o");
+		cbSessao.addItem("Literatura Cl·ssica");
 		cbSessao.addItem("Romance");
+		cbSessao.addItem("Auto Ajuda");
+		cbSessao.addItem("Suspense");
+		cbSessao.addItem("TÈcnicos");
 		
 		add(cbSessao, "cell 1 8 3 1,grow");
 		
@@ -76,9 +93,14 @@ public class PainelAcervoCadastro extends JPanel {
 		
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				JOptionPane.showConfirmDialog(null, "Cadastrar livro 'Exemplo'?", "Cadastrar Livro", JOptionPane.YES_NO_CANCEL_OPTION);
-				
+				String mensagem = "";
+				LivroController controller = new LivroController();
+				int sessao = controller.validarSessao((String) cbSessao.getSelectedItem());
+				mensagem += controller.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText());
+				if(mensagem.isEmpty()) {
+					controller.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), (String) cbAno.getSelectedItem(), sessao);
+				}
 			}
 		});
 		
