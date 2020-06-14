@@ -10,6 +10,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
 
 public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtNome;
@@ -17,6 +18,7 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtDtNascimento;
 	private JTextField txtEmail;
 	private JTextField txtDdd;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -42,6 +44,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtSobrenome.setColumns(10);
 		
 		JRadioButton rdbtnFixo = new JRadioButton("Fixo");
+		buttonGroup.add(rdbtnFixo);
 		rdbtnFixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -70,6 +73,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtEmail.setColumns(10);
 		
 		JRadioButton rdbtnMovel = new JRadioButton("Movel");
+		buttonGroup.add(rdbtnMovel);
 		rdbtnMovel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
