@@ -5,18 +5,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.JFormattedTextField;
 
 public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
-	private JTextField txtDtNascimento;
 	private JTextField txtEmail;
-	private JTextField txtDdd;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -42,6 +45,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtSobrenome.setColumns(10);
 		
 		JRadioButton rdbtnFixo = new JRadioButton("Fixo");
+		buttonGroup.add(rdbtnFixo);
 		rdbtnFixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -54,13 +58,23 @@ public class PainelUsuarioCadastro extends JPanel {
 		JLabel lblDdd = new JLabel("DDD");
 		add(lblDdd, "cell 4 5");
 		
-		txtDtNascimento = new JTextField();
-		add(txtDtNascimento, "cell 1 6 3 1,growx");
-		txtDtNascimento.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
+			JFormattedTextField txtDataNascimento = new JFormattedTextField(maskFormatter);
+			add(txtDataNascimento, "cell 1 6,growx");
+		} catch (ParseException e1) {
+			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+			e1.printStackTrace();
+		}
 		
-		txtDdd = new JTextField();
-		add(txtDdd, "cell 4 6,growx");
-		txtDdd.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##");
+			JFormattedTextField txtDdd = new JFormattedTextField(maskFormatter);
+			add(txtDdd, "cell 4 6,growx");
+		} catch (ParseException e1) {
+			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
+			e1.printStackTrace();
+		}
 		
 		JLabel lblEmail = new JLabel("Email");
 		add(lblEmail, "cell 1 7");
@@ -70,6 +84,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtEmail.setColumns(10);
 		
 		JRadioButton rdbtnMovel = new JRadioButton("Movel");
+		buttonGroup.add(rdbtnMovel);
 		rdbtnMovel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

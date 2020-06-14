@@ -1,29 +1,32 @@
 package view.usuario;
 
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+
+import net.miginfocom.swing.MigLayout;
 
 public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtIdUsuario;
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
-	private JTextField txtDataNascimento;
 	private JTextField txtEmail;
-	private JTextField txtDdd;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioAlterar() {
-		setLayout(new MigLayout("", "[71px][135.00][107.00,grow][99.00][63.00]", "[22px][][][][][][][][][][][][]"));
+		setLayout(new MigLayout("", "[71px][135.00,grow][107.00,grow][99.00][63.00,grow]", "[22px][][][][][][][][][][][][]"));
 		
 		JLabel lblIdUsuario = new JLabel("Digite o id do usuario");
 		add(lblIdUsuario, "cell 1 2,alignx left");
@@ -60,6 +63,7 @@ public class PainelUsuarioAlterar extends JPanel {
 		txtSobrenome.setColumns(10);
 		
 		JRadioButton rdbtnMovel = new JRadioButton("Movel");
+		buttonGroup.add(rdbtnMovel);
 		rdbtnMovel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -72,16 +76,24 @@ public class PainelUsuarioAlterar extends JPanel {
 		JLabel lblDdd = new JLabel("DDD");
 		add(lblDdd, "cell 4 7");
 		
-		txtDataNascimento = new JTextField();
-		txtDataNascimento.setText("19/01/2000");
-		add(txtDataNascimento, "cell 1 8 3 1,growx");
-		txtDataNascimento.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
+			JFormattedTextField txtDataNascimento = new JFormattedTextField(maskFormatter);
+			add(txtDataNascimento, "cell 1 8,growx");
+		} catch (ParseException e1) {
+			System.out.println("Erro na máscara de formatação de data no painel de alteração de usuário.");
+			e1.printStackTrace();
+		}
 		
-		txtDdd = new JTextField();
-		txtDdd.setText("48");
-		add(txtDdd, "cell 4 8,growx");
-		txtDdd.setColumns(10);
-		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##");
+			JFormattedTextField txtDdd = new JFormattedTextField(maskFormatter);
+			add(txtDdd, "cell 4 8,growx");
+		} catch (ParseException e1) {
+			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
+			e1.printStackTrace();
+		}
+				
 		JLabel lblEmail = new JLabel("Email");
 		add(lblEmail, "cell 1 9");
 		
@@ -91,6 +103,7 @@ public class PainelUsuarioAlterar extends JPanel {
 		txtEmail.setColumns(10);
 		
 		JRadioButton rdbtnFixo = new JRadioButton("Fixo");
+		buttonGroup.add(rdbtnFixo);
 		rdbtnFixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
