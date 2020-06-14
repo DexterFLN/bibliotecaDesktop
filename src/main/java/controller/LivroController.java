@@ -33,7 +33,7 @@ public class LivroController {
 		String mensagem = "O(s) campo(s): ";
 		
 		if(titulo.isEmpty()) {
-			mensagem += "TÍTULO ";
+			mensagem += "TÍTULO";
 		}
 		
 		if(autor.isEmpty()) {
@@ -47,7 +47,7 @@ public class LivroController {
 		
 		if(editora.isEmpty()) {
 			if(mensagem == "O(s) campo(s): ") {
-				mensagem += "EDITORA ";
+				mensagem += "EDITORA";
 				
 			} else {
 				mensagem += ", EDITORA";
@@ -56,7 +56,7 @@ public class LivroController {
 		
 		if(edicao.isEmpty()) {
 			if(mensagem == "O(s) campo(s): ") {
-				mensagem += "EDICAO ";
+				mensagem += "EDICAO";
 				
 			} else {
 				mensagem += ", EDICAO";
@@ -67,7 +67,7 @@ public class LivroController {
 			mensagem = "";
 			return mensagem;
 		} else {
-			mensagem += "não pode(m) ficar vazio(s).";
+			mensagem += " não pode(m) ficar vazio(s).";
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
