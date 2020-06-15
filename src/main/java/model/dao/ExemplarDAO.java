@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.vo.Exemplar;
 import model.vo.Livro;
 
@@ -127,6 +129,43 @@ public class ExemplarDAO {
 		}
 
 		return exemplares;
+	}
+
+	public void salvar(Livro livro, String quantidade, boolean status) {
+		Connection connection = Banco.getConnection();
+		String sql = "INSERT INTO EXEMPLAR (idLivro, status) VALUES (?,?)";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		
+		Exemplar exemplar = new Exemplar();
+		int qtde = Integer.parseInt(quantidade);
+		int alugado = (status) ? 1 : 0;
+		alugado = 0;
+		
+		try {
+			
+			for (int i = 0; i < qtde; i++) {
+				preparedStatement.setInt(1, livro.getId());
+				preparedStatement.setInt(2, alugado);
+				preparedStatement.executeUpdate();
+				resultSet = preparedStatement.getGeneratedKeys();
+				if (resultSet.next()) {
+					int idGerado = resultSet.getInt(1);
+					exemplar.setId(idGerado);
+				}
+			}
+			JOptionPane.showMessageDialog(null, "Livro e exemplar(es) cadastrados com sucesso!");
+
+		} catch (SQLException ex) {
+			System.out.println("Erro ao cadastrar exemplar.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
 	}
 
 }

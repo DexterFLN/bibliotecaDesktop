@@ -73,7 +73,7 @@ public class PainelAluguelNovo extends JPanel {
 				add(lblDataDevolucao, "cell 3 2");
 
 				txtTitulo = new JTextField();
-				txtTitulo.setText("Deuses do Olimpo");
+				txtTitulo.setText("");
 				add(txtTitulo, "cell 1 3 2 1,grow");
 				txtTitulo.setColumns(10);
 
@@ -83,7 +83,7 @@ public class PainelAluguelNovo extends JPanel {
 					
 					MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 					txfDataDevolucao = new JFormattedTextField(maskFormatter);
-					add(txfDataDevolucao, "cell 3 3,growx");
+					add(txfDataDevolucao, "cell 3 3,grow");
 				} catch (ParseException e1){
 					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			         e1.printStackTrace();
@@ -141,19 +141,19 @@ public class PainelAluguelNovo extends JPanel {
 				add(lblDataDeNascimento, "cell 3 6");
 				
 				txtNome = new JTextField();
-				txtNome.setText("Vitor");
+				txtNome.setText("");
 				add(txtNome, "cell 1 7,grow");
 				txtNome.setColumns(10);
 				
 				txtSobrenome = new JTextField();
-				txtSobrenome.setText("Ribeiro");
+				txtSobrenome.setText("");
 				add(txtSobrenome, "cell 2 7,grow");
 				txtSobrenome.setColumns(10);
 				
 				try {
 					MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 					txfDataNascimento = new JFormattedTextField(maskFormatter);
-					add(txfDataNascimento, "cell 3 7,growx");
+					add(txfDataNascimento, "cell 3 7,grow");
 					
 					
 					
