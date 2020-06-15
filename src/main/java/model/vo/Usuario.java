@@ -156,4 +156,10 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
+	@Override
+	public String toString() {
+		
+		return this.getNome() + " " + this.getSobrenome();
+		
+	}
 }

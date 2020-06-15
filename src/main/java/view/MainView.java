@@ -17,18 +17,21 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import view.acervo.MainAcervo;
 import view.aluguel.MainAluguel;
+import view.usuario.MainUsuario;
 
 public class MainView extends JFrame {
 
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final MainAcervo mainAcervo = new MainAcervo();
 	private static final MainAluguel mainAluguel = new MainAluguel();
+	private static final MainUsuario mainUsuario = new MainUsuario();
 	private static JLayeredPane layeredPane;
 	private static JPanel panel_1;
 	private JPanel panelMenuLateral;
 	private JButton btnAcervo;
 	private JButton btnPesquisaGeral;
 	private JButton buttonEmprestimos;
+	private JButton btnUsuario;
 
 	public MainView() {
 
@@ -123,6 +126,11 @@ public class MainView extends JFrame {
 		iconEmprestimoMenu = new ImageIcon(newimgIconEmprestimoMenu);
 		buttonEmprestimos.setIcon(iconEmprestimoMenu);
 		menuBar.add(buttonEmprestimos);
+		
+		btnUsuario = new JButton("");
+		btnUsuario.setIcon(new ImageIcon(MainView.class.getResource("/icons/icons8-usu\u00E1rio.png")));
+		
+		menuBar.add(btnUsuario);
 
 		this.addListeners();
 	}
@@ -144,6 +152,12 @@ public class MainView extends JFrame {
 		buttonEmprestimos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainAluguel);
+			}
+		});
+		
+		btnUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(mainUsuario);
 			}
 		});
 		
