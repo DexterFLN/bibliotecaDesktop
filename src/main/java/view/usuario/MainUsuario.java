@@ -1,40 +1,37 @@
-package view;
+package view.usuario;
 
-
+import javax.swing.JPanel;
+import javax.swing.JMenuBar;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JMenuItem;
+import javax.swing.border.LineBorder;
+import javax.swing.JLayeredPane;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JLayeredPane;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
-import net.miginfocom.swing.MigLayout;
-
-public class MainAcervo extends JPanel {
+public class MainUsuario extends JPanel {
 	
-	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
-	private JPanel painelAcervoCadastro = new PainelAcervoCadastro();
-	private JPanel painelAcervoEditar = new PainelAcervoEditar();
+	private JPanel painelUsuarioConsulta = new PainelUsuarioConsulta();
+	private JPanel painelUsuarioCadastro = new PainelUsuarioCadastro();
+	private JPanel painelUsuarioAlterar = new PainelUsuarioAlterar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmConsultar;
-	private JMenuItem mntmExcluir;
-	private JMenuItem mntmEditar;
-
+	private JMenuItem mntmAlterar;
 
 	/**
 	 * Create the panel.
 	 */
-	public MainAcervo() {
+	public MainUsuario() {
 		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
 		
         this.initialize();
 		
+
 	}
 	public void initialize() {
 		
@@ -51,18 +48,15 @@ public class MainAcervo extends JPanel {
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 		
-		mntmEditar = new JMenuItem("Editar");
-		menuBar.add(mntmEditar);
-		
-		mntmExcluir = new JMenuItem("Excluir");
-		menuBar.add(mntmExcluir);
+		mntmAlterar = new JMenuItem("Alterar");
+		menuBar.add(mntmAlterar);
 		
 		layeredPane = new JLayeredPane();
         layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
         add(layeredPane, "cell 0 1 15 11,grow");
         
-        layeredPane.add(painelAcervoConsulta, "cell 0 0,grow");
+        layeredPane.add(painelUsuarioConsulta, "cell 0 0,grow");
         
         this.addListeners();
     }
@@ -71,30 +65,25 @@ public class MainAcervo extends JPanel {
 		
 		mntmCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoCadastro);
+				switchPanel(painelUsuarioCadastro);
 			}
 		});
 		
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoConsulta);
+				switchPanel(painelUsuarioConsulta);
 			}
 		});
 		
-		mntmEditar.addActionListener(new ActionListener() {
+		mntmAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoEditar);
+				switchPanel(painelUsuarioAlterar);
 			}
 		});
 		
-		mntmExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 	}
 	
 	private static void switchPanel(JPanel panel) {
-		
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
@@ -102,6 +91,7 @@ public class MainAcervo extends JPanel {
 		layeredPane.add(panel, "grow");
 		layeredPane.repaint();
 		layeredPane.revalidate();
+		
     }
-
 }
+

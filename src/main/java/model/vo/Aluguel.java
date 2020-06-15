@@ -2,7 +2,6 @@ package model.vo;
 
 import java.time.LocalDate;
 
-
 public class Aluguel {
 
 	private int id;
@@ -11,14 +10,13 @@ public class Aluguel {
 	private LocalDate devovlucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
-	
-	
-	public Aluguel(LocalDate dataLocacao, LocalDate devovlucaoPrevista, LocalDate devolucaoEfetiva,
-			Usuario usuario, Exemplar exemplar) {
+
+
+	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva, Usuario usuario,
+			Exemplar exemplar) {
 		super();
-		//this.exemplar = idExemplar;
 		this.dataLocacao = dataLocacao;
-		this.devovlucaoPrevista = devovlucaoPrevista;
+		this.devovlucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
 		this.exemplar = exemplar;
@@ -27,7 +25,6 @@ public class Aluguel {
 	public Aluguel() {
 		super();
 	}
-
 
 	public int getId() {
 		return id;
@@ -45,11 +42,11 @@ public class Aluguel {
 		this.dataLocacao = dataLocacao;
 	}
 
-	public LocalDate getDevovlucaoPrevista() {
+	public LocalDate getDevolucaoPrevista() {
 		return devovlucaoPrevista;
 	}
 
-	public void setDevovlucaoPrevista(LocalDate devovlucaoPrevista) {
+	public void setDevolucaoPrevista(LocalDate devovlucaoPrevista) {
 		this.devovlucaoPrevista = devovlucaoPrevista;
 	}
 
@@ -69,7 +66,6 @@ public class Aluguel {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 
 	public Exemplar getExemplar() {
 		return exemplar;

@@ -1,11 +1,9 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,22 +15,28 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import view.acervo.MainAcervo;
+import view.aluguel.MainAluguel;
+import view.usuario.MainUsuario;
 
 public class MainView extends JFrame {
 
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final MainAcervo mainAcervo = new MainAcervo();
+	private static final MainAluguel mainAluguel = new MainAluguel();
+	private static final MainUsuario mainUsuario = new MainUsuario();
 	private static JLayeredPane layeredPane;
 	private static JPanel panel_1;
 	private JPanel panelMenuLateral;
 	private JButton btnAcervo;
 	private JButton btnPesquisaGeral;
 	private JButton buttonEmprestimos;
+	private JButton btnUsuario;
 
 	public MainView() {
 
 		this.setTitle("Principal Menu");
-		this.setBounds(0, 0, 1163, 739);
+		this.setBounds(0, 0, 1384, 791);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(new Color(2, 83, 83));
 		this.getContentPane().setLayout(new MigLayout("", "[96.00,fill][grow]", "[grow]"));
@@ -115,12 +119,18 @@ public class MainView extends JFrame {
 		menuBar.add(btnAcervo);
 		
 		buttonEmprestimos = new JButton("");
+		
 		ImageIcon iconEmprestimoMenu = new ImageIcon(MainView.class.getResource("/icons/verify.png"));
 		Image imageEmprestimoMenu = iconEmprestimoMenu.getImage();
 		Image newimgIconEmprestimoMenu = imageEmprestimoMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		iconEmprestimoMenu = new ImageIcon(newimgIconEmprestimoMenu);
 		buttonEmprestimos.setIcon(iconEmprestimoMenu);
 		menuBar.add(buttonEmprestimos);
+		
+		btnUsuario = new JButton("");
+		btnUsuario.setIcon(new ImageIcon(MainView.class.getResource("/icons/icons8-usu\u00E1rio.png")));
+		
+		menuBar.add(btnUsuario);
 
 		this.addListeners();
 	}
@@ -136,6 +146,18 @@ public class MainView extends JFrame {
 		btnAcervo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainAcervo);
+			}
+		});
+		
+		buttonEmprestimos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(mainAluguel);
+			}
+		});
+		
+		btnUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(mainUsuario);
 			}
 		});
 		

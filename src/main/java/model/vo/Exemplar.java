@@ -8,6 +8,7 @@ public class Exemplar {
 
 	private int id;
 	private Livro livro;
+	private boolean status;
 	private ArrayList<Aluguel> alugueis;
 
 	public Exemplar(Livro livro, ArrayList<Aluguel> alugueis) {
@@ -37,6 +38,14 @@ public class Exemplar {
 		this.livro = livro;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public ArrayList<Aluguel> getAlugueis() {
 		return alugueis;
 	}
@@ -45,5 +54,18 @@ public class Exemplar {
 		this.alugueis = alugueis;
 	}
 
+	@Override
+	public String toString() {
+		
+		return "\nId do Exemplar: " + this.getId() + "\nId do Livro: " + this.getLivro().getId() 
+				+ "\nId da Sessão: " + this.getLivro().getSessao().getId() 
+				+ "\nNome do Livro: " + this.getLivro().getNome() 
+				+ "\nAutor: " + this.getLivro().getAutor()
+				+ "\nEditora: " + this.getLivro().getEditora()
+				+ "\nEdição: " + this.getLivro().getEdicao()
+				+ "\nAno: " + this.getLivro().getAno()
+				+ "\n";
+		
+	}
 }
 
