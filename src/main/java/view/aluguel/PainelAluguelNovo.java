@@ -2,14 +2,11 @@ package view.aluguel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -26,17 +23,16 @@ import model.vo.Aluguel;
 import model.vo.Exemplar;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
+import util.ConversorData;
 
 public class PainelAluguelNovo extends JPanel {
 		private JTextField txtTitulo;
 		private JButton btnCadastrar;
 		private JTextField txtCodigoLivro;
-		private JTextField txtDataDevolucao;
 		private JTextField txtCodigoUser;
 		private JTextField txtNome;
 		private JTextField txtSobrenome;
 		private JFormattedTextField txfDataNascimento;
-		private MaskFormatter maskFormatter;
 		private JFormattedTextField txfDataDevolucao;
 		private DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
@@ -66,7 +62,6 @@ public class PainelAluguelNovo extends JPanel {
 						exemplarSelecionado.setId(Integer.valueOf(txtCodigoLivro.getText()));
 						exemplarSelecionado = dao.consultarExemplar(exemplarSelecionado.getId());
 						txtTitulo.setText(exemplarSelecionado.getLivro().getNome());
-						txtCodigoLivro.setEnabled(false);
 					}
 				});
 				add(btnPesquisarLivro, "cell 3 1,grow");
@@ -86,8 +81,8 @@ public class PainelAluguelNovo extends JPanel {
 				
 				try {
 					
-					maskFormatter = new MaskFormatter("##/##/####");
-					txfDataDevolucao = new JFormattedTextField(new MaskFormatter("##/##/####"));
+					MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
+					txfDataDevolucao = new JFormattedTextField(maskFormatter);
 					add(txfDataDevolucao, "cell 3 3,growx");
 				} catch (ParseException e1){
 					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
@@ -107,9 +102,10 @@ public class PainelAluguelNovo extends JPanel {
 				add(lblDigiteOCdigo, "cell 1 5,alignx center,aligny center");
 				
 				txtCodigoUser = new JTextField();
-				txtCodigoUser.setText("09630985");
+				txtCodigoUser.setText("");
 				add(txtCodigoUser, "cell 2 5,grow");
 				txtCodigoUser.setColumns(10);
+				txtCodigoUser.setEnabled(false);
 				
 				
 				JButton btnPesquisarUsuario = new JButton("Pesquisar Usu\u00E1rio");
@@ -120,6 +116,7 @@ public class PainelAluguelNovo extends JPanel {
 						Usuario usuarioSelecionado = new Usuario();
 						ArrayList<Usuario> usuarios = dao.consultarTodosUsuarios(10);
 
+						
 						usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuário", "Usuários",
 								JOptionPane.QUESTION_MESSAGE, null, usuarios.toArray(), null);
 						txtCodigoUser.setText(Integer.toString(usuarioSelecionado.getId())); 
@@ -154,7 +151,7 @@ public class PainelAluguelNovo extends JPanel {
 				txtSobrenome.setColumns(10);
 				
 				try {
-					maskFormatter = new MaskFormatter("##/##/####");
+					MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 					txfDataNascimento = new JFormattedTextField(maskFormatter);
 					add(txfDataNascimento, "cell 3 7,growx");
 					
@@ -165,19 +162,30 @@ public class PainelAluguelNovo extends JPanel {
 			        e1.printStackTrace();
 				}
 				
-				
-				this.addListeners();
 
 				JButton btnAlugar = new JButton("ALUGAR");
 				btnAlugar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						AluguelDAO dao = new AluguelDAO();
-						String[] data = txtDataDevolucao.getText().split("/");
-						String dia = data[0];
-						String mes = data[1];
-						String ano = data[2];
-						String dataFormatada = ano+"-"+mes+"-"+dia;
-						System.out.println(dataFormatada);
+						Aluguel aluguel = new Aluguel();
+						Exemplar exemplar = new Exemplar();
+						Usuario usuario = new Usuario();
+						
+						exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
+						usuario.setId(Integer.parseInt(txtCodigoUser.getText()));
+						
+						aluguel.setDataLocacao(LocalDate.now());
+						aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+						aluguel.setExemplar(exemplar);
+						aluguel.setUsuario(usuario);
+						
+						try {
+							dao.salvar(aluguel);
+							JOptionPane.showMessageDialog(null, "Aluguel registrado com sucesso!");
+						} catch (Exception ex) {
+							System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+						}
+						
 						
 					}
 				});
@@ -185,8 +193,4 @@ public class PainelAluguelNovo extends JPanel {
 				
 			}
 		
-		
-		private void addListeners() {
-			
-		}
 	}
