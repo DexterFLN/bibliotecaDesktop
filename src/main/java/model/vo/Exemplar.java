@@ -8,6 +8,7 @@ public class Exemplar {
 
 	private int id;
 	private Livro livro;
+	private boolean status;
 	private ArrayList<Aluguel> alugueis;
 
 	public Exemplar(Livro livro, ArrayList<Aluguel> alugueis) {
@@ -35,6 +36,14 @@ public class Exemplar {
 
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public ArrayList<Aluguel> getAlugueis() {
