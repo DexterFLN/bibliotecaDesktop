@@ -15,8 +15,8 @@ import model.vo.Sessao;
 public class LivroDAO {
 
 
-	public Livro salvar(Livro livro) { 		//MÃ‰TODO SALVAR ESTÃ� FUNCIONANDO
-    
+	public Livro salvar(Livro livro) { 		//METODO SALVAR ESTA FUNCIONANDO
+	    
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO LIVRO (nome, autor, editora, edicao, ano, idSessao) VALUES (?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -33,7 +33,7 @@ public class LivroDAO {
 			
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
-			JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+			//JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 			if (resultSet.next()) {
 				int idGerado = resultSet.getInt(1);
 				livro.setId(idGerado);
@@ -52,7 +52,7 @@ public class LivroDAO {
 	}
 
 
-	public boolean alterar(Livro livro) { 		//MÃ‰TODO ALTERAR ESTÃ� EM CONSTRUÃ‡ÃƒO
+	public boolean alterar(Livro livro) { 		//METODO ALTERAR EM CONSTRUCAO
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
