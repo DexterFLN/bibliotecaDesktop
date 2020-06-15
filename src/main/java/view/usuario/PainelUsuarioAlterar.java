@@ -14,12 +14,14 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import net.miginfocom.swing.MigLayout;
+import util.ConversorData;
 
 public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtIdUsuario;
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
+	private JFormattedTextField txtDataNascimento;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
@@ -78,7 +80,7 @@ public class PainelUsuarioAlterar extends JPanel {
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
-			JFormattedTextField txtDataNascimento = new JFormattedTextField(maskFormatter);
+			txtDataNascimento = new JFormattedTextField(maskFormatter);
 			add(txtDataNascimento, "cell 1 8,growx");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação de data no painel de alteração de usuário.");
@@ -113,6 +115,7 @@ public class PainelUsuarioAlterar extends JPanel {
 		JButton btnSalvar = new JButton("Salvar Alteracoes");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
 			}
 		});
 		add(btnSalvar, "cell 1 12");
