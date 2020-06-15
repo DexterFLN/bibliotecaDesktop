@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
@@ -13,8 +15,8 @@ import model.vo.Sessao;
 public class LivroDAO {
 
 
-	public Livro salvar(Livro livro) { 		//MÉTODO SALVAR ESTÁ FUNCIONANDO
-    
+	public Livro salvar(Livro livro) { 		//METODO SALVAR ESTA FUNCIONANDO
+	    
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO LIVRO (nome, autor, editora, edicao, ano, idSessao) VALUES (?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -31,7 +33,7 @@ public class LivroDAO {
 			
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
-
+			//JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 			if (resultSet.next()) {
 				int idGerado = resultSet.getInt(1);
 				livro.setId(idGerado);
@@ -50,7 +52,7 @@ public class LivroDAO {
 	}
 
 
-	public boolean alterar(Livro livro) { 		//MÉTODO ALTERAR ESTÁ EM CONSTRUÇÃO
+	public boolean alterar(Livro livro) { 		//METODO ALTERAR EM CONSTRUCAO
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
@@ -68,7 +70,7 @@ public class LivroDAO {
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
 
-			System.out.println(" Erro ao alterar endereço. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao alterar endereÃ§o. Causa: " + ex.getMessage());
 
 		}
 
@@ -76,7 +78,7 @@ public class LivroDAO {
 	}
 	
 
-	public boolean excluir(Livro livro) {		// MÉTODO EXCLUIR ESTÁ FUNCIONANDO
+	public boolean excluir(Livro livro) {		// MÃ‰TODO EXCLUIR ESTÃ� FUNCIONANDO
 
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM LIVRO WHERE id=?";
@@ -98,7 +100,7 @@ public class LivroDAO {
 		return excluiu;
 	}
 
-	// TODO inserir exemplares na construÃ§Ã£o do objeto livro
+	// TODO inserir exemplares na construÃƒÂ§ÃƒÂ£o do objeto livro
 	private Livro construirLivroDoResultSet(ResultSet resultSet) {
 		Livro livro = new Livro();
 		
