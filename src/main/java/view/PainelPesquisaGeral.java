@@ -17,10 +17,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.vo.Exemplar;
+import controller.LivroController;
+import model.seletor.LivroSeletor;
 import model.vo.Livro;
-import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
+import util.Utils;
 
 public class PainelPesquisaGeral extends JPanel {
 	
@@ -37,7 +38,7 @@ public class PainelPesquisaGeral extends JPanel {
 	 */
 	public PainelPesquisaGeral() {
 		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][97.00px,grow][134.00px,grow][133.00,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px]"));
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
@@ -47,31 +48,31 @@ public class PainelPesquisaGeral extends JPanel {
 		mnPesquisaGeral.setBackground(new Color(2,  83, 83));
 		menuBar.add(mnPesquisaGeral);
 		
+		//TODO colocar um placeholder
 		txtPesquisar = new JTextField();
-		txtPesquisar.setText("Digite um termo para Pesquisa");
-		add(txtPesquisar, "cell 1 1 6 1,grow");
+		add(txtPesquisar, "cell 1 1 7 1,grow");
 		txtPesquisar.setColumns(10);
 		
 		JLabel lblBuscar = new JLabel("Buscar por");
 		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
 		
 		cbBuscar = new JComboBox();
-		this.preenchercbBuscarPor();
+		cbBuscar = Utils.preenchercbBuscarPor(cbBuscar);
 		add(cbBuscar, "cell 2 2,grow");
 		
 		JLabel lblAno = new JLabel("Ano");
 		add(lblAno, "cell 3 2,alignx right,growy");
 		
 		cbAno = new JComboBox();
-		this.preenchercbAno();
+		cbAno = Utils.preenchercbAno(cbAno);
 		add(cbAno, "cell 4 2,grow");
 		
 		btnPesquisar = new JButton("Pesquisar");
 		
-		add(btnPesquisar, "cell 7 1,grow");
+		add(btnPesquisar, "cell 8 1,grow");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, "cell 1 3 8 1,grow");
+		add(scrollPane_1, "cell 1 3 9 1,grow");
 		
 		JPanel panel = new JPanel();
 		scrollPane_1.setViewportView(panel);
@@ -86,27 +87,18 @@ public class PainelPesquisaGeral extends JPanel {
 	}
 	
 	
-	private void preenchercbAno() {
-		//TODO combo ano de dois em dois?
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
-	
-	private void preenchercbBuscarPor() {
-		// TODO verificar se são só essas opções
-		cbBuscar.addItem("Autor");
-		cbBuscar.addItem("Título");
-		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
-		
-		
-	}
-
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LivroSeletor livroSeletor = new LivroSeletor();
 				
+				livroSeletor.setTermoPesquisa(txtPesquisar.getText());
+				livroSeletor.setAno((String) cbAno.getSelectedItem().toString());
+				livroSeletor.setBuscarPor((String) cbBuscar.getSelectedItem());
+				
+				LivroController livroController = new LivroController();
+				livros = livroController.consultarLivrosPorSeletor(livroSeletor);
+				System.out.println(livros.toString());
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
@@ -120,14 +112,13 @@ public class PainelPesquisaGeral extends JPanel {
 		limparTabelaResultadoPesquisa();
 		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
 		
-		for (int i = 0; i < 3; i++) {
+		for (Livro livro : livros) {
 			
 			Object[] novaLinhaDaTabela = new Object[4];
-			novaLinhaDaTabela[0] = "Deuses Do Olimpo";
-			novaLinhaDaTabela[1] = "teste";
-			novaLinhaDaTabela[2] = "teste";
-			novaLinhaDaTabela[3] = btnPesquisar;
-			
+			novaLinhaDaTabela[0] = livro.getNome();
+			novaLinhaDaTabela[1] = livro.getAutor();
+			novaLinhaDaTabela[2] = livro.getAno();
+			novaLinhaDaTabela[3] = 1;
 			
 			model.addRow(novaLinhaDaTabela);
 		}
