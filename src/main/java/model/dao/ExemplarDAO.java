@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
+import model.seletor.ExemplarSeletor;
+import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
 
@@ -167,5 +170,40 @@ public class ExemplarDAO {
 		}
 		
 	}
+	
+	public ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
+		LivroDAO livroDAO = new LivroDAO();
+		ArrayList<Livro> livros = new ArrayList<Livro>();
+		livros = livroDAO.consultarLivrosPorSeletor(livroSeletor);
+		int[] idsLivros = new int[livros.size()];
+		for (int i = 0; i < idsLivros.length; i++) {
+			idsLivros[i] = livros.get(i).getId();
+		}
+		
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro IN (" + Arrays.toString(idsLivros) + ");";
+		sql = sql.replaceAll("\\[|\\]", "");
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+		try {
+			resultSet = preparedStatement.executeQuery();
 
+			while(resultSet.next()) {
+				Exemplar exemplar = construirExemplarDoResultSet(resultSet);
+				exemplares.add(exemplar);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar exemplar.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		System.out.println(getClass().toString() + " Consulta Exemplar " + sql);
+		return exemplares;
+	}
+	
 }
