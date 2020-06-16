@@ -1,21 +1,32 @@
 package model.seletor;
+import util.Constants;
 
-public class PesquisaGeralSeletor {
+public class LivroSeletor {
 	
 	private String termoPesquisa;
 	private String buscarPor;
 	private String ano;
 	
+	
 	public boolean temFiltro() {
 		boolean temFiltroPreenchido = false;
-		
-		temFiltroPreenchido = !termoPesquisa.trim().isEmpty() 
-				|| !buscarPor.trim().isEmpty()
-				|| !ano.trim().isEmpty();
+		//TODO melhorar essas verificacoes
+		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.isBlank())
+				|| !buscarPor.isBlank()
+				|| !ano.isBlank();
 		
 		return temFiltroPreenchido;
 	}
 	
+	public LivroSeletor validarFitros(LivroSeletor seletor){
+		//TODO melhorar essas verificacoes
+		seletor.setAno(
+				ano = seletor.getAno().equals(Constants.CMBANO) ? "" : seletor.getAno());
+		seletor.setTermoPesquisa(
+				termoPesquisa = seletor.getTermoPesquisa().equals(Constants.PLACECHOLDEDRPESQUISA) ? "" : seletor.getTermoPesquisa());
+				
+		return seletor;
+	}	
 	
 	public String getTermoPesquisa() {
 		return termoPesquisa;

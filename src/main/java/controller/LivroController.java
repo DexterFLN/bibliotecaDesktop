@@ -1,14 +1,20 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
 import model.bo.LivroBO;
+import model.seletor.LivroSeletor;
 import model.vo.Livro;
 import model.vo.Sessao;
 
 public class LivroController {
+	
+	private LivroBO livroBo = new LivroBO();
 
 	public Livro criarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
-		Livro livro = new Livro ();
+		Livro livro = new Livro();
 		livro.setNome(txtTitulo);
 		livro.setAutor(txtAutor);
 		livro.setEditora(txtEditora);
@@ -20,9 +26,8 @@ public class LivroController {
     }
 	
 	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
-        LivroBO bo = new LivroBO();
         Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, cbAno, sessao);
-        bo.salvar(livro);
+        livroBo.salvar(livro);
         return livro;
     }
 	
@@ -30,7 +35,7 @@ public class LivroController {
 		String mensagem = "O(s) campo(s): ";
 		
 		if(titulo.isEmpty()) {
-			mensagem += "TÍTULO";
+			mensagem += "Tï¿½TULO";
 		}
 		
 		if(autor.isEmpty()) {
@@ -64,7 +69,7 @@ public class LivroController {
 			mensagem = "";
 			return mensagem;
 		} else {
-			mensagem += " não pode(m) ficar vazio(s).";
+			mensagem += " nï¿½o pode(m) ficar vazio(s).";
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
@@ -75,9 +80,9 @@ public class LivroController {
 		
 		int sessao;
 		
-		if (cbSessao == "Ficção" ) {
+		if (cbSessao == "Ficï¿½ï¿½o" ) {
 			sessao = 1;
-		} else if (cbSessao == "Literatura Clássica" ) {
+		} else if (cbSessao == "Literatura Clï¿½ssica" ) {
 			sessao = 2;
 		} else if (cbSessao == "Romance" ) {
 			sessao = 3;
@@ -90,6 +95,11 @@ public class LivroController {
 		}
 		
 		return sessao;
+	}
+	
+	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
+		return livroBo.consultarLivrosPorSeletor(seletor);
+		
 	}
 	
 }
