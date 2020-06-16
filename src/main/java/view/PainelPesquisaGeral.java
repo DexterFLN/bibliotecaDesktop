@@ -21,6 +21,7 @@ import controller.LivroController;
 import model.seletor.LivroSeletor;
 import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
+import util.Utils;
 
 public class PainelPesquisaGeral extends JPanel {
 	
@@ -56,14 +57,14 @@ public class PainelPesquisaGeral extends JPanel {
 		add(lblBuscar, "cell 1 2 1,alignx right,aligny center");
 		
 		cbBuscar = new JComboBox();
-		this.preenchercbBuscarPor();
+		cbBuscar = Utils.preenchercbBuscarPor(cbBuscar);
 		add(cbBuscar, "cell 2 2,grow");
 		
 		JLabel lblAno = new JLabel("Ano");
 		add(lblAno, "cell 3 2,alignx right,growy");
 		
 		cbAno = new JComboBox();
-		this.preenchercbAno();
+		cbAno = Utils.preenchercbAno(cbAno);
 		add(cbAno, "cell 4 2,grow");
 		
 		btnPesquisar = new JButton("Pesquisar");
@@ -86,25 +87,6 @@ public class PainelPesquisaGeral extends JPanel {
 	}
 	
 	
-	private void preenchercbAno() {
-		//TODO combo ano de dois em dois?
-		cbAno.addItem("SELECIONE");
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
-	
-	private void preenchercbBuscarPor() {
-		// TODO verificar se são só essas opções
-		
-		cbBuscar.addItem("Título");
-		cbBuscar.addItem("Autor");
-		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
-		
-		
-	}
-
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
