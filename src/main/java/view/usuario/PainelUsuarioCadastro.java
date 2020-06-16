@@ -17,10 +17,10 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
-	private JTextField txtDDDFixo;
-	private JTextField txtFoneFixo;
-	private JTextField txtDDDMovel;
-	private JTextField txtFoneMovel;
+	private JFormattedTextField txtDDDFixo;
+	private JFormattedTextField txtFoneFixo;
+	private JFormattedTextField txtDDDMovel;
+	private JFormattedTextField txtFoneMovel;
 
 	/**
 	 * Create the panel.
@@ -41,13 +41,24 @@ public class PainelUsuarioCadastro extends JPanel {
 		add(txtNome, "cell 1 2 2 1,growx");
 		txtNome.setColumns(10);
 		
-		txtDDDFixo = new JTextField();
-		add(txtDDDFixo, "cell 3 2,growx,aligny top");
-		txtDDDFixo.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##");
+			txtDDDFixo = new JFormattedTextField(maskFormatter);
+			add(txtDDDFixo, "cell 3 2,growx,aligny top");
+			txtDDDFixo.setColumns(10);
+		} catch (Exception ex) {
+			System.out.println("Erro na máscara de formatação do DDD fixo no painel de cadastro de usuário.");
+		}
 		
-		txtFoneFixo = new JTextField();
-		add(txtFoneFixo, "cell 4 2,growx");
-		txtFoneFixo.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("########");
+			txtFoneFixo = new JFormattedTextField(maskFormatter);
+			add(txtFoneFixo, "cell 4 2,growx");
+			txtFoneFixo.setColumns(10);
+		} catch (Exception ex) {
+			System.out.println("Erro na máscara de formatação do telefone fixo no painel de cadastro de usuário.");
+		}
+		
 		
 		JLabel lblSobrenome = new JLabel("Sobrenome");
 		add(lblSobrenome, "cell 1 3");
@@ -62,13 +73,23 @@ public class PainelUsuarioCadastro extends JPanel {
 		add(txtSobrenome, "cell 1 4 2 1,growx");
 		txtSobrenome.setColumns(10);
 		
-		txtDDDMovel = new JTextField();
-		add(txtDDDMovel, "cell 3 4,growx");
-		txtDDDMovel.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##");
+			txtDDDMovel = new JFormattedTextField(maskFormatter);
+			add(txtDDDMovel, "cell 3 4,growx");
+			txtDDDMovel.setColumns(10);
+		} catch (Exception ex) {
+			System.out.println("Erro na máscara de formatação do DDD móvel no painel de cadastro de usuário.");
+		}
 		
-		txtFoneMovel = new JTextField();
-		add(txtFoneMovel, "cell 4 4,growx");
-		txtFoneMovel.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("#########");
+			txtFoneMovel = new JFormattedTextField(maskFormatter);
+			add(txtFoneMovel, "cell 4 4,growx");
+			txtFoneMovel.setColumns(10);
+		} catch (Exception ex) {
+			System.out.println("Erro na máscara de formatação do DDD móvel no painel de cadastro de usuário.");
+		}
 		
 		JLabel lblDtNascimento = new JLabel("Data de Nascimento");
 		add(lblDtNascimento, "cell 1 5");
