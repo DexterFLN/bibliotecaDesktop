@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
+import model.seletor.ExemplarSeletor;
+import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
 
@@ -167,5 +170,120 @@ public class ExemplarDAO {
 		}
 		
 	}
+	
+	public ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
+		LivroDAO livroDAO = new LivroDAO();
+		ArrayList<Livro> livros = new ArrayList<Livro>();
+		livros = livroDAO.consultarLivrosPorSeletor(livroSeletor);
+		int[] idsLivros = new int[livros.size()];
+		for (int i = 0; i < idsLivros.length; i++) {
+			idsLivros[i] = livros.get(i).getId();
+		}
+		
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro IN (" + Arrays.toString(idsLivros) + ");";
+		sql = sql.replaceAll("\\[|\\]", "");
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+		try {
+			resultSet = preparedStatement.executeQuery();
 
+			while(resultSet.next()) {
+				Exemplar exemplar = construirExemplarDoResultSet(resultSet);
+				exemplares.add(exemplar);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar exemplar.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		System.out.println(getClass().toString() + " Consulta Exemplar " + sql);
+		return exemplares;
+	}
+	
+	public void statusAlugado1(Exemplar exemplar) {
+		Connection connection = Banco.getConnection();
+		String sql = "UPDATE EXEMPLAR SET idLivro = ?, status = ? WHERE id = ?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		
+		int alugado = 1;
+		try {
+						
+			preparedStatement.setInt(1, exemplar.getLivro().getId());
+			preparedStatement.setInt(2, alugado);
+			preparedStatement.setInt(3, exemplar.getId());
+			preparedStatement.executeUpdate();
+			/*
+			resultSet = preparedStatement.getGeneratedKeys();
+			if (resultSet.next()) {
+				int idGerado = resultSet.getInt(1);
+				exemplar.setId(idGerado);
+			}
+			*/
+			//JOptionPane.showMessageDialog(null, "Livro e exemplar(es) cadastrados com sucesso!");
+
+		} catch (SQLException ex) {
+			System.out.println("Erro ao alterar status.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+	}
+	
+	public boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
+
+		int registrosAlterados = 0;
+		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+
+		exemplar.setStatus(true);
+		
+		try {
+			preparedStatement.setBoolean(1, exemplar.isStatus());
+			preparedStatement.setInt(2, exemplar.getId());
+			registrosAlterados = preparedStatement.executeUpdate();
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao alterar status. Causa: " + ex.getMessage());
+
+		}
+
+		return registrosAlterados > 0;
+	}
+	
+	public boolean consultarStatus(Exemplar exemplar) { 	// METODO EM CONSTRUCAO
+
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT status FROM EXEMPLAR WHERE ID=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+		Exemplar statusExemplar = new Exemplar();
+		int valor;
+		boolean status;
+		try {
+			preparedStatement.setInt(1, exemplar.getId());
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet != null && resultSet.next()) {
+				statusExemplar.setStatus(resultSet.getBoolean("status"));
+			}
+			
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar status do exemplar do resultSet.");
+			System.out.println("Erro: " + ex.getMessage());
+		} 
+		status = statusExemplar.isStatus();
+		
+		return status;
+	}
 }

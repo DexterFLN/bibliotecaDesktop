@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.AluguelController;
 import model.dao.AluguelDAO;
 import model.dao.ExemplarDAO;
 import model.dao.UsuarioDAO;
@@ -46,7 +47,7 @@ public class PainelAluguelNovo extends JPanel {
 		public PainelAluguelNovo() {
 				setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][29.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 				
-				JLabel lblExcluir = new JLabel("Digite o c\u00F3digo do Livro");
+				JLabel lblExcluir = new JLabel("Digite o c\u00F3digo do Exemplar");
 				add(lblExcluir, "cell 1 1,alignx center,aligny center");
 				
 				txtCodigoLivro = new JTextField();
@@ -166,30 +167,32 @@ public class PainelAluguelNovo extends JPanel {
 				JButton btnAlugar = new JButton("ALUGAR");
 				btnAlugar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						AluguelDAO dao = new AluguelDAO();
+						AluguelController controller = new AluguelController();
 						Aluguel aluguel = new Aluguel();
 						Exemplar exemplar = new Exemplar();
 						Usuario usuario = new Usuario();
 						
-						exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
-						usuario.setId(Integer.parseInt(txtCodigoUser.getText()));
-						
-						aluguel.setDataLocacao(LocalDate.now());
-						aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
-						aluguel.setExemplar(exemplar);
-						aluguel.setUsuario(usuario);
-						
-						try {
-							dao.salvar(aluguel);
-							JOptionPane.showMessageDialog(null, "Aluguel registrado com sucesso!");
-						} catch (Exception ex) {
-							System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+						String mensagem = "";
+						mensagem += controller.validarCamposAlugar(txtCodigoLivro.getText(), txtCodigoUser.getText(), txfDataDevolucao.getText());
+						if(mensagem.isEmpty()) {
+							exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
+							usuario.setId(Integer.parseInt(txtCodigoUser.getText()));
+							aluguel.setDataLocacao(LocalDate.now());
+							aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+							aluguel.setExemplar(exemplar);
+							aluguel.setUsuario(usuario);
+							
+							try {
+								controller.salvarAluguel(aluguel);
+							} catch (Exception ex) {
+								System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+							}
 						}
 						
-						
+							
 					}
 				});
-				add(btnAlugar, "cell 2 11");
+				add(btnAlugar, "cell 2 11,grow");
 				
 			}
 		
