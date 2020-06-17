@@ -19,21 +19,24 @@ public class PainelAcervoAlterar extends JPanel {
 	private JTextField textAutor;
 	private JTextField textEditora;
 	private JTextField txtCodigoLivro;
+	private JComboBox cbAno;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelAcervoAlterar() {
-		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][29.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
-		
+		setLayout(new MigLayout("",
+				"[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]",
+				"[45.00px][29.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
+
 		JLabel lblExcluir = new JLabel("Digite o código do Livro");
 		add(lblExcluir, "cell 1 1,alignx center,aligny center");
-		
+
 		txtCodigoLivro = new JTextField();
 		txtCodigoLivro.setText("4127653");
 		add(txtCodigoLivro, "cell 2 1,grow");
 		txtCodigoLivro.setColumns(10);
-		
+
 		JButton btnPesquisar = new JButton("Pesquisar");
 		add(btnPesquisar, "cell 3 1,grow");
 
@@ -67,16 +70,15 @@ public class PainelAcervoAlterar extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Ano");
 		add(lblNewLabel_3, "cell 3 4,alignx left,aligny center");
 
-		JComboBox cbAno = new JComboBox();
-		cbAno.addItem("2019");
-		cbAno.setEditable(true);
+		cbAno = new JComboBox();
+		this.preenchercbAno();
 		add(cbAno, "cell 3 5,grow");
 
 		txtSessao = new JTextField();
 		txtSessao.setText("Ficção");
 		add(txtSessao, "cell 1 9 3 1,grow");
 		txtSessao.setColumns(10);
-		
+
 		JButton btnSalvarAlteraes = new JButton("Salvar Alterações");
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));
 		add(btnSalvarAlteraes, "cell 1 11,grow");
@@ -85,12 +87,12 @@ public class PainelAcervoAlterar extends JPanel {
 		btnExcluir.setBackground(new Color(229, 13, 13, 90));
 		add(btnExcluir, "cell 3 11,grow");
 
-		this.addListners();
-
 	}
 
-	private void addListners() {
-
+	private void preenchercbAno() {
+		for (int i = 2020; i >= 1500; i--) {
+			cbAno.addItem(i);
+		}
 	}
-
+	
 }

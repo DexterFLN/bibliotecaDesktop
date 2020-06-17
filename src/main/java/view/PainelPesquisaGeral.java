@@ -87,14 +87,12 @@ public class PainelPesquisaGeral extends JPanel {
 	
 	
 	private void preenchercbAno() {
-		//TODO combo ano de dois em dois?
 		for (int i = 2020; i >= 1500; i--) {
 			cbAno.addItem(i);
 		}
 	}
 	
 	private void preenchercbBuscarPor() {
-		// TODO verificar se são só essas opções
 		cbBuscar.addItem("Autor");
 		cbBuscar.addItem("Título");
 		cbBuscar.addItem("Editora");
