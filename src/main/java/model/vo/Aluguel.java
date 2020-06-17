@@ -7,7 +7,7 @@ public class Aluguel {
 	private int id;
 	private Exemplar exemplar;
 	private LocalDate dataLocacao;
-	private LocalDate devovlucaoPrevista;
+	private LocalDate devolucaoPrevista;
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
 
@@ -16,7 +16,7 @@ public class Aluguel {
 			Exemplar exemplar) {
 		super();
 		this.dataLocacao = dataLocacao;
-		this.devovlucaoPrevista = devolucaoPrevista;
+		this.devolucaoPrevista = devolucaoPrevista;
 		this.devolucaoEfetiva = devolucaoEfetiva;
 		this.usuario = usuario;
 		this.exemplar = exemplar;
@@ -43,11 +43,11 @@ public class Aluguel {
 	}
 
 	public LocalDate getDevolucaoPrevista() {
-		return devovlucaoPrevista;
+		return devolucaoPrevista;
 	}
 
-	public void setDevolucaoPrevista(LocalDate devovlucaoPrevista) {
-		this.devovlucaoPrevista = devovlucaoPrevista;
+	public void setDevolucaoPrevista(LocalDate devolucaoPrevista) {
+		this.devolucaoPrevista = devolucaoPrevista;
 	}
 
 	public LocalDate getDevolucaoEfetiva() {
