@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.seletor.LivroSeletor;
+import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
 
@@ -112,9 +113,9 @@ public class LivroDAO {
 			livro.setAno(resultSet.getInt(7));
 
 			/*
-			 * ExemplarDAO exemplarDAO = new ExemplarDAO(); ArrayList<Exemplar> exemplares =
-			 * exemplarDAO.construirExemplaresDoLivro(livro.getId());
-			 * livro.setExemplares(exemplares);
+			  ExemplarDAO exemplarDAO = new ExemplarDAO(); 
+			  ArrayList<Exemplar> exemplares = exemplarDAO.construirExemplaresDoLivro(livro.getId());
+			  livro.setExemplares(exemplares);
 			 */
 
 		} catch (SQLException ex) {
@@ -125,6 +126,30 @@ public class LivroDAO {
 		return livro;
 	}
 
+	private Livro construirLivroParaExemplares(ResultSet resultSet) {
+		Livro livro = new Livro();
+
+		try {
+			livro.setId(resultSet.getInt("id"));
+
+			SessaoDAO sessaoDAO = new SessaoDAO();
+			Sessao sessao = sessaoDAO.consultarSessaoPorId(resultSet.getInt(2));
+
+			livro.setSessao(sessao);
+			livro.setNome(resultSet.getString(3));
+			livro.setAutor(resultSet.getString(4));
+			livro.setEditora(resultSet.getString(5));
+			livro.setEdicao(resultSet.getInt(6));
+			livro.setAno(resultSet.getInt(7));
+
+		} catch (SQLException ex) {
+			System.out.println("Erro ao construir livro do resultSet.");
+			System.out.println("Erro: " + ex.getMessage());
+		}
+
+		return livro;
+	}
+	
 	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM LIVRO";
@@ -197,29 +222,7 @@ public class LivroDAO {
 		return sql;
 	}
 
-	private Livro construirLivroParaExemplares(ResultSet resultSet) {
-		Livro livro = new Livro();
-
-		try {
-			livro.setId(resultSet.getInt("id"));
-
-			SessaoDAO sessaoDAO = new SessaoDAO();
-			Sessao sessao = sessaoDAO.consultarSessaoPorId(resultSet.getInt(2));
-
-			livro.setSessao(sessao);
-			livro.setNome(resultSet.getString(3));
-			livro.setAutor(resultSet.getString(4));
-			livro.setEditora(resultSet.getString(5));
-			livro.setEdicao(resultSet.getInt(6));
-			livro.setAno(resultSet.getInt(7));
-
-		} catch (SQLException ex) {
-			System.out.println("Erro ao construir livro do resultSet.");
-			System.out.println("Erro: " + ex.getMessage());
-		}
-
-		return livro;
-	}
+	
 
 	public Livro consultarLivroPorId(int id) {
 		Connection connection = Banco.getConnection();
