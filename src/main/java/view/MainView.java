@@ -17,10 +17,12 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import view.acervo.MainAcervo;
 import view.aluguel.MainAluguel;
+import view.endereco.MainEndereco;
+import view.endereco.PainelEnderecoCadastro;
 import view.usuario.MainUsuario;
 
 public class MainView extends JFrame {
-
+	
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final MainAcervo mainAcervo = new MainAcervo();
 	private static final MainAluguel mainAluguel = new MainAluguel();
@@ -32,6 +34,7 @@ public class MainView extends JFrame {
 	private JButton btnPesquisaGeral;
 	private JButton buttonEmprestimos;
 	private JButton btnUsuario;
+	
 
 	public MainView() {
 
@@ -160,6 +163,8 @@ public class MainView extends JFrame {
 				switchPanel(mainUsuario);
 			}
 		});
+		
+		
 		
 	}
 
