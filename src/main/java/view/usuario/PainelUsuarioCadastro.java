@@ -4,18 +4,24 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import net.miginfocom.swing.MigLayout;
+import view.acervo.MainAcervo;
+import view.endereco.PainelEnderecoCadastro;
+
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JFormattedTextField;
 
 public class PainelUsuarioCadastro extends JPanel {
+	private static final PainelEnderecoCadastro painelEnderecoCadastro = new PainelEnderecoCadastro();
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
@@ -23,12 +29,15 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtFoneFixo;
 	private JTextField txtDDDMovel;
 	private JTextField txtFoneMovel;
+	private static JLayeredPane layeredPane;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioCadastro() {
 		setLayout(new MigLayout("", "[64.00px][135.00,grow][][99.00,grow][63.00,grow]", "[22px][][][][][][][][][][]"));
+		
+		
 		
 		JLabel lblNome = new JLabel("Nome");
 		add(lblNome, "cell 1 1");
@@ -91,8 +100,14 @@ public class PainelUsuarioCadastro extends JPanel {
 			e1.printStackTrace();
 		}
 		
-		JButton btnEndereo = new JButton("Endere\u00E7o");
-		add(btnEndereo, "cell 3 6 2 1,growx");
+		JButton btnEndereco = new JButton("Endere\u00E7o");
+		btnEndereco.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				painelEnderecoCadastro.setVisible(true);
+				}
+		});
+		
+		add(btnEndereco, "cell 3 6 2 1,growx");
 		
 		JLabel lblEmail = new JLabel("Email");
 		add(lblEmail, "cell 1 7");
@@ -107,7 +122,10 @@ public class PainelUsuarioCadastro extends JPanel {
 			}
 		});
 		add(btnCadastrar, "cell 2 10");
+			
+	    }
 
-	}
 
 }
+
+
