@@ -141,6 +141,26 @@ public class PainelAluguelAlterar extends JPanel {
 				add(btnRenovar, "cell 1 10,grow");
 
 				JButton btnDevolver = new JButton("Devolver");
+				btnDevolver.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						AluguelController controller = new AluguelController();
+						Aluguel aluguel = new Aluguel();
+						
+						String mensagem = "";
+						mensagem += controller.validarCamposRenovarDevolver(txtCodigoExemplar.getText(), txfDataDevolucao.getText());
+						if(mensagem.isEmpty()) {
+							int idExemplar = Integer.valueOf(txtCodigoExemplar.getText());
+							aluguel = controller.consultarAluguelAtual(idExemplar);
+							aluguel.setDevolucaoEfetiva(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+							
+							try {
+								controller.devolverAluguel(aluguel);
+							} catch (Exception ex) {
+								System.out.println("Erro ao renovar o aluguel: " + ex.getMessage());
+							}
+						}
+					}
+				});
 				btnDevolver.setBackground(new Color(229, 13, 13, 90));
 				add(btnDevolver, "cell 3 10,grow");
 

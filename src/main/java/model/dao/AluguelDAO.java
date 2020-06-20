@@ -131,6 +131,32 @@ public class AluguelDAO {
 		return aluguel;
 	}
 	
+	public Aluguel devolver(Aluguel aluguel) {
+		ExemplarDAO exemplarDAO = new ExemplarDAO();
+		Connection connection = Banco.getConnection();
+		String sql = "UPDATE ALUGUEL SET devolucaoEfetiva=? WHERE id=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+
+		if(exemplarDAO.consultarStatus(aluguel.getExemplar()) == true) {
+			try {
+				preparedStatement.setDate(1, java.sql.Date.valueOf(aluguel.getDevolucaoEfetiva()));
+				preparedStatement.setInt(2, aluguel.getId());
+				preparedStatement.executeUpdate();
+				exemplarDAO.statusDevolvido(aluguel.getExemplar());
+				JOptionPane.showMessageDialog(null, "Aluguel devolvido com sucesso!");
+			} catch (SQLException e) {
+				System.out.println("Erro ao encerrar o aluguel.");
+				System.out.println("Erro: " + e.getMessage());
+			} finally {
+				Banco.closePreparedStatement(preparedStatement);
+				Banco.closeConnection(connection);
+			} 
+		} else {
+			JOptionPane.showMessageDialog(null, "ERRO ao finalizar o ALUGUEL. \nO exemplar informado não se encontra alugado!");
+		}	
+		return aluguel;
+	}
+	
 	public Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
 		
 		Aluguel aluguel;
@@ -279,5 +305,7 @@ public class AluguelDAO {
 
 		return alugueis;
 	}
+
+	
 
 }

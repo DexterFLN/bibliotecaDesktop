@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 import model.bo.AluguelBO;
 import model.vo.Aluguel;
@@ -18,6 +20,17 @@ public class AluguelController {
 		AluguelBO bo = new AluguelBO();
         bo.renovar(aluguel);
         return aluguel;
+		
+	}
+	
+	public Aluguel devolverAluguel(Aluguel aluguel) {
+		if(aluguel.getDevolucaoEfetiva() == LocalDate.now()) {
+			AluguelBO bo = new AluguelBO();
+	        bo.devolver(aluguel); 
+		} else {
+			JOptionPane.showMessageDialog(null, "Para efetuar a devolução, a data informada deve ser igual a data de hoje!");
+		}
+		return aluguel;
 		
 	}
 	
@@ -83,6 +96,8 @@ public class AluguelController {
 		}
 		
 	}
+
+	
 
 	
 

@@ -206,40 +206,6 @@ public class ExemplarDAO {
 		return exemplares;
 	}
 	
-	public void statusAlugado1(Exemplar exemplar) {
-		Connection connection = Banco.getConnection();
-		String sql = "UPDATE EXEMPLAR SET idLivro = ?, status = ? WHERE id = ?";
-		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
-				PreparedStatement.RETURN_GENERATED_KEYS);
-		ResultSet resultSet = null;
-		
-		int alugado = 1;
-		try {
-						
-			preparedStatement.setInt(1, exemplar.getLivro().getId());
-			preparedStatement.setInt(2, alugado);
-			preparedStatement.setInt(3, exemplar.getId());
-			preparedStatement.executeUpdate();
-			/*
-			resultSet = preparedStatement.getGeneratedKeys();
-			if (resultSet.next()) {
-				int idGerado = resultSet.getInt(1);
-				exemplar.setId(idGerado);
-			}
-			*/
-			//JOptionPane.showMessageDialog(null, "Livro e exemplar(es) cadastrados com sucesso!");
-
-		} catch (SQLException ex) {
-			System.out.println("Erro ao alterar status.");
-			System.out.println("Erro: " + ex.getMessage());
-		} finally {
-			Banco.closeResultSet(resultSet);
-			Banco.closePreparedStatement(preparedStatement);
-			Banco.closeConnection(connection);
-		}
-		
-	}
-	
 	public boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
 
 		int registrosAlterados = 0;
@@ -261,7 +227,28 @@ public class ExemplarDAO {
 		return registrosAlterados > 0;
 	}
 	
-	public boolean consultarStatus(Exemplar exemplar) { 	// METODO EM CONSTRUCAO
+	public boolean statusDevolvido(Exemplar exemplar) { 	// METODO CONCLUIDO
+
+		int registrosAlterados = 0;
+		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+
+		exemplar.setStatus(false);
+		
+		try {
+			preparedStatement.setBoolean(1, exemplar.isStatus());
+			preparedStatement.setInt(2, exemplar.getId());
+			registrosAlterados = preparedStatement.executeUpdate();
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao alterar status. Causa: " + ex.getMessage());
+
+		}
+
+		return registrosAlterados > 0;
+	}
+	
+	public boolean consultarStatus(Exemplar exemplar) { 	// METODO CONCLUIDO
 
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT status FROM EXEMPLAR WHERE ID=?";
