@@ -85,26 +85,7 @@ public class PainelPesquisaGeral extends JPanel {
 		this.addListeners();
 		
 	}
-	
-	
-<<<<<<< HEAD
-	private void preenchercbAno() {
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
-	
-	private void preenchercbBuscarPor() {
-		cbBuscar.addItem("Autor");
-		cbBuscar.addItem("Título");
-		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
-		
-		
-	}
 
-=======
->>>>>>> 97c2d2f0be9874defe906b3f6fe040744a53c623
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
