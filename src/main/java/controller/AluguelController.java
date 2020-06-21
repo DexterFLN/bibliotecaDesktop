@@ -1,5 +1,9 @@
 package controller;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import javax.swing.JOptionPane;
 import model.bo.AluguelBO;
 import model.vo.Aluguel;
@@ -21,6 +25,20 @@ public class AluguelController {
 		
 	}
 	
+	public Aluguel devolverAluguel(Aluguel aluguel) {
+		String dataFormulario = aluguel.getDevolucaoEfetiva().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+		String dataHoje = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+		
+		if(aluguel.getDevolucaoEfetiva().equals(LocalDate.now())) {
+			AluguelBO bo = new AluguelBO();
+	        bo.devolver(aluguel); 
+		} else {
+			JOptionPane.showMessageDialog(null, "Para efetuar a devolu√ß√£o, a data informada deve ser igual a data de hoje!");
+		}
+		return aluguel;
+		
+	}
+	
 	public Aluguel consultarAluguelAtual(int idExemplar) {
 		AluguelBO bo = new AluguelBO();
 		Aluguel aluguel = new Aluguel();
@@ -33,20 +51,20 @@ public class AluguelController {
 		String mensagem = "";
 		
 		if(txtCodLivro.isEmpty()) {
-			mensagem = "O(s) campo(s): C”DIGO DO LIVRO";
+			mensagem = "O(s) campo(s): C√ìDIGO DO LIVRO";
 		}
 		
 		if(txtCodUser.isEmpty()) {
 			if(mensagem == "") {
-				mensagem = "O(s) campo(s): C”DIGO DO USU¡RIO ";
+				mensagem = "O(s) campo(s): C√ìDIGO DO USU√ÅRIO ";
 				
 			} else {
-				mensagem += ", C”DIGO DO USU¡RIO";
+				mensagem += ", C√ìDIGO DO USU√ÅRIO";
 			}
 		}
 		
 		if(mensagem != "") {
-			mensagem += " n„o pode(m) ficar vazio(s).";
+			mensagem += " n√£o pode(m) ficar vazio(s).";
 			mensagem += conversor.conferirDataVazia(txfDataDevolucao);
 		} else {
 			mensagem = conversor.conferirDataVazia(txfDataDevolucao);
@@ -66,7 +84,7 @@ public class AluguelController {
 		String mensagem = "";
 		
 		if(txtCodLivro.isEmpty()) {
-			mensagem = "O campo C”DIGO DO EXEMPLAR n„o pode ficar vazio.";
+			mensagem = "O campo C√ìDIGO DO EXEMPLAR n√£o pode ficar vazio.";
 		}
 		
 		if(mensagem != "") {
@@ -83,9 +101,5 @@ public class AluguelController {
 		}
 		
 	}
-
-	
-
-	
 	
 }
