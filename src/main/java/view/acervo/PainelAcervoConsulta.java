@@ -91,11 +91,13 @@ public class PainelAcervoConsulta extends JPanel {
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
+
 	}
 
 	private void limparTabelaResultadoPesquisa() {
 		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
 	}
+
 
 	private void atualizarTabelaResultadoPesquisa() {
 		limparTabelaResultadoPesquisa();
