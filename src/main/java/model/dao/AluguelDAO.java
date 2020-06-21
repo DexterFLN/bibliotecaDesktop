@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class AluguelDAO {
 				Banco.closeConnection(connection);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "ERRO ao registrar o ALUGUEL. O exemplar informado já se encontra alugado!");
+			JOptionPane.showMessageDialog(null, "ERRO ao registrar o ALUGUEL. O exemplar informado jï¿½ se encontra alugado!");
 		}
 		
 		return aluguel;
@@ -126,7 +127,7 @@ public class AluguelDAO {
 				Banco.closeConnection(connection);
 			} 
 		} else {
-			JOptionPane.showMessageDialog(null, "ERRO ao renovar o ALUGUEL. O exemplar informado não se encontra alugado!");
+			JOptionPane.showMessageDialog(null, "ERRO ao renovar o ALUGUEL. O exemplar informado nï¿½o se encontra alugado!");
 		}	
 		return aluguel;
 	}
@@ -154,17 +155,19 @@ public class AluguelDAO {
 
 			aluguel.setUsuario(usuario);
 
-			if (resultSet.getDate("dataLocacao").toLocalDate() != null) {
-				aluguel.setDataLocacao(resultSet.getDate("dataLocacao").toLocalDate());
-			}
-			if (resultSet.getDate("devolucaoPrevista").toLocalDate() != null) {
-				aluguel.setDevolucaoPrevista(resultSet.getDate("devolucaoPrevista").toLocalDate());
-			}
-			if (resultSet.next()) {
-				if (resultSet.getDate("devolucaoEfetiva") != null) {
-					aluguel.setDevolucaoEfetiva(resultSet.getDate("devolucaoEfetiva").toLocalDate());
-				}
-			}
+			Date dtLocacao = resultSet.getDate("dataLocacao");
+            Date dtDevolucaoP = resultSet.getDate("devolucaoPrevista");
+            Date dtDevolucaoE = resultSet.getDate("devolucaoEfetiva");
+            
+            if (dtLocacao != null) {
+                aluguel.setDataLocacao(dtLocacao.toLocalDate());
+            }
+            if (dtDevolucaoP != null) {
+                aluguel.setDevolucaoPrevista(dtDevolucaoP.toLocalDate());
+            }
+            if (dtDevolucaoE != null) {
+                aluguel.setDevolucaoEfetiva(dtDevolucaoE.toLocalDate());
+            }
 
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir aluguel do resultSet.");
@@ -172,8 +175,8 @@ public class AluguelDAO {
 		}
 
 		return aluguel;
-	}
-
+	} 
+	
 	public Aluguel consultarAluguelPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE id=?";
@@ -185,7 +188,7 @@ public class AluguelDAO {
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 
-			if (resultSet != null && resultSet.next()) {
+			if (resultSet.next()) {
 				aluguel = construirAluguelDoResultSet(resultSet);
 			}
 		} catch (SQLException ex) {

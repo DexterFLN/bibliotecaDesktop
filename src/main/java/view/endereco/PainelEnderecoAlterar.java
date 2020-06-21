@@ -1,6 +1,8 @@
 package view.endereco;
 
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -12,8 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class PainelEnderecoAlterar extends JPanel {
 	private JTextField txtRua;
@@ -30,50 +30,50 @@ public class PainelEnderecoAlterar extends JPanel {
 	private JTextField txtIdEndereco;
 	private JButton btnPesquisar;
 	private JComboBox cbUf;
-	
+
 	/**
 	 * Create the panel.
 	 */
 	public PainelEnderecoAlterar() {
 		setLayout(new MigLayout("", "[][][104.00,grow][107.00][]", "[][][][][][][][][][]"));
-		
+
 		lblIdEndereco = new Label("Digite o id do endere\u00E7o");
 		add(lblIdEndereco, "cell 1 1");
-		
+
 		txtIdEndereco = new JTextField();
 		txtIdEndereco.setText("4");
 		add(txtIdEndereco, "cell 2 1,growx");
 		txtIdEndereco.setColumns(10);
-		
+
 		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		add(btnPesquisar, "cell 3 1");
-		
+
 		JLabel lblRua = new JLabel("Rua");
 		add(lblRua, "cell 1 2");
-		
+
 		lblCidade = new Label("Cidade");
 		add(lblCidade, "cell 3 2");
-		
+
 		txtRua = new JTextField();
 		txtRua.setText("Flores Belta");
 		add(txtRua, "cell 1 3 2 1,growx");
 		txtRua.setColumns(10);
-		
+
 		txtCidade = new JTextField();
 		txtCidade.setText("S\u00E3o Jos\u00E9");
 		add(txtCidade, "cell 3 3,growx");
 		txtCidade.setColumns(10);
-		
+
 		JLabel lblNumeroRua = new JLabel("Numero da Rua");
 		add(lblNumeroRua, "cell 1 4");
-		
+
 		lblUf = new Label("UF");
 		add(lblUf, "cell 3 4");
-		
+
 		try {
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 			txtCep = new JFormattedTextField(mascaraCep);
@@ -82,27 +82,26 @@ public class PainelEnderecoAlterar extends JPanel {
 			add(txtCep, "cell 3 7,growx");
 
 		} catch (ParseException e) {
-			System.out.println("Erro na máscara de formatação de cep no painel de cadastro de Endereço.");
+			System.out.println("Erro na mï¿½scara de formataï¿½ï¿½o de cep no painel de cadastro de Endereï¿½o.");
 			e.printStackTrace();
 		}
-		
+
 		txtNumRua = new JTextField();
 		txtNumRua.setText("55");
 		add(txtNumRua, "cell 1 5 2 1,growx");
 		txtNumRua.setColumns(10);
-		
+
 		JLabel lblBairro = new JLabel("Bairro");
 		add(lblBairro, "cell 1 6");
-		
+
 		lblCep = new Label("CEP");
 		add(lblCep, "cell 3 6");
-		
-		
+
 		txtBairro = new JTextField();
 		txtBairro.setText("celta");
 		add(txtBairro, "cell 1 7 2 1,growx");
 		txtBairro.setColumns(10);
-		
+
 		cbUf = new JComboBox();
 		cbUf.addItem("BA");
 		cbUf.addItem("CE");
@@ -112,17 +111,16 @@ public class PainelEnderecoAlterar extends JPanel {
 		cbUf.addItem("PR");
 		cbUf.addItem("SC");
 		cbUf.addItem("RS");
-		
+
 		add(cbUf, "cell 3 5,growx");
-					
-		
+
 		btnSalvar = new JButton("Salvar Altera\u00E7\u00F5es");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		add(btnSalvar, "cell 1 9");
-		
+
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
