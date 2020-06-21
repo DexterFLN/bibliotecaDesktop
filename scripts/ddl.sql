@@ -42,6 +42,7 @@ CREATE TABLE LIVRO (
 CREATE TABLE EXEMPLAR (
     id INT NOT NULL AUTO_INCREMENT,
     idLivro INT NOT NULL,
+    status boolean,
     PRIMARY KEY(id, idLivro),
     FOREIGN KEY(idLivro) REFERENCES LIVRO(id)
 );

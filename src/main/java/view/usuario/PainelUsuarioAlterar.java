@@ -20,101 +20,117 @@ public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
+	private JTextField txtDDDFixo;
+	private JTextField txtFoneFixo;
+	private JTextField txtDDDMovel;
+	private JTextField txtFoneMovel;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JTextField txtUsuario;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioAlterar() {
-		setLayout(new MigLayout("", "[71px][135.00,grow][107.00,grow][99.00][63.00,grow]", "[22px][][][][][][][][][][][][]"));
+setLayout(new MigLayout("", "[64.00px][135.00][grow][99.00,grow][63.00,grow]", "[22px][][][][][][][][][][][][]"));
 		
-		JLabel lblIdUsuario = new JLabel("Digite o id do usuario");
-		add(lblIdUsuario, "cell 1 2,alignx left");
+		JLabel lblIdUsuario = new JLabel("Digite o id do usu\u00E1rio");
+		add(lblIdUsuario, "cell 1 1,alignx left");
 		
-		txtIdUsuario = new JTextField();
-		txtIdUsuario.setText("13");
-		txtIdUsuario.setColumns(10);
-		add(txtIdUsuario, "cell 2 2 2 1,growx");
+		txtUsuario = new JTextField();
+		add(txtUsuario, "cell 2 1,growx");
+		txtUsuario.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		add(btnPesquisar, "cell 4 2");
+		add(btnPesquisar, "cell 3 1,growx");
 		
 		JLabel lblNome = new JLabel("Nome");
-		add(lblNome, "cell 1 3");
+		add(lblNome, "cell 1 2");
+		
+		JLabel lblDDDFixo = new JLabel("DDD Fixo:");
+		add(lblDDDFixo, "cell 3 2");
+		
+		JLabel lblFoneFixo = new JLabel("Telefone Fixo:");
+		add(lblFoneFixo, "cell 4 2");
 		
 		txtNome = new JTextField();
-		txtNome.setText("Vitor de Souza ");
-		add(txtNome, "cell 1 4 4 1,growx");
+		add(txtNome, "cell 1 3 2 1,growx");
 		txtNome.setColumns(10);
 		
+		txtDDDFixo = new JTextField();
+		add(txtDDDFixo, "cell 3 3,growx,aligny top");
+		txtDDDFixo.setColumns(10);
+		
+		txtFoneFixo = new JTextField();
+		add(txtFoneFixo, "cell 4 3,growx");
+		txtFoneFixo.setColumns(10);
+		
 		JLabel lblSobrenome = new JLabel("Sobrenome");
-		add(lblSobrenome, "cell 1 5");
+		add(lblSobrenome, "cell 1 4");
 		
-		JLabel lblTelefone = new JLabel("Telefone");
-		add(lblTelefone, "cell 4 5");
-		
-		txtSobrenome = new JTextField();
-		txtSobrenome.setText("Ribeiro");
-		add(txtSobrenome, "cell 1 6 3 1,growx");
-		txtSobrenome.setColumns(10);
-		
-		JRadioButton rdbtnMovel = new JRadioButton("Movel");
-		buttonGroup.add(rdbtnMovel);
-		rdbtnMovel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		add(rdbtnMovel, "flowx,cell 4 6");
-		
-		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
-		add(lblDataNascimento, "cell 1 7");
-		
-		JLabel lblDdd = new JLabel("DDD");
-		add(lblDdd, "cell 4 7");
+		JLabel lblDDDMovel = new JLabel("DDD M\u00F3vel:");
+		add(lblDDDMovel, "cell 3 4");
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 			JFormattedTextField txtDataNascimento = new JFormattedTextField(maskFormatter);
-			add(txtDataNascimento, "cell 1 8,growx");
+			txtDataNascimento.setText("");
+			add(txtDataNascimento, "cell 1 7 2 1,growx");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação de data no painel de alteração de usuário.");
+			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			e1.printStackTrace();
 		}
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##");
-			JFormattedTextField txtDdd = new JFormattedTextField(maskFormatter);
-			add(txtDdd, "cell 4 8,growx");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
 			e1.printStackTrace();
 		}
-				
-		JLabel lblEmail = new JLabel("Email");
-		add(lblEmail, "cell 1 9");
 		
-		txtEmail = new JTextField();
-		txtEmail.setText("vittoribeiro12@gmail.com");
-		add(txtEmail, "cell 1 10 3 1,growx");
-		txtEmail.setColumns(10);
+		JLabel lblFoneMovel = new JLabel("Telefone M\u00F3vel:");
+		add(lblFoneMovel, "cell 4 4");
 		
-		JRadioButton rdbtnFixo = new JRadioButton("Fixo");
-		buttonGroup.add(rdbtnFixo);
-		rdbtnFixo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		add(rdbtnFixo, "cell 4 6");
+		txtSobrenome = new JTextField();
+		add(txtSobrenome, "cell 1 5 2 1,growx");
+		txtSobrenome.setColumns(10);
+		
+		txtDDDMovel = new JTextField();
+		add(txtDDDMovel, "cell 3 5,growx");
+		txtDDDMovel.setColumns(10);
+		
+		txtFoneMovel = new JTextField();
+		add(txtFoneMovel, "cell 4 5,growx");
+		txtFoneMovel.setColumns(10);
+		
+		JLabel lblDtNascimento = new JLabel("Data de Nascimento");
+		add(lblDtNascimento, "cell 1 6");
 		
 		JButton btnSalvar = new JButton("Salvar Alteracoes");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		
+		
+		
+		JButton btnEndereco = new JButton("Endere\u00E7o");
+		btnEndereco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		add(btnEndereco, "cell 3 7 2 1,growx");
+		
+		JLabel lblEmail = new JLabel("Email");
+		add(lblEmail, "cell 1 8");
+		
+		txtEmail = new JTextField();
+		add(txtEmail, "cell 1 9 3 1,growx");
+		txtEmail.setColumns(10);
 		add(btnSalvar, "cell 1 12");
 		
 		JButton btnExcluir = new JButton("Excluir");
