@@ -187,10 +187,10 @@ public class LivroDAO {
 		boolean primeiro = true;
 		
 
-		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isBlank()) {
+		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
 			sql += " WHERE ";
 			System.out.println("LivroDAO.java - Seletor Termo Pesquisa Validado");
-			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isBlank()) {
+			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isEmpty()) {
 
 				if (seletor.getBuscarPor() == "Autor") {
 					System.out.println("LivroDAO.java - Seletor Autor");
@@ -209,7 +209,7 @@ public class LivroDAO {
 				primeiro = false;
 			}
 			
-			if (seletor.getAno() != null && !seletor.getAno().isBlank()) {
+			if (seletor.getAno() != null && !seletor.getAno().isEmpty()) {
 				if (!primeiro) {
 					sql += " AND ";
 				}

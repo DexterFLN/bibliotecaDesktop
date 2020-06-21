@@ -23,13 +23,8 @@ public class PainelAcervoConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
-<<<<<<< HEAD
-	private String[] nomesColunas = { "Título", "Autor", "Ano", "Exemplares" };
-	private ArrayList<Livro> livros;
-=======
 	private String[] nomesColunas = { "Título", "Autor", "Editora", "Ano", "Código" };
 	private ArrayList<Exemplar> exemplares;
->>>>>>> 97c2d2f0be9874defe906b3f6fe040744a53c623
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
 
@@ -76,24 +71,6 @@ public class PainelAcervoConsulta extends JPanel {
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
-<<<<<<< HEAD
-
-	}
-
-	private void preenchercbAno() {
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
-
-	private void preenchercbBuscarPor() {
-		cbBuscar.addItem("Autor");
-		cbBuscar.addItem("Título");
-		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
-=======
-
-		this.addListeners();
 
 	}
 
@@ -134,7 +111,6 @@ public class PainelAcervoConsulta extends JPanel {
 			model.addRow(novaLinhaDaTabela);
 		}
 
->>>>>>> 97c2d2f0be9874defe906b3f6fe040744a53c623
 	}
 
 }
