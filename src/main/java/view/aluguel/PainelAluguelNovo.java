@@ -77,8 +77,6 @@ public class PainelAluguelNovo extends JPanel {
 				txtTitulo.setText("");
 				add(txtTitulo, "cell 1 3 2 1,grow");
 				txtTitulo.setColumns(10);
-
-				
 				
 				try {
 					
@@ -86,19 +84,10 @@ public class PainelAluguelNovo extends JPanel {
 					txfDataDevolucao = new JFormattedTextField(maskFormatter);
 					add(txfDataDevolucao, "cell 3 3,grow");
 				} catch (ParseException e1){
-					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+					 System.out.println("Erro na mï¿½scara de formataï¿½ï¿½o de data no painel de cadastro de usuï¿½rio.");
 			         e1.printStackTrace();
 				}
 				
-				
-			
-				
-				
-				
-				
-				
-				
-								
 				JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo do Usu\u00E1rio");
 				add(lblDigiteOCdigo, "cell 1 5,alignx center,aligny center");
 				
@@ -118,7 +107,7 @@ public class PainelAluguelNovo extends JPanel {
 						ArrayList<Usuario> usuarios = dao.consultarTodosUsuarios(10);
 
 						
-						usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuário", "Usuários",
+						usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuï¿½rio", "Usuï¿½rios",
 								JOptionPane.QUESTION_MESSAGE, null, usuarios.toArray(), null);
 						txtCodigoUser.setText(Integer.toString(usuarioSelecionado.getId())); 
 						txtNome.setText(usuarioSelecionado.getNome());
@@ -159,7 +148,7 @@ public class PainelAluguelNovo extends JPanel {
 					
 					
 				} catch (ParseException e1) {
-					System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+					System.out.println("Erro na mï¿½scara de formataï¿½ï¿½o de data no painel de cadastro de usuï¿½rio.");
 			        e1.printStackTrace();
 				}
 				

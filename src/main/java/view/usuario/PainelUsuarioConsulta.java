@@ -2,6 +2,8 @@ package view.usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -26,12 +28,14 @@ public class PainelUsuarioConsulta extends JPanel {
 	private JLabel lblBuscarPor;
 	private String[] nomesColunas = {"Código", "Nome", "Sobrenome", "Tipo", "Data de Nascimento", "Email", "Telefone Fixo", "Telefone Movel"};
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	private JButton btnAlterar;
+	private JPanel painelUsuarioAlterar = null;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioConsulta() {
-setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px]"));
+setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px][][]"));
 		
 		txtPesquisar = new JTextField();
 		txtPesquisar.setText("Digite um termo para Pesquisa");
@@ -61,6 +65,9 @@ setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.0
 		
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 		
+		btnAlterar = new JButton("Alterar");
+		add(btnAlterar, "cell 1 4");
+		
 		this.addListeners();
 
 	}
@@ -75,6 +82,24 @@ setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.0
 				UsuarioController usuarioController = new UsuarioController();
 				usuarios = usuarioController.consultarUsuarioPorFiltro(usuarioSeletor);
 				atualizarTabelaResultadoPesquisa();
+			}
+		});
+		
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		
+		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
+				System.out.println(usuarios.get(tableResultadoPesquisa.getSelectedRow()-1).getNome());
+				painelUsuarioAlterar = new PainelUsuarioAlterar(usuarios.get(tableResultadoPesquisa.getSelectedRow()-1));
+				MainUsuario.switchPanel(painelUsuarioAlterar);
+
 			}
 		});
 	}
