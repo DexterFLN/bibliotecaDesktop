@@ -21,16 +21,16 @@ public class ValidadorTexto {
 
 	/**
 	 * Verifica se uma String é válida, uma String será válida se não possuir
-	 * números.
+	 * números e não estiver vazia.
 	 * 
 	 * @param String texto à ser validado.
 	 * @return false se o texto não é válido, e true caso texto seja válido.
 	 */
-	public static boolean stringIsValid(String string) {
+	public static boolean isValidString(String string) {
 		String regex = "\\d";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(string);
-		return !matcher.find();
+		return !matcher.find() && !string.isEmpty();
 	}
 
 }

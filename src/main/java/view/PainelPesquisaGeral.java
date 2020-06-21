@@ -42,6 +42,7 @@ public class PainelPesquisaGeral extends JPanel {
 				"[][93.00px,grow][146.00px,grow][97.00px,grow][134.00px,grow][133.00,grow][grow][41px,grow,right][144px,grow][92px][]",
 				"[58.00px][31.00px][30.00px][544.00px]"));
 
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Roboto", Font.PLAIN, 12));
 		add(menuBar, "cell 1 0,alignx leading,growy");
@@ -49,8 +50,9 @@ public class PainelPesquisaGeral extends JPanel {
 		JMenu mnPesquisaGeral = new JMenu("Pesquisa Geral");
 		mnPesquisaGeral.setBackground(new Color(2, 83, 83));
 		menuBar.add(mnPesquisaGeral);
+	
+		//TODO colocar um placeholder
 
-		// TODO colocar um placeholder
 		txtPesquisar = new JTextField();
 		add(txtPesquisar, "cell 1 1 7 1,grow");
 		txtPesquisar.setColumns(10);
@@ -70,11 +72,12 @@ public class PainelPesquisaGeral extends JPanel {
 		add(cbAno, "cell 4 2,grow");
 
 		btnPesquisar = new JButton("Pesquisar");
-
+		
 		add(btnPesquisar, "cell 8 1,grow");
-
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		add(scrollPane_1, "cell 1 3 9 1,grow");
+		
 
 		JPanel panel = new JPanel();
 		scrollPane_1.setViewportView(panel);
@@ -85,14 +88,13 @@ public class PainelPesquisaGeral extends JPanel {
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 
 		this.addListeners();
-
 	}
 
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LivroSeletor livroSeletor = new LivroSeletor();
-
+				
 				livroSeletor.setTermoPesquisa(txtPesquisar.getText());
 				livroSeletor.setAno((String) cbAno.getSelectedItem().toString());
 				livroSeletor.setBuscarPor((String) cbBuscar.getSelectedItem());
@@ -112,9 +114,9 @@ public class PainelPesquisaGeral extends JPanel {
 	private void atualizarTabelaResultadoPesquisa() {
 		limparTabelaResultadoPesquisa();
 		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
-
+		
 		for (Livro livro : livros) {
-
+			
 			Object[] novaLinhaDaTabela = new Object[4];
 			novaLinhaDaTabela[0] = livro.getNome();
 			novaLinhaDaTabela[1] = livro.getAutor();
