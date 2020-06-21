@@ -75,8 +75,8 @@ public class PainelAcervoCadastro extends JPanel {
 		JLabel lblSessao = new JLabel("Sessão");
 		add(lblSessao, "cell 1 7,alignx left,aligny center");
 		
-		JLabel lblNewLabel_3 = new JLabel("Ano");
-		add(lblNewLabel_3, "cell 3 1,alignx left,aligny center");
+		JLabel lblAno = new JLabel("Ano");
+		add(lblAno, "cell 3 1,alignx left,aligny center");
 		
 		cbAno = new JComboBox();
 		for(int i = 1990; i <= 2020; i++) {

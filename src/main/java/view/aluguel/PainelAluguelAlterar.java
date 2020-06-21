@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-
 import controller.AluguelController;
 import controller.ExemplarController;
 import model.dao.AluguelDAO;
@@ -18,7 +17,6 @@ import model.vo.Exemplar;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
-
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -71,7 +69,7 @@ public class PainelAluguelAlterar extends JPanel {
 							txtNome.setText(aluguel.getUsuario().getNome());
 							txtSobrenome.setText(aluguel.getUsuario().getSobrenome());							
 						} else {
-							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado n�o se encontra alugado!");
+							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado não se encontra alugado!");
 						}
 					}
 				});
@@ -84,7 +82,7 @@ public class PainelAluguelAlterar extends JPanel {
 				add(txtTitulo, "cell 1 3 2 1,grow");
 				txtTitulo.setColumns(10);
 
-				JLabel lblAutor = new JLabel("Data Devolução");
+				JLabel lblAutor = new JLabel("Data DevoluÃ§Ã£o");
 				add(lblAutor, "cell 3 2,alignx left,aligny center");
 			
 				
@@ -94,7 +92,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataDevolucao = new JFormattedTextField(maskFormatter);
 					add(txfDataDevolucao, "cell 3 3,grow");
 				} catch (ParseException e1){
-					 System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			         e1.printStackTrace();
 				}
 				
@@ -121,7 +119,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataNascimento = new JFormattedTextField(maskFormatter);
 					add(txfDataNascimento, "cell 3 6,grow");
 				} catch (ParseException e1) {
-					System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+					System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			        e1.printStackTrace();
 				}
 				

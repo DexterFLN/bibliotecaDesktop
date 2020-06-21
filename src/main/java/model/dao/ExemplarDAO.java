@@ -212,6 +212,7 @@ public class ExemplarDAO {
 		return exemplares;
 	}
 	
+  
 	public boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
 
 		int registrosAlterados = 0;
@@ -234,7 +235,6 @@ public class ExemplarDAO {
 	}
 	
 	public boolean statusDevolvido(Exemplar exemplar) { 	// METODO CONCLUIDO
-
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
 		Connection connection = Banco.getConnection();
@@ -255,7 +255,6 @@ public class ExemplarDAO {
 	}
 	
 	public boolean consultarStatus(Exemplar exemplar) { 	// METODO CONCLUIDO
-
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT status FROM EXEMPLAR WHERE ID=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);

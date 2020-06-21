@@ -5,6 +5,7 @@ import model.vo.Aluguel;
 
 public class AluguelBO {
 
+
 	
 	
 	public void salvar(Aluguel aluguel) {
@@ -14,15 +15,16 @@ public class AluguelBO {
 	}
 
 	public void renovar(Aluguel aluguel) {
+
 		AluguelDAO aluguelDAO = new AluguelDAO();
 		aluguelDAO.renovar(aluguel);
 		
 	}
 
+
 	public void devolver(Aluguel aluguel) {
 		AluguelDAO aluguelDAO = new AluguelDAO();
 		aluguelDAO.devolver(aluguel);
-		
 	}
 	
 	public Aluguel consultarAluguelAtual(int idExemplar) {
@@ -31,7 +33,5 @@ public class AluguelBO {
 		aluguel = aluguelDAO.consultarAluguelAtual(idExemplar);
 		return aluguel;
 	}
-
-	
 
 }
