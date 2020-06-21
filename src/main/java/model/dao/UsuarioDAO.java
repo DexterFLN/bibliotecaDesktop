@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.seletor.LivroSeletor;
+import model.seletor.UsuarioSeletor;
 import model.vo.Biblioteca;
 import model.vo.Endereco;
 import model.vo.Usuario;
@@ -230,6 +232,64 @@ public class UsuarioDAO {
 		}
 		
 		return usuarios;
+	}
+	
+	private String criarFiltros(String sql, UsuarioSeletor seletor) {
+
+		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isBlank()) {
+			System.out.println(getClass().toString() + " - Seletor Termo Pesquisa Validado");
+			sql += " WHERE ";
+			
+			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isBlank()) {
+				if(seletor.getBuscarPor() == "Código") {
+					System.out.println(getClass().toString() + "  - Seletor Código");
+					sql += " id = "+ seletor.getTermoPesquisa().toString();
+				} else {
+					System.out.println(getClass().toString() + " - Seletor nome");
+					sql += " nome LIKE " + "'%"  + seletor.getTermoPesquisa() + "%'";
+				}
+				
+			}
+
+		}
+	
+		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+		return sql;
+	}
+
+	public ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
+		String sql = "SELECT * FROM USUARIO";
+		Connection connection = Banco.getConnection();
+		
+		usuarioSeletor = usuarioSeletor.validarFitros(usuarioSeletor);
+		if(usuarioSeletor.temFiltro()) {
+			sql = criarFiltros(sql, usuarioSeletor);
+		}
+		
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+		try {
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Usuario usuario = construirUsuarioDoResultSet(resultSet);
+				usuarios.add(usuario);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os usuários.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+		return usuarios;
+		
 	}
 
 }
