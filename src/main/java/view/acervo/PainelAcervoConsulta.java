@@ -1,5 +1,7 @@
 package view.acervo;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -9,16 +11,25 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
-import model.vo.Livro;
+import controller.ExemplarController;
+import model.seletor.LivroSeletor;
+import model.vo.Exemplar;
 import net.miginfocom.swing.MigLayout;
+import util.Utils;
 
 public class PainelAcervoConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
+<<<<<<< HEAD
 	private String[] nomesColunas = { "Título", "Autor", "Ano", "Exemplares" };
 	private ArrayList<Livro> livros;
+=======
+	private String[] nomesColunas = { "Título", "Autor", "Editora", "Ano", "Código" };
+	private ArrayList<Exemplar> exemplares;
+>>>>>>> 97c2d2f0be9874defe906b3f6fe040744a53c623
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
 
@@ -40,14 +51,14 @@ public class PainelAcervoConsulta extends JPanel {
 		add(lblBuscar, "cell 1 1,alignx right,aligny center");
 
 		cbBuscar = new JComboBox();
-		this.preenchercbBuscarPor();
+		cbBuscar = Utils.preenchercbBuscarPor(cbBuscar);
 		add(cbBuscar, "cell 2 1,grow");
 
 		JLabel lblAno = new JLabel("Ano");
 		add(lblAno, "cell 3 1,alignx right,growy");
 
 		cbAno = new JComboBox();
-		this.preenchercbAno();
+		cbAno = Utils.preenchercbAno(cbAno);
 		add(cbAno, "cell 4 1,grow");
 
 		btnPesquisar = new JButton("Pesquisar");
@@ -65,6 +76,7 @@ public class PainelAcervoConsulta extends JPanel {
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
+<<<<<<< HEAD
 
 	}
 
@@ -79,6 +91,50 @@ public class PainelAcervoConsulta extends JPanel {
 		cbBuscar.addItem("Título");
 		cbBuscar.addItem("Editora");
 		cbBuscar.addItem("Sessão");
+=======
+
+		this.addListeners();
+
+	}
+
+	private void addListeners() {
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LivroSeletor livroSeletor = new LivroSeletor();
+
+				livroSeletor.setTermoPesquisa(txtPesquisar.getText());
+				livroSeletor.setAno((String) cbAno.getSelectedItem().toString());
+				livroSeletor.setBuscarPor((String) cbBuscar.getSelectedItem());
+
+				ExemplarController exemplarController = new ExemplarController();
+				exemplares = exemplarController.consultarExemplarLivroSeletor(livroSeletor);
+				System.out.println(exemplares.toString());
+				atualizarTabelaResultadoPesquisa();
+			}
+		});
+	}
+
+	private void limparTabelaResultadoPesquisa() {
+		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+	}
+
+	private void atualizarTabelaResultadoPesquisa() {
+		limparTabelaResultadoPesquisa();
+		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
+
+		for (Exemplar exemplar : exemplares) {
+
+			Object[] novaLinhaDaTabela = new Object[5];
+			novaLinhaDaTabela[0] = exemplar.getLivro().getNome();
+			novaLinhaDaTabela[1] = exemplar.getLivro().getAutor();
+			novaLinhaDaTabela[2] = exemplar.getLivro().getEditora();
+			novaLinhaDaTabela[3] = exemplar.getLivro().getAno();
+			novaLinhaDaTabela[4] = exemplar.getId();
+
+			model.addRow(novaLinhaDaTabela);
+		}
+
+>>>>>>> 97c2d2f0be9874defe906b3f6fe040744a53c623
 	}
 
 }
