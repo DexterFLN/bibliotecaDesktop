@@ -95,6 +95,12 @@ public class ExemplarDAO {
 				LivroDAO livroDAO = new LivroDAO();
 				Livro livro = livroDAO.consultarLivroPorIdParaExemplares(resultSet.getInt("idLivro"));
 				exemplar.setLivro(livro);
+				int status = resultSet.getInt("status");
+				if (status == 1) {
+					exemplar.setStatus(true);
+				} else {
+					exemplar.setStatus(false);
+				}
 			}
 			
 		} catch (SQLException ex) {

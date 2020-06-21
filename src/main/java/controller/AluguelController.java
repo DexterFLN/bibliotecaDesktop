@@ -1,6 +1,8 @@
 package controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.JOptionPane;
 import model.bo.AluguelBO;
@@ -24,7 +26,10 @@ public class AluguelController {
 	}
 	
 	public Aluguel devolverAluguel(Aluguel aluguel) {
-		if(aluguel.getDevolucaoEfetiva() == LocalDate.now()) {
+		String dataFormulario = aluguel.getDevolucaoEfetiva().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+		String dataHoje = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+		
+		if(aluguel.getDevolucaoEfetiva().equals(LocalDate.now())) {
 			AluguelBO bo = new AluguelBO();
 	        bo.devolver(aluguel); 
 		} else {

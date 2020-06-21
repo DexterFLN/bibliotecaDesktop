@@ -4,11 +4,13 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.AluguelController;
+import controller.ExemplarController;
 import model.dao.AluguelDAO;
 import model.dao.ExemplarDAO;
 import model.vo.Aluguel;
@@ -50,20 +52,27 @@ public class PainelAluguelAlterar extends JPanel {
 				JButton btnPesquisarAluguel = new JButton("Pesquisar");
 				btnPesquisarAluguel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {				//METODO PRONTO
-						AluguelDAO aluguelDAO = new AluguelDAO();
-						Aluguel aluguel = new Aluguel();
+						ExemplarController exemplarController = new ExemplarController();
+						Exemplar exemplar = new Exemplar();
 						int idExemplar = Integer.valueOf(txtCodigoExemplar.getText());
-						aluguel = aluguelDAO.consultarAluguelAtual(idExemplar);
-						txtTitulo.setText(aluguel.getExemplar().getLivro().getNome());
-						LocalDate dataOriginal = aluguel.getDevolucaoPrevista();
-						String dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-						txfDataDevolucao.setText(dataFormatada);
-						dataOriginal = aluguel.getUsuario().getDataNascimento();
-						dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-						txfDataNascimento.setText(dataFormatada);
-						txtNome.setText(aluguel.getUsuario().getNome());
-						txtSobrenome.setText(aluguel.getUsuario().getSobrenome());
+						exemplar = exemplarController.consultarExemplar(idExemplar);
 						
+						if(exemplar.isStatus() == true) {
+							AluguelController aluguelController = new AluguelController();
+							Aluguel aluguel = new Aluguel();
+							aluguel = aluguelController.consultarAluguelAtual(idExemplar);
+							txtTitulo.setText(aluguel.getExemplar().getLivro().getNome());
+							LocalDate dataOriginal = aluguel.getDevolucaoPrevista();
+							String dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+							txfDataDevolucao.setText(dataFormatada);
+							dataOriginal = aluguel.getUsuario().getDataNascimento();
+							dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+							txfDataNascimento.setText(dataFormatada);
+							txtNome.setText(aluguel.getUsuario().getNome());
+							txtSobrenome.setText(aluguel.getUsuario().getSobrenome());							
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado não se encontra alugado!");
+						}
 					}
 				});
 				add(btnPesquisarAluguel, "cell 3 1,grow");
