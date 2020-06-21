@@ -11,7 +11,8 @@ public class ExemplarSeletor {
 		public boolean temFiltro() {
 			boolean temFiltroPreenchido = false;
 			//TODO melhorar essas verificacoes
-			temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.isEmpty())
+
+			temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty())
 					|| !buscarPor.isEmpty()
 					|| !ano.isEmpty();
 			

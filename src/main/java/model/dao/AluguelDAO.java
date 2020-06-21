@@ -15,6 +15,7 @@ import model.vo.Usuario;
 
 public class AluguelDAO {
 
+	
 	public Aluguel salvar(Aluguel aluguel) {
 
 		ExemplarDAO exemplarDAO = new ExemplarDAO();
@@ -48,9 +49,8 @@ public class AluguelDAO {
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao registrar o ALUGUEL. O exemplar informado j� se encontra alugado!");
+					"ERRO ao registrar o ALUGUEL. O exemplar informado já se encontra alugado!");
 		}
-
 		return aluguel;
 	}
 
@@ -104,6 +104,7 @@ public class AluguelDAO {
 			Banco.closeConnection(connection);
 		}
 
+
 		return registrosAlterados > 0;
 	}
 
@@ -112,7 +113,7 @@ public class AluguelDAO {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET devolucaoPrevista=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
-
+    
 		if (exemplarDAO.consultarStatus(aluguel.getExemplar()) == true) {
 			try {
 				preparedStatement.setDate(1, java.sql.Date.valueOf(aluguel.getDevolucaoPrevista()));
@@ -128,7 +129,7 @@ public class AluguelDAO {
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao renovar o ALUGUEL. O exemplar informado n�o se encontra alugado!");
+					"ERRO ao renovar o ALUGUEL. O exemplar informado não se encontra alugado!");
 		}
 		return aluguel;
 	}
@@ -155,10 +156,11 @@ public class AluguelDAO {
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao finalizar o ALUGUEL. \nO exemplar informado n�o se encontra alugado!");
+					"ERRO ao finalizar o ALUGUEL. \nO exemplar informado não se encontra alugado!");
 		}
 		return aluguel;
 	}
+
 
 	public Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
 
@@ -168,12 +170,11 @@ public class AluguelDAO {
 		try {
 
 			aluguel.setId(resultSet.getInt("id"));
-
+      
 			Exemplar exemplar = new Exemplar();
 			exemplar.setId(resultSet.getInt("idExemplar"));
 			ExemplarDAO exemplarDAO = new ExemplarDAO();
 			exemplar = exemplarDAO.consultarExemplar(exemplar.getId());
-
 			aluguel.setExemplar(exemplar);
 
 			Usuario usuario = new Usuario();
@@ -203,8 +204,8 @@ public class AluguelDAO {
 		}
 
 		return aluguel;
-	}
-
+	} 
+	
 	public Aluguel consultarAluguelPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE id=?";
@@ -216,7 +217,7 @@ public class AluguelDAO {
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 
-			if (resultSet != null && resultSet.next()) {
+			if (resultSet.next()) {
 				aluguel = construirAluguelDoResultSet(resultSet);
 			}
 		} catch (SQLException ex) {
@@ -253,6 +254,32 @@ public class AluguelDAO {
 			Banco.closeConnection(connection);
 		}
 
+		return aluguel;
+	}
+	
+	public Aluguel consultarAluguelAtual(int idExemplar) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM ALUGUEL WHERE idExemplar=? ORDER BY id DESC LIMIT 1";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+		Aluguel aluguel = new Aluguel();
+		
+		try {
+			preparedStatement.setInt(1, idExemplar);
+			resultSet = preparedStatement.executeQuery();
+			
+			if (resultSet != null && resultSet.next()) {
+				aluguel = construirAluguelDoResultSet(resultSet);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar aluguel.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
 		return aluguel;
 	}
 

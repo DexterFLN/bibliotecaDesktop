@@ -15,6 +15,7 @@ public class ExemplarController {
 	private ExemplarBO exemplarBO = new ExemplarBO();
 
 	public void salvarExemplar(Livro livro, String quantidade, boolean status) {
+
 		exemplarBO.salvar(livro, quantidade, status);
     
     }

@@ -72,6 +72,8 @@ public class PainelAcervoConsulta extends JPanel {
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 
+		this.addListeners();
+
 	}
 
 	private void addListeners() {
@@ -89,11 +91,13 @@ public class PainelAcervoConsulta extends JPanel {
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
+
 	}
 
 	private void limparTabelaResultadoPesquisa() {
 		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
 	}
+
 
 	private void atualizarTabelaResultadoPesquisa() {
 		limparTabelaResultadoPesquisa();
