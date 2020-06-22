@@ -16,6 +16,7 @@ import javax.swing.text.MaskFormatter;
 import controller.UsuarioController;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
+import util.ConversorData;
 
 public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtIdUsuario;
@@ -32,6 +33,7 @@ public class PainelUsuarioAlterar extends JPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField txtTelefone;
 	private JLabel lblTelefone;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	/**
 	 * Create the panel.
@@ -114,8 +116,17 @@ public class PainelUsuarioAlterar extends JPanel {
 
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Usuario usuarioAlterado = new Usuario();
+				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));
+				usuarioAlterado.setNome(txtNome.getText());
+				usuarioAlterado.setSobrenome(txtSobrenome.getText());
+				usuarioAlterado.setEmail(txtEmail.getText());
+				usuarioAlterado.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
+				usuarioAlterado.setDdd(txtDdd.getText());
+				usuarioAlterado.setFone(txtTelefone.getText());
 				
 				UsuarioController usuarioController = new UsuarioController();
+				String message = usuarioController.alterarUsuario(usuarioAlterado);
 			}
 		});
 
@@ -133,8 +144,9 @@ public class PainelUsuarioAlterar extends JPanel {
 			txtSobrenome.setText(usuario.getSobrenome());
 			txtEmail.setText(usuario.getEmail());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			txtDdd.setText(usuario.getDdd());
 			txtDataNascimento.setText(usuario.getDataNascimento().format(formatter));
-			txtDdd.setText(usuario.getDddFixo());
+			txtTelefone.setText(usuario.getFone());
 			System.out.println(usuario.getDataNascimento().toString());
 		}
 		

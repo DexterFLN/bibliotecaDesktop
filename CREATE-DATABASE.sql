@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Atlas;
-CREATE DATABASE Atlas;
-USE Atlas;
+DROP DATABASE IF EXISTS ATLAS;
+CREATE DATABASE ATLAS;
+USE ATLAS;
 
 CREATE TABLE BIBLIOTECA (
     id INT NOT NULL AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE ENDERECO (
 
 CREATE TABLE LIVRO (
     id INT NOT NULL AUTO_INCREMENT,
-    idSessao INT,
+    idSessao INT NOT NULL,
     nome VARCHAR(40) NOT NULL,
     autor VARCHAR(40) NOT NULL,
     editora VARCHAR(30) NOT NULL,
@@ -56,10 +56,8 @@ CREATE TABLE USUARIO (
     tipo INT NOT NULL,
     dataNascimento DATE NOT NULL,
     email VARCHAR(40) NOT NULL,
-    dddFixo VARCHAR(2),
-    foneFixo VARCHAR(8),
-    dddMovel VARCHAR(2),
-    foneMovel VARCHAR(9),
+    ddd VARCHAR(2),
+    fone VARCHAR(8),
     PRIMARY KEY(id),
     FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(id),
     FOREIGN KEY(idEndereco) REFERENCES ENDERECO(id)
@@ -114,12 +112,12 @@ INSERT INTO EXEMPLAR VALUES (4, 4, 0);
 INSERT INTO EXEMPLAR VALUES (5, 5, 0);
 INSERT INTO EXEMPLAR VALUES (6, 6, 0);
 
-INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857', '48', '991737576');
-INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857', '48', '911737572');
-INSERT INTO USUARIO VALUES (3, 3, 3, 'Gustavo', 'Rodriguez', 3, '1998-02-20', '3@gmail.com', '48', '33348857', '48', '931737571');
-INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gmail.com', '48', '33058857', '48', '921737573');
-INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123', '48', '931737574');
-INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657', '48', '921737575');
+INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857');
+INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857');
+INSERT INTO USUARIO VALUES (3, 3, 3, 'Gustavo', 'Rodriguez', 3, '1998-02-20', '3@gmail.com', '48', '33348857');
+INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gmail.com', '48', '33058857');
+INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123');
+INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657');
 
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (1, 1, '2020-03-04', '2020-03-15');
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (2, 2, '2020-04-05', '2020-05-15');

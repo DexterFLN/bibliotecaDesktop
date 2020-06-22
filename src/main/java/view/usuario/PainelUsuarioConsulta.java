@@ -26,7 +26,7 @@ public class PainelUsuarioConsulta extends JPanel {
 	private JButton btnPesquisar;
 	private JComboBox cbBuscarPor;
 	private JLabel lblBuscarPor;
-	private String[] nomesColunas = {"Código", "Nome", "Sobrenome", "Tipo", "Data de Nascimento", "Email", "Telefone Fixo", "Telefone Movel"};
+	private String[] nomesColunas = {"Código", "Nome", "Sobrenome", "Tipo", "Data de Nascimento", "Email", "Telefone"};
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private JButton btnAlterar;
 	private JPanel painelUsuarioAlterar = null;
@@ -114,15 +114,14 @@ setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.0
 		
 		for (Usuario usuario : usuarios) {
 			
-			Object[] novaLinhaDaTabela = new Object[8];
+			Object[] novaLinhaDaTabela = new Object[7];
 			novaLinhaDaTabela[0] = usuario.getId();
 			novaLinhaDaTabela[1] = usuario.getNome();
 			novaLinhaDaTabela[2] = usuario.getSobrenome();
 			novaLinhaDaTabela[3] = usuario.getTipo();
 			novaLinhaDaTabela[4] = usuario.getDataNascimento();
 			novaLinhaDaTabela[5] = usuario.getEmail();
-			novaLinhaDaTabela[6] = usuario.getDddFixo() + usuario.getFoneFixo();
-			novaLinhaDaTabela[7] = usuario.getDddMovel() + usuario.getFoneMovel();
+			novaLinhaDaTabela[6] = usuario.getDdd() + usuario.getFone();
 			
 			model.addRow(novaLinhaDaTabela);
 		}
