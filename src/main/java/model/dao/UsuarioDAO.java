@@ -87,9 +87,9 @@ public class UsuarioDAO {
 	public boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"
-				+ " ddd=?, fone=?, WHERE id=?";
+				+ " ddd=?, fone=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
-
+		System.out.println(sql);
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setInt(1, usuario.getBiblioteca().getId());
@@ -110,7 +110,7 @@ public class UsuarioDAO {
 			} else {
 				preparedStatement.setString(9, null);
 			}
-			preparedStatement.setInt(12, usuario.getId());
+			preparedStatement.setInt(10, usuario.getId());
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 

@@ -29,16 +29,13 @@ public class UsuarioController {
 		}
 
 		if (message.isEmpty()) {
-					Cliente novoCliente = new Cliente(nome, sobrenome, cpfCnpj, null, endereco);
-					Cliente clienteCadastrado = clienteDao.salvar(novoCliente);
-					// TODO como fazer uma ternária nesse caso
-				if (clienteCadastrado.getId() > 0 ) {
-					message += "Cliente cadastrado com sucesso!";
+				if (usuarioBO.alterarUsuario(usuarioAlterado)) {
+					message += "Usuário alterado com sucesso!";
 				} else {
-					message += "Cliente não cadastrado!";
+					message += "Usuário não foi alterado.";
 				}
 			}
-		}
+		
 		
 		return message;
 	}

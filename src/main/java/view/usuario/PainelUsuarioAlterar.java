@@ -4,19 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.BibliotecaController;
 import controller.UsuarioController;
+import model.vo.Biblioteca;
+import model.vo.Endereco;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
+import util.Utils;
 
 public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtIdUsuario;
@@ -34,52 +42,80 @@ public class PainelUsuarioAlterar extends JPanel {
 	private JTextField txtTelefone;
 	private JLabel lblTelefone;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private JLabel lblBiblioteca;
+	private JComboBox cbBiblioteca;
+	private ArrayList<Biblioteca> bibliotecas;
+	private JLabel lblEndereo;
+	private JTextField txtRua;
+	private JLabel lblNumero;
+	private JTextField txtNumero;
+	private JLabel lblBairro;
+	private JTextField txtBairro;
+	private JLabel lblCidade;
+	private JTextField txtCidade;
+	private JLabel lblCep;
+	private JTextField txtCEP;
+	private JLabel lblUf;
+	private JComboBox cbUf;
+	private Usuario usuarioAlterado = new Usuario();
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioAlterar(Usuario usuario) {
-		setLayout(new MigLayout("", "[71px][213.00][107.00,grow][99.00,grow][63.00,grow]", "[22px,grow][29][29][29][29][29][29][29][29][71.00][][grow]"));
+		setLayout(new MigLayout("", "[102.00px][264.00,grow,leading][162.00,grow,trailing][176.00,grow][99.00,grow][102.00]", "[22px,grow][29][29][29][29][29][29][29][29][][][][71.00][][grow]"));
+		
+		cbBiblioteca = new JComboBox();
+		add(cbBiblioteca, "cell 3 4,growx");
 
 		lblIdUsuario = new JLabel("Id Usuario");
-		add(lblIdUsuario, "cell 3 5,alignx left");
+		add(lblIdUsuario, "cell 3 1,alignx leading");
+		
+		lblBiblioteca = new JLabel("Biblioteca");
+		add(lblBiblioteca, "cell 3 3");
 
 		txtIdUsuario = new JTextField();
 		txtIdUsuario.setEditable(false);
 		txtIdUsuario.setColumns(10);
-		add(txtIdUsuario, "cell 3 6,growx");
+		add(txtIdUsuario, "cell 3 2,growx");
 
 		lblNome = new JLabel("Nome");
-		add(lblNome, "cell 1 1");
+		add(lblNome, "cell 1 1,alignx left");
 
 		txtNome = new JTextField();
-		add(txtNome, "cell 1 2 2 1,growx");
+		add(txtNome, "cell 1 2,growx");
 		txtNome.setColumns(10);
 
 		lblSobrenome = new JLabel("Sobrenome");
-		add(lblSobrenome, "cell 1 3");
+		add(lblSobrenome, "cell 1 3,alignx left");
 		
 		lblTelefone = new JLabel("Telefone");
-		add(lblTelefone, "cell 3 3");
+		add(lblTelefone, "cell 2 3,alignx left");
 
 		txtSobrenome = new JTextField();
-		add(txtSobrenome, "cell 1 4 2 1,growx");
+		add(txtSobrenome, "cell 1 4,growx");
 		txtSobrenome.setColumns(10);
 		
 		txtTelefone = new JTextField();
-		add(txtTelefone, "cell 3 4,growx");
+		add(txtTelefone, "cell 2 4,growx");
 		txtTelefone.setColumns(10);
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
-		add(lblDataNascimento, "cell 1 5");
+		add(lblDataNascimento, "cell 2 5,alignx left");
 
 		JLabel lblDdd = new JLabel("DDD");
-		add(lblDdd, "cell 3 1");
+		add(lblDdd, "cell 2 1,alignx left");
 
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
+			
+			lblCep = new JLabel("CEP");
+			add(lblCep, "cell 3 5");
+			
+			lblUf = new JLabel("UF");
+			add(lblUf, "cell 4 5,alignx left");
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
-			add(txtDataNascimento, "cell 1 6,growx");
+			add(txtDataNascimento, "cell 2 6,growx");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação de data no painel de alteração de usuário.");
 			e1.printStackTrace();
@@ -88,24 +124,59 @@ public class PainelUsuarioAlterar extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##");
 			txtDdd = new JFormattedTextField(maskFormatter);
-			add(txtDdd, "cell 3 2,growx");
+			add(txtDdd, "cell 2 2,growx");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
 			e1.printStackTrace();
 		}
 
 		JLabel lblEmail = new JLabel("Email");
-		add(lblEmail, "cell 2 5");
+		add(lblEmail, "cell 1 5,alignx left");
 
 		txtEmail = new JTextField();
-		add(txtEmail, "cell 2 6,growx");
+		add(txtEmail, "cell 1 6,growx");
 		txtEmail.setColumns(10);
+		
+		txtCEP = new JTextField();
+		add(txtCEP, "cell 3 6,growx");
+		txtCEP.setColumns(10);
+		
+		cbUf = new JComboBox();
+		add(cbUf, "cell 4 6,growx");
+		
+		lblEndereo = new JLabel("Rua");
+		add(lblEndereo, "cell 1 7,alignx left");
+		
+		lblNumero = new JLabel("Numero");
+		add(lblNumero, "cell 2 7,alignx left");
+		
+		lblBairro = new JLabel("Bairro");
+		add(lblBairro, "cell 3 7");
+		
+		lblCidade = new JLabel("Cidade");
+		add(lblCidade, "cell 4 7");
+		
+		txtRua = new JTextField();
+		add(txtRua, "cell 1 8,growx");
+		txtRua.setColumns(10);
+		
+		txtNumero = new JTextField();
+		add(txtNumero, "cell 2 8,growx");
+		txtNumero.setColumns(10);
+		
+		txtBairro = new JTextField();
+		add(txtBairro, "cell 3 8,growx");
+		txtBairro.setColumns(10);
+		
+		txtCidade = new JTextField();
+		add(txtCidade, "cell 4 8,growx");
+		txtCidade.setColumns(10);
 
 		btnSalvar = new JButton("Salvar Alteracoes");
-		add(btnSalvar, "cell 2 8,alignx center");
+		add(btnSalvar, "cell 2 11,alignx center");
 
 		btnExcluir = new JButton("Excluir");
-		add(btnExcluir, "cell 3 8,alignx center");
+		add(btnExcluir, "cell 3 11,alignx center");
 
 		this.preencherDadosDaTela(usuario);
 		this.addListeners();
@@ -116,7 +187,6 @@ public class PainelUsuarioAlterar extends JPanel {
 
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Usuario usuarioAlterado = new Usuario();
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));
 				usuarioAlterado.setNome(txtNome.getText());
 				usuarioAlterado.setSobrenome(txtSobrenome.getText());
@@ -124,9 +194,23 @@ public class PainelUsuarioAlterar extends JPanel {
 				usuarioAlterado.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
 				usuarioAlterado.setDdd(txtDdd.getText());
 				usuarioAlterado.setFone(txtTelefone.getText());
+				System.out.println(cbBiblioteca.getSelectedItem().toString() + cbBiblioteca.getSelectedIndex());
+				usuarioAlterado.setBiblioteca(bibliotecas.get(cbBiblioteca.getSelectedIndex()));
 				
+				Endereco endereco = new Endereco();
+				endereco.setId(usuarioAlterado.getEndereco().getId());
+				endereco.setRua(txtRua.getText());
+				endereco.setNumeroRua(Integer.parseInt(txtNumero.getText()));
+				endereco.setBairro(txtBairro.getText());
+				endereco.setCidade(txtCidade.getText());
+				endereco.setCep(txtCEP.getText());
+			
+				usuarioAlterado.setEndereco(endereco);
 				UsuarioController usuarioController = new UsuarioController();
 				String message = usuarioController.alterarUsuario(usuarioAlterado);
+				
+				JOptionPane.showMessageDialog(null, message, "Alterar Usuario",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 
@@ -134,11 +218,14 @@ public class PainelUsuarioAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 
 	}
 
 	private void preencherDadosDaTela(Usuario usuario) {
+		
 		if(usuario!= null) {
+			usuarioAlterado = usuario;
 			txtIdUsuario.setText(Integer.toString(usuario.getId()));
 			txtNome.setText(usuario.getNome());
 			txtSobrenome.setText(usuario.getSobrenome());
@@ -147,9 +234,38 @@ public class PainelUsuarioAlterar extends JPanel {
 			txtDdd.setText(usuario.getDdd());
 			txtDataNascimento.setText(usuario.getDataNascimento().format(formatter));
 			txtTelefone.setText(usuario.getFone());
+			
+			txtRua.setText(usuario.getEndereco().getRua());
+			txtNumero.setText(String.valueOf(usuario.getEndereco().getNumeroRua()));
+			txtBairro.setText(usuario.getEndereco().getBairro());
+			txtCidade.setText(usuario.getEndereco().getCidade());
+			txtCEP.setText(usuario.getEndereco().getCep());
+			
+			this.preencherComboUf();
+			cbUf.setSelectedItem(usuario.getEndereco().getUf());
+			
+			this.preencherComboboxBiblioteca();
+			cbBiblioteca.setSelectedItem(usuario.getBiblioteca().getNome());
 			System.out.println(usuario.getDataNascimento().toString());
+			
 		}
 		
+	}
+	
+	private void preencherComboUf() {
+		List<String> ufs = Utils.ufsBrasil();
+		for (String uf : ufs) {
+			cbUf.addItem(uf);
+		}
+	}
+	
+	private void preencherComboboxBiblioteca() {
+		BibliotecaController bibliotecaController = new BibliotecaController();
+		bibliotecas = bibliotecaController.consultarTodas();
+		
+		for (Biblioteca biblioteca : bibliotecas) {
+			cbBiblioteca.addItem(biblioteca.getNome());
+		}
 	}
 
 }
