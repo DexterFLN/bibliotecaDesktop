@@ -283,6 +283,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
+	/*
 	public Aluguel consultarAluguelAtual(int idExemplar) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE idExemplar=? ORDER BY id DESC LIMIT 1";
@@ -308,7 +309,8 @@ public class AluguelDAO {
 
 		return aluguel;
 	}
-
+	*/
+	
 	public ArrayList<Aluguel> consultarTodos(int limit) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL LIMIT ?";
