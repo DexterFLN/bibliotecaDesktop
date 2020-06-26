@@ -13,8 +13,8 @@ public class ExemplarSeletor {
 			//TODO melhorar essas verificacoes
 
 			temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty())
-					|| !buscarPor.isEmpty()
-					|| !ano.isEmpty();
+					|| !buscarPor.trim().isEmpty()
+					|| !ano.trim().isEmpty();
 			
 			return temFiltroPreenchido;
 		}

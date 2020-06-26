@@ -236,11 +236,11 @@ public class UsuarioDAO {
 	
 	private String criarFiltros(String sql, UsuarioSeletor seletor) {
 
-		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isBlank()) {
+		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().trim().isEmpty()) {
 			System.out.println(getClass().toString() + " - Seletor Termo Pesquisa Validado");
 			sql += " WHERE ";
 			
-			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isBlank()) {
+			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().trim().isEmpty()) {
 				if(seletor.getBuscarPor() == "Código") {
 					System.out.println(getClass().toString() + "  - Seletor Código");
 					sql += " id = "+ seletor.getTermoPesquisa().toString();
