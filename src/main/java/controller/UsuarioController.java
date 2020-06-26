@@ -13,6 +13,8 @@ public class UsuarioController {
 	public ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
 		return usuarioBO.consultarUsuarioPorFiltro(usuarioSeletor);
 	}
-	
 
+	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
+		 usuarioBO.gerarRelatorio(usuarios, caminhoEscolhido);
+	}
 }

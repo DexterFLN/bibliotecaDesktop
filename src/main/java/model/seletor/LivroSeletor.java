@@ -11,9 +11,9 @@ public class LivroSeletor {
 	public boolean temFiltro() {
 		boolean temFiltroPreenchido = false;
 		//TODO melhorar essas verificacoes
-		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.isEmpty())
-				|| !buscarPor.isEmpty()
-				|| !ano.isEmpty();
+		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty())
+				|| !buscarPor.trim().isEmpty()
+				|| !ano.trim().isEmpty();
 		
 		return temFiltroPreenchido;
 	}
