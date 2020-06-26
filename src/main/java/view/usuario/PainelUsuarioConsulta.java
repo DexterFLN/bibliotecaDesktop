@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,6 +18,7 @@ import controller.UsuarioController;
 import model.seletor.UsuarioSeletor;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
+import util.GeradorPlanilha;
 
 public class PainelUsuarioConsulta extends JPanel {
 	private JTextField txtPesquisar;
@@ -26,12 +28,13 @@ public class PainelUsuarioConsulta extends JPanel {
 	private JLabel lblBuscarPor;
 	private String[] nomesColunas = {"Código", "Nome", "Sobrenome", "Tipo", "Data de Nascimento", "Email", "Telefone Fixo", "Telefone Movel"};
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	private JButton btnGerarRelatorio;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioConsulta() {
-setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px]"));
+setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px][][]"));
 		
 		txtPesquisar = new JTextField();
 		txtPesquisar.setText("Digite um termo para Pesquisa");
@@ -61,6 +64,9 @@ setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.0
 		
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 		
+		btnGerarRelatorio = new JButton("Gerar Relatorio");
+		add(btnGerarRelatorio, "cell 2 4");
+		
 		this.addListeners();
 
 	}
@@ -77,6 +83,24 @@ setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.0
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
+		
+		btnGerarRelatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser janelaSelecaoDestinoArquivo = new JFileChooser();
+				janelaSelecaoDestinoArquivo.setDialogTitle("Selecione um destino para a planilha...");
+
+				int opcaoSelecionada = janelaSelecaoDestinoArquivo.showSaveDialog(null);
+				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
+					String caminhoEscolhido = janelaSelecaoDestinoArquivo.getSelectedFile().getAbsolutePath();
+
+					UsuarioController usuarioController = new UsuarioController();
+					usuarioController.gerarRelatorio(usuarios, caminhoEscolhido);
+					
+				}
+			}
+		});
+		
 	}
 	
 	private void limparTabelaResultadoPesquisa() {

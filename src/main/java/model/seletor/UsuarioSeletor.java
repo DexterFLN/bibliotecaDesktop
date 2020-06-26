@@ -10,8 +10,8 @@ public class UsuarioSeletor {
 	public boolean temFiltro() {
 		boolean temFiltroPreenchido = false;
 		//TODO melhorar essas verificacoes
-		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.isBlank())
-				|| !buscarPor.isBlank();		
+		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty())
+				|| !buscarPor.trim().isEmpty();		
 		return temFiltroPreenchido;
 	}
 	
