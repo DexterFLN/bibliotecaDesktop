@@ -283,6 +283,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
+	//TODO arrumar isso
 	/*
 	public Aluguel consultarAluguelAtual(int idExemplar) {
 		Connection connection = Banco.getConnection();

@@ -3,8 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import model.bo.ExemplarBO;
-import model.bo.LivroBO;
-import model.seletor.ExemplarSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
@@ -29,5 +27,10 @@ public class ExemplarController {
 	public Exemplar consultarExemplar(int id) {
 		return exemplarBO.consultarExemplar(id);
     }
+	
+	public static boolean exemplarAlugado(Exemplar exemplar) {
+		ExemplarBO exemplarBO = new ExemplarBO();
+		return exemplarBO.exemplarAlugado(exemplar);
+	}
 	
 }

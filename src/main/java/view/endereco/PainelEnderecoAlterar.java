@@ -9,10 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.EnderecoController;
+import model.vo.Endereco;
 import net.miginfocom.swing.MigLayout;
 
 public class PainelEnderecoAlterar extends JPanel {
@@ -124,6 +127,17 @@ public class PainelEnderecoAlterar extends JPanel {
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String mensagem = "";
+				Endereco endereco = new Endereco();
+				endereco.setId(Integer.parseInt(txtIdEndereco.getText()));
+				mensagem = EnderecoController.excluirEndereco(endereco);
+				if (mensagem.isEmpty()) {
+					JOptionPane jOptionPane = new JOptionPane();
+					jOptionPane.showMessageDialog(null, "Endereco excluído com sucesso!");
+				} else {
+					JOptionPane jOptionPane = new JOptionPane();
+					jOptionPane.showMessageDialog(null, mensagem);
+				}
 			}
 		});
 		add(btnExcluir, "cell 3 9");
