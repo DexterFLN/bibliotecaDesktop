@@ -106,8 +106,7 @@ public class AluguelController {
 
 	public static String exemplarAlugado(Exemplar exemplar) {
 		String mensagem = "";
-		ExemplarController exemplarController = new ExemplarController();
-		if (exemplarController.exemplarAlugado(exemplar)) {
+		if (ExemplarController.exemplarAlugado(exemplar)) {
 			mensagem += "Este livro já foi alugado.";
 		}
 		return mensagem;
