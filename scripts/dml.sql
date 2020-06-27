@@ -26,12 +26,12 @@ INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (4, 'livr
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (5, 'livro cinco', 'autor cinco', 'editora cinco', 5, '2005');
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (6, 'livro seis', 'autor seis', 'editora seis', 6, '2006');
 
-INSERT INTO EXEMPLAR VALUES (1, 1, 0);
-INSERT INTO EXEMPLAR VALUES (2, 2, 0);
-INSERT INTO EXEMPLAR VALUES (3, 3, 0);
-INSERT INTO EXEMPLAR VALUES (4, 4, 0);
-INSERT INTO EXEMPLAR VALUES (5, 5, 0);
-INSERT INTO EXEMPLAR VALUES (6, 6, 0);
+INSERT INTO EXEMPLAR VALUES (1, 1, 1);
+INSERT INTO EXEMPLAR VALUES (2, 2, 1);
+INSERT INTO EXEMPLAR VALUES (3, 3, 1);
+INSERT INTO EXEMPLAR VALUES (4, 4, 1);
+INSERT INTO EXEMPLAR VALUES (5, 5, 1);
+INSERT INTO EXEMPLAR VALUES (6, 6, 1);
 
 INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857', '48', '991737576');
 INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857', '48', '911737572');
