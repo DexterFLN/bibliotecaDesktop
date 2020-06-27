@@ -26,7 +26,7 @@ public class MainUsuario extends JPanel {
 	 * Create the panel.
 	 */
 	public MainUsuario() {
-		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
+		setLayout(new MigLayout("", "[735.00,grow][grow]", "[74.00px][baseline]"));
 
 		this.initialize();
 
