@@ -4,9 +4,6 @@ import model.dao.AluguelDAO;
 import model.vo.Aluguel;
 
 public class AluguelBO {
-
-
-	
 	
 	public void salvar(Aluguel aluguel) {
 		AluguelDAO aluguelDAO = new AluguelDAO();
