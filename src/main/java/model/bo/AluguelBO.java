@@ -16,8 +16,7 @@ public class AluguelBO {
 	public void salvar(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == false) {
 			if(aluguel.getDevolucaoPrevista().isAfter(LocalDate.now())) {
-				AluguelDAO aluguelDAO = new AluguelDAO();
-				aluguelDAO.salvar(aluguel);
+				AluguelDAO.salvar(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null, 
 						"Erro ao REGISTRAR o aluguel! \nA data informada deve ser superior à data atual!");
@@ -34,8 +33,7 @@ public class AluguelBO {
 	public void renovar(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == true) {
 			if(aluguel.getDevolucaoPrevista().isAfter(LocalDate.now())) {
-				AluguelDAO aluguelDAO = new AluguelDAO();
-				aluguelDAO.renovar(aluguel);
+				AluguelDAO.renovar(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null, 
 						"Erro ao RENOVAR o aluguel! \nA data informada deve ser superior à data atual!");
@@ -50,8 +48,7 @@ public class AluguelBO {
 	public void devolver(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == true) {
 			if(aluguel.getDevolucaoPrevista().equals(LocalDate.now())) {
-				AluguelDAO aluguelDAO = new AluguelDAO();
-				aluguelDAO.devolver(aluguel);
+				AluguelDAO.devolver(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null, 
 						"Erro ao DEVOLVER o aluguel! \nA data informada deve ser IGUAL à data atual!");
@@ -64,8 +61,7 @@ public class AluguelBO {
 	
 	public Aluguel consultarAluguelAtual(int idExemplar) {
 		Aluguel aluguel = new Aluguel();
-		AluguelDAO aluguelDAO = new AluguelDAO();
-		aluguel = aluguelDAO.consultarAluguelAtual(idExemplar);
+		aluguel = AluguelDAO.consultarAluguelAtual(idExemplar);
 		return aluguel;
 	}
 	
@@ -76,8 +72,7 @@ public class AluguelBO {
 	}
 
 	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
-		AluguelDAO aluguelDAO = new AluguelDAO();
-		return aluguelDAO.consultarAluguelSeletor(aluguelSeletor) ;
+		return AluguelDAO.consultarAluguelSeletor(aluguelSeletor) ;
 	}
 
 }

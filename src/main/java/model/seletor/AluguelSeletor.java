@@ -8,7 +8,6 @@ public class AluguelSeletor {
 	
 	public boolean temFiltro() {
 		boolean temFiltroPreenchido = false;
-		//TODO melhorar essas verificacoes
 
 		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty())
 				|| !buscarPor.trim().isEmpty();
@@ -17,7 +16,7 @@ public class AluguelSeletor {
 	}
 	
 	public AluguelSeletor validarFitros(AluguelSeletor seletor){
-		//TODO melhorar essas verificacoes
+
 		seletor.setTermoPesquisa(
 				termoPesquisa = seletor.getTermoPesquisa().equals(Constants.PLACECHOLDEDRPESQUISA) ? "" : seletor.getTermoPesquisa());
 				

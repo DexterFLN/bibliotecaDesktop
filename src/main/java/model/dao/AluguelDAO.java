@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import model.seletor.AluguelSeletor;
-import model.seletor.LivroSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
-import model.vo.Livro;
 import model.vo.Usuario;
 
 public class AluguelDAO {
@@ -336,9 +334,10 @@ public class AluguelDAO {
 
 
 	private static String criarFiltros(String sql, AluguelSeletor seletor) {
-		
+		boolean primeiro = true;
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
 			sql += " WHERE ";
+			primeiro = false;
 			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isEmpty()) {
 
@@ -355,8 +354,10 @@ public class AluguelDAO {
 			
 		} 
 		
-		if (seletor.getBuscarPor() == "Atrasados") {
-			sql += " WHERE ";
+		if (seletor.getTermoPesquisa() != null && seletor.getBuscarPor() == "Atrasados") {
+			if (primeiro) {
+				sql += " WHERE ";
+			}
 			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
 			System.out.println("AluguelDAO.java - Seletor Atrasados");
 			sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
