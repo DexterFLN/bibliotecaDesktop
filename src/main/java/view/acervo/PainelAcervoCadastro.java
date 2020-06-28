@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import controller.ExemplarController;
 import controller.LivroController;
+import controller.SessaoController;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
@@ -32,7 +33,7 @@ public class PainelAcervoCadastro extends JPanel {
 	public PainelAcervoCadastro() {
 		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 		
-		JLabel lblTitulo = new JLabel("Título");
+		JLabel lblTitulo = new JLabel("Tï¿½tulo");
 		add(lblTitulo, "cell 1 1,alignx left,aligny center");
 		
 		txtTitulo = new JTextField();
@@ -43,7 +44,7 @@ public class PainelAcervoCadastro extends JPanel {
 		JLabel lblEditora = new JLabel("Editora");
 		add(lblEditora, "cell 1 3,alignx left,aligny center");
 		
-		JLabel lblEdicao = new JLabel("Edição");
+		JLabel lblEdicao = new JLabel("Ediï¿½ï¿½o");
 		add(lblEdicao, "cell 3 3");
 		
 		txtEditora = new JTextField();
@@ -72,7 +73,7 @@ public class PainelAcervoCadastro extends JPanel {
 			add(cbQuantidade, "cell 3 6,grow");
 		}
 		
-		JLabel lblSessao = new JLabel("Sessão");
+		JLabel lblSessao = new JLabel("Sessï¿½o");
 		add(lblSessao, "cell 1 7,alignx left,aligny center");
 		
 		JLabel lblAno = new JLabel("Ano");
@@ -85,12 +86,7 @@ public class PainelAcervoCadastro extends JPanel {
 		}
 		
 		cbSessao = new JComboBox();
-		cbSessao.addItem("Ficção");
-		cbSessao.addItem("Literatura Clássica");
-		cbSessao.addItem("Romance");
-		cbSessao.addItem("Auto Ajuda");
-		cbSessao.addItem("Suspense");
-		cbSessao.addItem("Técnicos");
+		SessaoController.preencherComboBox(cbSessao);
 		
 		add(cbSessao, "cell 1 8 3 1,grow");
 		

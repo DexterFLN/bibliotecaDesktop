@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
+
 import model.bo.SessaoBO;
 import model.dao.SessaoDAO;
 import model.vo.Sessao;
@@ -41,6 +43,13 @@ public class SessaoController {
 	
 	public static ArrayList<Sessao> consultarSessoes(int limit) {
 		return SessaoBO.consultarSessoes(limit);
+	}
+	
+	public static void preencherComboBox(JComboBox cbSessao) {
+		ArrayList<Sessao> sessoes = SessaoController.consultarSessoes(6);
+		for (Sessao sessao : sessoes) {
+			cbSessao.addItem(sessao);
+		}
 	}
 	
 }
