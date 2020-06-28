@@ -2,7 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import model.bo.LivroBO;
 import model.seletor.LivroSeletor;
@@ -105,8 +107,5 @@ public class LivroController {
 	public Livro consultarLivroPorId(int id) {
 		return livroBo.consultarLivroPorId(id);
 	}
-	
-	
-	
 	
 }
