@@ -8,6 +8,7 @@ import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -36,7 +37,9 @@ public class PainelAcervoAlterar extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelAcervoAlterar() {
-		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
+		setLayout(new MigLayout("",
+				"[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]",
+				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
 		JLabel lblDigiteCodigo = new JLabel("Digite o Codigo");
 		add(lblDigiteCodigo, "cell 1 1,alignx center");
@@ -60,8 +63,8 @@ public class PainelAcervoAlterar extends JPanel {
 				txtEdicao.setText(Integer.toString(livro.getEdicao()));
 				cbSessao.setSelectedItem(livro.getSessao());
 				txfAno.setText(Integer.toString(livro.getAno()));
-				//txfQuantidade.setText(Integer.toString(exemplarController.consultarQuantidade(idLivro)));
-				
+				// txfQuantidade.setText(Integer.toString(exemplarController.consultarQuantidade(idLivro)));
+
 			}
 		});
 		add(btnPesquisar, "cell 3 1,grow");
@@ -75,16 +78,16 @@ public class PainelAcervoAlterar extends JPanel {
 		txtTitulo = new JTextField();
 		add(txtTitulo, "cell 1 3 2 1,grow");
 		txtTitulo.setColumns(10);
-		
+
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("####");
 			txfAno = new JFormattedTextField(maskFormatter);
 			add(txfAno, "cell 3 3,grow");
-		} catch (ParseException e1){
-			 System.out.println("Erro na mascara de formatacao de ano no painel de alterar livro.");
-	         e1.printStackTrace();
+		} catch (ParseException e1) {
+			System.out.println("Erro na mascara de formatacao de ano no painel de alterar livro.");
+			e1.printStackTrace();
 		}
-		
+
 		JLabel lblEditora = new JLabel("Editora");
 		add(lblEditora, "cell 1 4,alignx left,aligny center");
 
@@ -114,11 +117,11 @@ public class PainelAcervoAlterar extends JPanel {
 			MaskFormatter maskFormatter = new MaskFormatter("###");
 			txfQuantidade = new JFormattedTextField(maskFormatter);
 			add(txfQuantidade, "cell 3 7,grow");
-		} catch (ParseException e1){
-			 System.out.println("Erro na mascara de formatacao de quantidade no painel de alterar livro.");
-	         e1.printStackTrace();
+		} catch (ParseException e1) {
+			System.out.println("Erro na mascara de formatacao de quantidade no painel de alterar livro.");
+			e1.printStackTrace();
 		}
-		
+
 		JLabel lblSessao = new JLabel("Sessao");
 		add(lblSessao, "cell 1 8,alignx left,aligny center");
 
@@ -144,8 +147,19 @@ public class PainelAcervoAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				LivroController livroController = new LivroController();
 				// String ano = "ano";
-				livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-						txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
+				// livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(),
+				// txtEditora.getText(),
+				// txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
+
+				if (!ExemplarController
+						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigoLivro.getSelectedText()))
+						.isEmpty()) {
+					JOptionPane joptionpane = new JOptionPane();
+					joptionpane.showMessageDialog(null, ExemplarController.validarQuantidade(txfQuantidade,
+							Integer.parseInt(txtCodigoLivro.getSelectedText())));
+				}
+				;
+
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));
@@ -154,7 +168,5 @@ public class PainelAcervoAlterar extends JPanel {
 		add(btnExcluir, "cell 3 10,grow");
 
 	}
-
-	
 
 }
