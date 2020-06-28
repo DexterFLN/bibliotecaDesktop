@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -57,7 +58,7 @@ public class PainelUsuarioConsulta extends JPanel {
 
 		cbBuscarPor = new JComboBox();
 		cbBuscarPor.addItem("Nome");
-		cbBuscarPor.addItem("Código");
+		cbBuscarPor.addItem("Codigo");
 		add(cbBuscarPor, "cell 2 1,growx");
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -122,7 +123,6 @@ public class PainelUsuarioConsulta extends JPanel {
 
 					UsuarioController usuarioController = new UsuarioController();
 					usuarioController.gerarRelatorio(usuarios, caminhoEscolhido);
-					
 				}
 			}
 		});
