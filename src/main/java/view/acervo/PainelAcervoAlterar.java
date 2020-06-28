@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,10 +18,10 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ExemplarController;
 import controller.LivroController;
+import controller.SessaoController;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JFormattedTextField;
 
 public class PainelAcervoAlterar extends JPanel {
 
@@ -36,38 +38,19 @@ public class PainelAcervoAlterar extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PainelAcervoAlterar() {
+	public PainelAcervoAlterar(Livro livro) {
 		setLayout(new MigLayout("",
 				"[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]",
 				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
-		JLabel lblDigiteCodigo = new JLabel("Digite o Codigo");
+		JLabel lblDigiteCodigo = new JLabel("Codigo do Livro");
 		add(lblDigiteCodigo, "cell 1 1,alignx center");
 
 		txtCodigo = new JTextField();
+		txtCodigo.setEnabled(false);
+		txtCodigo.setEditable(false);
 		add(txtCodigo, "cell 2 1,grow");
 		txtCodigo.setColumns(10);
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LivroController livroController = new LivroController();
-				ExemplarController exemplarController = new ExemplarController();
-				Livro livro = new Livro();
-
-				int idLivro = Integer.valueOf(txtCodigo.getText());
-				livro = livroController.consultarLivroPorId(idLivro);
-				txtTitulo.setText(livro.getNome());
-				txtEditora.setText(livro.getEditora());
-				txtAutor.setText(livro.getAutor());
-				txtEdicao.setText(Integer.toString(livro.getEdicao()));
-				cbSessao.setSelectedItem(livro.getSessao());
-				txfAno.setText(Integer.toString(livro.getAno()));
-				// txfQuantidade.setText(Integer.toString(exemplarController.consultarQuantidade(idLivro)));
-
-			}
-		});
-		add(btnPesquisar, "cell 3 1,grow");
 
 		JLabel lblTitulo = new JLabel("Titulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
@@ -126,13 +109,6 @@ public class PainelAcervoAlterar extends JPanel {
 		add(lblSessao, "cell 1 8,alignx left,aligny center");
 
 		cbSessao = new JComboBox();
-		cbSessao.addItem("Ficcao");
-		cbSessao.addItem("Literatura Classica");
-		cbSessao.addItem("Romance");
-		cbSessao.addItem("Auto Ajuda");
-		cbSessao.addItem("Suspense");
-		cbSessao.addItem("Tecnicos");
-
 		add(cbSessao, "cell 1 9 3 1,grow");
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -152,11 +128,11 @@ public class PainelAcervoAlterar extends JPanel {
 				// txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
 
 				if (!ExemplarController
-						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigo.getSelectedText()))
+						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigoLivro.getSelectedText()))
 						.isEmpty()) {
 					JOptionPane joptionpane = new JOptionPane();
 					joptionpane.showMessageDialog(null, ExemplarController.validarQuantidade(txfQuantidade,
-							Integer.parseInt(txtCodigo.getSelectedText())));
+							Integer.parseInt(txtCodigoLivro.getSelectedText())));
 				}
 				;
 
@@ -166,7 +142,42 @@ public class PainelAcervoAlterar extends JPanel {
 		add(btnSalvarAlteraes, "cell 2 10,grow");
 		btnExcluir.setBackground(new Color(229, 13, 13, 90));
 		add(btnExcluir, "cell 3 10,grow");
+		
+		this.preencherDadosDaTela(livro);
 
+	}
+
+	private void preencherDadosDaTela(Livro livro) {
+
+		if(livro != null) {
+			System.out.println(livro.getId());
+        txtCodigo.setText(String.valueOf(livro.getId()));
+		txtTitulo.setText(livro.getNome());
+		txtAutor.setText(livro.getAutor());
+		txtEditora.setText(livro.getEditora());
+		txtEdicao.setText(String.valueOf(livro.getEdicao()));
+		
+		this.preencherSessao();
+		cbSessao.setSelectedItem(livro.getSessao().getNome());
+		
+		txfAno.setText(String.valueOf(livro.getAno()));
+		
+		ExemplarController exemplarcontroller = new ExemplarController();
+		int exemplaresdolivro = exemplarcontroller.consultarQuantidade(livro.getId()).size();
+		txfQuantidade.setText(String.valueOf(exemplaresdolivro));
+		
+		}
+
+	}
+
+	private void preencherSessao() {
+		SessaoController sessaoController = new SessaoController();
+		ArrayList<Sessao> sessoes = sessaoController.consultarSessoes(1000);
+		
+		for (Sessao sessao : sessoes) {
+			cbSessao.addItem(sessao.getNome());
+		}
+		
 	}
 
 }
