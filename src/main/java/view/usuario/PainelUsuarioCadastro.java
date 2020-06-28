@@ -39,6 +39,8 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JLabel lblCidade;
 	private JLabel lblCep;
 	private JLabel lblUf;
+	private JLabel lblCpf;
+	private Label lblBiblioteca;
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
@@ -50,21 +52,20 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtTelefone;
 	private JFormattedTextField txtDataNascimento;
 	private JFormattedTextField txtDdd;
-	private ArrayList<Biblioteca> bibliotecas;
+	private JTextField txtCpf;
 	private JComboBox cbUf;
-	private JButton btnSalvarEndereco;
-	private Usuario usuarioCadastrado = new Usuario();
-	private JButton btnSalvarUsurio;
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	private Label lblBiblioteca;
 	private JComboBox cbBiblioteca;
+	private JButton btnSalvarUsurio;
+	private JButton btnLimpar;
+	private Usuario usuarioCadastrado = new Usuario();
+	private ArrayList<Biblioteca> bibliotecas;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioCadastro() {
-		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]",
-				"[22px,grow][29][29][29][29][29][29][][][53.00][29][29][][][][][grow]"));
+		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]", "[22px,grow][29][29][29][29][29][29][][][53.00][29][29][][][][][grow]"));
 
 		lblNome = new JLabel("Nome");
 		add(lblNome, "cell 1 1,alignx left");
@@ -84,26 +85,49 @@ public class PainelUsuarioCadastro extends JPanel {
 
 		lblTelefone = new JLabel("Telefone");
 		add(lblTelefone, "cell 4 3,alignx left");
+		
+		lblCpf = new JLabel("CPF");
+		add(lblCpf, "cell 5 3");
 
 		txtSobrenome = new JTextField();
 		add(txtSobrenome, "cell 1 4 2 1,growx");
 		txtSobrenome.setColumns(10);
 
-		txtTelefone = new JTextField();
-		add(txtTelefone, "cell 4 4,growx");
-		txtTelefone.setColumns(10);
+		
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("########");
+			txtTelefone = new JFormattedTextField(maskFormatter);
+			add(txtTelefone, "cell 4 4,growx");
+			txtTelefone.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
+			e.printStackTrace();
+		}
+		
+	
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
+			txtCpf = new JFormattedTextField(maskFormatter);
+			add(txtCpf, "cell 5 4,growx");
+			txtCpf.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na máscara de formatação de CPf no painel de cadastro de usuário.");
+			e.printStackTrace();
+		}
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
 		add(lblDataNascimento, "cell 4 5,alignx left");
 
 		JLabel lblDdd = new JLabel("DDD");
 		add(lblDdd, "cell 4 1,alignx left");
+		
 
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 
 			btnSalvarUsurio = new JButton("Salvar Usuário");
-			add(btnSalvarUsurio, "cell 2 8,grow");
+			add(btnSalvarUsurio, "cell 2 15,grow");
 
 			lblCep = new JLabel("CEP");
 			add(lblCep, "cell 1 10");
@@ -132,10 +156,16 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtEmail = new JTextField();
 		add(txtEmail, "cell 1 6 2 1,growx");
 		txtEmail.setColumns(10);
-
-		txtCEP = new JTextField();
-		add(txtCEP, "cell 1 11 2 1,growx");
-		txtCEP.setColumns(10);
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("########");
+			txtCEP = new JFormattedTextField(maskFormatter);
+			add(txtCEP, "cell 1 11 2 1,growx");
+			txtCEP.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
+			e.printStackTrace();
+		}
 
 		cbUf = new JComboBox();
 		add(cbUf, "cell 5 11,growx");
@@ -168,43 +198,45 @@ public class PainelUsuarioCadastro extends JPanel {
 		add(txtCidade, "cell 4 11,growx");
 		txtCidade.setColumns(10);
 
-		btnSalvarEndereco = new JButton("Salvar Endereco");
-		add(btnSalvarEndereco, "cell 2 15,growx");
+		btnLimpar = new JButton("Limpar");
+		add(btnLimpar, "cell 4 15,growx");
 
 		this.preencherComboboxBiblioteca();
+		this.preencherComboUf();
 		this.addListeners();
 
 	}
 
 	private void addListeners() {
 
-		btnSalvarEndereco.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Endereco endereco = new Endereco();
-				endereco.setRua(txtRua.getText());
-				endereco.setNumeroRua(Integer.parseInt(txtNumero.getText()));
-				endereco.setBairro(txtBairro.getText());
-				endereco.setUf(cbUf.getSelectedItem().toString());
-				endereco.setCidade(txtCidade.getText());
-				endereco.setCep(txtCEP.getText());
-
-			}
-		});
-
-
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UsuarioController usuarioController = new UsuarioController();
-				usuarioController.cadastrarUsuario(txtNome.getText(), txtSobrenome.getText(), txtEmail.getText(),
-						txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(),
-						bibliotecas.get(cbBiblioteca.getSelectedIndex()));
-
+				String message = usuarioController.cadastrarUsuario(txtNome.getText(), txtSobrenome.getText(), txtEmail.getText(),
+						txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(), txtCpf.getText(),
+						bibliotecas.get(cbBiblioteca.getSelectedIndex()), txtRua.getText(), txtNumero.getText(), txtBairro.getText(), cbUf, txtCidade.getText(), txtCEP.getText());
+				JOptionPane.showMessageDialog(null, message, "Cadastrar Usuario", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
-
 		
-
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtNome.setText("");
+				txtSobrenome.setText("");
+				txtEmail.setText("");
+				txtRua.setText("");
+				txtNumero.setText("");
+				txtBairro.setText("");
+				txtCidade.setText("");
+				txtCEP.setText("");
+				txtTelefone.setText("");
+				txtDataNascimento.setText("");
+				txtDdd.setText("");
+				txtCpf.setText("");
+				cbUf.setSelectedIndex(0);
+				cbBiblioteca.setSelectedIndex(0);;
+			}
+		});
 	}
 
 	private void preencherComboUf() {

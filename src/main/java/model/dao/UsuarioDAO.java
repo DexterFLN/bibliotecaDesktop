@@ -15,9 +15,11 @@ import model.vo.Usuario;
 public class UsuarioDAO {
 
 	public static Usuario salvar(Usuario usuario) {
+		
+		
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO USUARIO (idBiblioteca, idEndereco, nome, sobrenome, tipo, dataNascimento, email,"
-				+ " ddd, fone) VALUES (?,?,?,?,?,?,?,?,?)";
+				+ " ddd, fone, cpf) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
@@ -40,7 +42,12 @@ public class UsuarioDAO {
 				preparedStatement.setString(9, usuario.getFone());
 			} else {
 				preparedStatement.setString(9, null);
+			}if (usuario.getCpf() != null && !usuario.getCpf().isEmpty()) {
+				preparedStatement.setString(10, usuario.getCpf());
+			} else {
+				preparedStatement.setString(10, null);
 			}
+			
 
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -269,6 +276,38 @@ public class UsuarioDAO {
 		}
 		
 		return usuarios;
+		
+	}
+	
+	
+	public static boolean existeUsuarioPorCpf(String cpf) {
+		String sql = "SELECT * FROM USUARIO WHERE cpf = ?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+		try {
+			preparedStatement.setString(1, cpf);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Usuario usuario = construirUsuarioDoResultSet(resultSet);
+				usuarios.add(usuario);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os usuários.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+		
+		return !usuarios.isEmpty();
 		
 	}
 
