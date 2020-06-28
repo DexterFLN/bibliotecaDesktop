@@ -3,23 +3,15 @@ package view.acervo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import controller.AluguelController;
-import controller.ExemplarController;
 import controller.LivroController;
-import model.vo.Aluguel;
-import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
@@ -47,7 +39,6 @@ public class PainelAcervoAlterar extends JPanel {
 		add(lblDigiteCodigo, "cell 1 1,alignx left");
 
 		txtCodigo = new JTextField();
-		txtCodigo.setText("123456");
 		add(txtCodigo, "cell 2 1,grow");
 		txtCodigo.setColumns(10);
 
@@ -77,7 +68,6 @@ public class PainelAcervoAlterar extends JPanel {
 		add(lblNewLabel_3, "cell 3 2,alignx left,aligny center");
 
 		txtTitulo = new JTextField();
-		txtTitulo.setText("CINQUENTA TONS DE CINZA");
 		add(txtTitulo, "cell 1 3 2 1,grow");
 		txtTitulo.setColumns(10);
 
@@ -88,7 +78,6 @@ public class PainelAcervoAlterar extends JPanel {
 		add(lblEdicao, "cell 3 4");
 
 		txtEditora = new JTextField();
-		txtEditora.setText("RECORD");
 		add(txtEditora, "cell 1 5 2 1,grow");
 		txtEditora.setColumns(10);
 
@@ -105,7 +94,6 @@ public class PainelAcervoAlterar extends JPanel {
 		}
 
 		txtEdicao = new JTextField();
-		txtEdicao.setText("4");
 		add(txtEdicao, "cell 3 5,grow");
 		txtEdicao.setColumns(10);
 
@@ -117,7 +105,6 @@ public class PainelAcervoAlterar extends JPanel {
 
 		txtAutor = new JTextField();
 		txtAutor.setHorizontalAlignment(SwingConstants.LEFT);
-		txtAutor.setText("MACHADO DE ASSIS");
 		add(txtAutor, "cell 1 7 2 1,grow");
 		txtAutor.setColumns(10);
 
