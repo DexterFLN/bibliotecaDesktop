@@ -101,7 +101,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			add(txtTelefone, "cell 4 4,grow");
 			txtTelefone.setColumns(10);
 		} catch (Exception e) {
-			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
+			System.out.println("Erro na mascara de formatacao de Telefone no painel de cadastro de usuario.");
 			e.printStackTrace();
 		}
 		
@@ -112,7 +112,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			add(txtCpf, "cell 5 4,grow");
 			txtCpf.setColumns(10);
 		} catch (Exception e) {
-			System.out.println("Erro na máscara de formatação de CPf no painel de cadastro de usuário.");
+			System.out.println("Erro na mascara de formatacao de CPF no painel de cadastro de usuario.");
 			e.printStackTrace();
 		}
 
@@ -126,7 +126,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 
-			btnSalvarUsurio = new JButton("Salvar Usuário");
+			btnSalvarUsurio = new JButton("Salvar Usuario");
 			add(btnSalvarUsurio, "cell 2 15,grow");
 
 			lblCep = new JLabel("CEP");
@@ -137,7 +137,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
 			add(txtDataNascimento, "cell 4 6,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			e1.printStackTrace();
 		}
 
@@ -146,7 +146,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			txtDdd = new JFormattedTextField(maskFormatter);
 			add(txtDdd, "cell 4 2,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
+			System.out.println("Erro na mascara de formatacao do DDD no painel de alteracao de usuario.");
 			e1.printStackTrace();
 		}
 
@@ -163,7 +163,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			add(txtCEP, "cell 1 11 2 1,grow");
 			txtCEP.setColumns(10);
 		} catch (Exception e) {
-			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
+			System.out.println("Erro na mascara de formatacao de CEP no painel de cadastro de usuario.");
 			e.printStackTrace();
 		}
 

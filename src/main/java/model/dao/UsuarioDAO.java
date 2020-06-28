@@ -149,6 +149,7 @@ public class UsuarioDAO {
 			usuario.setTipo(resultSet.getInt("tipo"));
 			usuario.setDdd(resultSet.getString("ddd"));
 			usuario.setFone(resultSet.getString("fone"));
+			usuario.setCpf(resultSet.getString("cpf"));
 			
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir Biblioteca do ResultSet");

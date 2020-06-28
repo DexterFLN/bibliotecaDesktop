@@ -147,7 +147,7 @@ public class PainelUsuarioConsulta extends JPanel {
 			novaLinhaDaTabela[4] = usuario.getTipo();
 			novaLinhaDaTabela[5] = usuario.getDataNascimento();
 			novaLinhaDaTabela[6] = usuario.getEmail();
-			novaLinhaDaTabela[7] = usuario.getDdd() + usuario.getFone();
+			novaLinhaDaTabela[7] = "(" + usuario.getDdd() + ") " + usuario.getFone();
 			System.out.println(usuario.getCpf());
 			model.addRow(novaLinhaDaTabela);
 		}
