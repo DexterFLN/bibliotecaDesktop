@@ -19,4 +19,8 @@ public class UsuarioBO {
 	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
 		 GeradorPlanilha.gerarPlanilhaUsuarios(usuarios, caminhoEscolhido);
 	}
+	public Usuario cadastrarUsuario(Usuario usuario) {
+		return usuarioDAO.salvar(usuario);
+		 
+	}
 }
