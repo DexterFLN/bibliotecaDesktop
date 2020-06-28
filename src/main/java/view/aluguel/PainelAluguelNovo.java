@@ -26,6 +26,7 @@ import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
 
 public class PainelAluguelNovo extends JPanel {
+						
 	private JTextField txtTitulo;
 	private JButton btnCadastrar;
 	private JTextField txtCodigoLivro;

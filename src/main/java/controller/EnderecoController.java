@@ -23,6 +23,7 @@ public class EnderecoController {
 		if(!excluiu) {
 			mensagem += "Não foi possível excluir este endereço.";
 		}
+		
 		return mensagem;
 	}
 	
@@ -35,13 +36,15 @@ public class EnderecoController {
 		return EnderecoBO.consultarEnderecos(limit);
 	}
 	
-//	public static String alterarEndereco(Endereco endereco) {
-//		String mensagem = "";
-//		boolean alterou = EnderecoBO.alterarEndereco(endereco);
-//		if(!alterou) {
-//			mensagem += "Não foi possível alterar este endereço.";
-//		}	
-//		return mensagem;
-//	}
+	public static String alterarEndereco(Endereco endereco) {
+		String mensagem = "";
+		boolean alterou = EnderecoBO.alterarEndereco(endereco);
+		if(!alterou) {
+			mensagem += "Não foi possível alterar este endereço.";
+		}else {
+			mensagem += "Endereço alterado com sucesso!";
+		}
+		return mensagem;
+	}
 	
 }

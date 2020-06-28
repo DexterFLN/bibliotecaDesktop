@@ -12,8 +12,11 @@ public class UsuarioBO {
 	public ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
 		return usuarioDAO.consultarUsuarioPorFiltro(usuarioSeletor);
 	}
+	public Boolean alterarUsuario(Usuario usuarioAlterado) {
+		return usuarioDAO.alterar(usuarioAlterado);
+	}
+	
 	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
 		 GeradorPlanilha.gerarPlanilhaUsuarios(usuarios, caminhoEscolhido);
 	}
-
 }
