@@ -19,7 +19,7 @@ public class EnderecoDAO {
 
 		try {
 			preparedStatement.setString(1, endereco.getRua());
-			preparedStatement.setInt(2, endereco.getNumeroRua());
+			preparedStatement.setString(2, endereco.getNumeroRua());
 			preparedStatement.setString(3, endereco.getBairro());
 			preparedStatement.setString(4, endereco.getCidade());
 			preparedStatement.setString(5, endereco.getUf());
@@ -67,7 +67,7 @@ public class EnderecoDAO {
 		try {
 			endereco.setId(resultSet.getInt("id"));
 			endereco.setRua(resultSet.getString("rua"));
-			endereco.setNumeroRua(resultSet.getInt("numeroRua"));
+			endereco.setNumeroRua(resultSet.getString("numeroRua"));
 			endereco.setBairro(resultSet.getString("bairro"));
 			endereco.setCidade(resultSet.getString("cidade"));
 			endereco.setUf(resultSet.getString("uf"));
@@ -135,7 +135,7 @@ public class EnderecoDAO {
 
 		try {
 			preparedStatement.setString(1, endereco.getRua());
-			preparedStatement.setInt(2, endereco.getNumeroRua());
+			preparedStatement.setString(2, endereco.getNumeroRua());
 			preparedStatement.setString(3, endereco.getBairro());
 			preparedStatement.setString(4, endereco.getCidade());
 			preparedStatement.setString(5, endereco.getUf());

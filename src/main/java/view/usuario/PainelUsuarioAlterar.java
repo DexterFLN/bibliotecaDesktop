@@ -198,7 +198,7 @@ public class PainelUsuarioAlterar extends JPanel {
 				Endereco endereco = new Endereco();
 				endereco.setId(usuarioAlterado.getEndereco().getId());
 				endereco.setRua(txtRua.getText());
-				endereco.setNumeroRua(Integer.parseInt(txtNumero.getText()));
+				endereco.setNumeroRua(txtNumero.getText());
 				endereco.setBairro(txtBairro.getText());
 				endereco.setUf(cbUf.getSelectedItem().toString());
 				endereco.setCidade(txtCidade.getText());
