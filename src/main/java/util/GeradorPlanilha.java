@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public class GeradorPlanilha {
 	public static void gerarPlanilhaUsuarios(List<Usuario> usuarios ,  String path) {
 		//TODO completar com todos os campos de usuário e refatorar o método  para generics
 		
-		String[] nomesColunas = { "Nome", "Sobrenome", "Email"};
+		String[] nomesColunas = { "Nome", "Sobrenome", "Email", "CPF", "Data de Nascimento", "DDD", "Fone"};
 		
 				// 1) Criar a planilha e uma aba
 				XSSFWorkbook planilha = new XSSFWorkbook();
@@ -48,10 +49,15 @@ public class GeradorPlanilha {
 				for (Usuario usuario : usuarios) {
 					Row novaLinha = abaPlanilha.createRow(linhaAtual++);
 
-					// Preencher a linha, célula a célula com os valores do objeto clienteAtual
+					// Preencher a linha, celula a celula com os valores do objeto clienteAtual
 					novaLinha.createCell(0).setCellValue(usuario.getNome());
 					novaLinha.createCell(1).setCellValue(usuario.getSobrenome());
 					novaLinha.createCell(2).setCellValue(usuario.getEmail());
+					novaLinha.createCell(3).setCellValue(usuario.getCpf());
+					String dataFormatada = usuario.getDataNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+					novaLinha.createCell(4).setCellValue(dataFormatada);
+					novaLinha.createCell(5).setCellValue(usuario.getDdd());
+					novaLinha.createCell(6).setCellValue(usuario.getFone());
 				}
 
 				// 4) Ajustar a largura das colunas
