@@ -14,7 +14,7 @@ import model.vo.Usuario;
 
 public class UsuarioDAO {
 
-	public Usuario salvar(Usuario usuario) {
+	public static Usuario salvar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO USUARIO (idBiblioteca, idEndereco, nome, sobrenome, tipo, dataNascimento, email,"
 				+ " ddd, fone) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -62,7 +62,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public boolean excluir(Usuario usuario) {
+	public static boolean excluir(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM USUARIO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -84,7 +84,7 @@ public class UsuarioDAO {
 	}
 
 	// TODO pensar nas regras de neg�cio por tr�s do m�todo (verificar quais atributos podem ser nulos, e quais s�o obrigat�rios).
-	public boolean alterar(Usuario usuario) {
+	public static boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"
 				+ " ddd=?, fone=? WHERE id=?";
@@ -125,7 +125,7 @@ public class UsuarioDAO {
 		return quantidadeLinhasAfetadas > 0;
 	}
 
-	public Usuario construirUsuarioDoResultSet(ResultSet resultSet) {
+	public static Usuario construirUsuarioDoResultSet(ResultSet resultSet) {
 		Usuario usuario;
 		usuario = new Usuario();
 
@@ -158,7 +158,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public Usuario consultarUsuario(Usuario usuario) {
+	public static Usuario consultarUsuario(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM USUARIO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -184,7 +184,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	public ArrayList<Usuario> consultarTodosUsuarios(int limit) {
+	public static ArrayList<Usuario> consultarTodosUsuarios(int limit) {
 		String sql = "SELECT * FROM USUARIO LIMIT ?";
 
 		Connection connection = Banco.getConnection();
@@ -214,18 +214,18 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
-	private String criarFiltros(String sql, UsuarioSeletor seletor) {
+	private static String criarFiltros(String sql, UsuarioSeletor seletor) {
 
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().trim().isEmpty()) {
-			System.out.println(getClass().toString() + " - Seletor Termo Pesquisa Validado");
+			System.out.println(" - Seletor Termo Pesquisa Validado");
 			sql += " WHERE ";
 			
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().trim().isEmpty()) {
 				if(seletor.getBuscarPor() == "Código") {
-					System.out.println(getClass().toString() + "  - Seletor Código");
+					System.out.println("  - Seletor Código");
 					sql += " id = "+ seletor.getTermoPesquisa().toString();
 				} else {
-					System.out.println(getClass().toString() + " - Seletor nome");
+					System.out.println(" - Seletor nome");
 					sql += " nome LIKE " + "'%"  + seletor.getTermoPesquisa() + "%'";
 				}
 				
@@ -233,11 +233,11 @@ public class UsuarioDAO {
 
 		}
 	
-		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+		System.out.println(" SQL FILTROS: " + sql);
 		return sql;
 	}
 
-	public ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
+	public static ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
 		String sql = "SELECT * FROM USUARIO";
 		Connection connection = Banco.getConnection();
 		
@@ -245,7 +245,7 @@ public class UsuarioDAO {
 		if(usuarioSeletor.temFiltro()) {
 			sql = criarFiltros(sql, usuarioSeletor);
 		}
-		System.out.println(getClass() + "Consultar Usuario Filtro - " + sql);
+		System.out.println("Consultar Usuario Filtro - " + sql);
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
