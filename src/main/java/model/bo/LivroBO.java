@@ -21,4 +21,8 @@ public class LivroBO {
 	public Livro consultarLivroPorId(int id) {
 		return livroDAO.consultarLivroPorId(id);
 	}
+
+	public Livro consultarLivroPorIdParaExemplares(int id) {
+		return livroDAO.consultarLivroPorIdParaExemplares(id);
+	}
 }
