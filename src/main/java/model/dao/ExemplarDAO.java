@@ -16,7 +16,7 @@ import model.vo.Livro;
 
 public class ExemplarDAO {
 	
-	public Exemplar construirExemplarDoResultSet(ResultSet resultSet) {
+	public static Exemplar construirExemplarDoResultSet(ResultSet resultSet) {
 		Exemplar exemplar = new Exemplar();
 
 		try {
@@ -33,7 +33,7 @@ public class ExemplarDAO {
 		return exemplar;
 	}
 	
-	public Exemplar construirExemplaresDeLivroDoResultSet(ResultSet resultSet) {
+	public static Exemplar construirExemplaresDeLivroDoResultSet(ResultSet resultSet) {
 		Exemplar exemplar = new Exemplar();
 
 		try {
@@ -50,7 +50,7 @@ public class ExemplarDAO {
 		return exemplar;
 	}
 	
-	public Exemplar consultarExemplarLivro(int idLivro) {
+	public static Exemplar consultarExemplarLivro(int idLivro) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -78,7 +78,7 @@ public class ExemplarDAO {
 	}
 	
   
-	public Exemplar consultarExemplar(int id) {
+	public static Exemplar consultarExemplar(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -112,7 +112,7 @@ public class ExemplarDAO {
 	}
 
 
-	public ArrayList<Exemplar> construirExemplaresDoLivro(int idLivro) {
+	public static ArrayList<Exemplar> construirExemplaresDoLivro(int idLivro) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -140,7 +140,7 @@ public class ExemplarDAO {
 		return exemplares;
 	}
 
-	public void salvar(Livro livro, String quantidade, boolean status) {
+	public static void salvar(Livro livro, String quantidade, boolean status) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO EXEMPLAR (idLivro, status) VALUES (?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -177,7 +177,7 @@ public class ExemplarDAO {
 		
 	}
 	
-	public ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
+	public static ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
 		LivroDAO livroDAO = new LivroDAO();
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		livros = livroDAO.consultarLivrosPorSeletor(livroSeletor);
@@ -208,12 +208,12 @@ public class ExemplarDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		System.out.println(getClass().toString() + " Consulta Exemplar " + sql);
+		System.out.println(" Consulta Exemplar " + sql);
 		return exemplares;
 	}
 	
   
-	public boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
+	public static boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
@@ -234,7 +234,7 @@ public class ExemplarDAO {
 		return registrosAlterados > 0;
 	}
 	
-	public boolean statusDevolvido(Exemplar exemplar) { 	// METODO CONCLUIDO
+	public static boolean statusDevolvido(Exemplar exemplar) { 	// METODO CONCLUIDO
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
 		Connection connection = Banco.getConnection();
@@ -254,7 +254,7 @@ public class ExemplarDAO {
 		return registrosAlterados > 0;
 	}
 	
-	public boolean consultarStatus(Exemplar exemplar) { 	// METODO CONCLUIDO
+	public static boolean consultarStatus(Exemplar exemplar) { 	// METODO CONCLUIDO
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT status FROM EXEMPLAR WHERE ID=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);

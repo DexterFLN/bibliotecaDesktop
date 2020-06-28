@@ -13,7 +13,7 @@ import model.vo.Sessao;
 
 public class LivroDAO {
 
-	public Livro salvar(Livro livro) { // METODO SALVAR ESTA FUNCIONANDO
+	public static Livro salvar(Livro livro) { // METODO SALVAR ESTA FUNCIONANDO
 
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO LIVRO (nome, autor, editora, edicao, ano, idSessao) VALUES (?,?,?,?,?,?)";
@@ -49,7 +49,7 @@ public class LivroDAO {
 		return livro;
 	}
 
-	public boolean alterar(Livro livro) { // METODO ALTERAR EM CONSTRUCAO
+	public static boolean alterar(Livro livro) { // METODO ALTERAR EM CONSTRUCAO
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
@@ -73,7 +73,7 @@ public class LivroDAO {
 		return registrosAlterados > 0;
 	}
 
-	public boolean excluir(Livro livro) { // MÃ‰TODO EXCLUIR ESTÃ� FUNCIONANDO
+	public static boolean excluir(Livro livro) { // MÃ‰TODO EXCLUIR ESTÃ� FUNCIONANDO
 
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM LIVRO WHERE id=?";
@@ -96,7 +96,7 @@ public class LivroDAO {
 	}
 
 	// TODO inserir exemplares na construÃƒÂ§ÃƒÂ£o do objeto livro
-	private Livro construirLivroDoResultSet(ResultSet resultSet) {
+	private static Livro construirLivroDoResultSet(ResultSet resultSet) {
 		Livro livro = new Livro();
 
 		try {
@@ -126,7 +126,7 @@ public class LivroDAO {
 		return livro;
 	}
 
-	private Livro construirLivroParaExemplares(ResultSet resultSet) {
+	private static Livro construirLivroParaExemplares(ResultSet resultSet) {
 		Livro livro = new Livro();
 
 		try {
@@ -150,7 +150,7 @@ public class LivroDAO {
 		return livro;
 	}
 	
-	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
+	public static ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM LIVRO";
 		ResultSet resultSet = null;
@@ -183,7 +183,7 @@ public class LivroDAO {
 		return livros;
 	}
 
-	private String criarFiltros(String sql, LivroSeletor seletor) {
+	private static String criarFiltros(String sql, LivroSeletor seletor) {
 		boolean primeiro = true;
 		
 
@@ -218,13 +218,13 @@ public class LivroDAO {
 
 		}
 	
-		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+		System.out.println(" SQL FILTROS: " + sql);
 		return sql;
 	}
 
 	
 
-	public Livro consultarLivroPorId(int id) {
+	public static Livro consultarLivroPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM LIVRO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -251,7 +251,7 @@ public class LivroDAO {
 		return livro;
 	}
 
-	public Livro consultarLivroPorIdParaExemplares(int id) {
+	public static Livro consultarLivroPorIdParaExemplares(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM LIVRO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
