@@ -17,5 +17,8 @@ public class LivroBO {
 	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
 		return livroDAO.consultarLivrosPorSeletor(seletor) ;
 	}
-
+	
+	public Livro consultarLivroPorId(int id) {
+		return livroDAO.consultarLivroPorId(id);
+	}
 }
