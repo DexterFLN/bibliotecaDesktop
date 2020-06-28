@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ExemplarController;
 import controller.LivroController;
 import model.seletor.LivroSeletor;
 import model.vo.Livro;
@@ -28,7 +29,7 @@ public class PainelPesquisaGeral extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
-	private String[] nomesColunas = { "Título", "Autor", "Ano", "Exemplares" };
+	private String[] nomesColunas = { "Titulo", "Autor", "Ano", "Editora", "Sessao", "Exemplares" };
 	private ArrayList<Livro> livros;
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
@@ -117,11 +118,13 @@ public class PainelPesquisaGeral extends JPanel {
 		
 		for (Livro livro : livros) {
 			
-			Object[] novaLinhaDaTabela = new Object[4];
+			Object[] novaLinhaDaTabela = new Object[6];
 			novaLinhaDaTabela[0] = livro.getNome();
 			novaLinhaDaTabela[1] = livro.getAutor();
 			novaLinhaDaTabela[2] = livro.getAno();
-			novaLinhaDaTabela[3] = 1;
+			novaLinhaDaTabela[3] = livro.getEditora();
+			novaLinhaDaTabela[4] = livro.getSessao().getNome();
+			novaLinhaDaTabela[5] = ExemplarController.consultarQuantidade(livro.getId()).size();
 
 			model.addRow(novaLinhaDaTabela);
 		}

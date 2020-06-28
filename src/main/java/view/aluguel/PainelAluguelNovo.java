@@ -47,7 +47,7 @@ public class PainelAluguelNovo extends JPanel {
 				"[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]",
 				"[45.00px][29.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 
-		JLabel lblExcluir = new JLabel("Digite o c\u00F3digo do Exemplar");
+		JLabel lblExcluir = new JLabel("Digite o codigo do Exemplar");
 		add(lblExcluir, "cell 1 1,alignx center,aligny center");
 
 		txtCodigoLivro = new JTextField();
@@ -70,7 +70,7 @@ public class PainelAluguelNovo extends JPanel {
 		JLabel lblTitulo = new JLabel("T\u00EDtulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
 
-		JLabel lblDataDevolucao = new JLabel("Data Devolu\u00E7\u00E3o:");
+		JLabel lblDataDevolucao = new JLabel("Data Devolucao:");
 		add(lblDataDevolucao, "cell 3 2");
 
 		txtTitulo = new JTextField();
@@ -88,7 +88,7 @@ public class PainelAluguelNovo extends JPanel {
 			e1.printStackTrace();
 		}
 
-		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo do Usu\u00E1rio");
+		JLabel lblDigiteOCdigo = new JLabel("Digite o codigo do Usuario");
 		add(lblDigiteOCdigo, "cell 1 5,alignx center,aligny center");
 
 		txtCodigoUser = new JTextField();
@@ -97,7 +97,7 @@ public class PainelAluguelNovo extends JPanel {
 		txtCodigoUser.setColumns(10);
 		txtCodigoUser.setEnabled(false);
 
-		JButton btnPesquisarUsuario = new JButton("Pesquisar Usu\u00E1rio");
+		JButton btnPesquisarUsuario = new JButton("Pesquisar Usuario");
 		btnPesquisarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

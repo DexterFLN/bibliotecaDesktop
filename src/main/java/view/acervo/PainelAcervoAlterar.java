@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -146,9 +147,21 @@ public class PainelAcervoAlterar extends JPanel {
 		JButton btnSalvarAlteraes = new JButton("Salvar Alteracoes");
 		btnSalvarAlteraes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				LivroController livroController = new LivroController();
-//				livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-//						txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
+				LivroController livroController = new LivroController();
+				// String ano = "ano";
+				// livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(),
+				// txtEditora.getText(),
+				// txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
+
+				if (!ExemplarController
+						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigoLivro.getSelectedText()))
+						.isEmpty()) {
+					JOptionPane joptionpane = new JOptionPane();
+					joptionpane.showMessageDialog(null, ExemplarController.validarQuantidade(txfQuantidade,
+							Integer.parseInt(txtCodigoLivro.getSelectedText())));
+				}
+				;
+
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));
