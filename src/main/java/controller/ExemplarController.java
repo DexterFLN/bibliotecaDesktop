@@ -50,6 +50,10 @@ public class ExemplarController {
 		return mensagem;
 	}
 
+	public static ArrayList<Exemplar> consultarQuantidade(int idLivro) {
+		return ExemplarBO.consultarQuantidade(idLivro);
+	}
+
 	/*
 	 * public static boolean exemplarAlugado(Exemplar exemplar) { ExemplarBO
 	 * exemplarBO = new ExemplarBO(); return exemplarBO.exemplarAlugado(exemplar); }
