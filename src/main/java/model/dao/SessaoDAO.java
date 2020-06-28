@@ -11,7 +11,7 @@ import model.vo.Sessao;
 
 public class SessaoDAO {
 
-	public Sessao salvar(Sessao sessao) {
+	public static Sessao salvar(Sessao sessao) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO SESSAO (nome, idBiblioteca) VALUES (?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -31,7 +31,7 @@ public class SessaoDAO {
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro ao cadastrar sessão.");
+			System.out.println("Erro ao cadastrar sessï¿½o.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
@@ -42,7 +42,7 @@ public class SessaoDAO {
 		return sessao;
 	}
 
-	public boolean excluir(Sessao sessao) {
+	public static boolean excluir(Sessao sessao) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM SESSAO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -52,7 +52,7 @@ public class SessaoDAO {
 			preparedStatement.setInt(1, sessao.getId());
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println("Erro ao excluir sessão.");
+			System.out.println("Erro ao excluir sessï¿½o.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -63,7 +63,7 @@ public class SessaoDAO {
 		return excluiu;
 	}
 
-	public boolean alterar(Sessao sessao) {
+	public static boolean alterar(Sessao sessao) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE SESSAO SET nome=?, idBiblioteca=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -75,7 +75,7 @@ public class SessaoDAO {
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println("Erro ao alterar sessão.");
+			System.out.println("Erro ao alterar sessï¿½o.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -85,7 +85,7 @@ public class SessaoDAO {
 		return quantidadeLinhasAfetadas > 0;
 	}
 
-	public Sessao construirSessaoDoResultset(ResultSet resultSet) {
+	public static Sessao construirSessaoDoResultset(ResultSet resultSet) {
 		Biblioteca biblioteca = new Biblioteca();
 		Sessao sessao = new Sessao();
 		sessao.setBiblioteca(biblioteca);
@@ -104,7 +104,7 @@ public class SessaoDAO {
 		return sessao;
 	}
 
-	public Sessao consultarSessao(Sessao sessao) {
+	public static Sessao consultarSessao(Sessao sessao) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id WHERE SESSAO.id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -117,7 +117,7 @@ public class SessaoDAO {
 
 			sessao = construirSessaoDoResultset(resultSet);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao consultar sessão.");
+			System.out.println("Erro ao consultar sessï¿½o.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
@@ -128,7 +128,7 @@ public class SessaoDAO {
 		return sessao;
 	}
 	
-	public Sessao consultarSessaoPorId(int id) {
+	public static Sessao consultarSessaoPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id WHERE SESSAO.id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -142,7 +142,7 @@ public class SessaoDAO {
 
 			sessao = construirSessaoDoResultset(resultSet);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao consultar sessão.");
+			System.out.println("Erro ao consultar sessï¿½o.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
@@ -153,7 +153,7 @@ public class SessaoDAO {
 		return sessao;
 	}
 
-	public ArrayList<Sessao> consultarTodasSessoes(int limit) {
+	public static ArrayList<Sessao> consultarTodasSessoes(int limit) {
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id LIMIT ?";
 
 		Connection connection = Banco.getConnection();
@@ -172,7 +172,7 @@ public class SessaoDAO {
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro consultar todas as sessões.");
+			System.out.println("Erro consultar todas as sessï¿½es.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
