@@ -10,9 +10,6 @@ import model.vo.Aluguel;
 import model.vo.Exemplar;
 
 public class AluguelBO {
-
-
-	
 	
 	public void salvar(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == false) {

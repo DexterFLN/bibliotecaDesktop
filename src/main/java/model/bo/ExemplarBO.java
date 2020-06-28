@@ -26,10 +26,10 @@ public class ExemplarBO {
 		return exemplarDAO.consultarExemplar(id);
 	}
 
+
 	public boolean consultarStatus(Exemplar exemplarAConsultar) {
 		ExemplarDAO dao = new ExemplarDAO();
-		boolean status = dao.consultarStatus(exemplarAConsultar);
-		return status;
+		return dao.consultarStatus(exemplarAConsultar);
 	}
 
 }
