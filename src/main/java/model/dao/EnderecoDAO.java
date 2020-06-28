@@ -10,7 +10,7 @@ import model.vo.Endereco;
 
 public class EnderecoDAO {
 
-	public Endereco salvar(Endereco endereco) {
+	public static Endereco salvar(Endereco endereco) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES (?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -43,7 +43,7 @@ public class EnderecoDAO {
 		return endereco;
 	}
 
-	public boolean excluir(Endereco endereco) {
+	public static boolean excluir(Endereco endereco) {
 		String sql = " DELETE FROM ENDERECO WHERE id = ?";
 		Connection connection = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -62,7 +62,7 @@ public class EnderecoDAO {
 		return excluiu;
 	}
 
-	private Endereco construirEnderecoDoResultSet(ResultSet resultSet) {
+	private static Endereco construirEnderecoDoResultSet(ResultSet resultSet) {
 		Endereco endereco = new Endereco();
 		try {
 			endereco.setId(resultSet.getInt("id"));
@@ -78,7 +78,7 @@ public class EnderecoDAO {
 		return endereco;
 	}
 
-	public Endereco consultarEnderecoPorId(int id) {
+	public static Endereco consultarEnderecoPorId(int id) {
 		String sql = " SELECT * FROM ENDERECO WHERE id = ?";
 
 		Connection conn = Banco.getConnection();
@@ -102,7 +102,7 @@ public class EnderecoDAO {
 		return enderecoConsultado;
 	}
 
-	public ArrayList<Endereco> consultarTodos(int limit) {
+	public static ArrayList<Endereco> consultarTodos(int limit) {
 		String sql = " SELECT * FROM ENDERECO LIMIT ?";
 
 		Connection connection = Banco.getConnection();
@@ -127,7 +127,7 @@ public class EnderecoDAO {
 		return enderecos;
 	}
 
-	public boolean alterar(Endereco endereco) {
+	public static boolean alterar(Endereco endereco) {
 		int registrosAlterados = 0;
 		String sql = "UPDATE ENDERECO SET rua=?, numeroRua=?, bairro=?, cidade=?, uf=?, cep=? WHERE id=?";
 		Connection connection = Banco.getConnection();

@@ -1,36 +1,35 @@
-package view.usuario;
+package view.endereco;
 
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import net.miginfocom.swing.MigLayout;
-import view.endereco.PainelEnderecoCadastro;
-
-import javax.swing.JMenuItem;
-import javax.swing.border.LineBorder;
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainUsuario extends JPanel {
+import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
-	protected JPanel painelUsuarioConsulta = new PainelUsuarioConsulta();
-	protected JPanel painelUsuarioCadastro = new PainelUsuarioCadastro();
-	protected JPanel painelUsuarioAlterar = new PainelUsuarioAlterar(null);
+import net.miginfocom.swing.MigLayout;
+
+public class MainEndereco extends JPanel {
+
+	private JPanel painelEnderecoConsulta = new PainelEnderecoConsulta();
+	private JPanel painelEnderecoCadastro = new PainelEnderecoCadastro();
+	private JPanel painelEnderecoAlterar = new PainelEnderecoAlterar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmConsultar;
 	private JMenuItem mntmAlterar;
-	
 
 	/**
 	 * Create the panel.
 	 */
-	public MainUsuario() {
-		setLayout(new MigLayout("", "[735.00,grow][grow]", "[74.00px][baseline]"));
+	public MainEndereco() {
+
+		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
 
 		this.initialize();
 
@@ -59,7 +58,7 @@ public class MainUsuario extends JPanel {
 		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		add(layeredPane, "cell 0 1 15 11,grow");
 
-		layeredPane.add(painelUsuarioConsulta, "cell 0 0,grow");
+		layeredPane.add(painelEnderecoConsulta, "cell 0 0,grow");
 
 		this.addListeners();
 	}
@@ -68,26 +67,25 @@ public class MainUsuario extends JPanel {
 
 		mntmCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioCadastro);
+				switchPanel(painelEnderecoConsulta);
 			}
 		});
 
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioConsulta);
+				switchPanel(painelEnderecoConsulta);
 			}
 		});
 
 		mntmAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioAlterar);
+				switchPanel(painelEnderecoAlterar);
 			}
 		});
+
 	}
 
-	protected static void switchPanel(JPanel panel) {
-		System.out.println(panel.getClass());
-
+	private static void switchPanel(JPanel panel) {
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
@@ -97,5 +95,4 @@ public class MainUsuario extends JPanel {
 		layeredPane.revalidate();
 
 	}
-	
 }

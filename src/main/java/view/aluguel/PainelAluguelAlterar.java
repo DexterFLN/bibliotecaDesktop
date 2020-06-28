@@ -4,11 +4,12 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-
 import controller.AluguelController;
+import controller.ExemplarController;
 import model.dao.AluguelDAO;
 import model.dao.ExemplarDAO;
 import model.vo.Aluguel;
@@ -16,7 +17,6 @@ import model.vo.Exemplar;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
-
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -50,20 +50,27 @@ public class PainelAluguelAlterar extends JPanel {
 				JButton btnPesquisarAluguel = new JButton("Pesquisar");
 				btnPesquisarAluguel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {				//METODO PRONTO
-						AluguelDAO aluguelDAO = new AluguelDAO();
-						Aluguel aluguel = new Aluguel();
+						ExemplarController exemplarController = new ExemplarController();
+						Exemplar exemplar = new Exemplar();
 						int idExemplar = Integer.valueOf(txtCodigoExemplar.getText());
-						aluguel = aluguelDAO.consultarAluguelAtual(idExemplar);
-						txtTitulo.setText(aluguel.getExemplar().getLivro().getNome());
-						LocalDate dataOriginal = aluguel.getDevolucaoPrevista();
-						String dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-						txfDataDevolucao.setText(dataFormatada);
-						dataOriginal = aluguel.getUsuario().getDataNascimento();
-						dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-						txfDataNascimento.setText(dataFormatada);
-						txtNome.setText(aluguel.getUsuario().getNome());
-						txtSobrenome.setText(aluguel.getUsuario().getSobrenome());
+						exemplar = exemplarController.consultarExemplar(idExemplar);
 						
+						if(exemplar.isStatus() == true) {
+							AluguelController aluguelController = new AluguelController();
+							Aluguel aluguel = new Aluguel();
+							aluguel = aluguelController.consultarAluguelAtual(idExemplar);
+							txtTitulo.setText(aluguel.getExemplar().getLivro().getNome());
+							LocalDate dataOriginal = aluguel.getDevolucaoPrevista();
+							String dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+							txfDataDevolucao.setText(dataFormatada);
+							dataOriginal = aluguel.getUsuario().getDataNascimento();
+							dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+							txfDataNascimento.setText(dataFormatada);
+							txtNome.setText(aluguel.getUsuario().getNome());
+							txtSobrenome.setText(aluguel.getUsuario().getSobrenome());							
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado não se encontra alugado!");
+						}
 					}
 				});
 				add(btnPesquisarAluguel, "cell 3 1,grow");
@@ -75,7 +82,7 @@ public class PainelAluguelAlterar extends JPanel {
 				add(txtTitulo, "cell 1 3 2 1,grow");
 				txtTitulo.setColumns(10);
 
-				JLabel lblAutor = new JLabel("Data Devolução");
+				JLabel lblAutor = new JLabel("Data DevoluÃ§Ã£o");
 				add(lblAutor, "cell 3 2,alignx left,aligny center");
 			
 				
@@ -85,7 +92,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataDevolucao = new JFormattedTextField(maskFormatter);
 					add(txfDataDevolucao, "cell 3 3,grow");
 				} catch (ParseException e1){
-					 System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			         e1.printStackTrace();
 				}
 				
@@ -112,7 +119,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataNascimento = new JFormattedTextField(maskFormatter);
 					add(txfDataNascimento, "cell 3 6,grow");
 				} catch (ParseException e1) {
-					System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+					System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			        e1.printStackTrace();
 				}
 				
@@ -141,6 +148,26 @@ public class PainelAluguelAlterar extends JPanel {
 				add(btnRenovar, "cell 1 10,grow");
 
 				JButton btnDevolver = new JButton("Devolver");
+				btnDevolver.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						AluguelController controller = new AluguelController();
+						Aluguel aluguel = new Aluguel();
+						
+						String mensagem = "";
+						mensagem += controller.validarCamposRenovarDevolver(txtCodigoExemplar.getText(), txfDataDevolucao.getText());
+						if(mensagem.isEmpty()) {
+							int idExemplar = Integer.valueOf(txtCodigoExemplar.getText());
+							aluguel = controller.consultarAluguelAtual(idExemplar);
+							aluguel.setDevolucaoEfetiva(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+							
+							try {
+								controller.devolverAluguel(aluguel);
+							} catch (Exception ex) {
+								System.out.println("Erro ao renovar o aluguel: " + ex.getMessage());
+							}
+						}
+					}
+				});
 				btnDevolver.setBackground(new Color(229, 13, 13, 90));
 				add(btnDevolver, "cell 3 10,grow");
 

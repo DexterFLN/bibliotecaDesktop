@@ -121,7 +121,7 @@ public class PainelUsuarioAlterar extends JPanel {
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
 			add(txtDataNascimento, "cell 4 6,growx");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação de data no painel de alteração de usuário.");
+			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			e1.printStackTrace();
 		}
 
@@ -202,11 +202,9 @@ public class PainelUsuarioAlterar extends JPanel {
 				endereco.setCidade(txtCidade.getText());
 				endereco.setCep(txtCEP.getText());
 				
-				EnderecoController enderecoController = new EnderecoController();
 
 			}
 		});
-
 		btnExcluirUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -216,7 +214,6 @@ public class PainelUsuarioAlterar extends JPanel {
 
 			}
 		});
-
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));

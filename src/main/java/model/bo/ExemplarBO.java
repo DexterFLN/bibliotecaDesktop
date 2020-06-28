@@ -21,4 +21,15 @@ public class ExemplarBO {
 		return exemplarDAO.consultarExemplarLivroSeletor(livroSeletor) ;
 	}
 
+	public Exemplar consultarExemplar(int id) {
+		ExemplarDAO exemplarDAO = new ExemplarDAO();
+		return exemplarDAO.consultarExemplar(id);
+	}
+
+
+	public boolean consultarStatus(Exemplar exemplarAConsultar) {
+		ExemplarDAO dao = new ExemplarDAO();
+		return dao.consultarStatus(exemplarAConsultar);
+	}
+
 }

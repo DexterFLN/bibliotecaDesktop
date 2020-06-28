@@ -39,6 +39,8 @@ public class UsuarioController {
 		
 		return message;
 	}
-	
 
+	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
+		 usuarioBO.gerarRelatorio(usuarios, caminhoEscolhido);
+	}
 }

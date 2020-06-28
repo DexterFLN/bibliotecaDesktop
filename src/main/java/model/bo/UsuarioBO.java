@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.dao.UsuarioDAO;
 import model.seletor.UsuarioSeletor;
 import model.vo.Usuario;
+import util.GeradorPlanilha;
 
 public class UsuarioBO {
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -15,5 +16,7 @@ public class UsuarioBO {
 		return usuarioDAO.alterar(usuarioAlterado);
 	}
 	
-
+	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
+		 GeradorPlanilha.gerarPlanilhaUsuarios(usuarios, caminhoEscolhido);
+	}
 }

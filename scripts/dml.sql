@@ -1,3 +1,4 @@
+<<<<<<< HEAD:CREATE-DATABASE.sql
 DROP DATABASE IF EXISTS ATLAS;
 CREATE DATABASE ATLAS;
 USE ATLAS;
@@ -77,6 +78,8 @@ CREATE TABLE ALUGUEL (
 
 -- BIBLIOTECA, SESSAO, ENDERECO, LIVRO, EXEMPLAR, USUARIO, ALUGUEL
 
+=======
+>>>>>>> c3509e45ed61b286af1b45c983664e74ec2ff6ae:scripts/dml.sql
 INSERT INTO BIBLIOTECA (nome) VALUES ('Atlas');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Pergamum');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Barca dos Livros');
@@ -105,12 +108,12 @@ INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (4, 'livr
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (5, 'livro cinco', 'autor cinco', 'editora cinco', 5, '2005');
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (6, 'livro seis', 'autor seis', 'editora seis', 6, '2006');
 
-INSERT INTO EXEMPLAR VALUES (1, 1, 0);
-INSERT INTO EXEMPLAR VALUES (2, 2, 0);
-INSERT INTO EXEMPLAR VALUES (3, 3, 0);
-INSERT INTO EXEMPLAR VALUES (4, 4, 0);
-INSERT INTO EXEMPLAR VALUES (5, 5, 0);
-INSERT INTO EXEMPLAR VALUES (6, 6, 0);
+INSERT INTO EXEMPLAR VALUES (1, 1, 1);
+INSERT INTO EXEMPLAR VALUES (2, 2, 1);
+INSERT INTO EXEMPLAR VALUES (3, 3, 1);
+INSERT INTO EXEMPLAR VALUES (4, 4, 1);
+INSERT INTO EXEMPLAR VALUES (5, 5, 1);
+INSERT INTO EXEMPLAR VALUES (6, 6, 1);
 
 INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857');
 INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857');
@@ -125,6 +128,3 @@ INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALU
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista, devolucaoEfetiva) VALUES (4, 4, '2020-02-04', '2020-03-15', '2020-03-15');
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista, devolucaoEfetiva) VALUES (5, 5, '2020-01-04', '2020-02-15', '2020-02-15');
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista, devolucaoEfetiva) VALUES (6, 6, '2020-07-04', '2020-08-15', '2020-08-15');
-
-select * from livro;
-select * from exemplar;
