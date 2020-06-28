@@ -191,6 +191,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			}
 		});
 
+
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UsuarioController usuarioController = new UsuarioController();
@@ -200,6 +201,9 @@ public class PainelUsuarioCadastro extends JPanel {
 
 			}
 		});
+
+
+		
 
 	}
 

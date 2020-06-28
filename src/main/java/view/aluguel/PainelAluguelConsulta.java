@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import controller.AluguelController;
 import model.seletor.AluguelSeletor;
@@ -22,7 +23,7 @@ public class PainelAluguelConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
-	private String[] nomesColunas = {"TÃ­tulo", "Autor", "Ano", "Exemplares"};
+	private String[] nomesColunas = {"Codigo Exemplar", "Titulo", "Autor", "Usuario", "Devolucao Prevista", "Devolucao Efetiva"};
 	private ArrayList<Livro> livros;
 	private ArrayList<Aluguel> alugueis;
 	private JComboBox cbBuscar;
@@ -45,8 +46,8 @@ public class PainelAluguelConsulta extends JPanel {
 		cbBuscar = new JComboBox();
 		cbBuscar.addItem("SELECIONE");
 		cbBuscar.addItem("Atrasados");
-		cbBuscar.addItem("Código Usuário");
-		cbBuscar.addItem("Código Exemplar");
+		cbBuscar.addItem("Codigo Usuario");
+		cbBuscar.addItem("Codigo Exemplar");
 		add(cbBuscar, "cell 2 1,grow");
 		
 		btnPesquisar = new JButton("Pesquisar");
@@ -78,8 +79,36 @@ public class PainelAluguelConsulta extends JPanel {
 				
 				AluguelController aluguelController = new AluguelController();
 				alugueis = aluguelController.consultarAluguelSeletor(aluguelSeletor);
+				System.out.println(alugueis.toString());
+				atualizarTabelaResultadoPesquisa();
 				
 			}
+			
 		});
+	}
+	
+	private void limparTabelaResultadoPesquisa() {
+		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+	}
+	
+	private void atualizarTabelaResultadoPesquisa() {
+		limparTabelaResultadoPesquisa();
+		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
+		
+		for (Aluguel aluguel : alugueis) {
+			
+			Object[] novaLinhaDaTabela = new Object[6];
+			novaLinhaDaTabela[0] = aluguel.getExemplar().getId();
+			novaLinhaDaTabela[1] = aluguel.getExemplar().getLivro().getNome();
+			novaLinhaDaTabela[2] = aluguel.getExemplar().getLivro().getAutor();
+			novaLinhaDaTabela[3] = aluguel.getUsuario().getNome();
+			novaLinhaDaTabela[4] = aluguel.getDevolucaoPrevista();
+			novaLinhaDaTabela[5] = aluguel.getDevolucaoEfetiva();
+
+			model.addRow(novaLinhaDaTabela);
+			
+		}
+		
+		
 	}
 }

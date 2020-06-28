@@ -14,12 +14,13 @@ import model.seletor.AluguelSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
+import model.vo.Livro;
 import model.vo.Usuario;
 
 public class AluguelDAO {
 
 	
-	public Aluguel salvar(Aluguel aluguel) {
+	public static Aluguel salvar(Aluguel aluguel) {
 
 		ExemplarDAO exemplarDAO = new ExemplarDAO();
 		Connection connection = Banco.getConnection();
@@ -53,7 +54,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
-	public boolean excluir(Aluguel aluguel) {
+	public static boolean excluir(Aluguel aluguel) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM ALUGUEL WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -75,7 +76,7 @@ public class AluguelDAO {
 		return excluiu;
 	}
 
-	public boolean alterar(Aluguel aluguel) {
+	public static boolean alterar(Aluguel aluguel) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET idUsuario=?, idExemplar=?, dataLocacao=?, devolucaoPrevista=?, devolucaoEfetiva=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -107,7 +108,7 @@ public class AluguelDAO {
 		return registrosAlterados > 0;
 	}
 
-	public Aluguel renovar(Aluguel aluguel) {
+	public static Aluguel renovar(Aluguel aluguel) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET devolucaoPrevista=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -126,7 +127,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
-	public Aluguel devolver(Aluguel aluguel) {
+	public static Aluguel devolver(Aluguel aluguel) {
 		ExemplarDAO exemplarDAO = new ExemplarDAO();
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE ALUGUEL SET devolucaoEfetiva=? WHERE id=?";
@@ -150,7 +151,7 @@ public class AluguelDAO {
 	}
 
 
-	public Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
+	public static Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
 
 		Aluguel aluguel;
 		aluguel = new Aluguel();
@@ -194,7 +195,7 @@ public class AluguelDAO {
 		return aluguel;
 	} 
 	
-	public Aluguel consultarAluguelPorId(int id) {
+	public static Aluguel consultarAluguelPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -220,7 +221,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 
-	public Aluguel consultarAluguel(Aluguel aluguel) {
+	public static Aluguel consultarAluguel(Aluguel aluguel) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -245,7 +246,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 	
-	public Aluguel consultarAluguelAtual(int idExemplar) {
+	public static Aluguel consultarAluguelAtual(int idExemplar) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE idExemplar=? ORDER BY id DESC LIMIT 1";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -271,7 +272,7 @@ public class AluguelDAO {
 		return aluguel;
 	}
 	
-	public ArrayList<Aluguel> consultarTodos(int limit) {
+	public static ArrayList<Aluguel> consultarTodos(int limit) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL LIMIT ?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -300,7 +301,7 @@ public class AluguelDAO {
 		return alugueis;
 	}
 
-	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor seletor) {
+	public static ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor seletor) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL";
 		ResultSet resultSet = null;
@@ -312,35 +313,57 @@ public class AluguelDAO {
 			sql = criarFiltros(sql, seletor);
 		}
 		
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		
+		try {
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Aluguel aluguel = construirAluguelDoResultSet(resultSet);
+				alugueis.add(aluguel);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar aluguel.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
 		return alugueis;
 	}
 
-	private String criarFiltros(String sql, AluguelSeletor seletor) {
-		boolean primeiro = true;
-		
 
+	private static String criarFiltros(String sql, AluguelSeletor seletor) {
+		
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
 			sql += " WHERE ";
 			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isEmpty()) {
 
-				if (seletor.getBuscarPor() == "Atrasados") {
-					System.out.println("AluguelDAO.java - Seletor Atrasados");
-					sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
-				}  else if (seletor.getBuscarPor() == "Código Usuário") {
-					System.out.println("AluguelDAO.java - Seletor Código Usuário");
+				if (seletor.getBuscarPor() == "Codigo Usuario") {
+					System.out.println("AluguelDAO.java - Seletor Codigo Usuario");
 					sql += " idUsuario = " + seletor.getTermoPesquisa();
-				} else if(seletor.getBuscarPor() == "Código Exemplar") {
-					System.out.println("AluguelDAO.java - Seletor Código Exemplar");
+				} else if(seletor.getBuscarPor() == "Codigo Exemplar") {
+					System.out.println("AluguelDAO.java - Seletor Codigo Exemplar");
+
 					sql += " idExemplar = " + seletor.getTermoPesquisa();
 				} 
 				
-				primeiro = false;
 			}
-
+			
+		} 
+		
+		if (seletor.getBuscarPor() == "Atrasados") {
+			sql += " WHERE ";
+			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
+			System.out.println("AluguelDAO.java - Seletor Atrasados");
+			sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
 		}
-	
-		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+
+		System.out.println( " SQL FILTROS: " + sql);
+
 		return sql;
 	}
 }
