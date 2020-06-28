@@ -139,13 +139,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			}
 		});
 		add(btnCadastrar, "cell 2 10");
-
-
-		
-	
-	    }
-		
-
+	}
 
 }
 
