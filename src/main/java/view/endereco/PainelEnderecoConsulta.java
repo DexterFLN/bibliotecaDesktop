@@ -22,7 +22,6 @@ public class PainelEnderecoConsulta extends JPanel {
 				"[31.00px][30.00px][544.00px]"));
 
 		txtPesquisar = new JTextField();
-		txtPesquisar.setText("Digite um termo para Pesquisa");
 		add(txtPesquisar, "cell 1 0 6 1,grow");
 		txtPesquisar.setColumns(10);
 
