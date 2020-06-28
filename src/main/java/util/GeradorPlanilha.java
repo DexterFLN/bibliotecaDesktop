@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -70,6 +72,7 @@ public class GeradorPlanilha {
 			saida = new FileOutputStream(new File(caminhoArquivo + extensao));
 			planilha.write(saida);
 			mensagem = "Planilha gerada com sucesso!";
+			JOptionPane.showMessageDialog(null, "Relatorio Salvo com Sucesso!");
 		} catch (FileNotFoundException e) {
 			mensagem = "Erro ao tentar salvar planilha em: " + caminhoArquivo + extensao;
 			System.out.println("Causa: " + e.getMessage());

@@ -78,8 +78,9 @@ public class LivroController {
 		
 	}
 	
-	public int validarSessao(String cbSessao) {
-		
+	public Sessao validarSessao(Sessao sessao) {
+		return SessaoController.consultarSessao(sessao.getId());
+		/*
 		int sessao;
 		
 		if (cbSessao == "Fic��o" ) {
@@ -97,6 +98,7 @@ public class LivroController {
 		}
 		
 		return sessao;
+		*/
 	}
 	
 	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
