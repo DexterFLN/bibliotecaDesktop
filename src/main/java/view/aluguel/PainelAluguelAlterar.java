@@ -39,7 +39,7 @@ public class PainelAluguelAlterar extends JPanel {
 		public PainelAluguelAlterar() {
 				setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][29.00][35.00px][27.00][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 				
-				JLabel lblExcluir = new JLabel("Digite o C\u00F3digo do Exemplar");
+				JLabel lblExcluir = new JLabel("Digite o Codigo do Exemplar");
 				add(lblExcluir, "cell 1 1,alignx center,aligny center");
 				
 				txtCodigoExemplar = new JTextField();
@@ -82,7 +82,7 @@ public class PainelAluguelAlterar extends JPanel {
 				add(txtTitulo, "cell 1 3 2 1,grow");
 				txtTitulo.setColumns(10);
 
-				JLabel lblAutor = new JLabel("Data DevoluÃ§Ã£o");
+				JLabel lblAutor = new JLabel("Data Devolucao");
 				add(lblAutor, "cell 3 2,alignx left,aligny center");
 			
 				
