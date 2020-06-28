@@ -18,7 +18,6 @@ import net.miginfocom.swing.MigLayout;
 import view.acervo.MainAcervo;
 import view.aluguel.MainAluguel;
 import view.endereco.MainEndereco;
-import view.endereco.PainelEnderecoCadastro;
 import view.usuario.MainUsuario;
 
 public class MainView extends JFrame {

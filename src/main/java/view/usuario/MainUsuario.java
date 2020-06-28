@@ -3,7 +3,7 @@ package view.usuario;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import net.miginfocom.swing.MigLayout;
-import view.endereco.PainelEnderecoCadastro;
+
 
 import javax.swing.JMenuItem;
 import javax.swing.border.LineBorder;
