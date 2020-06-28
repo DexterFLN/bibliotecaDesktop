@@ -131,7 +131,6 @@ public class MainView extends JFrame {
 		
 		btnUsuario = new JButton("");
 		btnUsuario.setIcon(new ImageIcon(MainView.class.getResource("/icons/icons8-usu\u00E1rio.png")));
-		
 		menuBar.add(btnUsuario);
 
 		this.addListeners();

@@ -54,8 +54,7 @@ public class Sessao {
 
 	@Override
 	public String toString() {
-		return "\nID: " + this.getId() + "\nNome: " + this.getNome()
-				+ "\nBiblioteca: " + this.getBiblioteca().getNome();
+		return this.getNome();
 	}
 	
 }

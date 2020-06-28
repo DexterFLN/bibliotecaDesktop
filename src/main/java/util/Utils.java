@@ -21,10 +21,10 @@ public class Utils {
 
 	public static JComboBox preenchercbBuscarPor(JComboBox cbBuscar) {
 
-		cbBuscar.addItem("Título");
+		cbBuscar.addItem("Titulo");
 		cbBuscar.addItem("Autor");
 		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sessão");
+		cbBuscar.addItem("Sessao");
 
 		return cbBuscar;
 
