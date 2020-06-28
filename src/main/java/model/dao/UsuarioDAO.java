@@ -17,7 +17,7 @@ public class UsuarioDAO {
 	public Usuario salvar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO USUARIO (idBiblioteca, idEndereco, nome, sobrenome, tipo, dataNascimento, email,"
-				+ " dddFixo, foneFixo, dddMovel, foneMovel) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				+ " ddd, fone) VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
@@ -31,25 +31,15 @@ public class UsuarioDAO {
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
-			if (usuario.getDddFixo() != null && !usuario.getDddFixo().isEmpty()) {
-				preparedStatement.setString(8, usuario.getDddFixo());
+			if (usuario.getDdd() != null && !usuario.getDdd().isEmpty()) {
+				preparedStatement.setString(8, usuario.getDdd());
 			} else {
 				preparedStatement.setString(8, null);
 			}
-			if (usuario.getFoneFixo() != null && !usuario.getFoneFixo().isEmpty()) {
-				preparedStatement.setString(9, usuario.getFoneFixo());
+			if (usuario.getFone() != null && !usuario.getFone().isEmpty()) {
+				preparedStatement.setString(9, usuario.getFone());
 			} else {
 				preparedStatement.setString(9, null);
-			}
-			if (usuario.getDddMovel() != null && !usuario.getDddMovel().isEmpty()) {
-				preparedStatement.setString(10, usuario.getDddMovel());
-			} else {
-				preparedStatement.setString(10, null);
-			}
-			if (usuario.getFoneMovel() != null && !usuario.getFoneMovel().isEmpty()) {
-				preparedStatement.setString(11, usuario.getFoneMovel());
-			} else {
-				preparedStatement.setString(11, null);
 			}
 
 			preparedStatement.executeUpdate();
@@ -97,9 +87,9 @@ public class UsuarioDAO {
 	public boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"
-				+ " dddFixo=?, foneFixo=?, dddMovel=?, foneMovel=? WHERE id=?";
+				+ " ddd=?, fone=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
-
+		System.out.println(sql);
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setInt(1, usuario.getBiblioteca().getId());
@@ -110,32 +100,22 @@ public class UsuarioDAO {
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
-			if (usuario.getDddFixo() != null && !usuario.getDddFixo().isEmpty()) {
-				preparedStatement.setString(8, usuario.getDddFixo());
+			if (usuario.getDdd() != null && !usuario.getDdd().isEmpty()) {
+				preparedStatement.setString(8, usuario.getDdd());
 			} else {
 				preparedStatement.setString(8, null);
 			}
-			if (usuario.getFoneFixo() != null && !usuario.getFoneFixo().isEmpty()) {
-				preparedStatement.setString(9, usuario.getFoneFixo());
+			if (usuario.getFone() != null && !usuario.getFone().isEmpty()) {
+				preparedStatement.setString(9, usuario.getFone());
 			} else {
 				preparedStatement.setString(9, null);
 			}
-			if (usuario.getDddMovel() != null && !usuario.getDddMovel().isEmpty()) {
-				preparedStatement.setString(10, usuario.getDddMovel());
-			} else {
-				preparedStatement.setString(10, null);
-			}
-			if (usuario.getFoneMovel() != null && !usuario.getFoneMovel().isEmpty()) {
-				preparedStatement.setString(11, usuario.getFoneMovel());
-			} else {
-				preparedStatement.setString(11, null);
-			}
-			preparedStatement.setInt(12, usuario.getId());
+			preparedStatement.setInt(10, usuario.getId());
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 
 		} catch (SQLException ex) {
-			System.out.println("Erro ao alterar usu�rio.");
+			System.out.println("Erro ao alterar usuario.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -159,10 +139,10 @@ public class UsuarioDAO {
 			usuario.setSobrenome(resultSet.getString("sobrenome"));
 			usuario.setDataNascimento(resultSet.getDate("dataNascimento").toLocalDate());
 			usuario.setEmail(resultSet.getString("email"));
-			usuario.setDddFixo(resultSet.getString("dddFixo"));
-			usuario.setFoneFixo(resultSet.getString("foneFixo"));
-			usuario.setDddMovel(resultSet.getString("dddMovel"));
-			usuario.setFoneMovel(resultSet.getString("foneMovel"));
+			usuario.setTipo(resultSet.getInt("tipo"));
+			usuario.setDdd(resultSet.getString("ddd"));
+			usuario.setFone(resultSet.getString("fone"));
+			
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir Biblioteca do ResultSet");
 		}
@@ -172,7 +152,7 @@ public class UsuarioDAO {
 			Endereco endereco = enderecoDAO.consultarEnderecoPorId(resultSet.getInt("idEndereco"));
 			usuario.setEndereco(endereco);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao construir Endere�o do ResultSet");
+			System.out.println("Erro ao construir Endereco do ResultSet");
 		}
 
 		return usuario;
@@ -265,7 +245,7 @@ public class UsuarioDAO {
 		if(usuarioSeletor.temFiltro()) {
 			sql = criarFiltros(sql, usuarioSeletor);
 		}
-		
+		System.out.println(getClass() + "Consultar Usuario Filtro - " + sql);
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
