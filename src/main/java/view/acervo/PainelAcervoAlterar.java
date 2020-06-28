@@ -152,11 +152,11 @@ public class PainelAcervoAlterar extends JPanel {
 				// txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
 
 				if (!ExemplarController
-						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigoLivro.getSelectedText()))
+						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigo.getSelectedText()))
 						.isEmpty()) {
 					JOptionPane joptionpane = new JOptionPane();
 					joptionpane.showMessageDialog(null, ExemplarController.validarQuantidade(txfQuantidade,
-							Integer.parseInt(txtCodigoLivro.getSelectedText())));
+							Integer.parseInt(txtCodigo.getSelectedText())));
 				}
 				;
 
