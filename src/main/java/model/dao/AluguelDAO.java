@@ -14,6 +14,7 @@ import model.seletor.AluguelSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
+import model.vo.Livro;
 import model.vo.Usuario;
 
 public class AluguelDAO {
@@ -312,34 +313,52 @@ public class AluguelDAO {
 			sql = criarFiltros(sql, seletor);
 		}
 		
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		
+		try {
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Aluguel aluguel = construirAluguelDoResultSet(resultSet);
+				alugueis.add(aluguel);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar aluguel.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
 		return alugueis;
 	}
 
 	private String criarFiltros(String sql, AluguelSeletor seletor) {
-		boolean primeiro = true;
 		
-
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
 			sql += " WHERE ";
 			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isEmpty()) {
-
-				if (seletor.getBuscarPor() == "Atrasados") {
-					System.out.println("AluguelDAO.java - Seletor Atrasados");
-					sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
-				}  else if (seletor.getBuscarPor() == "Código Usuário") {
-					System.out.println("AluguelDAO.java - Seletor Código Usuário");
+				if (seletor.getBuscarPor() == "Codigo Usuario") {
+					System.out.println("AluguelDAO.java - Seletor Codigo Usuario");
 					sql += " idUsuario = " + seletor.getTermoPesquisa();
-				} else if(seletor.getBuscarPor() == "Código Exemplar") {
-					System.out.println("AluguelDAO.java - Seletor Código Exemplar");
+				} else if(seletor.getBuscarPor() == "Codigo Exemplar") {
+					System.out.println("AluguelDAO.java - Seletor Codigo Exemplar");
 					sql += " idExemplar = " + seletor.getTermoPesquisa();
 				} 
 				
-				primeiro = false;
 			}
-
+			
+		} 
+		
+		if (seletor.getBuscarPor() == "Atrasados") {
+			sql += " WHERE ";
+			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
+			System.out.println("AluguelDAO.java - Seletor Atrasados");
+			sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
 		}
-	
+		
 		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
 		return sql;
 	}
