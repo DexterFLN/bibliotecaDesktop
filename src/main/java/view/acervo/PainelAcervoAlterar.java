@@ -43,33 +43,14 @@ public class PainelAcervoAlterar extends JPanel {
 				"[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]",
 				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
-		JLabel lblDigiteCodigo = new JLabel("Digite o Codigo");
+		JLabel lblDigiteCodigo = new JLabel("Codigo do Livro");
 		add(lblDigiteCodigo, "cell 1 1,alignx center");
 
 		txtCodigo = new JTextField();
+		txtCodigo.setEnabled(false);
+		txtCodigo.setEditable(false);
 		add(txtCodigo, "cell 2 1,grow");
 		txtCodigo.setColumns(10);
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LivroController livroController = new LivroController();
-				ExemplarController exemplarController = new ExemplarController();
-				Livro livro = new Livro();
-
-				int idLivro = Integer.valueOf(txtCodigo.getText());
-				livro = livroController.consultarLivroPorId(idLivro);
-				txtTitulo.setText(livro.getNome());
-				txtEditora.setText(livro.getEditora());
-				txtAutor.setText(livro.getAutor());
-				txtEdicao.setText(Integer.toString(livro.getEdicao()));
-				cbSessao.setSelectedItem(livro.getSessao());
-				txfAno.setText(Integer.toString(livro.getAno()));
-				// txfQuantidade.setText(Integer.toString(exemplarController.consultarQuantidade(idLivro)));
-
-			}
-		});
-		add(btnPesquisar, "cell 3 1,grow");
 
 		JLabel lblTitulo = new JLabel("Titulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
@@ -128,13 +109,6 @@ public class PainelAcervoAlterar extends JPanel {
 		add(lblSessao, "cell 1 8,alignx left,aligny center");
 
 		cbSessao = new JComboBox();
-		cbSessao.addItem("Ficcao");
-		cbSessao.addItem("Literatura Classica");
-		cbSessao.addItem("Romance");
-		cbSessao.addItem("Auto Ajuda");
-		cbSessao.addItem("Suspense");
-		cbSessao.addItem("Tecnicos");
-
 		add(cbSessao, "cell 1 9 3 1,grow");
 
 		JButton btnExcluir = new JButton("Excluir");
@@ -176,18 +150,21 @@ public class PainelAcervoAlterar extends JPanel {
 	private void preencherDadosDaTela(Livro livro) {
 
 		if(livro != null) {
-			
-//		txtCodigoLivro.setText(String.valueOf(livro.getId()));
+			System.out.println(livro.getId());
+        txtCodigo.setText(String.valueOf(livro.getId()));
 		txtTitulo.setText(livro.getNome());
 		txtAutor.setText(livro.getAutor());
 		txtEditora.setText(livro.getEditora());
 		txtEdicao.setText(String.valueOf(livro.getEdicao()));
 		
 		this.preencherSessao();
-		cbSessao.setSelectedItem(livro.getSessao());
+		cbSessao.setSelectedItem(livro.getSessao().getNome());
 		
 		txfAno.setText(String.valueOf(livro.getAno()));
-		txfQuantidade.setText(String.valueOf(livro.getExemplares().size()));
+		
+		ExemplarController exemplarcontroller = new ExemplarController();
+		int exemplaresdolivro = exemplarcontroller.consultarQuantidade(livro.getId()).size();
+		txfQuantidade.setText(String.valueOf(exemplaresdolivro));
 		
 		}
 
@@ -198,7 +175,7 @@ public class PainelAcervoAlterar extends JPanel {
 		ArrayList<Sessao> sessoes = sessaoController.consultarSessoes(1000);
 		
 		for (Sessao sessao : sessoes) {
-			cbSessao.addItem(sessao);
+			cbSessao.addItem(sessao.getNome());
 		}
 		
 	}

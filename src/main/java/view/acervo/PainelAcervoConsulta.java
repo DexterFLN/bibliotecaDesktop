@@ -75,19 +75,6 @@ public class PainelAcervoConsulta extends JPanel {
 		panel.setLayout(new MigLayout("", "[1145.00px,grow,fill]", "[58.00px,grow,fill]"));
 
 		tableResultadoPesquisa = new JTable();
-		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
-				System.out.println(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1));
-				
-				LivroController  livroController = new LivroController();
-				Livro  livroClicado = livroController.consultarLivroPorIdParaExemplares(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro().getId());
-				painelAcervoAlterar = new PainelAcervoAlterar(livroClicado);
-				MainAcervo.switchPanel(painelAcervoAlterar);
-				
-			}
-		});
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
@@ -109,6 +96,20 @@ public class PainelAcervoConsulta extends JPanel {
 				exemplares = exemplarController.consultarExemplarLivroSeletor(livroSeletor);
 				System.out.println(exemplares.toString());
 				atualizarTabelaResultadoPesquisa();
+			}
+		});
+		
+		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
+				System.out.println(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1));
+				
+				LivroController  livroController = new LivroController();
+				Livro  livroClicado = livroController.consultarLivroPorIdParaExemplares(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro().getId());
+				painelAcervoAlterar = new PainelAcervoAlterar(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro());
+				MainAcervo.switchPanel(painelAcervoAlterar);
+				
 			}
 		});
 
