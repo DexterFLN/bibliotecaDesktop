@@ -13,17 +13,29 @@ public class Usuario {
 	private int tipo;
 	private LocalDate dataNascimento;
 	private String email;
+<<<<<<< Updated upstream
 	private String dddFixo;
 	private String dddMovel;
 	private String foneMovel;
 	private String foneFixo;
+=======
+	private String ddd;
+	private String fone;
+	private String cpf;
+>>>>>>> Stashed changes
 	private ArrayList<Livro> livros;
 	private ArrayList<Aluguel> alugueis;
 	private Endereco endereco;
 
+<<<<<<< Updated upstream
 	public Usuario(Biblioteca biblioteca, String nome, String sobrenome, int tipo, LocalDate dataNascimento,
 			String email, String dddFixo, String dddMovel, String foneMovel, String foneFixo, ArrayList<Livro> livros,
 			ArrayList<Aluguel> alugueis, Endereco endereco) {
+=======
+	public Usuario(int id, Biblioteca biblioteca, String nome, String sobrenome, int tipo, LocalDate dataNascimento,
+			String email, String ddd, String fone, String cpf, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
+			Endereco endereco) {
+>>>>>>> Stashed changes
 		super();
 		this.biblioteca = biblioteca;
 		this.nome = nome;
@@ -31,10 +43,16 @@ public class Usuario {
 		this.tipo = tipo;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
+<<<<<<< Updated upstream
 		this.dddFixo = dddFixo;
 		this.dddMovel = dddMovel;
 		this.foneMovel = foneMovel;
 		this.foneFixo = foneFixo;
+=======
+		this.ddd = ddd;
+		this.fone = fone;
+		this.cpf = cpf;
+>>>>>>> Stashed changes
 		this.livros = livros;
 		this.alugueis = alugueis;
 		this.endereco = endereco;
@@ -116,6 +134,7 @@ public class Usuario {
 		this.dddMovel = dddMovel;
 	}
 
+<<<<<<< Updated upstream
 	public String getFoneMovel() {
 		return foneMovel;
 	}
@@ -125,6 +144,17 @@ public class Usuario {
 	}
 
 	public List<Livro> getLivros() {
+=======
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public ArrayList<Livro> getLivros() {
+>>>>>>> Stashed changes
 		return livros;
 	}
 

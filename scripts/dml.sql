@@ -1,3 +1,86 @@
+<<<<<<< Updated upstream
+=======
+DROP DATABASE IF EXISTS ATLAS;
+CREATE DATABASE ATLAS;
+USE ATLAS;
+
+CREATE TABLE BIBLIOTECA (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE SESSAO (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    idBiblioteca INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(ID)
+);
+
+CREATE TABLE ENDERECO (
+	id INT NOT NULL AUTO_INCREMENT,
+	rua VARCHAR(40) NOT NULL,
+    numeroRua INT NOT NULL,
+    bairro VARCHAR(25) NOT NULL,
+    cidade VARCHAR(20) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    cep VARCHAR(8) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE LIVRO (
+    id INT NOT NULL AUTO_INCREMENT,
+    idSessao INT NOT NULL,
+    nome VARCHAR(40) NOT NULL,
+    autor VARCHAR(40) NOT NULL,
+    editora VARCHAR(30) NOT NULL,
+    edicao INT NOT NULL,
+    ano INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idSessao) REFERENCES SESSAO(id)
+);
+
+CREATE TABLE EXEMPLAR (
+    id INT NOT NULL AUTO_INCREMENT,
+    idLivro INT NOT NULL,
+    status boolean,
+    PRIMARY KEY(id, idLivro),
+    FOREIGN KEY(idLivro) REFERENCES LIVRO(id)
+);
+
+CREATE TABLE USUARIO (
+    id INT NOT NULL AUTO_INCREMENT,
+    idBiblioteca INT NOT NULL,
+    idEndereco INT NOT NULL,
+    nome VARCHAR(30) NOT NULL,
+    sobrenome VARCHAR(40) NOT NULL,
+    tipo INT NOT NULL,
+    dataNascimento DATE NOT NULL,
+    email VARCHAR(40) NOT NULL,
+    ddd VARCHAR(2),
+    fone VARCHAR(8),
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(id),
+    FOREIGN KEY(idEndereco) REFERENCES ENDERECO(id)
+);
+
+CREATE TABLE ALUGUEL (
+    id INT NOT NULL AUTO_INCREMENT,
+    idExemplar INT NOT NULL,
+    idUsuario INT NOT NULL,
+    dataLocacao DATE NOT NULL,
+    devolucaoPrevista DATE NOT NULL,
+    devolucaoEfetiva DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY (idUsuario) REFERENCES USUARIO(id),
+    FOREIGN KEY (idExemplar) REFERENCES EXEMPLAR(id)
+);
+
+-- BIBLIOTECA, SESSAO, ENDERECO, LIVRO, EXEMPLAR, USUARIO, ALUGUEL
+
+>>>>>>> Stashed changes
 INSERT INTO BIBLIOTECA (nome) VALUES ('Atlas');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Pergamum');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Barca dos Livros');
@@ -33,12 +116,21 @@ INSERT INTO EXEMPLAR VALUES (4, 4, 1);
 INSERT INTO EXEMPLAR VALUES (5, 5, 1);
 INSERT INTO EXEMPLAR VALUES (6, 6, 1);
 
+<<<<<<< Updated upstream
 INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857', '48', '991737576');
 INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857', '48', '911737572');
 INSERT INTO USUARIO VALUES (3, 3, 3, 'Gustavo', 'Rodriguez', 3, '1998-02-20', '3@gmail.com', '48', '33348857', '48', '931737571');
 INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gmail.com', '48', '33058857', '48', '921737573');
 INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123', '48', '931737574');
 INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657', '48', '921737575');
+=======
+INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857', '12345678901');
+INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857', '12345678902');
+INSERT INTO USUARIO VALUES (3, 3, 3, 'Gustavo', 'Rodriguez', 3, '1998-02-20', '3@gmail.com', '48', '33348857', '12345678903');
+INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gmail.com', '48', '33058857', '12345678904');
+INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123', '12345678905');
+INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657', '12345678906');
+>>>>>>> Stashed changes
 
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (1, 1, '2020-03-04', '2020-03-15');
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (2, 2, '2020-04-05', '2020-05-15');
