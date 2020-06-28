@@ -1,11 +1,13 @@
 package model.bo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import controller.ExemplarController;
 import model.dao.AluguelDAO;
+import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
 
@@ -71,6 +73,11 @@ public class AluguelBO {
 		ExemplarController exemplarController = new ExemplarController();
 		boolean status = exemplarController.consultarStatus(exemplar);
 		return status;
+	}
+
+	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
+		AluguelDAO aluguelDAO = new AluguelDAO();
+		return aluguelDAO.consultarAluguelSeletor(aluguelSeletor) ;
 	}
 
 }

@@ -3,10 +3,12 @@ package controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import model.bo.AluguelBO;
+import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
 import util.ConversorData;
@@ -19,6 +21,12 @@ public class AluguelController {
 		return aluguel;
 	}
 
+	
+	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
+		AluguelBO aluguelBO = new AluguelBO();
+		return aluguelBO.consultarAluguelSeletor(aluguelSeletor);
+	}
+	
 	public Aluguel renovarAluguel(Aluguel aluguel) {
 		AluguelBO bo = new AluguelBO();
 		bo.renovar(aluguel);
@@ -87,7 +95,7 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O campo CÃ“DIGO DO EXEMPLAR nÃ£o pode ficar vazio.";
+			mensagem = "O campo CÓDIGO DO EXEMPLAR não pode ficar vazio.";
 		}
 
 		if (mensagem != "") {
@@ -109,7 +117,7 @@ public class AluguelController {
 		 ExemplarController controller = new ExemplarController();
 		 String mensagem = "";
 		if (controller.consultarStatus(exemplar) == true) {
-			mensagem += "Este livro jÃ¡ foi alugado.";
+			mensagem += "Este livro já foi alugado.";
 		}
 		return mensagem;
 	 }

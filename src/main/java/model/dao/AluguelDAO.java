@@ -5,10 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import model.seletor.AluguelSeletor;
+import model.seletor.LivroSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
 import model.vo.Usuario;
@@ -297,4 +300,47 @@ public class AluguelDAO {
 		return alugueis;
 	}
 
+	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor seletor) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT * FROM ALUGUEL";
+		ResultSet resultSet = null;
+		ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
+		
+		seletor = seletor.validarFitros(seletor);
+		
+		if(seletor.temFiltro()) {
+			sql = criarFiltros(sql, seletor);
+		}
+		
+		return alugueis;
+	}
+
+	private String criarFiltros(String sql, AluguelSeletor seletor) {
+		boolean primeiro = true;
+		
+
+		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
+			sql += " WHERE ";
+			System.out.println("AluguelDAO.java - Seletor Termo Pesquisa Validado");
+			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().isEmpty()) {
+
+				if (seletor.getBuscarPor() == "Atrasados") {
+					System.out.println("AluguelDAO.java - Seletor Atrasados");
+					sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
+				}  else if (seletor.getBuscarPor() == "Código Usuário") {
+					System.out.println("AluguelDAO.java - Seletor Código Usuário");
+					sql += " idUsuario = " + seletor.getTermoPesquisa();
+				} else if(seletor.getBuscarPor() == "Código Exemplar") {
+					System.out.println("AluguelDAO.java - Seletor Código Exemplar");
+					sql += " idExemplar = " + seletor.getTermoPesquisa();
+				} 
+				
+				primeiro = false;
+			}
+
+		}
+	
+		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+		return sql;
+	}
 }

@@ -15,10 +15,10 @@ public class Utils {
 	
 	public static JComboBox preenchercbBuscarPor(JComboBox cbBuscar) {
 
-		cbBuscar.addItem("T√≠tulo");
+		cbBuscar.addItem("TÌtulo");
 		cbBuscar.addItem("Autor");
 		cbBuscar.addItem("Editora");
-		cbBuscar.addItem("Sess√£o");
+		cbBuscar.addItem("Sess„o");
 		
 		return cbBuscar;
 		
