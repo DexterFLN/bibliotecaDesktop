@@ -166,7 +166,7 @@ public class PainelAluguelNovo extends JPanel {
 					aluguel.setExemplar(exemplar);
 					aluguel.setUsuario(usuario);
 
-					String mensagem2 = AluguelController.exemplarAlugado(exemplar);
+					String mensagem2 = AluguelController.consultarStatus(exemplar);
 					if (mensagem2.isEmpty()) {
 						try {
 							controller.salvarAluguel(aluguel);

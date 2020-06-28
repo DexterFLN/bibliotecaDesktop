@@ -267,35 +267,6 @@ public class AluguelDAO {
 		
 		return aluguel;
 	}
-
-	//TODO arrumar isso
-	/*
-	public Aluguel consultarAluguelAtual(int idExemplar) {
-		Connection connection = Banco.getConnection();
-		String sql = "SELECT * FROM ALUGUEL WHERE idExemplar=? ORDER BY id DESC LIMIT 1";
-		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
-		ResultSet resultSet = null;
-		Aluguel aluguel = new Aluguel();
-
-		try {
-			preparedStatement.setInt(1, idExemplar);
-			resultSet = preparedStatement.executeQuery();
-
-			if (resultSet != null && resultSet.next()) {
-				aluguel = construirAluguelDoResultSet(resultSet);
-			}
-		} catch (SQLException ex) {
-			System.out.println("Erro ao consultar aluguel.");
-			System.out.println("Erro: " + ex.getMessage());
-		} finally {
-			Banco.closeResultSet(resultSet);
-			Banco.closePreparedStatement(preparedStatement);
-			Banco.closeConnection(connection);
-		}
-
-		return aluguel;
-	}
-	*/
 	
 	public ArrayList<Aluguel> consultarTodos(int limit) {
 		Connection connection = Banco.getConnection();

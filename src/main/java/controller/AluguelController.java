@@ -36,7 +36,7 @@ public class AluguelController {
 			bo.devolver(aluguel);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Para efetuar a devolução, a data informada deve ser igual a data de hoje!");
+					"Para efetuar a devoluÃ§Ã£o, a data informada deve ser igual a data de hoje!");
 		}
 		return aluguel;
 
@@ -54,20 +54,20 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O(s) campo(s): CÓDIGO DO LIVRO";
+			mensagem = "O(s) campo(s): CÃ“DIGO DO LIVRO";
 		}
 
 		if (txtCodUser.isEmpty()) {
 			if (mensagem == "") {
-				mensagem = "O(s) campo(s): CÓDIGO DO USUÁRIO ";
+				mensagem = "O(s) campo(s): CÃ“DIGO DO USUÃ�RIO ";
 
 			} else {
-				mensagem += ", CÓDIGO DO USUÁRIO";
+				mensagem += ", CÃ“DIGO DO USUÃ�RIO";
 			}
 		}
 
 		if (mensagem != "") {
-			mensagem += " não pode(m) ficar vazio(s).";
+			mensagem += " nÃ£o pode(m) ficar vazio(s).";
 			mensagem += conversor.conferirDataVazia(txfDataDevolucao);
 		} else {
 			mensagem = conversor.conferirDataVazia(txfDataDevolucao);
@@ -87,7 +87,7 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O campo CÓDIGO DO EXEMPLAR não pode ficar vazio.";
+			mensagem = "O campo CÃ“DIGO DO EXEMPLAR nÃ£o pode ficar vazio.";
 		}
 
 		if (mensagem != "") {
@@ -104,12 +104,15 @@ public class AluguelController {
 		}
 	}
 
-	public static String exemplarAlugado(Exemplar exemplar) {
-		String mensagem = "";
-		if (ExemplarController.exemplarAlugado(exemplar)) {
-			mensagem += "Este livro já foi alugado.";
+	
+	 public static String consultarStatus(Exemplar exemplar) {
+		 ExemplarController controller = new ExemplarController();
+		 String mensagem = "";
+		if (controller.consultarStatus(exemplar) == true) {
+			mensagem += "Este livro jÃ¡ foi alugado.";
 		}
 		return mensagem;
-	}
+	 }
+	
 	
 }

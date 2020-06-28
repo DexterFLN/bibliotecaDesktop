@@ -34,9 +34,10 @@ public class ExemplarController {
 		return status;
 	}
 	
+	/*
 	public static boolean exemplarAlugado(Exemplar exemplar) {
 		ExemplarBO exemplarBO = new ExemplarBO();
 		return exemplarBO.exemplarAlugado(exemplar);
 	}
-	
+	*/
 }

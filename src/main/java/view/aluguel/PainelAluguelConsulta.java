@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 
 import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelAluguelConsulta extends JPanel {
 	private JTextField txtPesquisar;
@@ -39,6 +41,7 @@ public class PainelAluguelConsulta extends JPanel {
 		cbBuscar.addItem("Atrasados");
 		cbBuscar.addItem("Código Usuário");
 		cbBuscar.addItem("Código Livro");
+		cbBuscar.setSelectedIndex(-1);
 		add(cbBuscar, "cell 2 1,grow");
 		
 		btnPesquisar = new JButton("Pesquisar");
@@ -57,6 +60,14 @@ public class PainelAluguelConsulta extends JPanel {
 		
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
 		
-
+		this.addListeners();
+	}
+	
+	private void addListeners() {
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 }
