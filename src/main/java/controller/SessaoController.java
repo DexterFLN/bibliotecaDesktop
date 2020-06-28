@@ -40,7 +40,7 @@ public class SessaoController {
 	}
 	
 	public static ArrayList<Sessao> consultarSessoes(int limit) {
-		return SessaoDAO.consultarTodasSessoes(limit);
+		return SessaoBO.consultarSessoes(limit);
 	}
 	
 }

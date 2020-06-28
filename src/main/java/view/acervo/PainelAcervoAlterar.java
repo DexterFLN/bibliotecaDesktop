@@ -3,6 +3,7 @@ package view.acervo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,11 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
+import controller.ExemplarController;
 import controller.LivroController;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JFormattedTextField;
 
 public class PainelAcervoAlterar extends JPanel {
 
@@ -24,19 +28,18 @@ public class PainelAcervoAlterar extends JPanel {
 	private JTextField txtCodigoLivro;
 	private JTextField txtEdicao;
 	private JComboBox cbSessao;
-	private JComboBox cbAno;
-	private JComboBox cbQuantidade;
 	private JTextField txtCodigo;
+	private JFormattedTextField txfAno;
+	private JFormattedTextField txfQuantidade;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelAcervoAlterar() {
-		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px][144px,grow]",
-				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
+		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]", "[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
-		JLabel lblDigiteCodigo = new JLabel("Digite o C\u00F3digo");
-		add(lblDigiteCodigo, "cell 1 1,alignx left");
+		JLabel lblDigiteCodigo = new JLabel("Digite o Codigo");
+		add(lblDigiteCodigo, "cell 1 1,alignx center");
 
 		txtCodigo = new JTextField();
 		add(txtCodigo, "cell 2 1,grow");
@@ -46,6 +49,7 @@ public class PainelAcervoAlterar extends JPanel {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LivroController livroController = new LivroController();
+				ExemplarController exemplarController = new ExemplarController();
 				Livro livro = new Livro();
 
 				int idLivro = Integer.valueOf(txtCodigo.getText());
@@ -55,13 +59,14 @@ public class PainelAcervoAlterar extends JPanel {
 				txtAutor.setText(livro.getAutor());
 				txtEdicao.setText(Integer.toString(livro.getEdicao()));
 				cbSessao.setSelectedItem(livro.getSessao());
-				cbAno.setSelectedItem(livro.getAno());
-
+				txfAno.setText(Integer.toString(livro.getAno()));
+				//txfQuantidade.setText(Integer.toString(exemplarController.consultarQuantidade(idLivro)));
+				
 			}
 		});
-		add(btnPesquisar, "cell 3 1,alignx center,growy");
+		add(btnPesquisar, "cell 3 1,grow");
 
-		JLabel lblTitulo = new JLabel("T�tulo");
+		JLabel lblTitulo = new JLabel("Titulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
 
 		JLabel lblNewLabel_3 = new JLabel("Ano");
@@ -70,28 +75,25 @@ public class PainelAcervoAlterar extends JPanel {
 		txtTitulo = new JTextField();
 		add(txtTitulo, "cell 1 3 2 1,grow");
 		txtTitulo.setColumns(10);
-
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("####");
+			txfAno = new JFormattedTextField(maskFormatter);
+			add(txfAno, "cell 3 3,grow");
+		} catch (ParseException e1){
+			 System.out.println("Erro na mascara de formatacao de ano no painel de alterar livro.");
+	         e1.printStackTrace();
+		}
+		
 		JLabel lblEditora = new JLabel("Editora");
 		add(lblEditora, "cell 1 4,alignx left,aligny center");
 
-		JLabel lblEdicao = new JLabel("Edi��o");
+		JLabel lblEdicao = new JLabel("Edicao");
 		add(lblEdicao, "cell 3 4");
 
 		txtEditora = new JTextField();
 		add(txtEditora, "cell 1 5 2 1,grow");
 		txtEditora.setColumns(10);
-
-		cbQuantidade = new JComboBox();
-		for (int i = 1; i <= 20; i++) {
-			cbQuantidade.addItem("" + i + "");
-			add(cbQuantidade, "cell 3 7,grow");
-		}
-
-		cbAno = new JComboBox();
-		for (int i = 1990; i <= 2020; i++) {
-			cbAno.addItem("" + i + "");
-			add(cbAno, "cell 3 3,grow");
-		}
 
 		txtEdicao = new JTextField();
 		add(txtEdicao, "cell 3 5,grow");
@@ -108,16 +110,25 @@ public class PainelAcervoAlterar extends JPanel {
 		add(txtAutor, "cell 1 7 2 1,grow");
 		txtAutor.setColumns(10);
 
-		JLabel lblSessao = new JLabel("Sess�o");
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("###");
+			txfQuantidade = new JFormattedTextField(maskFormatter);
+			add(txfQuantidade, "cell 3 7,grow");
+		} catch (ParseException e1){
+			 System.out.println("Erro na mascara de formatacao de quantidade no painel de alterar livro.");
+	         e1.printStackTrace();
+		}
+		
+		JLabel lblSessao = new JLabel("Sessao");
 		add(lblSessao, "cell 1 8,alignx left,aligny center");
 
 		cbSessao = new JComboBox();
-		cbSessao.addItem("Fic��o");
-		cbSessao.addItem("Literatura Cl�ssica");
+		cbSessao.addItem("Ficcao");
+		cbSessao.addItem("Literatura Classica");
 		cbSessao.addItem("Romance");
 		cbSessao.addItem("Auto Ajuda");
 		cbSessao.addItem("Suspense");
-		cbSessao.addItem("T�cnicos");
+		cbSessao.addItem("Tecnicos");
 
 		add(cbSessao, "cell 1 9 3 1,grow");
 
@@ -128,26 +139,22 @@ public class PainelAcervoAlterar extends JPanel {
 			}
 		});
 
-		JButton btnSalvarAlteraes = new JButton("Salvar Alterações");
+		JButton btnSalvarAlteraes = new JButton("Salvar Alteracoes");
 		btnSalvarAlteraes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LivroController livroController = new LivroController();
-				String ano = (String) cbAno.getSelectedItem();
+				// String ano = "ano";
 				livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-						txtEdicao.getText(), ano, (Sessao) cbSessao.getSelectedItem());
+						txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));
-		add(btnSalvarAlteraes, "cell 2 10,aligny center");
+		add(btnSalvarAlteraes, "cell 2 10,grow");
 		btnExcluir.setBackground(new Color(229, 13, 13, 90));
-		add(btnExcluir, "cell 3 10,growx");
+		add(btnExcluir, "cell 3 10,grow");
 
 	}
 
-	private void preenchercbAno() {
-		for (int i = 2020; i >= 1500; i--) {
-			cbAno.addItem(i);
-		}
-	}
+	
 
 }

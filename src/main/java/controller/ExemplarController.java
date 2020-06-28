@@ -3,9 +3,11 @@ package controller;
 import java.util.ArrayList;
 
 import model.bo.ExemplarBO;
+import model.dao.SessaoDAO;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
+import model.vo.Sessao;
 
 public class ExemplarController {
 	
@@ -33,11 +35,6 @@ public class ExemplarController {
 		boolean status = bo.consultarStatus(exemplarAConsultar);
 		return status;
 	}
+
 	
-	/*
-	public static boolean exemplarAlugado(Exemplar exemplar) {
-		ExemplarBO exemplarBO = new ExemplarBO();
-		return exemplarBO.exemplarAlugado(exemplar);
-	}
-	*/
 }
