@@ -8,15 +8,15 @@ import model.vo.Sessao;
 public class SessaoBO {
 
 	public static boolean salvarSessao(Sessao sessao) {
-		return SessaoDAO.consultarSessao(sessao).getId() > 0;
+		return SessaoDAO.salvar(sessao).getId() > 0;
 	}
 	
 	public static boolean excluirSessao(Sessao sessao) {
 		return SessaoDAO.excluir(sessao);
 	}
 	
-	public static boolean alterarSessao(Sessao sessao) {
-		return SessaoDAO.alterar(sessao);
+	public static boolean alterarSessao(Sessao sessao, String nomeAntigo) {
+		return SessaoDAO.alterar(sessao, nomeAntigo);
 	}
 	
 	public static Sessao consultarSessao(int id) {		

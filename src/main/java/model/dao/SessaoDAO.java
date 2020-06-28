@@ -63,15 +63,16 @@ public class SessaoDAO {
 		return excluiu;
 	}
 
-	public static boolean alterar(Sessao sessao) {
+	public static boolean alterar(Sessao sessao, String nomeAntigo) {
 		Connection connection = Banco.getConnection();
-		String sql = "UPDATE SESSAO SET nome=?, idBiblioteca=?";
+		String sql = "UPDATE SESSAO SET nome=?, idBiblioteca=? WHERE nome = ?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setString(1, sessao.getNome());
 			preparedStatement.setInt(2, sessao.getBiblioteca().getId());
+			preparedStatement.setString(3, nomeAntigo);
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
@@ -103,6 +104,24 @@ public class SessaoDAO {
 
 		return sessao;
 	}
+	
+	public static Sessao construirSessoesDoResultset(ResultSet resultSet) {
+		Biblioteca biblioteca = new Biblioteca();
+		Sessao sessao = new Sessao();
+		sessao.setBiblioteca(biblioteca);
+		try {
+				sessao.setId(resultSet.getInt(1));
+				sessao.setNome(resultSet.getString(2));
+				sessao.getBiblioteca().setId(resultSet.getInt(4)); //3
+				sessao.getBiblioteca().setNome(resultSet.getString(5));
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir sessao do resultSet.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+
+		return sessao;
+	}
+
 
 	public static Sessao consultarSessao(Sessao sessao) {
 		Connection connection = Banco.getConnection();
@@ -157,8 +176,7 @@ public class SessaoDAO {
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id LIMIT ?";
 
 		Connection connection = Banco.getConnection();
-		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
-				PreparedStatement.RETURN_GENERATED_KEYS);
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 		ResultSet resultSet = null;
 		ArrayList<Sessao> sessoes = new ArrayList<Sessao>();
 
@@ -166,13 +184,13 @@ public class SessaoDAO {
 			preparedStatement.setInt(1, limit);
 			resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-				Sessao sessao = construirSessaoDoResultset(resultSet);
+			while (resultSet.next() && resultSet != null) {
+				Sessao sessao = construirSessoesDoResultset(resultSet);
 				sessoes.add(sessao);
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro consultar todas as sess�es.");
+			System.out.println("Erro consultar todas as sessoes.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);
