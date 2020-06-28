@@ -32,4 +32,5 @@ public class ExemplarBO {
 		return dao.consultarStatus(exemplarAConsultar);
 	}
 
+
 }
