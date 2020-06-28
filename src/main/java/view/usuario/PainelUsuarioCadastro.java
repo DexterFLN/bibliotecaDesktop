@@ -65,32 +65,32 @@ public class PainelUsuarioCadastro extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelUsuarioCadastro() {
-		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]", "[22px,grow][29][29][29][29][29][29][][][53.00][29][29][][][][][grow]"));
+		setLayout(new MigLayout("", "[102.00px,grow][184.00px,grow][160.00px,grow][32.00px,grow][162.00px,grow][176.00px,grow][102.00px,grow]", "[22px,grow][29px][29px][29px][29px][29px][29px][][][53.00px][29px][29px][][][][][grow]"));
 
 		lblNome = new JLabel("Nome");
-		add(lblNome, "cell 1 1,alignx left");
+		add(lblNome, "cell 1 1,alignx left,growy");
 
 		lblBiblioteca = new Label("Biblioteca");
-		add(lblBiblioteca, "cell 5 1");
+		add(lblBiblioteca, "cell 5 1,alignx left,aligny center");
 
 		txtNome = new JTextField();
-		add(txtNome, "cell 1 2 2 1,growx");
+		add(txtNome, "cell 1 2 2 1,grow");
 		txtNome.setColumns(10);
 
 		cbBiblioteca = new JComboBox();
-		add(cbBiblioteca, "cell 5 2,growx");
+		add(cbBiblioteca, "cell 5 2,grow");
 
 		lblSobrenome = new JLabel("Sobrenome");
-		add(lblSobrenome, "cell 1 3,alignx left");
+		add(lblSobrenome, "cell 1 3,alignx left,growy");
 
 		lblTelefone = new JLabel("Telefone");
-		add(lblTelefone, "cell 4 3,alignx left");
+		add(lblTelefone, "cell 4 3,alignx left,growy");
 		
 		lblCpf = new JLabel("CPF");
-		add(lblCpf, "cell 5 3");
+		add(lblCpf, "cell 5 3,alignx left,growy");
 
 		txtSobrenome = new JTextField();
-		add(txtSobrenome, "cell 1 4 2 1,growx");
+		add(txtSobrenome, "cell 1 4 2 1,grow");
 		txtSobrenome.setColumns(10);
 
 		
@@ -98,7 +98,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("########");
 			txtTelefone = new JFormattedTextField(maskFormatter);
-			add(txtTelefone, "cell 4 4,growx");
+			add(txtTelefone, "cell 4 4,grow");
 			txtTelefone.setColumns(10);
 		} catch (Exception e) {
 			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
@@ -109,7 +109,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
 			txtCpf = new JFormattedTextField(maskFormatter);
-			add(txtCpf, "cell 5 4,growx");
+			add(txtCpf, "cell 5 4,grow");
 			txtCpf.setColumns(10);
 		} catch (Exception e) {
 			System.out.println("Erro na máscara de formatação de CPf no painel de cadastro de usuário.");
@@ -117,10 +117,10 @@ public class PainelUsuarioCadastro extends JPanel {
 		}
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
-		add(lblDataNascimento, "cell 4 5,alignx left");
+		add(lblDataNascimento, "cell 4 5,alignx left,growy");
 
 		JLabel lblDdd = new JLabel("DDD");
-		add(lblDdd, "cell 4 1,alignx left");
+		add(lblDdd, "cell 4 1,alignx left,growy");
 		
 
 		try {
@@ -130,12 +130,12 @@ public class PainelUsuarioCadastro extends JPanel {
 			add(btnSalvarUsurio, "cell 2 15,grow");
 
 			lblCep = new JLabel("CEP");
-			add(lblCep, "cell 1 10");
+			add(lblCep, "cell 1 10,alignx left,growy");
 
 			lblUf = new JLabel("UF");
-			add(lblUf, "cell 5 10,alignx left");
+			add(lblUf, "cell 5 10,alignx left,growy");
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
-			add(txtDataNascimento, "cell 4 6,growx");
+			add(txtDataNascimento, "cell 4 6,grow");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
 			e1.printStackTrace();
@@ -144,23 +144,23 @@ public class PainelUsuarioCadastro extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##");
 			txtDdd = new JFormattedTextField(maskFormatter);
-			add(txtDdd, "cell 4 2,growx");
+			add(txtDdd, "cell 4 2,grow");
 		} catch (ParseException e1) {
 			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
 			e1.printStackTrace();
 		}
 
 		JLabel lblEmail = new JLabel("Email");
-		add(lblEmail, "cell 1 5,alignx left");
+		add(lblEmail, "cell 1 5,alignx left,growy");
 
 		txtEmail = new JTextField();
-		add(txtEmail, "cell 1 6 2 1,growx");
+		add(txtEmail, "cell 1 6 2 1,grow");
 		txtEmail.setColumns(10);
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("########");
 			txtCEP = new JFormattedTextField(maskFormatter);
-			add(txtCEP, "cell 1 11 2 1,growx");
+			add(txtCEP, "cell 1 11 2 1,grow");
 			txtCEP.setColumns(10);
 		} catch (Exception e) {
 			System.out.println("Erro na máscara de formatação de Telefon no painel de cadastro de usuário.");
@@ -168,38 +168,38 @@ public class PainelUsuarioCadastro extends JPanel {
 		}
 
 		cbUf = new JComboBox();
-		add(cbUf, "cell 5 11,growx");
+		add(cbUf, "cell 5 11,grow");
 
 		lblEndereo = new JLabel("Rua");
-		add(lblEndereo, "cell 1 12,alignx left");
+		add(lblEndereo, "cell 1 12,alignx left,growy");
 
 		lblNumero = new JLabel("Numero");
-		add(lblNumero, "cell 4 12,alignx left");
+		add(lblNumero, "cell 4 12,alignx left,growy");
 
 		lblBairro = new JLabel("Bairro");
-		add(lblBairro, "cell 5 12");
+		add(lblBairro, "cell 5 12,alignx left,growy");
 
 		lblCidade = new JLabel("Cidade");
-		add(lblCidade, "cell 4 10,alignx left");
+		add(lblCidade, "cell 4 10,alignx left,growy");
 
 		txtRua = new JTextField();
-		add(txtRua, "cell 1 13 2 1,growx");
+		add(txtRua, "cell 1 13 2 1,grow");
 		txtRua.setColumns(10);
 
 		txtNumero = new JTextField();
-		add(txtNumero, "cell 4 13,growx");
+		add(txtNumero, "cell 4 13,grow");
 		txtNumero.setColumns(10);
 
 		txtBairro = new JTextField();
-		add(txtBairro, "cell 5 13,growx");
+		add(txtBairro, "cell 5 13,grow");
 		txtBairro.setColumns(10);
 
 		txtCidade = new JTextField();
-		add(txtCidade, "cell 4 11,growx");
+		add(txtCidade, "cell 4 11,grow");
 		txtCidade.setColumns(10);
 
 		btnLimpar = new JButton("Limpar");
-		add(btnLimpar, "cell 4 15,growx");
+		add(btnLimpar, "cell 4 15,grow");
 
 		this.preencherComboboxBiblioteca();
 		this.preencherComboUf();

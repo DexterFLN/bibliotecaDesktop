@@ -103,11 +103,14 @@ public class LivroController {
 	
 	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
 		return livroBo.consultarLivrosPorSeletor(seletor);
-		
 	}
 
 	public Livro consultarLivroPorId(int id) {
 		return livroBo.consultarLivroPorId(id);
+	}
+
+	public Livro consultarLivroPorIdParaExemplares(int id) {
+		return livroBo.consultarLivroPorIdParaExemplares(id);
 	}
 	
 }
