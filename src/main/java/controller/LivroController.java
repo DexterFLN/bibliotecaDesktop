@@ -101,5 +101,12 @@ public class LivroController {
 		return livroBo.consultarLivrosPorSeletor(seletor);
 		
 	}
+
+	public Livro consultarLivroPorId(int id) {
+		return livroBo.consultarLivroPorId(id);
+	}
+	
+	
+	
 	
 }

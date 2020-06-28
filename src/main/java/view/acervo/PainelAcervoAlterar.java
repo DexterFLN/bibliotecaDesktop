@@ -3,14 +3,25 @@ package view.acervo;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import controller.AluguelController;
+import controller.ExemplarController;
+import controller.LivroController;
+import model.vo.Aluguel;
+import model.vo.Exemplar;
+import model.vo.Livro;
+import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
 
 public class PainelAcervoAlterar extends JPanel {
@@ -40,12 +51,24 @@ public class PainelAcervoAlterar extends JPanel {
 		add(txtCodigo, "cell 2 1,grow");
 		txtCodigo.setColumns(10);
 
-		JButton btnNewButton = new JButton("Pesquisar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LivroController livroController = new LivroController();
+				Livro livro = new Livro();
+
+				int idLivro = Integer.valueOf(txtCodigo.getText());
+				livro = livroController.consultarLivroPorId(idLivro);
+				txtTitulo.setText(livro.getNome());
+				txtEditora.setText(livro.getEditora());
+				txtAutor.setText(livro.getAutor());
+				txtEdicao.setText(Integer.toString(livro.getEdicao()));
+				cbSessao.setSelectedItem(livro.getSessao());
+				cbAno.setSelectedItem(livro.getAno());
+
 			}
 		});
-		add(btnNewButton, "cell 3 1,alignx center,growy");
+		add(btnPesquisar, "cell 3 1,alignx center,growy");
 
 		JLabel lblTitulo = new JLabel("T�tulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
@@ -114,12 +137,17 @@ public class PainelAcervoAlterar extends JPanel {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 
 		JButton btnSalvarAlteraes = new JButton("Salvar Alterações");
 		btnSalvarAlteraes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LivroController livroController = new LivroController();
+				String ano = (String) cbAno.getSelectedItem();
+				livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
+						txtEdicao.getText(), ano, (Sessao) cbSessao.getSelectedItem());
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));

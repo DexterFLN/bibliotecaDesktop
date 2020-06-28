@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+<<<<<<< HEAD:CREATE-DATABASE.sql
+>>>>>>> 407420d9cc5630dd72da68a8136397408c380ecd
 DROP DATABASE IF EXISTS ATLAS;
 CREATE DATABASE ATLAS;
 USE ATLAS;
@@ -60,7 +64,10 @@ CREATE TABLE USUARIO (
     email VARCHAR(40) NOT NULL,
     ddd VARCHAR(2),
     fone VARCHAR(8),
+<<<<<<< HEAD
     cpf VARCHAR(11) NOT NULL UNIQUE,
+=======
+>>>>>>> 407420d9cc5630dd72da68a8136397408c380ecd
     PRIMARY KEY(id),
     FOREIGN KEY(idBiblioteca) REFERENCES BIBLIOTECA(id),
     FOREIGN KEY(idEndereco) REFERENCES ENDERECO(id)
@@ -80,7 +87,12 @@ CREATE TABLE ALUGUEL (
 
 -- BIBLIOTECA, SESSAO, ENDERECO, LIVRO, EXEMPLAR, USUARIO, ALUGUEL
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+=======
+>>>>>>> c3509e45ed61b286af1b45c983664e74ec2ff6ae:scripts/dml.sql
+>>>>>>> 407420d9cc5630dd72da68a8136397408c380ecd
 INSERT INTO BIBLIOTECA (nome) VALUES ('Atlas');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Pergamum');
 INSERT INTO BIBLIOTECA (nome) VALUES ('Barca dos Livros');
@@ -116,6 +128,7 @@ INSERT INTO EXEMPLAR VALUES (4, 4, 1);
 INSERT INTO EXEMPLAR VALUES (5, 5, 1);
 INSERT INTO EXEMPLAR VALUES (6, 6, 1);
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857', '48', '991737576');
 INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857', '48', '911737572');
@@ -131,6 +144,14 @@ INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gma
 INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123', '12345678905');
 INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657', '12345678906');
 >>>>>>> Stashed changes
+=======
+INSERT INTO USUARIO VALUES (1, 1, 1, 'Arthur', 'Martins', 1, '2000-07-20', '1@gmail.com', '48', '32238857');
+INSERT INTO USUARIO VALUES (2, 2, 2, 'Adriano', 'Rossetto', 2, '1987-03-10', '2@gmail.com', '48', '32348857');
+INSERT INTO USUARIO VALUES (3, 3, 3, 'Gustavo', 'Rodriguez', 3, '1998-02-20', '3@gmail.com', '48', '33348857');
+INSERT INTO USUARIO VALUES (4, 4, 4, 'Vitor', 'Ribeiro', 4, '2000-05-12', '4@gmail.com', '48', '33058857');
+INSERT INTO USUARIO VALUES (5, 5, 5, 'Nélio', 'Alves', 5, '1980-07-10', '5@gmail.com', '48', '33028123');
+INSERT INTO USUARIO VALUES (6, 6, 6, 'Sandro', 'Machado', 6, '1996-02-22', '5@gmail.com', '48', '32045657');
+>>>>>>> 407420d9cc5630dd72da68a8136397408c380ecd
 
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (1, 1, '2020-03-04', '2020-03-15');
 INSERT INTO ALUGUEL (idExemplar, idUsuario, dataLocacao, devolucaoPrevista) VALUES (2, 2, '2020-04-05', '2020-05-15');

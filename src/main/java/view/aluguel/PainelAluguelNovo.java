@@ -26,6 +26,7 @@ import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
 
 public class PainelAluguelNovo extends JPanel {
+						
 	private JTextField txtTitulo;
 	private JButton btnCadastrar;
 	private JTextField txtCodigoLivro;
@@ -166,7 +167,7 @@ public class PainelAluguelNovo extends JPanel {
 					aluguel.setExemplar(exemplar);
 					aluguel.setUsuario(usuario);
 
-					String mensagem2 = AluguelController.exemplarAlugado(exemplar);
+					String mensagem2 = AluguelController.consultarStatus(exemplar);
 					if (mensagem2.isEmpty()) {
 						try {
 							controller.salvarAluguel(aluguel);

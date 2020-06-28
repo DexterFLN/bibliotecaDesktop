@@ -3,10 +3,12 @@ package controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import model.bo.AluguelBO;
+import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
 import util.ConversorData;
@@ -19,6 +21,12 @@ public class AluguelController {
 		return aluguel;
 	}
 
+	
+	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
+		AluguelBO aluguelBO = new AluguelBO();
+		return aluguelBO.consultarAluguelSeletor(aluguelSeletor);
+	}
+	
 	public Aluguel renovarAluguel(Aluguel aluguel) {
 		AluguelBO bo = new AluguelBO();
 		bo.renovar(aluguel);
@@ -36,7 +44,7 @@ public class AluguelController {
 			bo.devolver(aluguel);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Para efetuar a devolução, a data informada deve ser igual a data de hoje!");
+					"Para efetuar a devoluÃ§Ã£o, a data informada deve ser igual a data de hoje!");
 		}
 		return aluguel;
 
@@ -54,20 +62,20 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O(s) campo(s): CÓDIGO DO LIVRO";
+			mensagem = "O(s) campo(s): CÃ“DIGO DO LIVRO";
 		}
 
 		if (txtCodUser.isEmpty()) {
 			if (mensagem == "") {
-				mensagem = "O(s) campo(s): CÓDIGO DO USUÁRIO ";
+				mensagem = "O(s) campo(s): CÃ“DIGO DO USUÃ�RIO ";
 
 			} else {
-				mensagem += ", CÓDIGO DO USUÁRIO";
+				mensagem += ", CÃ“DIGO DO USUÃ�RIO";
 			}
 		}
 
 		if (mensagem != "") {
-			mensagem += " não pode(m) ficar vazio(s).";
+			mensagem += " nÃ£o pode(m) ficar vazio(s).";
 			mensagem += conversor.conferirDataVazia(txfDataDevolucao);
 		} else {
 			mensagem = conversor.conferirDataVazia(txfDataDevolucao);
@@ -104,12 +112,15 @@ public class AluguelController {
 		}
 	}
 
-	public static String exemplarAlugado(Exemplar exemplar) {
-		String mensagem = "";
-		if (ExemplarController.exemplarAlugado(exemplar)) {
+	
+	 public static String consultarStatus(Exemplar exemplar) {
+		 ExemplarController controller = new ExemplarController();
+		 String mensagem = "";
+		if (controller.consultarStatus(exemplar) == true) {
 			mensagem += "Este livro já foi alugado.";
 		}
 		return mensagem;
-	}
+	 }
+	
 	
 }
