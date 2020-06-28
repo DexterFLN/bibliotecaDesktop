@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JFormattedTextField;
+
 import model.bo.ExemplarBO;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
@@ -32,6 +34,18 @@ public class ExemplarController {
 		ExemplarBO bo = new ExemplarBO();
 		boolean status = bo.consultarStatus(exemplarAConsultar);
 		return status;
+	}
+	
+	public static String validarQuantidade(JFormattedTextField quantidadeExemplares, int idLivro) {
+		String mensagem = "";
+		int quantidade = Integer.parseInt(quantidadeExemplares.getText());
+		boolean maiorQueQuantidade = ExemplarBO.alteracaoValida(quantidade, idLivro);
+		
+		if(maiorQueQuantidade == false) {
+			mensagem += "A quantidade informada tem que ser igual ou maior do que a quantidade atual.";
+		}
+		
+		return mensagem;
 	}
 	
 	/*

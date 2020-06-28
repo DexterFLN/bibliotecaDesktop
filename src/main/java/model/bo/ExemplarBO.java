@@ -3,7 +3,6 @@ package model.bo;
 import java.util.ArrayList;
 
 import model.dao.ExemplarDAO;
-import model.seletor.ExemplarSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
@@ -29,6 +28,10 @@ public class ExemplarBO {
 	public boolean consultarStatus(Exemplar exemplarAConsultar) {
 		ExemplarDAO dao = new ExemplarDAO();
 		return dao.consultarStatus(exemplarAConsultar);
+	}
+
+	public static boolean alteracaoValida(int quantidade, int idLivro) {
+		return quantidade >= ExemplarDAO.pesquisarQuantidade(idLivro);
 	}
 
 
