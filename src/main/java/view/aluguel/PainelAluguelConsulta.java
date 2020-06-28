@@ -10,6 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import controller.AluguelController;
+import model.seletor.AluguelSeletor;
+import model.vo.Aluguel;
 import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.ActionListener;
@@ -21,6 +24,8 @@ public class PainelAluguelConsulta extends JPanel {
 	private JButton btnPesquisar;
 	private String[] nomesColunas = {"T√≠tulo", "Autor", "Ano", "Exemplares"};
 	private ArrayList<Livro> livros;
+	private ArrayList<Aluguel> alugueis;
+	private JComboBox cbBuscar;
 
 	/**
 	 * Create the panel.
@@ -37,11 +42,11 @@ public class PainelAluguelConsulta extends JPanel {
 		JLabel lblBuscar = new JLabel("Buscar por");
 		add(lblBuscar, "cell 1 1,alignx right,aligny center");
 		
-		JComboBox cbBuscar = new JComboBox();
+		cbBuscar = new JComboBox();
+		cbBuscar.addItem("SELECIONE");
 		cbBuscar.addItem("Atrasados");
-		cbBuscar.addItem("C√≥digo Usu√°rio");
-		cbBuscar.addItem("C√≥digo Livro");
-		cbBuscar.setSelectedIndex(-1);
+		cbBuscar.addItem("CÛdigo Usu·rio");
+		cbBuscar.addItem("CÛdigo Exemplar");
 		add(cbBuscar, "cell 2 1,grow");
 		
 		btnPesquisar = new JButton("Pesquisar");
@@ -66,6 +71,13 @@ public class PainelAluguelConsulta extends JPanel {
 	private void addListeners() {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AluguelSeletor aluguelSeletor = new AluguelSeletor();
+				
+				aluguelSeletor.setTermoPesquisa(txtPesquisar.getText());
+				aluguelSeletor.setBuscarPor((String) cbBuscar.getSelectedItem());
+				
+				AluguelController aluguelController = new AluguelController();
+				alugueis = aluguelController.consultarAluguelSeletor(aluguelSeletor);
 				
 			}
 		});
