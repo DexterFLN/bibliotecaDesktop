@@ -23,8 +23,8 @@ public class EnderecoBO {
 		return EnderecoDAO.consultarTodos(limit);
 	}
 
-//	public static boolean alterarEndereco(Endereco endereco) {
-//		return EnderecoDAO.alterar(endereco);
-//	}
+	public static boolean alterarEndereco(Endereco endereco) {
+		return EnderecoDAO.alterar(endereco);
+	}
 	
 }

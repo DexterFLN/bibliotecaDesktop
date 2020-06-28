@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.BibliotecaController;
+import controller.EnderecoController;
 import controller.UsuarioController;
 import model.vo.Biblioteca;
 import model.vo.Endereco;
@@ -199,9 +200,13 @@ public class PainelUsuarioAlterar extends JPanel {
 				endereco.setRua(txtRua.getText());
 				endereco.setNumeroRua(Integer.parseInt(txtNumero.getText()));
 				endereco.setBairro(txtBairro.getText());
+				endereco.setUf(cbUf.getSelectedItem().toString());
 				endereco.setCidade(txtCidade.getText());
 				endereco.setCep(txtCEP.getText());
 				
+				EnderecoController enderecoController = new EnderecoController();
+				String message = enderecoController.alterarEndereco(endereco);
+				JOptionPane.showMessageDialog(null, message, "Alterar Endereco", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		});
@@ -214,6 +219,7 @@ public class PainelUsuarioAlterar extends JPanel {
 
 			}
 		});
+		
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));
