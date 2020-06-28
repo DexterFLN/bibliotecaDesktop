@@ -2,6 +2,8 @@ package view.acervo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -14,10 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ExemplarController;
+import controller.LivroController;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
+import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
 import util.Utils;
+import view.usuario.MainUsuario;
 
 public class PainelAcervoConsulta extends JPanel {
 	private JTextField txtPesquisar;
@@ -27,6 +32,8 @@ public class PainelAcervoConsulta extends JPanel {
 	private ArrayList<Exemplar> exemplares;
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
+	private JPanel painelAcervoAlterar = null;
+
 
 	/**
 	 * Create the panel.
@@ -68,6 +75,19 @@ public class PainelAcervoConsulta extends JPanel {
 		panel.setLayout(new MigLayout("", "[1145.00px,grow,fill]", "[58.00px,grow,fill]"));
 
 		tableResultadoPesquisa = new JTable();
+		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
+				System.out.println(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1));
+				
+				LivroController  livroController = new LivroController();
+				Livro  livroClicado = livroController.consultarLivroPorIdParaExemplares(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro().getId());
+				painelAcervoAlterar = new PainelAcervoAlterar(livroClicado);
+				MainAcervo.switchPanel(painelAcervoAlterar);
+				
+			}
+		});
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");

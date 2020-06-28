@@ -18,7 +18,7 @@ public class MainAcervo extends JPanel {
 	
 	private JPanel painelAcervoConsulta = new PainelAcervoConsulta();
 	private JPanel painelAcervoCadastro = new PainelAcervoCadastro();
-	private JPanel painelAcervoAlterar = new PainelAcervoAlterar();
+	private JPanel painelAcervoAlterar = new PainelAcervoAlterar(null);
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
@@ -85,7 +85,7 @@ public class MainAcervo extends JPanel {
 		
 	}
 	
-	private static void switchPanel(JPanel panel) {
+	protected static void switchPanel(JPanel panel) {
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
