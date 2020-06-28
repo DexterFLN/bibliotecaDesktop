@@ -11,7 +11,7 @@ public class SessaoController {
 	public static String salvarSessao(Sessao sessao) {
 		String mensagem = "";
 		if(!SessaoBO.salvarSessao(sessao)) {
-			mensagem += "Não foi possível salvar sessão.";
+			mensagem += "Nao foi possivel salvar sessao.";
 		}
 		
 		return mensagem;
@@ -20,16 +20,16 @@ public class SessaoController {
 	public static String excluirSessao(Sessao sessao) {
 		String mensagem = "";
 		if(!SessaoBO.excluirSessao(sessao)) {
-			mensagem += "Não foi possível excluir sessão.";
+			mensagem += "Nao foi possivel excluir sessao.";
 		}
 		
 		return mensagem;
 	}
 	
-	public static String alterarSessao(Sessao sessao) {
+	public static String alterarSessao(Sessao sessao, String nomeAntigo) {
 		String mensagem = "";
-		if(!SessaoBO.alterarSessao(sessao)) {
-			mensagem += "Não foi possível alterar sessão.";
+		if(!SessaoBO.alterarSessao(sessao, nomeAntigo)) {
+			mensagem += "Nao foi possivel alterar sessao.";
 		}
 		
 		return mensagem;

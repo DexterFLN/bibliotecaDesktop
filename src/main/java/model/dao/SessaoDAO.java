@@ -63,15 +63,16 @@ public class SessaoDAO {
 		return excluiu;
 	}
 
-	public static boolean alterar(Sessao sessao) {
+	public static boolean alterar(Sessao sessao, String nomeAntigo) {
 		Connection connection = Banco.getConnection();
-		String sql = "UPDATE SESSAO SET nome=?, idBiblioteca=?";
+		String sql = "UPDATE SESSAO SET nome=?, idBiblioteca=? WHERE nome = ?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setString(1, sessao.getNome());
 			preparedStatement.setInt(2, sessao.getBiblioteca().getId());
+			preparedStatement.setString(3, nomeAntigo);
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
@@ -172,7 +173,7 @@ public class SessaoDAO {
 			}
 
 		} catch (SQLException ex) {
-			System.out.println("Erro consultar todas as sess�es.");
+			System.out.println("Erro consultar todas as sessoes.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closeResultSet(resultSet);

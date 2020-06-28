@@ -52,4 +52,10 @@ public class Sessao {
 		this.livros = livros;
 	}
 
+	@Override
+	public String toString() {
+		return "\nID: " + this.getId() + "\nNome: " + this.getNome()
+				+ "\nBiblioteca: " + this.getBiblioteca().getNome();
+	}
+	
 }
