@@ -12,12 +12,12 @@ INSERT INTO SESSAO (nome, idBiblioteca) VALUES ('Infantil', 4);
 INSERT INTO SESSAO (nome, idBiblioteca) VALUES ('Terror', 5);
 INSERT INTO SESSAO (nome, idBiblioteca) VALUES ('Suspense', 6);
 
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua um', 1, 'bairro numero 1', 'cidade numero 1', '48', '11111111');
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua dois', 2, 'bairro numero 2', 'cidade numero 2', '48', '22222222');
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua três', 3, 'bairro numero 3', 'cidade numero 3', '48', '33333333');
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua quatro', 4, 'bairro numero 4', 'cidade numero 4', '48', '44444444');
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua cinco', 5, 'bairro numero 5', 'cidade numero 5', '48', '55555555');
-INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua seis', 6, 'bairro numero 6', 'cidade numero 6', '48', '66666666');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua um', '1', 'bairro numero 1', 'cidade numero 1', '48', '11111111');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua dois', '2', 'bairro numero 2', 'cidade numero 2', '48', '22222222');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua três', '3', 'bairro numero 3', 'cidade numero 3', '48', '33333333');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua quatro', '4', 'bairro numero 4', 'cidade numero 4', '48', '44444444');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua cinco', '5', 'bairro numero 5', 'cidade numero 5', '48', '55555555');
+INSERT INTO ENDERECO (rua, numeroRua, bairro, cidade, uf, cep) VALUES ('rua seis', '6', 'bairro numero 6', 'cidade numero 6', '48', '66666666');
 
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (1, 'livro um', 'autor um', 'editora um', 1, '2001');
 INSERT INTO LIVRO (idSessao, nome, autor, editora, edicao, ano) VALUES (2, 'livro dois', 'autor dois', 'editora dois', 2, '2002');
