@@ -29,5 +29,11 @@ public class ExemplarController {
 	public Exemplar consultarExemplar(int id) {
 		return exemplarBO.consultarExemplar(id);
     }
+
+	public boolean consultarStatus(Exemplar exemplarAConsultar) {
+		ExemplarBO bo = new ExemplarBO();
+		boolean status = bo.consultarStatus(exemplarAConsultar);
+		return status;
+	}
 	
 }
