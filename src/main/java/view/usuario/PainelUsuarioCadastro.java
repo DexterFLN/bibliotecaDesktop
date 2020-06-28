@@ -16,7 +16,6 @@ import net.miginfocom.swing.MigLayout;
 import view.endereco.PainelEnderecoCadastro;
 
 public class PainelUsuarioCadastro extends JPanel {
-	
 	private JTextField txtNome;
 	private JTextField txtSobrenome;
 	private JTextField txtEmail;
@@ -24,9 +23,7 @@ public class PainelUsuarioCadastro extends JPanel {
 	private JTextField txtFoneFixo;
 	private JTextField txtDDDMovel;
 	private JTextField txtFoneMovel;
-	private PainelEnderecoCadastro painelEnderecoCadastro;
 	
-
 	/**
 	 * Create the panel.
 	 */
@@ -116,11 +113,9 @@ public class PainelUsuarioCadastro extends JPanel {
 
 		JButton btnEndereco = new JButton("Endere\u00E7o");
 		btnEndereco.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent arg0) {
-				painelEnderecoCadastro.setVisible(true);
+				
 			}
-
 		});
 
 		add(btnEndereco, "cell 3 6 2 1,growx");
@@ -135,18 +130,10 @@ public class PainelUsuarioCadastro extends JPanel {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 			}
 		});
 		add(btnCadastrar, "cell 2 10");
 
-
-		
-	
-	    }
-		
-
+	}
 
 }
-
-
