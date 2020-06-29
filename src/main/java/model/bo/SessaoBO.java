@@ -27,4 +27,8 @@ public class SessaoBO {
 		return SessaoDAO.consultarTodasSessoes(limit);
 	}
 
+	public static Sessao consultarSessaoPorNome(String nome) {
+		return SessaoDAO.consultarSessaoPorNome(nome);
+	}
+
 }

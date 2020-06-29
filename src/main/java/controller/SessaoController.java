@@ -38,7 +38,7 @@ public class SessaoController {
 	}
 	
 	public static Sessao consultarSessao(int id) {
-		return SessaoDAO.consultarSessaoPorId(id);
+		return SessaoBO.consultarSessao(id);
 	}
 	
 	public static ArrayList<Sessao> consultarSessoes(int limit) {
@@ -50,6 +50,10 @@ public class SessaoController {
 		for (Sessao sessao : sessoes) {
 			cbSessao.addItem(sessao);
 		}
+	}
+
+	public static Sessao consultarSessaoPorNome(String nome) {
+		return SessaoBO.consultarSessaoPorNome(nome);
 	}
 	
 }

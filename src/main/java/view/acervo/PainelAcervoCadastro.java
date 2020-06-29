@@ -2,6 +2,7 @@ package view.acervo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.ExemplarController;
 import controller.LivroController;
@@ -16,6 +18,7 @@ import controller.SessaoController;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JFormattedTextField;
 
 public class PainelAcervoCadastro extends JPanel {
 	private JTextField txtTitulo;
@@ -24,8 +27,8 @@ public class PainelAcervoCadastro extends JPanel {
 	private JButton btnCadastrar;
 	private JTextField txtEdicao;
 	private JComboBox cbSessao;
-	private JComboBox cbAno;
 	private JComboBox cbQuantidade;
+	private JFormattedTextField txfAno;
 
 	/**
 	 * Create the panel.
@@ -40,6 +43,15 @@ public class PainelAcervoCadastro extends JPanel {
 		txtTitulo.setText("");
 		add(txtTitulo, "cell 1 2 2 1,grow");
 		txtTitulo.setColumns(10);
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("####");
+			txfAno = new JFormattedTextField(maskFormatter);
+			add(txfAno, "cell 3 2,grow");
+		} catch (ParseException e1) {
+			System.out.println("Erro na mascara de formatacao de ano no painel de alterar livro.");
+			e1.printStackTrace();
+		}
 		
 		JLabel lblEditora = new JLabel("Editora");
 		add(lblEditora, "cell 1 3,alignx left,aligny center");
@@ -79,12 +91,6 @@ public class PainelAcervoCadastro extends JPanel {
 		JLabel lblAno = new JLabel("Ano");
 		add(lblAno, "cell 3 1,alignx left,aligny center");
 		
-		cbAno = new JComboBox();
-		for(int i = 1990; i <= 2020; i++) {
-			cbAno.addItem("" + i + "");
-			add(cbAno, "cell 3 2,grow");
-		}
-		
 		cbSessao = new JComboBox();
 		SessaoController.preencherComboBox(cbSessao);
 		
@@ -109,9 +115,9 @@ public class PainelAcervoCadastro extends JPanel {
 				Livro livro;
 				sessao = (Sessao) cbSessao.getSelectedItem();
 				livroController.validarSessao(sessao);
-				mensagem += livroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText());
+				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), txfAno.getText().trim());
 				if(mensagem.isEmpty()) {
-					livro = livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), (String) cbAno.getSelectedItem(), sessao);
+					livro = livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), txfAno.getText(), sessao);
 					exemplarController.salvarExemplar(livro, (String)cbQuantidade.getSelectedItem(), false);
 				}
 			}

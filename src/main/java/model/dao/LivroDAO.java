@@ -49,7 +49,7 @@ public class LivroDAO {
 		return livro;
 	}
 
-	public static boolean alterar(Livro livro) { // METODO ALTERAR EM CONSTRUCAO
+	public static boolean alterar(Livro livro, Livro dadosNovos) { // METODO ALTERAR EM CONSTRUCAO
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE LIVRO SET nome=?, autor=?, editora=?, edicao=?, ano=?, idSessao=? WHERE id=?";
@@ -57,16 +57,16 @@ public class LivroDAO {
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
 		try {
-			preparedStatement.setString(1, livro.getNome());
-			preparedStatement.setString(2, livro.getAutor());
-			preparedStatement.setString(3, livro.getEditora());
-			preparedStatement.setInt(4, livro.getEdicao());
-			preparedStatement.setInt(5, livro.getAno());
-			preparedStatement.setInt(6, livro.getSessao().getId());
+			preparedStatement.setString(1, dadosNovos.getNome());
+			preparedStatement.setString(2, dadosNovos.getAutor());
+			preparedStatement.setString(3, dadosNovos.getEditora());
+			preparedStatement.setInt(4, dadosNovos.getEdicao());
+			preparedStatement.setInt(5, dadosNovos.getAno());
+			preparedStatement.setInt(6, dadosNovos.getSessao().getId());
 			preparedStatement.setInt(7, livro.getId());
 			registrosAlterados = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println(" Erro ao alterar endereÃ§o. Causa: " + ex.getMessage());
+			System.out.println(" Erro ao alterar o livro. Causa: " + ex.getMessage());
 
 		}
 

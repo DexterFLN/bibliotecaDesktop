@@ -5,21 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
-
 import controller.ExemplarController;
 import controller.LivroController;
 import controller.SessaoController;
-import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
@@ -29,7 +25,6 @@ public class PainelAcervoAlterar extends JPanel {
 	private JTextField txtTitulo;
 	private JTextField txtAutor;
 	private JTextField txtEditora;
-	private JTextField txtCodigoLivro;
 	private JTextField txtEdicao;
 	private JComboBox cbSessao;
 	private JTextField txtCodigo;
@@ -118,10 +113,8 @@ public class PainelAcervoAlterar extends JPanel {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LivroController livroController = new LivroController();
-				ExemplarController exemplarController = new ExemplarController();
 				Livro livro = new Livro();
 				livro = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
-				
 				ExemplarController.excluir(livro);
 		
 			}
@@ -130,21 +123,28 @@ public class PainelAcervoAlterar extends JPanel {
 		JButton btnSalvarAlteraes = new JButton("Salvar Alteracoes");
 		btnSalvarAlteraes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LivroController livroController = new LivroController();
-				// String ano = "ano";
-				// livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(),
-				// txtEditora.getText(),
-				// txtEdicao.getText(), /*ano,*/ (Sessao) cbSessao.getSelectedItem());
-
-				if (!ExemplarController
-						.validarQuantidade(txfQuantidade, Integer.parseInt(txtCodigoLivro.getSelectedText()))
-						.isEmpty()) {
-					JOptionPane joptionpane = new JOptionPane();
-					joptionpane.showMessageDialog(null, ExemplarController.validarQuantidade(txfQuantidade,
-							Integer.parseInt(txtCodigoLivro.getSelectedText())));
+				String mensagem = "";
+				
+				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), txfAno.getText().trim());
+				if(mensagem.isEmpty()) {
+					LivroController livroController = new LivroController();
+					Livro livroDoBD = new Livro();
+					livroDoBD = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
+					
+					Livro dadosNovos = new Livro();
+					dadosNovos.setNome(txtTitulo.getText());
+					dadosNovos.setAno(Integer.parseInt(txfAno.getText().trim()));
+					dadosNovos.setEditora(txtEditora.getText());
+					dadosNovos.setEdicao(Integer.parseInt(txtEdicao.getText()));
+					dadosNovos.setAutor(txtAutor.getText());
+					
+					Sessao sessao = new Sessao();
+					sessao.setNome(cbSessao.getSelectedItem().toString());
+					sessao = SessaoController.consultarSessaoPorNome(sessao.getNome());
+					dadosNovos.setSessao(sessao);
+					
+					LivroController.alterar(livroDoBD, dadosNovos);
 				}
-				;
-
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));

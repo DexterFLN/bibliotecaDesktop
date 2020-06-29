@@ -27,22 +27,22 @@ public class LivroController {
         return livro;
     }
 	
-	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
-        Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, cbAno, sessao);
+	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String ano, Sessao sessao) {
+        Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, ano, sessao);
         livroBo.salvar(livro);
         return livro;
     }
 	
-	public String validarCampos(String titulo, String autor, String editora, String edicao) {
+	public static String validarCampos(String titulo, String autor, String editora, String edicao, String ano) {
 		String mensagem = "O(s) campo(s): ";
 		
 		if(titulo.isEmpty()) {
-			mensagem += "T�TULO";
+			mensagem += "TITULO";
 		}
 		
 		if(autor.isEmpty()) {
 			if(mensagem == "O(s) campo(s): ") {
-				mensagem += "AUTOR ";
+				mensagem += "AUTOR";
 				
 			} else {
 				mensagem += ", AUTOR";
@@ -67,11 +67,20 @@ public class LivroController {
 			}
 		}
 		
+		if(ano.isEmpty()) {
+			if(mensagem == "O(s) campo(s): ") {
+				mensagem += "ANO";
+				
+			} else {
+				mensagem += " e ANO";
+			}
+		}
+		
 		if(mensagem == "O(s) campo(s): ") {
 			mensagem = "";
 			return mensagem;
 		} else {
-			mensagem += " n�o pode(m) ficar vazio(s).";
+			mensagem += " nao pode(m) ficar vazio(s).";
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
@@ -97,6 +106,10 @@ public class LivroController {
 	public static boolean excluir(Livro livro) {
 		boolean excluiu = LivroBO.excluir(livro);
 		return excluiu;
+	}
+
+	public static void alterar(Livro livro, Livro dadosNovos) {
+		LivroBO.alterar(livro, dadosNovos);
 	}
 	
 }
