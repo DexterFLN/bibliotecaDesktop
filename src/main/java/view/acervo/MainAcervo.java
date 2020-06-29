@@ -71,6 +71,7 @@ public class MainAcervo extends JPanel {
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(painelAcervoConsulta);
+				
 			}
 		});
 		
