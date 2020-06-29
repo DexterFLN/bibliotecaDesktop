@@ -127,8 +127,8 @@ public class BibliotecaDAO {
 		try {
 			preparedStatement.setInt(1, biblioteca.getId());
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				biblioteca.setId(resultSet.getInt(1));
 				biblioteca.setNome(resultSet.getString(2));
 			}
@@ -142,7 +142,7 @@ public class BibliotecaDAO {
 		}
 		return biblioteca;
 	}
-	
+
 	public static Biblioteca consultarBibliotecaPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = " SELECT * FROM BIBLIOTECA WHERE id=?";
@@ -154,8 +154,8 @@ public class BibliotecaDAO {
 			biblioteca = new Biblioteca();
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				biblioteca.setId(resultSet.getInt(1));
 				biblioteca.setNome(resultSet.getString(2));
 			}

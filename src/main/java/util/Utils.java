@@ -29,18 +29,18 @@ public class Utils {
 		return cbBuscar;
 
 	}
-	
-	public static List<String> ufsBrasil(){
-		
-		return Arrays.asList("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", 
-				"MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO");
-		  
+
+	public static List<String> ufsBrasil() {
+
+		return Arrays.asList("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB",
+				"PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO");
+
 	}
 
-	public static boolean emailValido(String email){
-		    Matcher matcher = pattern.matcher(email);
-		    return matcher.matches();
-		 }
+	public static boolean emailValido(String email) {
+		Matcher matcher = pattern.matcher(email);
+		return matcher.matches();
+	}
 
 	public static final String executeRegexp(final String text, final String er, final int group, int pattern) {
 		final Matcher matcher = Pattern.compile(er, pattern).matcher(text);
@@ -56,6 +56,5 @@ public class Utils {
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
-	
 
 }

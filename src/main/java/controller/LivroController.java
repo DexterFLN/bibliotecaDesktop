@@ -12,10 +12,11 @@ import model.vo.Livro;
 import model.vo.Sessao;
 
 public class LivroController {
-	
+
 	private LivroBO livroBo = new LivroBO();
 
-	public Livro criarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
+	public Livro criarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno,
+			Sessao sessao) {
 		Livro livro = new Livro();
 		livro.setNome(txtTitulo);
 		livro.setAutor(txtAutor);
@@ -24,59 +25,60 @@ public class LivroController {
 		livro.setAno(Integer.parseInt(cbAno));
 		livro.setSessao(sessao);
 
-        return livro;
-    }
-	
-	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String ano, Sessao sessao) {
-        Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, ano, sessao);
-        livroBo.salvar(livro);
-        return livro;
-    }
-	
+		return livro;
+	}
+
+	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String ano,
+			Sessao sessao) {
+		Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, ano, sessao);
+		livroBo.salvar(livro);
+		return livro;
+	}
+
 	public static String validarCampos(String titulo, String autor, String editora, String edicao, String ano) {
 		String mensagem = "O(s) campo(s): ";
-		
-		if(titulo.isEmpty()) {
+
+		if (titulo.isEmpty()) {
 			mensagem += "TITULO";
 		}
-		
-		if(autor.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (autor.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "AUTOR";
-				
+
 			} else {
 				mensagem += ", AUTOR";
 			}
 		}
-		
-		if(editora.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (editora.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "EDITORA";
-				
+
 			} else {
 				mensagem += ", EDITORA";
 			}
 		}
-		
-		if(edicao.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (edicao.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "EDICAO";
-				
+
 			} else {
 				mensagem += ", EDICAO";
 			}
 		}
-		
-		if(ano.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (ano.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "ANO";
-				
+
 			} else {
 				mensagem += " e ANO";
 			}
 		}
-		
-		if(mensagem == "O(s) campo(s): ") {
+
+		if (mensagem == "O(s) campo(s): ") {
 			mensagem = "";
 			return mensagem;
 		} else {
@@ -84,14 +86,14 @@ public class LivroController {
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
-		
+
 	}
-	
+
 	public Sessao validarSessao(Sessao sessao) {
 		return SessaoController.consultarSessao(sessao.getId());
 	}
-	
-	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
+
+	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
 		return livroBo.consultarLivrosPorSeletor(seletor);
 	}
 
@@ -111,5 +113,5 @@ public class LivroController {
 	public static void alterar(Livro livro, Livro dadosNovos) {
 		LivroBO.alterar(livro, dadosNovos);
 	}
-	
+
 }

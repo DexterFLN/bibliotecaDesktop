@@ -65,7 +65,9 @@ public class PainelUsuarioCadastro extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelUsuarioCadastro() {
-		setLayout(new MigLayout("", "[102.00px,grow][184.00px,grow][160.00px,grow][32.00px,grow][162.00px,grow][176.00px,grow][102.00px,grow]", "[22px,grow][29px][29px][29px][29px][29px][29px][][][53.00px][29px][29px][][][][][grow]"));
+		setLayout(new MigLayout("",
+				"[102.00px,grow][184.00px,grow][160.00px,grow][32.00px,grow][162.00px,grow][176.00px,grow][102.00px,grow]",
+				"[22px,grow][29px][29px][29px][29px][29px][29px][][][53.00px][29px][29px][][][][][grow]"));
 
 		lblNome = new JLabel("Nome");
 		add(lblNome, "cell 1 1,alignx left,growy");
@@ -85,7 +87,7 @@ public class PainelUsuarioCadastro extends JPanel {
 
 		lblTelefone = new JLabel("Telefone");
 		add(lblTelefone, "cell 4 3,alignx left,growy");
-		
+
 		lblCpf = new JLabel("CPF");
 		add(lblCpf, "cell 5 3,alignx left,growy");
 
@@ -93,8 +95,6 @@ public class PainelUsuarioCadastro extends JPanel {
 		add(txtSobrenome, "cell 1 4 2 1,grow");
 		txtSobrenome.setColumns(10);
 
-		
-		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("########");
 			txtTelefone = new JFormattedTextField(maskFormatter);
@@ -104,8 +104,7 @@ public class PainelUsuarioCadastro extends JPanel {
 			System.out.println("Erro na mascara de formatacao de Telefone no painel de cadastro de usuario.");
 			e.printStackTrace();
 		}
-		
-	
+
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
 			txtCpf = new JFormattedTextField(maskFormatter);
@@ -121,7 +120,6 @@ public class PainelUsuarioCadastro extends JPanel {
 
 		JLabel lblDdd = new JLabel("DDD");
 		add(lblDdd, "cell 4 1,alignx left,growy");
-		
 
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
@@ -156,7 +154,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtEmail = new JTextField();
 		add(txtEmail, "cell 1 6 2 1,grow");
 		txtEmail.setColumns(10);
-		
+
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("########");
 			txtCEP = new JFormattedTextField(maskFormatter);
@@ -212,13 +210,14 @@ public class PainelUsuarioCadastro extends JPanel {
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UsuarioController usuarioController = new UsuarioController();
-				String message = usuarioController.cadastrarUsuario(txtNome.getText(), txtSobrenome.getText(), txtEmail.getText(),
-						txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(), txtCpf.getText(),
-						bibliotecas.get(cbBiblioteca.getSelectedIndex()), txtRua.getText(), txtNumero.getText(), txtBairro.getText(), cbUf, txtCidade.getText(), txtCEP.getText());
+				String message = usuarioController.cadastrarUsuario(txtNome.getText(), txtSobrenome.getText(),
+						txtEmail.getText(), txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(),
+						txtCpf.getText(), bibliotecas.get(cbBiblioteca.getSelectedIndex()), txtRua.getText(),
+						txtNumero.getText(), txtBairro.getText(), cbUf, txtCidade.getText(), txtCEP.getText());
 				JOptionPane.showMessageDialog(null, message, "Cadastrar Usuario", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		
+
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtNome.setText("");
@@ -234,7 +233,8 @@ public class PainelUsuarioCadastro extends JPanel {
 				txtDdd.setText("");
 				txtCpf.setText("");
 				cbUf.setSelectedIndex(0);
-				cbBiblioteca.setSelectedIndex(0);;
+				cbBiblioteca.setSelectedIndex(0);
+				;
 			}
 		});
 	}
