@@ -24,11 +24,11 @@ public class UsuarioController {
 		return usuarioBO.consultarUsuarioPorFiltro(usuarioSeletor);
 	}
 
-	public String cadastrarUsuario(String txtNome, String txtSobrenome, String txtEmail, String txtDdd, String txtTelefone, String txtDataNascimento,
-			String cpf, Biblioteca biblioteca, String txtRua, String txtNumero, String txtBairro, JComboBox cbUf,
-			String txtCidade, String txtCEP) {
+	public String cadastrarUsuario(String txtNome, String txtSobrenome, String txtEmail, String txtDdd,
+			String txtTelefone, String txtDataNascimento, String cpf, Biblioteca biblioteca, String txtRua,
+			String txtNumero, String txtBairro, JComboBox cbUf, String txtCidade, String txtCEP) {
 		String message = "";
-		
+
 		Endereco endereco = new Endereco();
 		endereco.setRua(txtRua);
 		endereco.setNumeroRua(txtNumero);
@@ -38,7 +38,7 @@ public class UsuarioController {
 		endereco.setCep(txtCEP);
 
 		message += EnderecoController.validarEndereco(endereco);
-		
+
 		Usuario usuario = new Usuario();
 		usuario.setNome(txtNome.trim());
 		usuario.setSobrenome(txtSobrenome.trim());
@@ -49,24 +49,24 @@ public class UsuarioController {
 		usuario.setBiblioteca(biblioteca);
 		usuario.setEndereco(endereco);
 		usuario.setCpf(cpf.trim().replaceAll("[^0-9]", ""));
-		
+
 		message += validarUsuario(usuario);
-		
-		if(UsuarioBO.existeUsuarioPorCpf(usuario)) {
+
+		if (UsuarioBO.existeUsuarioPorCpf(usuario)) {
 			message += "\n CPF já utilizado! ";
 		}
-		
-		if(message.trim().isEmpty()) {
+
+		if (message.trim().isEmpty()) {
 			message += EnderecoController.salvarEndereco(endereco);
-			if(message.trim().isEmpty()) {
-			usuario = usuarioBO.cadastrarUsuario(usuario);
+			if (message.trim().isEmpty()) {
+				usuario = usuarioBO.cadastrarUsuario(usuario);
 			}
 		}
-		
-		if(message.trim().isEmpty()) {
+
+		if (message.trim().isEmpty()) {
 			message += "Usuário cadastrado com sucesso!";
 		}
-		
+
 		return message;
 	}
 
@@ -97,7 +97,7 @@ public class UsuarioController {
 	public void gerarRelatorio(ArrayList<Usuario> usuarios, String caminhoEscolhido) {
 		usuarioBO.gerarRelatorio(usuarios, caminhoEscolhido);
 	}
-	
+
 	private String validarUsuario(Usuario usuario) {
 		String message = "";
 		if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
@@ -108,13 +108,18 @@ public class UsuarioController {
 			message += "Sobrenome inválido ";
 		} else if (!Utils.emailValido(usuario.getEmail())) {
 			message += "Email inválido ";
-		}else if (usuario.getFone().length() > 8) {
+		} else if (usuario.getFone().length() > 8) {
 			message += "Telefone inválido ";
-		}else if(usuario.getCpf().trim().length() != 11) {
+		} else if (usuario.getCpf().trim().length() != 11) {
 			message += "CPF inválido";
 		}
-		return message;	
-		
+		return message;
+
+	}
+
+	public boolean excluirUsuario(Usuario usuario) {
+		return usuarioBO.excluirUsuario(usuario);
+
 	}
 
 }
