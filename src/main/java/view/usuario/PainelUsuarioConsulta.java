@@ -29,7 +29,7 @@ public class PainelUsuarioConsulta extends JPanel {
 	private JButton btnPesquisar;
 	private JComboBox cbBuscarPor;
 	private JLabel lblBuscarPor;
-	private String[] nomesColunas = { "Código", "Nome", "Sobrenome", "Tipo", "Data de Nascimento", "Email",
+	private String[] nomesColunas = { "Codigo", "Nome", "Sobrenome", "CPF", "Tipo", "Data de Nascimento", "Email",
 			"Telefone" };
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private JButton btnAlterar;
@@ -139,15 +139,16 @@ public class PainelUsuarioConsulta extends JPanel {
 
 		for (Usuario usuario : usuarios) {
 
-			Object[] novaLinhaDaTabela = new Object[7];
+			Object[] novaLinhaDaTabela = new Object[8];
 			novaLinhaDaTabela[0] = usuario.getId();
 			novaLinhaDaTabela[1] = usuario.getNome();
 			novaLinhaDaTabela[2] = usuario.getSobrenome();
-			novaLinhaDaTabela[3] = usuario.getTipo();
-			novaLinhaDaTabela[4] = usuario.getDataNascimento();
-			novaLinhaDaTabela[5] = usuario.getEmail();
-			novaLinhaDaTabela[6] = usuario.getDdd() + usuario.getFone();
-
+			novaLinhaDaTabela[3] = usuario.getCpf();
+			novaLinhaDaTabela[4] = usuario.getTipo();
+			novaLinhaDaTabela[5] = usuario.getDataNascimento();
+			novaLinhaDaTabela[6] = usuario.getEmail();
+			novaLinhaDaTabela[7] = "(" + usuario.getDdd() + ") " + usuario.getFone();
+			System.out.println(usuario.getCpf());
 			model.addRow(novaLinhaDaTabela);
 		}
 

@@ -2,7 +2,6 @@ package model.vo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Usuario {
 
@@ -13,20 +12,16 @@ public class Usuario {
 	private int tipo;
 	private LocalDate dataNascimento;
 	private String email;
-	private String dddFixo;
-	private String dddMovel;
-	private String foneMovel;
-	private String foneFixo;
 	private String ddd;
 	private String fone;
 	private String cpf;
 	private ArrayList<Livro> livros;
 	private ArrayList<Aluguel> alugueis;
 	private Endereco endereco;
-	
+
 	public Usuario(int id, Biblioteca biblioteca, String nome, String sobrenome, int tipo, LocalDate dataNascimento,
-			String email, String dddFixo, String dddMovel, String foneMovel, String foneFixo, String ddd, String fone,
-			String cpf, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis, Endereco endereco) {
+			String email, String ddd, String fone, String cpf, ArrayList<Livro> livros, ArrayList<Aluguel> alugueis,
+			Endereco endereco) {
 		super();
 		this.id = id;
 		this.biblioteca = biblioteca;
@@ -35,10 +30,6 @@ public class Usuario {
 		this.tipo = tipo;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
-		this.dddFixo = dddFixo;
-		this.dddMovel = dddMovel;
-		this.foneMovel = foneMovel;
-		this.foneFixo = foneFixo;
 		this.ddd = ddd;
 		this.fone = fone;
 		this.cpf = cpf;
@@ -105,38 +96,6 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getDddFixo() {
-		return dddFixo;
-	}
-
-	public void setDddFixo(String dddFixo) {
-		this.dddFixo = dddFixo;
-	}
-
-	public String getDddMovel() {
-		return dddMovel;
-	}
-
-	public void setDddMovel(String dddMovel) {
-		this.dddMovel = dddMovel;
-	}
-
-	public String getFoneMovel() {
-		return foneMovel;
-	}
-
-	public void setFoneMovel(String foneMovel) {
-		this.foneMovel = foneMovel;
-	}
-
-	public String getFoneFixo() {
-		return foneFixo;
-	}
-
-	public void setFoneFixo(String foneFixo) {
-		this.foneFixo = foneFixo;
 	}
 
 	public String getDdd() {

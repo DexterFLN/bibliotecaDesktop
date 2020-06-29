@@ -64,11 +64,10 @@ public class PainelUsuarioAlterar extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelUsuarioAlterar(Usuario usuario) {
-		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]",
-				"[22px,grow][29][29][29][29][29][29][][][53.00][29][29][][][][][grow]"));
+		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]", "[22px,grow][29][29][29][29][29][29][][][53.00][][][][][29][][][][][29][][][][][grow]"));
 
 		cbBiblioteca = new JComboBox();
-		add(cbBiblioteca, "cell 5 4,growx");
+		add(cbBiblioteca, "cell 5 4,grow");
 
 		lblIdUsuario = new JLabel("Id Usuario");
 		add(lblIdUsuario, "cell 5 1,alignx leading");
@@ -79,13 +78,13 @@ public class PainelUsuarioAlterar extends JPanel {
 		txtIdUsuario = new JTextField();
 		txtIdUsuario.setEditable(false);
 		txtIdUsuario.setColumns(10);
-		add(txtIdUsuario, "cell 5 2,growx");
+		add(txtIdUsuario, "cell 5 2,grow");
 
 		lblNome = new JLabel("Nome");
 		add(lblNome, "cell 1 1,alignx left");
 
 		txtNome = new JTextField();
-		add(txtNome, "cell 1 2 2 1,growx");
+		add(txtNome, "cell 1 2 2 1,grow");
 		txtNome.setColumns(10);
 
 		lblSobrenome = new JLabel("Sobrenome");
@@ -95,11 +94,11 @@ public class PainelUsuarioAlterar extends JPanel {
 		add(lblTelefone, "cell 4 3,alignx left");
 
 		txtSobrenome = new JTextField();
-		add(txtSobrenome, "cell 1 4 2 1,growx");
+		add(txtSobrenome, "cell 1 4 2 1,grow");
 		txtSobrenome.setColumns(10);
 
 		txtTelefone = new JTextField();
-		add(txtTelefone, "cell 4 4,growx");
+		add(txtTelefone, "cell 4 4,grow");
 		txtTelefone.setColumns(10);
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
@@ -111,27 +110,27 @@ public class PainelUsuarioAlterar extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 
-			btnSalvarUsurio = new JButton("Salvar Usuário");
+			btnSalvarUsurio = new JButton("Salvar Usuario");
 			add(btnSalvarUsurio, "cell 2 8,grow");
-
-			lblCep = new JLabel("CEP");
-			add(lblCep, "cell 1 10");
-
-			lblUf = new JLabel("UF");
-			add(lblUf, "cell 5 10,alignx left");
+			
+						lblCep = new JLabel("CEP");
+						add(lblCep, "cell 1 10");
+			
+					lblCidade = new JLabel("Cidade");
+					add(lblCidade, "cell 4 10,alignx left");
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
-			add(txtDataNascimento, "cell 4 6,growx");
+			add(txtDataNascimento, "cell 4 6,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+			System.out.println("Erro na mascara de formatacao de data no painel alterar usuario.");
 			e1.printStackTrace();
 		}
 
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##");
 			txtDdd = new JFormattedTextField(maskFormatter);
-			add(txtDdd, "cell 4 2,growx");
+			add(txtDdd, "cell 4 2,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na máscara de formatação ddo DDD no painel de alteração de usuário.");
+			System.out.println("Erro na mascara de formatacao do DDD no painel alterar usuario.");
 			e1.printStackTrace();
 		}
 
@@ -139,52 +138,52 @@ public class PainelUsuarioAlterar extends JPanel {
 		add(lblEmail, "cell 1 5,alignx left");
 
 		txtEmail = new JTextField();
-		add(txtEmail, "cell 1 6 2 1,growx");
+		add(txtEmail, "cell 1 6 2 1,grow");
 		txtEmail.setColumns(10);
+		
+					lblUf = new JLabel("UF");
+					add(lblUf, "cell 5 10,alignx left");
+		
+				txtCEP = new JTextField();
+				add(txtCEP, "cell 1 11 2 1,grow");
+				txtCEP.setColumns(10);
+		
+				txtCidade = new JTextField();
+				add(txtCidade, "cell 4 11,grow");
+				txtCidade.setColumns(10);
+		
+				cbUf = new JComboBox();
+				add(cbUf, "cell 5 11,grow");
+		
+				lblEndereo = new JLabel("Rua");
+				add(lblEndereo, "cell 1 12,alignx left");
+				
+						lblNumero = new JLabel("Numero");
+						add(lblNumero, "cell 4 12,alignx left");
+				
+						lblBairro = new JLabel("Bairro");
+						add(lblBairro, "cell 5 12");
+		
+				txtRua = new JTextField();
+				add(txtRua, "cell 1 13 2 1,grow");
+				txtRua.setColumns(10);
+		
+				txtNumero = new JTextField();
+				add(txtNumero, "cell 4 13,grow");
+				txtNumero.setColumns(10);
+		
+				txtBairro = new JTextField();
+				add(txtBairro, "cell 5 13,grow");
+				txtBairro.setColumns(10);
 
-		txtCEP = new JTextField();
-		add(txtCEP, "cell 1 11 2 1,growx");
-		txtCEP.setColumns(10);
-
-		cbUf = new JComboBox();
-		add(cbUf, "cell 5 11,growx");
-
-		lblEndereo = new JLabel("Rua");
-		add(lblEndereo, "cell 1 12,alignx left");
-
-		lblNumero = new JLabel("Numero");
-		add(lblNumero, "cell 4 12,alignx left");
-
-		lblBairro = new JLabel("Bairro");
-		add(lblBairro, "cell 5 12");
-
-		lblCidade = new JLabel("Cidade");
-		add(lblCidade, "cell 4 10,alignx left");
-
-		txtRua = new JTextField();
-		add(txtRua, "cell 1 13 2 1,growx");
-		txtRua.setColumns(10);
-
-		txtNumero = new JTextField();
-		add(txtNumero, "cell 4 13,growx");
-		txtNumero.setColumns(10);
-
-		txtBairro = new JTextField();
-		add(txtBairro, "cell 5 13,growx");
-		txtBairro.setColumns(10);
-
-		txtCidade = new JTextField();
-		add(txtCidade, "cell 4 11,growx");
-		txtCidade.setColumns(10);
-
-		btnSalvarEndereco = new JButton("Salvar Endereco");
-		add(btnSalvarEndereco, "cell 2 15,growx");
-
-		btnExcluirUsuario = new JButton("Excluir Usuário");
-		add(btnExcluirUsuario, "cell 4 8,growx");
-
-		btnNewButton = new JButton("Limpar Alteraçções");
-		add(btnNewButton, "cell 4 15,growx");
+		btnExcluirUsuario = new JButton("Excluir Usuario");
+		add(btnExcluirUsuario, "cell 4 8,grow");
+		
+				btnSalvarEndereco = new JButton("Salvar Endereco");
+				add(btnSalvarEndereco, "cell 2 15,grow");
+						
+								btnNewButton = new JButton("Limpar Alteracoes");
+								add(btnNewButton, "cell 4 15,grow");
 
 		this.preencherDadosDaTela(usuario);
 		this.addListeners();
@@ -214,6 +213,7 @@ public class PainelUsuarioAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				Object[] options = { "Confirmar", "Cancelar" };
+				
 				int resposta = JOptionPane.showOptionDialog(null, "Deseja excluir o usuário?", "Informação",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 				String message = "";
