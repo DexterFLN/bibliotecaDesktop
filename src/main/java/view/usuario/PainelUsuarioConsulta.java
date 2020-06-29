@@ -32,7 +32,6 @@ public class PainelUsuarioConsulta extends JPanel {
 	private String[] nomesColunas = { "Codigo", "Nome", "Sobrenome", "CPF", "Tipo", "Data de Nascimento", "Email",
 			"Telefone" };
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-	private JButton btnAlterar;
 	private JPanel painelUsuarioAlterar = null;
 	private JButton btnGerarRelatorio;
 
@@ -40,9 +39,7 @@ public class PainelUsuarioConsulta extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelUsuarioConsulta() {
-		setLayout(new MigLayout("",
-				"[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]",
-				"[31.00px][30.00px][544.00px][][]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px,grow][][]"));
 
 //setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px][][]"));
 		
@@ -72,11 +69,8 @@ public class PainelUsuarioConsulta extends JPanel {
 		tableResultadoPesquisa.setBounds(0, 0, 500, 500);
 
 		panel.add(tableResultadoPesquisa, "cell 0 0,grow");
-		btnAlterar = new JButton("Alterar");
-		
-		add(btnAlterar, "cell 1 4");
 		btnGerarRelatorio = new JButton("Gerar Relatorio");
-		add(btnGerarRelatorio, "cell 2 4");
+		add(btnGerarRelatorio, "cell 1 4");
 		
 		this.addListeners();
 
@@ -92,11 +86,6 @@ public class PainelUsuarioConsulta extends JPanel {
 				UsuarioController usuarioController = new UsuarioController();
 				usuarios = usuarioController.consultarUsuarioPorFiltro(usuarioSeletor);
 				atualizarTabelaResultadoPesquisa();
-			}
-		});
-		btnAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
 			}
 		});
 

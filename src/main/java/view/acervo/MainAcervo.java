@@ -44,14 +44,11 @@ public class MainAcervo extends JPanel {
 		menuBar = new JMenuBar();
 		panel.add(menuBar);
 		
-		mntmCadastro = new JMenuItem("Cadastro");
-		menuBar.add(mntmCadastro);
-		
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 		
-		mntmAlterar = new JMenuItem("Alterar");
-		menuBar.add(mntmAlterar);
+		mntmCadastro = new JMenuItem("Cadastro");
+		menuBar.add(mntmCadastro);
 		
 		layeredPane = new JLayeredPane();
         layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -74,12 +71,6 @@ public class MainAcervo extends JPanel {
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(painelAcervoConsulta);
-			}
-		});
-		
-		mntmAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAcervoAlterar);
 			}
 		});
 		

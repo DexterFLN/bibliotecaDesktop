@@ -40,9 +40,7 @@ public class PainelAcervoConsulta extends JPanel {
 	 */
 	public PainelAcervoConsulta() {
 
-		setLayout(new MigLayout("",
-				"[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]",
-				"[31.00px][30.00px][544.00px]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px,grow]"));
 
 		txtPesquisar = new JTextField();
 		add(txtPesquisar, "cell 1 0 6 1,grow");

@@ -39,9 +39,7 @@ public class PainelPesquisaGeral extends JPanel {
 	 */
 	public PainelPesquisaGeral() {
 		setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-		setLayout(new MigLayout("",
-				"[][93.00px,grow][146.00px,grow][97.00px,grow][134.00px,grow][133.00,grow][grow][41px,grow,right][144px,grow][92px][]",
-				"[58.00px][31.00px][30.00px][544.00px]"));
+		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][97.00px,grow][134.00px,grow][133.00,grow][grow][41px,grow,right][144px,grow][92px][]", "[58.00px][31.00px][30.00px][544.00px,grow]"));
 
 
 		JMenuBar menuBar = new JMenuBar();
