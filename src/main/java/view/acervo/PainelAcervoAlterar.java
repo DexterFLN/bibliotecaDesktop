@@ -35,7 +35,9 @@ public class PainelAcervoAlterar extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelAcervoAlterar(Livro livro) {
-		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,leading][172.00px,grow][144px,grow]", "[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
+		setLayout(new MigLayout("",
+				"[159.00px,grow,fill][100px:154.00px,grow][218px,leading][172.00px,grow][144px,grow]",
+				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
 		JLabel lblDigiteCodigo = new JLabel("Codigo do Livro");
 		add(lblDigiteCodigo, "cell 1 1,alignx center");
@@ -114,7 +116,7 @@ public class PainelAcervoAlterar extends JPanel {
 				Livro livro = new Livro();
 				livro = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
 				ExemplarController.excluir(livro);
-		
+
 			}
 		});
 
@@ -122,25 +124,26 @@ public class PainelAcervoAlterar extends JPanel {
 		btnSalvarAlteraes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mensagem = "";
-				
-				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText(), txfAno.getText().trim());
-				if(mensagem.isEmpty()) {
+
+				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
+						txtEdicao.getText(), txfAno.getText().trim());
+				if (mensagem.isEmpty()) {
 					LivroController livroController = new LivroController();
 					Livro livroDoBD = new Livro();
 					livroDoBD = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
-					
+
 					Livro dadosNovos = new Livro();
 					dadosNovos.setNome(txtTitulo.getText());
 					dadosNovos.setAno(Integer.parseInt(txfAno.getText().trim()));
 					dadosNovos.setEditora(txtEditora.getText());
 					dadosNovos.setEdicao(Integer.parseInt(txtEdicao.getText()));
 					dadosNovos.setAutor(txtAutor.getText());
-					
+
 					Sessao sessao = new Sessao();
 					sessao.setNome(cbSessao.getSelectedItem().toString());
 					sessao = SessaoController.consultarSessaoPorNome(sessao.getNome());
 					dadosNovos.setSessao(sessao);
-					
+
 					LivroController.alterar(livroDoBD, dadosNovos);
 				}
 			}
@@ -149,30 +152,30 @@ public class PainelAcervoAlterar extends JPanel {
 		add(btnSalvarAlteraes, "cell 1 10,grow");
 		btnExcluir.setBackground(new Color(229, 13, 13, 90));
 		add(btnExcluir, "cell 3 10,grow");
-		
+
 		this.preencherDadosDaTela(livro);
 
 	}
 
 	private void preencherDadosDaTela(Livro livro) {
 
-		if(livro != null) {
+		if (livro != null) {
 			System.out.println(livro.getId());
-        txtCodigo.setText(String.valueOf(livro.getId()));
-		txtTitulo.setText(livro.getNome());
-		txtAutor.setText(livro.getAutor());
-		txtEditora.setText(livro.getEditora());
-		txtEdicao.setText(String.valueOf(livro.getEdicao()));
-		
-		this.preencherSessao();
-		cbSessao.setSelectedItem(livro.getSessao().getNome());
-		
-		txfAno.setText(String.valueOf(livro.getAno()));
-		
-		ExemplarController exemplarcontroller = new ExemplarController();
-		int exemplaresdolivro = exemplarcontroller.consultarQuantidade(livro.getId()).size();
-		txfQuantidade.setText(String.valueOf(exemplaresdolivro));
-		
+			txtCodigo.setText(String.valueOf(livro.getId()));
+			txtTitulo.setText(livro.getNome());
+			txtAutor.setText(livro.getAutor());
+			txtEditora.setText(livro.getEditora());
+			txtEdicao.setText(String.valueOf(livro.getEdicao()));
+
+			this.preencherSessao();
+			cbSessao.setSelectedItem(livro.getSessao().getNome());
+
+			txfAno.setText(String.valueOf(livro.getAno()));
+
+			ExemplarController exemplarcontroller = new ExemplarController();
+			int exemplaresdolivro = exemplarcontroller.consultarQuantidade(livro.getId()).size();
+			txfQuantidade.setText(String.valueOf(exemplaresdolivro));
+
 		}
 
 	}
@@ -180,11 +183,11 @@ public class PainelAcervoAlterar extends JPanel {
 	private void preencherSessao() {
 		SessaoController sessaoController = new SessaoController();
 		ArrayList<Sessao> sessoes = sessaoController.consultarSessoes(1000);
-		
+
 		for (Sessao sessao : sessoes) {
 			cbSessao.addItem(sessao.getNome());
 		}
-		
+
 	}
 
 }

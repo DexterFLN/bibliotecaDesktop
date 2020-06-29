@@ -17,12 +17,11 @@ public class AluguelController {
 		return aluguel;
 	}
 
-	
 	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
 		AluguelBO aluguelBO = new AluguelBO();
 		return aluguelBO.consultarAluguelSeletor(aluguelSeletor);
 	}
-	
+
 	public Aluguel renovarAluguel(Aluguel aluguel) {
 		AluguelBO bo = new AluguelBO();
 		bo.renovar(aluguel);
@@ -30,7 +29,7 @@ public class AluguelController {
 
 	}
 
-	public Aluguel devolverAluguel(Aluguel aluguel) {		
+	public Aluguel devolverAluguel(Aluguel aluguel) {
 		AluguelBO bo = new AluguelBO();
 		bo.devolver(aluguel);
 		return aluguel;
@@ -98,20 +97,18 @@ public class AluguelController {
 		}
 	}
 
-	
-	 public static String consultarStatus(Exemplar exemplar) {
-		 ExemplarController controller = new ExemplarController();
-		 String mensagem = "";
+	public static String consultarStatus(Exemplar exemplar) {
+		ExemplarController controller = new ExemplarController();
+		String mensagem = "";
 		if (controller.consultarStatus(exemplar) == true) {
 			mensagem += "Este livro ja foi alugado.";
 		}
 		return mensagem;
-	 }
-
+	}
 
 	public static boolean existeAluguelAtrasado(Usuario usuario) {
 		boolean existe = AluguelBO.existeAluguelAtrasado(usuario);
 		return existe;
 	}
-	
+
 }

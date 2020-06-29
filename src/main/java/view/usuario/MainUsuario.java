@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import net.miginfocom.swing.MigLayout;
 
-
 import javax.swing.JMenuItem;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
@@ -24,7 +23,6 @@ public class MainUsuario extends JPanel {
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmConsultar;
 	private JMenuItem mntmAlterar;
-	
 
 	/**
 	 * Create the panel.
@@ -44,13 +42,12 @@ public class MainUsuario extends JPanel {
 
 		menuBar = new JMenuBar();
 		panel.add(menuBar);
-		
+
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 
 		mntmCadastro = new JMenuItem("Cadastro");
 		menuBar.add(mntmCadastro);
-
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -90,5 +87,5 @@ public class MainUsuario extends JPanel {
 		layeredPane.revalidate();
 
 	}
-	
+
 }

@@ -35,11 +35,11 @@ public class Sessao {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Biblioteca getBiblioteca() {
 		return biblioteca;
 	}
-	
+
 	public void setBiblioteca(Biblioteca biblioteca) {
 		this.biblioteca = biblioteca;
 	}
@@ -56,5 +56,5 @@ public class Sessao {
 	public String toString() {
 		return this.getNome();
 	}
-	
+
 }

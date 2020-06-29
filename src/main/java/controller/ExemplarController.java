@@ -56,7 +56,7 @@ public class ExemplarController {
 
 	public static void excluir(Livro livro) {
 		ExemplarBO.excluir(livro);
-		
+
 	}
 
 	public static boolean existeIdDeExemplar(Exemplar exemplar) {

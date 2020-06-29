@@ -17,7 +17,6 @@ import model.vo.Usuario;
 
 public class AluguelDAO {
 
-	
 	public static Aluguel salvar(Aluguel aluguel) {
 
 		ExemplarDAO exemplarDAO = new ExemplarDAO();
@@ -48,10 +47,10 @@ public class AluguelDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
+
 		return aluguel;
 	}
-	
+
 	public static boolean excluirAluguelPorUsuario(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM ALUGUEL WHERE idUsuario=?";
@@ -124,7 +123,6 @@ public class AluguelDAO {
 			Banco.closeConnection(connection);
 		}
 
-
 		return registrosAlterados > 0;
 	}
 
@@ -166,10 +164,9 @@ public class AluguelDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-	
+
 		return aluguel;
 	}
-
 
 	public static Aluguel construirAluguelDoResultSet(ResultSet resultSet) {
 
@@ -179,7 +176,7 @@ public class AluguelDAO {
 		try {
 
 			aluguel.setId(resultSet.getInt("id"));
-      
+
 			Exemplar exemplar = new Exemplar();
 			exemplar.setId(resultSet.getInt("idExemplar"));
 			ExemplarDAO exemplarDAO = new ExemplarDAO();
@@ -213,8 +210,8 @@ public class AluguelDAO {
 		}
 
 		return aluguel;
-	} 
-	
+	}
+
 	public static Aluguel consultarAluguelPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE id=?";
@@ -265,18 +262,18 @@ public class AluguelDAO {
 
 		return aluguel;
 	}
-	
+
 	public static Aluguel consultarAluguelAtual(int idExemplar) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL WHERE idExemplar=? ORDER BY id DESC LIMIT 1";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 		ResultSet resultSet = null;
 		Aluguel aluguel = new Aluguel();
-		
+
 		try {
 			preparedStatement.setInt(1, idExemplar);
 			resultSet = preparedStatement.executeQuery();
-			
+
 			if (resultSet != null && resultSet.next()) {
 				aluguel = construirAluguelDoResultSet(resultSet);
 			}
@@ -288,10 +285,10 @@ public class AluguelDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
+
 		return aluguel;
 	}
-	
+
 	public static ArrayList<Aluguel> consultarTodos(int limit) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM ALUGUEL LIMIT ?";
@@ -326,16 +323,16 @@ public class AluguelDAO {
 		String sql = "SELECT * FROM ALUGUEL";
 		ResultSet resultSet = null;
 		ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
-		
+
 		seletor = seletor.validarFitros(seletor);
-		
-		if(seletor.temFiltro()) {
+
+		if (seletor.temFiltro()) {
 			sql = criarFiltros(sql, seletor);
 		}
-		
+
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
-		
+
 		try {
 			resultSet = preparedStatement.executeQuery();
 
@@ -354,7 +351,6 @@ public class AluguelDAO {
 		return alugueis;
 	}
 
-
 	private static String criarFiltros(String sql, AluguelSeletor seletor) {
 		boolean primeiro = true;
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().isEmpty()) {
@@ -366,16 +362,16 @@ public class AluguelDAO {
 				if (seletor.getBuscarPor() == "Codigo Usuario") {
 					System.out.println("AluguelDAO.java - Seletor Codigo Usuario");
 					sql += " idUsuario = " + seletor.getTermoPesquisa();
-				} else if(seletor.getBuscarPor() == "Codigo Exemplar") {
+				} else if (seletor.getBuscarPor() == "Codigo Exemplar") {
 					System.out.println("AluguelDAO.java - Seletor Codigo Exemplar");
 
 					sql += " idExemplar = " + seletor.getTermoPesquisa();
-				} 
-				
+				}
+
 			}
-			
-		} 
-		
+
+		}
+
 		if (seletor.getTermoPesquisa() != null && seletor.getBuscarPor() == "Atrasados") {
 			if (primeiro) {
 				sql += " WHERE ";
@@ -385,7 +381,7 @@ public class AluguelDAO {
 			sql += " devolucaoPrevista < '" + LocalDate.now() + "' AND devolucaoEfetiva IS NULL";
 		}
 
-		System.out.println( " SQL FILTROS: " + sql);
+		System.out.println(" SQL FILTROS: " + sql);
 
 		return sql;
 	}
@@ -416,8 +412,7 @@ public class AluguelDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
-		
+
 		return !alugueis.isEmpty();
 	}
 }
