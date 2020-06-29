@@ -35,9 +35,7 @@ public class PainelAcervoAlterar extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelAcervoAlterar(Livro livro) {
-		setLayout(new MigLayout("",
-				"[159.00px,grow,fill][100px:154.00px][218px,grow,center][172.00px,grow][144px,grow]",
-				"[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
+		setLayout(new MigLayout("", "[159.00px,grow,fill][100px:154.00px,grow][218px,leading][172.00px,grow][144px,grow]", "[45.00px][35.00px][29.00][38.00px][27.00px][38.00px][29.00px][38.00][29.00px][29.00px][37.00][grow][][]"));
 
 		JLabel lblDigiteCodigo = new JLabel("Codigo do Livro");
 		add(lblDigiteCodigo, "cell 1 1,alignx center");
@@ -148,7 +146,7 @@ public class PainelAcervoAlterar extends JPanel {
 			}
 		});
 		btnSalvarAlteraes.setBackground(new Color(173, 255, 47));
-		add(btnSalvarAlteraes, "cell 2 10,grow");
+		add(btnSalvarAlteraes, "cell 1 10,grow");
 		btnExcluir.setBackground(new Color(229, 13, 13, 90));
 		add(btnExcluir, "cell 3 10,grow");
 		

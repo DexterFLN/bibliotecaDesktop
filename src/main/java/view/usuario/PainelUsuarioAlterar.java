@@ -57,14 +57,15 @@ public class PainelUsuarioAlterar extends JPanel {
 	private JButton btnExcluirUsuario;
 	private Usuario usuarioAlterado = new Usuario();
 	private JButton btnSalvarUsurio;
-	private JButton btnNewButton;
+	private JButton btnLimparAlteracoes;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelUsuarioAlterar(Usuario usuario) {
-		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]", "[22px,grow][29][29][29][29][29][29][][][53.00][][][][][29][][][][][29][][][][][grow]"));
+		setLayout(new MigLayout("", "[102.00px][184.00,grow][160.00,grow][32.00][162.00,grow][176.00,grow][102.00]",
+				"[22px,grow][29][29][29][29][29][29][][][53.00][][][][][29][][][][][29][][][][][grow]"));
 
 		cbBiblioteca = new JComboBox();
 		add(cbBiblioteca, "cell 5 4,grow");
@@ -92,14 +93,21 @@ public class PainelUsuarioAlterar extends JPanel {
 
 		lblTelefone = new JLabel("Telefone");
 		add(lblTelefone, "cell 4 3,alignx left");
-
+		
 		txtSobrenome = new JTextField();
 		add(txtSobrenome, "cell 1 4 2 1,grow");
 		txtSobrenome.setColumns(10);
 
-		txtTelefone = new JTextField();
-		add(txtTelefone, "cell 4 4,grow");
-		txtTelefone.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("########");
+			txtTelefone = new JFormattedTextField(maskFormatter);
+			add(txtTelefone, "cell 4 4,grow");
+			txtTelefone.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Telefone no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
 		add(lblDataNascimento, "cell 4 5,alignx left");
@@ -112,12 +120,12 @@ public class PainelUsuarioAlterar extends JPanel {
 
 			btnSalvarUsurio = new JButton("Salvar Usuario");
 			add(btnSalvarUsurio, "cell 2 8,grow");
-			
-						lblCep = new JLabel("CEP");
-						add(lblCep, "cell 1 10");
-			
-					lblCidade = new JLabel("Cidade");
-					add(lblCidade, "cell 4 10,alignx left");
+
+			lblCep = new JLabel("CEP");
+			add(lblCep, "cell 1 10");
+
+			lblCidade = new JLabel("Cidade");
+			add(lblCidade, "cell 4 10,alignx left");
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
 			add(txtDataNascimento, "cell 4 6,grow");
 		} catch (ParseException e1) {
@@ -140,50 +148,50 @@ public class PainelUsuarioAlterar extends JPanel {
 		txtEmail = new JTextField();
 		add(txtEmail, "cell 1 6 2 1,grow");
 		txtEmail.setColumns(10);
-		
-					lblUf = new JLabel("UF");
-					add(lblUf, "cell 5 10,alignx left");
-		
-				txtCEP = new JTextField();
-				add(txtCEP, "cell 1 11 2 1,grow");
-				txtCEP.setColumns(10);
-		
-				txtCidade = new JTextField();
-				add(txtCidade, "cell 4 11,grow");
-				txtCidade.setColumns(10);
-		
-				cbUf = new JComboBox();
-				add(cbUf, "cell 5 11,grow");
-		
-				lblEndereo = new JLabel("Rua");
-				add(lblEndereo, "cell 1 12,alignx left");
-				
-						lblNumero = new JLabel("Numero");
-						add(lblNumero, "cell 4 12,alignx left");
-				
-						lblBairro = new JLabel("Bairro");
-						add(lblBairro, "cell 5 12");
-		
-				txtRua = new JTextField();
-				add(txtRua, "cell 1 13 2 1,grow");
-				txtRua.setColumns(10);
-		
-				txtNumero = new JTextField();
-				add(txtNumero, "cell 4 13,grow");
-				txtNumero.setColumns(10);
-		
-				txtBairro = new JTextField();
-				add(txtBairro, "cell 5 13,grow");
-				txtBairro.setColumns(10);
+
+		lblUf = new JLabel("UF");
+		add(lblUf, "cell 5 10,alignx left");
+
+		txtCEP = new JTextField();
+		add(txtCEP, "cell 1 11 2 1,grow");
+		txtCEP.setColumns(10);
+
+		txtCidade = new JTextField();
+		add(txtCidade, "cell 4 11,grow");
+		txtCidade.setColumns(10);
+
+		cbUf = new JComboBox();
+		add(cbUf, "cell 5 11,grow");
+
+		lblEndereo = new JLabel("Rua");
+		add(lblEndereo, "cell 1 12,alignx left");
+
+		lblNumero = new JLabel("Numero");
+		add(lblNumero, "cell 4 12,alignx left");
+
+		lblBairro = new JLabel("Bairro");
+		add(lblBairro, "cell 5 12");
+
+		txtRua = new JTextField();
+		add(txtRua, "cell 1 13 2 1,grow");
+		txtRua.setColumns(10);
+
+		txtNumero = new JTextField();
+		add(txtNumero, "cell 4 13,grow");
+		txtNumero.setColumns(10);
+
+		txtBairro = new JTextField();
+		add(txtBairro, "cell 5 13,grow");
+		txtBairro.setColumns(10);
 
 		btnExcluirUsuario = new JButton("Excluir Usuario");
 		add(btnExcluirUsuario, "cell 4 8,grow");
-		
-				btnSalvarEndereco = new JButton("Salvar Endereco");
-				add(btnSalvarEndereco, "cell 2 15,grow");
-						
-								btnNewButton = new JButton("Limpar Alteracoes");
-								add(btnNewButton, "cell 4 15,grow");
+
+		btnSalvarEndereco = new JButton("Salvar Endereco");
+		add(btnSalvarEndereco, "cell 2 15,grow");
+
+		btnLimparAlteracoes = new JButton("Limpar Alteracoes");
+		add(btnLimparAlteracoes, "cell 4 15,grow");
 
 		this.preencherDadosDaTela(usuario);
 		this.addListeners();
@@ -213,7 +221,7 @@ public class PainelUsuarioAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				Object[] options = { "Confirmar", "Cancelar" };
-				
+
 				int resposta = JOptionPane.showOptionDialog(null, "Deseja excluir o usuário?", "Informação",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 				String message = "";
@@ -222,7 +230,7 @@ public class PainelUsuarioAlterar extends JPanel {
 
 					if (usuarioController.excluirUsuario(usuarioAlterado)) {
 						message += "Usuário excluido com Sucesso!";
-					}else {
+					} else {
 						message += "Usuário não foi excluído.";
 					}
 				}
@@ -247,6 +255,12 @@ public class PainelUsuarioAlterar extends JPanel {
 				String message = usuarioController.alterarUsuario(usuarioAlterado);
 
 				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
+		btnLimparAlteracoes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				preencherDadosDaTela(usuarioAlterado);
 			}
 		});
 

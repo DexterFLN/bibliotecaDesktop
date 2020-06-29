@@ -44,15 +44,13 @@ public class MainUsuario extends JPanel {
 
 		menuBar = new JMenuBar();
 		panel.add(menuBar);
+		
+		mntmConsultar = new JMenuItem("Consultar");
+		menuBar.add(mntmConsultar);
 
 		mntmCadastro = new JMenuItem("Cadastro");
 		menuBar.add(mntmCadastro);
 
-		mntmConsultar = new JMenuItem("Consultar");
-		menuBar.add(mntmConsultar);
-
-		mntmAlterar = new JMenuItem("Alterar");
-		menuBar.add(mntmAlterar);
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -78,11 +76,6 @@ public class MainUsuario extends JPanel {
 			}
 		});
 
-		mntmAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioAlterar);
-			}
-		});
 	}
 
 	protected static void switchPanel(JPanel panel) {
