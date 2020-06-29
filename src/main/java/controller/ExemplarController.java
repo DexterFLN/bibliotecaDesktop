@@ -54,9 +54,14 @@ public class ExemplarController {
 		return ExemplarBO.consultarQuantidade(idLivro);
 	}
 
-	public static boolean excluir(Livro livro) {
-		return ExemplarBO.excluir(livro);
+	public static void excluir(Livro livro) {
+		ExemplarBO.excluir(livro);
 		
+	}
+
+	public static boolean existeIdDeExemplar(Exemplar exemplar) {
+		boolean existe = ExemplarBO.existeIdDeExemplar(exemplar);
+		return existe;
 	}
 
 }

@@ -112,5 +112,4 @@ public class AluguelController {
 		return mensagem;
 	 }
 	
-	
 }

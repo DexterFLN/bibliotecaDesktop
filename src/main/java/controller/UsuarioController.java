@@ -53,7 +53,7 @@ public class UsuarioController {
 		message += validarUsuario(usuario);
 
 		if (UsuarioBO.existeUsuarioPorCpf(usuario)) {
-			message += "\n CPF já utilizado! ";
+			message += "\n CPF ja utilizado! ";
 		}
 
 		if (message.trim().isEmpty()) {

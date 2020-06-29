@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import controller.ExemplarController;
+import controller.LivroController;
 import model.dao.ExemplarDAO;
 import model.dao.LivroDAO;
 import model.seletor.LivroSeletor;
+import model.vo.Exemplar;
 import model.vo.Livro;
 
 public class LivroBO {

@@ -95,7 +95,8 @@ public class LivroController {
 	}
 
 	public static boolean excluir(Livro livro) {
-		return LivroBO.excluir(livro);
+		boolean excluiu = LivroBO.excluir(livro);
+		return excluiu;
 	}
 	
 }

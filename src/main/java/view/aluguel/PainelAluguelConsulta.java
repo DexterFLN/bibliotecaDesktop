@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import controller.AluguelController;
+import controller.ExemplarController;
 import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Livro;
@@ -96,15 +97,18 @@ public class PainelAluguelConsulta extends JPanel {
 		
 		for (Aluguel aluguel : alugueis) {
 			
-			Object[] novaLinhaDaTabela = new Object[6];
-			novaLinhaDaTabela[0] = aluguel.getExemplar().getId();
-			novaLinhaDaTabela[1] = aluguel.getExemplar().getLivro().getNome();
-			novaLinhaDaTabela[2] = aluguel.getExemplar().getLivro().getAutor();
-			novaLinhaDaTabela[3] = aluguel.getUsuario().getNome();
-			novaLinhaDaTabela[4] = aluguel.getDevolucaoPrevista();
-			novaLinhaDaTabela[5] = aluguel.getDevolucaoEfetiva();
+			if(ExemplarController.existeIdDeExemplar(aluguel.getExemplar())) {
+				Object[] novaLinhaDaTabela = new Object[6];
+				novaLinhaDaTabela[0] = aluguel.getExemplar().getId();
+				novaLinhaDaTabela[1] = aluguel.getExemplar().getLivro().getNome();
+				novaLinhaDaTabela[2] = aluguel.getExemplar().getLivro().getAutor();
+				novaLinhaDaTabela[3] = aluguel.getUsuario().getNome();
+				novaLinhaDaTabela[4] = aluguel.getDevolucaoPrevista();
+				novaLinhaDaTabela[5] = aluguel.getDevolucaoEfetiva();
 
-			model.addRow(novaLinhaDaTabela);
+				model.addRow(novaLinhaDaTabela);
+			}
+			
 			
 		}
 		

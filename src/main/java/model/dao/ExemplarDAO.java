@@ -13,6 +13,7 @@ import model.seletor.ExemplarSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
+import model.vo.Usuario;
 
 public class ExemplarDAO {
 
@@ -345,5 +346,35 @@ public class ExemplarDAO {
 		boolean excluiu = quantidadeLinhasAfetadas > 0;
 		return excluiu;
 		
+	}
+
+	public static boolean existeIdDeExemplar(Exemplar exemplar) {
+		String sql = "SELECT * FROM EXEMPLAR WHERE id = ?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+
+		try {
+			preparedStatement.setInt(1, exemplar.getId());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Exemplar exemplarSelecionado = construirExemplarDoResultSet(resultSet);
+				exemplares.add(exemplarSelecionado);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os exemplares.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+		
+		return !exemplares.isEmpty();
 	}
 }
