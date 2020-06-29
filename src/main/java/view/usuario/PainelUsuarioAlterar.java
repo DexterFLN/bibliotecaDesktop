@@ -93,7 +93,7 @@ public class PainelUsuarioAlterar extends JPanel {
 
 		lblTelefone = new JLabel("Telefone");
 		add(lblTelefone, "cell 4 3,alignx left");
-		
+
 		txtSobrenome = new JTextField();
 		add(txtSobrenome, "cell 1 4 2 1,grow");
 		txtSobrenome.setColumns(10);
@@ -107,7 +107,6 @@ public class PainelUsuarioAlterar extends JPanel {
 			System.out.println("Erro na mascara de formatacao de Telefone no painel de cadastro de usuario.");
 			e.printStackTrace();
 		}
-		
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento");
 		add(lblDataNascimento, "cell 4 5,alignx left");
@@ -257,7 +256,7 @@ public class PainelUsuarioAlterar extends JPanel {
 				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		
+
 		btnLimparAlteracoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				preencherDadosDaTela(usuarioAlterado);

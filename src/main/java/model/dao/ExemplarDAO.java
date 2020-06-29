@@ -215,7 +215,7 @@ public class ExemplarDAO {
 		return exemplares;
 	}
 
-	public static boolean statusAlugado(Exemplar exemplar) { // METODO CONCLUIDO
+	public static boolean statusAlugado(Exemplar exemplar) {
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
@@ -239,7 +239,7 @@ public class ExemplarDAO {
 		return registrosAlterados > 0;
 	}
 
-	public static boolean statusDevolvido(Exemplar exemplar) { // METODO CONCLUIDO
+	public static boolean statusDevolvido(Exemplar exemplar) {
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
 		Connection connection = Banco.getConnection();
@@ -262,7 +262,7 @@ public class ExemplarDAO {
 		return registrosAlterados > 0;
 	}
 
-	public static boolean consultarStatus(Exemplar exemplar) { // METODO CONCLUIDO
+	public static boolean consultarStatus(Exemplar exemplar) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT status FROM EXEMPLAR WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -318,7 +318,7 @@ public class ExemplarDAO {
 	}
 
 	public static boolean excluir(Livro livro) {
-		
+
 		Connection connection = Banco.getConnection();
 		String sql0 = "SET foreign_key_checks = 0";
 		String sql = "DELETE FROM EXEMPLAR WHERE idLivro=?";
@@ -345,7 +345,7 @@ public class ExemplarDAO {
 
 		boolean excluiu = quantidadeLinhasAfetadas > 0;
 		return excluiu;
-		
+
 	}
 
 	public static boolean existeIdDeExemplar(Exemplar exemplar) {
@@ -373,8 +373,7 @@ public class ExemplarDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
-		
+
 		return !exemplares.isEmpty();
 	}
 }

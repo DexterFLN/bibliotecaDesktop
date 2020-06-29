@@ -128,7 +128,7 @@ public class PainelEnderecoAlterar extends JPanel {
 				mensagem = EnderecoController.excluirEndereco(endereco);
 				if (mensagem.isEmpty()) {
 					JOptionPane jOptionPane = new JOptionPane();
-					jOptionPane.showMessageDialog(null, "Endereco excluído com sucesso!");
+					jOptionPane.showMessageDialog(null, "Endereco excluido com sucesso!");
 				} else {
 					JOptionPane jOptionPane = new JOptionPane();
 					jOptionPane.showMessageDialog(null, mensagem);

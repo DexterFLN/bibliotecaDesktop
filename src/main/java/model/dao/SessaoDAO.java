@@ -91,10 +91,10 @@ public class SessaoDAO {
 		Sessao sessao = new Sessao();
 		sessao.setBiblioteca(biblioteca);
 		try {
-			if(resultSet != null && resultSet.next()) {
+			if (resultSet != null && resultSet.next()) {
 				sessao.setId(resultSet.getInt(1));
 				sessao.setNome(resultSet.getString(2));
-				sessao.getBiblioteca().setId(resultSet.getInt("idBiblioteca")); //3
+				sessao.getBiblioteca().setId(resultSet.getInt("idBiblioteca")); // 3
 				sessao.getBiblioteca().setNome(resultSet.getString(5));
 			}
 		} catch (SQLException e) {
@@ -104,16 +104,16 @@ public class SessaoDAO {
 
 		return sessao;
 	}
-	
+
 	public static Sessao construirSessoesDoResultset(ResultSet resultSet) {
 		Biblioteca biblioteca = new Biblioteca();
 		Sessao sessao = new Sessao();
 		sessao.setBiblioteca(biblioteca);
 		try {
-				sessao.setId(resultSet.getInt(1));
-				sessao.setNome(resultSet.getString(2));
-				sessao.getBiblioteca().setId(resultSet.getInt(4)); //3
-				sessao.getBiblioteca().setNome(resultSet.getString(5));
+			sessao.setId(resultSet.getInt(1));
+			sessao.setNome(resultSet.getString(2));
+			sessao.getBiblioteca().setId(resultSet.getInt(4)); // 3
+			sessao.getBiblioteca().setNome(resultSet.getString(5));
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir sessao do resultSet.");
 			System.out.println("Erro: " + e.getMessage());
@@ -121,7 +121,6 @@ public class SessaoDAO {
 
 		return sessao;
 	}
-
 
 	public static Sessao consultarSessao(Sessao sessao) {
 		Connection connection = Banco.getConnection();
@@ -146,7 +145,7 @@ public class SessaoDAO {
 
 		return sessao;
 	}
-	
+
 	public static Sessao consultarSessaoPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM SESSAO INNER JOIN BIBLIOTECA ON SESSAO.idBiblioteca = BIBLIOTECA.id WHERE SESSAO.id=?";

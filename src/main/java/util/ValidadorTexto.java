@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 public class ValidadorTexto {
 
 	/**
-	 * Verifica se um email é válido.
+	 * Verifica se um email e valido.
 	 * 
-	 * @param String email à ser validado.
-	 * @return false se o email não é válido, e true caso texto seja válido.
+	 * @param String email a� ser validado.
+	 * @return false se o email nao e valido, e true caso texto seja valido.
 	 */
 	public static boolean emailIsValid(String email) {
 		String regex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)"
@@ -20,11 +20,11 @@ public class ValidadorTexto {
 	}
 
 	/**
-	 * Verifica se uma String é válida, uma String será válida se não possuir
-	 * números e não estiver vazia.
+	 * Verifica se uma String e valida, uma String sera� valida se nao possuir
+	 * numeros e nao estiver vazia.
 	 * 
-	 * @param String texto à ser validado.
-	 * @return false se o texto não é válido, e true caso texto seja válido.
+	 * @param String texto a� ser validado.
+	 * @return false se o texto nao e valido, e true caso texto seja valido.
 	 */
 	public static boolean isValidString(String string) {
 		String regex = "\\d";

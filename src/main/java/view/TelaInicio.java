@@ -44,21 +44,21 @@ public class TelaInicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		getContentPane().setBackground(new java.awt.Color(2, 83, 83));
-		icon = new  ImageIcon(getClass().getResource("/icons/logomenor.png"));
-		
+		icon = new ImageIcon(getClass().getResource("/icons/logomenor.png"));
+
 		imagem = new JLabel(icon);
 		imagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 		});
 		imagem.setBounds(250, -150, 1089, 176);
 		imagem.setSize(700, 960);
 		imagem.setVisible(true);
 		getContentPane().add(imagem);
-		
+
 	}
 }

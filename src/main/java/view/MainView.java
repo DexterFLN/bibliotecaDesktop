@@ -21,7 +21,7 @@ import view.endereco.MainEndereco;
 import view.usuario.MainUsuario;
 
 public class MainView extends JFrame {
-	
+
 	private static final PainelPesquisaGeral painelPesquisaGeral = new PainelPesquisaGeral();
 	private static final MainAcervo mainAcervo = new MainAcervo();
 	private static final MainAluguel mainAluguel = new MainAluguel();
@@ -33,7 +33,6 @@ public class MainView extends JFrame {
 	private JButton btnPesquisaGeral;
 	private JButton buttonEmprestimos;
 	private JButton btnUsuario;
-	
 
 	public MainView() {
 
@@ -47,7 +46,7 @@ public class MainView extends JFrame {
 		layeredPane.setBorder(null);
 		layeredPane.setBackground(new Color(2, 83, 83));
 		layeredPane.setLayout(new MigLayout("", "[][grow][]", "[][grow][]"));
-		
+
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(2, 83, 83));
 		layeredPane.add(panel_1, "cell 1 1,grow");
@@ -76,7 +75,7 @@ public class MainView extends JFrame {
 	public static void switchPanel(JPanel panel) {
 		panel_1.removeAll();
 		layeredPane.removeAll();
-		
+
 		layeredPane.setLayout(new MigLayout("", "[][grow][]", "[][grow][]"));
 		panel_1.setBackground(new Color(2, 83, 83));
 		panel_1.revalidate();
@@ -104,7 +103,7 @@ public class MainView extends JFrame {
 		btnPesquisaGeral = new JButton("");
 		ImageIcon iconSearchMenu = new ImageIcon(MainView.class.getResource("/icons/searchFine.png"));
 		Image imageSearchMenu = iconSearchMenu.getImage();
-		Image newimgIconSearchMenu= imageSearchMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		Image newimgIconSearchMenu = imageSearchMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		iconSearchMenu = new ImageIcon(newimgIconSearchMenu);
 		btnPesquisaGeral.setBackground(new Color(229, 229, 229, 240));
 		btnPesquisaGeral.setIcon(iconSearchMenu);
@@ -119,16 +118,16 @@ public class MainView extends JFrame {
 		btnAcervo.setBackground(new Color(229, 229, 229, 240));
 		btnAcervo.setIcon(iconBooksMenu);
 		menuBar.add(btnAcervo);
-		
+
 		buttonEmprestimos = new JButton("");
-		
+
 		ImageIcon iconEmprestimoMenu = new ImageIcon(MainView.class.getResource("/icons/verify.png"));
 		Image imageEmprestimoMenu = iconEmprestimoMenu.getImage();
 		Image newimgIconEmprestimoMenu = imageEmprestimoMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		iconEmprestimoMenu = new ImageIcon(newimgIconEmprestimoMenu);
 		buttonEmprestimos.setIcon(iconEmprestimoMenu);
 		menuBar.add(buttonEmprestimos);
-		
+
 		btnUsuario = new JButton("");
 		ImageIcon iconUserMenu = new ImageIcon(MainView.class.getResource("/icons/user.png"));
 		Image imageUserMenu = iconUserMenu.getImage();
@@ -153,21 +152,19 @@ public class MainView extends JFrame {
 				switchPanel(mainAcervo);
 			}
 		});
-		
+
 		buttonEmprestimos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainAluguel);
 			}
 		});
-		
+
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainUsuario);
 			}
 		});
-		
-		
-		
+
 	}
 
 }

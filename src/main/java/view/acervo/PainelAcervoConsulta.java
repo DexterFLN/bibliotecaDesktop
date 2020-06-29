@@ -34,13 +34,14 @@ public class PainelAcervoConsulta extends JPanel {
 	private JComboBox cbBuscar;
 	private JPanel painelAcervoAlterar = null;
 
-
 	/**
 	 * Create the panel.
 	 */
 	public PainelAcervoConsulta() {
 
-		setLayout(new MigLayout("", "[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]", "[31.00px][30.00px][544.00px,grow]"));
+		setLayout(new MigLayout("",
+				"[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]",
+				"[31.00px][30.00px][544.00px,grow]"));
 
 		txtPesquisar = new JTextField();
 		add(txtPesquisar, "cell 1 0 6 1,grow");
@@ -95,18 +96,20 @@ public class PainelAcervoConsulta extends JPanel {
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
-		
+
 		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
 				System.out.println(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1));
-				
-				LivroController  livroController = new LivroController();
-				Livro  livroClicado = livroController.consultarLivroPorIdParaExemplares(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro().getId());
-				painelAcervoAlterar = new PainelAcervoAlterar(exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro());
+
+				LivroController livroController = new LivroController();
+				Livro livroClicado = livroController.consultarLivroPorIdParaExemplares(
+						exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro().getId());
+				painelAcervoAlterar = new PainelAcervoAlterar(
+						exemplares.get(tableResultadoPesquisa.getSelectedRow() - 1).getLivro());
 				MainAcervo.switchPanel(painelAcervoAlterar);
-				
+
 			}
 		});
 
@@ -115,7 +118,6 @@ public class PainelAcervoConsulta extends JPanel {
 	private void limparTabelaResultadoPesquisa() {
 		tableResultadoPesquisa.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
 	}
-
 
 	private void atualizarTabelaResultadoPesquisa() {
 		limparTabelaResultadoPesquisa();
