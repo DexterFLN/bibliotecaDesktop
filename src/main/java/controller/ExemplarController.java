@@ -14,25 +14,25 @@ import model.vo.Sessao;
 public class ExemplarController {
 
 	private Exemplar exemplar;
-	private ExemplarBO exemplarBO = new ExemplarBO();
+	private static ExemplarBO exemplarBO = new ExemplarBO();
 
-	public void salvarExemplar(Livro livro, String quantidade, boolean status) {
+	public static void salvarExemplar(Livro livro, String quantidade, boolean status) {
 
 		exemplarBO.salvar(livro, quantidade, status);
 
 	}
 
-	public ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
+	public static ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
 		return exemplarBO.consultarExemplarLivroSeletor(livroSeletor);
 		// TODO retornar todos os livros selecionando apenas o ano
 
 	}
 
-	public Exemplar consultarExemplar(int id) {
+	public static Exemplar consultarExemplar(int id) {
 		return exemplarBO.consultarExemplar(id);
 	}
 
-	public boolean consultarStatus(Exemplar exemplarAConsultar) {
+	public static boolean consultarStatus(Exemplar exemplarAConsultar) {
 		ExemplarBO bo = new ExemplarBO();
 		boolean status = bo.consultarStatus(exemplarAConsultar);
 		return status;
@@ -54,9 +54,9 @@ public class ExemplarController {
 		return ExemplarBO.consultarQuantidade(idLivro);
 	}
 
-	/*
-	 * public static boolean exemplarAlugado(Exemplar exemplar) { ExemplarBO
-	 * exemplarBO = new ExemplarBO(); return exemplarBO.exemplarAlugado(exemplar); }
-	 */
+	public static boolean excluir(Livro livro) {
+		return ExemplarBO.excluir(livro);
+		
+	}
 
 }

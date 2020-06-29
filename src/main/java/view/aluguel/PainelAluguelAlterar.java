@@ -69,7 +69,7 @@ public class PainelAluguelAlterar extends JPanel {
 							txtNome.setText(aluguel.getUsuario().getNome());
 							txtSobrenome.setText(aluguel.getUsuario().getSobrenome());							
 						} else {
-							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado não se encontra alugado!");
+							JOptionPane.showMessageDialog(null, "Erro ao renovar/devolver! O exemplar informado nao se encontra alugado!");
 						}
 					}
 				});
@@ -92,7 +92,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataDevolucao = new JFormattedTextField(maskFormatter);
 					add(txfDataDevolucao, "cell 3 3,grow");
 				} catch (ParseException e1){
-					 System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+					 System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			         e1.printStackTrace();
 				}
 				
@@ -119,7 +119,7 @@ public class PainelAluguelAlterar extends JPanel {
 					txfDataNascimento = new JFormattedTextField(maskFormatter);
 					add(txfDataNascimento, "cell 3 6,grow");
 				} catch (ParseException e1) {
-					System.out.println("Erro na máscara de formatação de data no painel de cadastro de usuário.");
+					System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			        e1.printStackTrace();
 				}
 				

@@ -2,6 +2,8 @@ package model.bo;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.dao.ExemplarDAO;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
@@ -32,6 +34,11 @@ public class ExemplarBO {
 
 	public static ArrayList<Exemplar> consultarQuantidade(int idLivro) {
 		return ExemplarDAO.construirExemplaresDoLivro(idLivro);
+	}
+
+	public static boolean excluir(Livro livro) {
+		boolean excluiu = ExemplarDAO.excluir(livro);
+		return excluiu;
 	}
 
 

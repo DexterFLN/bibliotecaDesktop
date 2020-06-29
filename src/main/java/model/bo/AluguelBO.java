@@ -23,7 +23,7 @@ public class AluguelBO {
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao registrar o ALUGUEL. O exemplar informado já se encontra alugado!");
+					"ERRO ao registrar o ALUGUEL. O exemplar informado ja se encontra alugado!");
 		}
 		
 		
@@ -47,7 +47,7 @@ public class AluguelBO {
 
 	public void devolver(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == true) {
-			if(aluguel.getDevolucaoPrevista().equals(LocalDate.now())) {
+			if(aluguel.getDevolucaoEfetiva().equals(LocalDate.now())) {
 				AluguelDAO.devolver(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null, 

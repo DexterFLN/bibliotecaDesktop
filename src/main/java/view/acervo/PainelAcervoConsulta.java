@@ -28,7 +28,7 @@ public class PainelAcervoConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
-	private String[] nomesColunas = { "Título", "Autor", "Editora", "Ano", "Código" };
+	private String[] nomesColunas = { "Titulo", "Autor", "Editora", "Ano", "Codigo" };
 	private ArrayList<Exemplar> exemplares;
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
@@ -45,7 +45,6 @@ public class PainelAcervoConsulta extends JPanel {
 				"[31.00px][30.00px][544.00px]"));
 
 		txtPesquisar = new JTextField();
-		txtPesquisar.setText("Digite um termo para Pesquisa");
 		add(txtPesquisar, "cell 1 0 6 1,grow");
 		txtPesquisar.setColumns(10);
 

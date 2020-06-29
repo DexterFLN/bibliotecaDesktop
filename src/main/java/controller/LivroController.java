@@ -80,25 +80,6 @@ public class LivroController {
 	
 	public Sessao validarSessao(Sessao sessao) {
 		return SessaoController.consultarSessao(sessao.getId());
-		/*
-		int sessao;
-		
-		if (cbSessao == "Fic��o" ) {
-			sessao = 1;
-		} else if (cbSessao == "Literatura Cl�ssica" ) {
-			sessao = 2;
-		} else if (cbSessao == "Romance" ) {
-			sessao = 3;
-		} else if (cbSessao == "Auto Ajuda" ) {
-			sessao = 4;
-		} else if (cbSessao == "Suspense" ) {
-			sessao = 5;
-		} else {
-			sessao = 6;
-		}
-		
-		return sessao;
-		*/
 	}
 	
 	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
@@ -111,6 +92,10 @@ public class LivroController {
 
 	public Livro consultarLivroPorIdParaExemplares(int id) {
 		return livroBo.consultarLivroPorIdParaExemplares(id);
+	}
+
+	public static boolean excluir(Livro livro) {
+		return LivroBO.excluir(livro);
 	}
 	
 }

@@ -34,20 +34,10 @@ public class AluguelController {
 
 	}
 
-	public Aluguel devolverAluguel(Aluguel aluguel) {
-		String dataFormulario = aluguel.getDevolucaoEfetiva()
-				.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-		String dataHoje = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-
-		if (aluguel.getDevolucaoEfetiva().equals(LocalDate.now())) {
-			AluguelBO bo = new AluguelBO();
-			bo.devolver(aluguel);
-		} else {
-			JOptionPane.showMessageDialog(null,
-					"Para efetuar a devoluÃ§Ã£o, a data informada deve ser igual a data de hoje!");
-		}
+	public Aluguel devolverAluguel(Aluguel aluguel) {		
+		AluguelBO bo = new AluguelBO();
+		bo.devolver(aluguel);
 		return aluguel;
-
 	}
 
 	public Aluguel consultarAluguelAtual(int idExemplar) {
@@ -62,15 +52,15 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O(s) campo(s): CÃ“DIGO DO LIVRO";
+			mensagem = "O(s) campo(s): CODIGO DO LIVRO";
 		}
 
 		if (txtCodUser.isEmpty()) {
 			if (mensagem == "") {
-				mensagem = "O(s) campo(s): CÃ“DIGO DO USUÃ�RIO ";
+				mensagem = "O(s) campo(s): CODIGO DO USUARIO ";
 
 			} else {
-				mensagem += ", CÃ“DIGO DO USUÃ�RIO";
+				mensagem += ", CODIGO DO USUARIO";
 			}
 		}
 
@@ -95,7 +85,7 @@ public class AluguelController {
 		String mensagem = "";
 
 		if (txtCodLivro.isEmpty()) {
-			mensagem = "O campo CÓDIGO DO EXEMPLAR não pode ficar vazio.";
+			mensagem = "O campo CODIGO DO EXEMPLAR nao pode ficar vazio.";
 		}
 
 		if (mensagem != "") {
@@ -117,7 +107,7 @@ public class AluguelController {
 		 ExemplarController controller = new ExemplarController();
 		 String mensagem = "";
 		if (controller.consultarStatus(exemplar) == true) {
-			mensagem += "Este livro já foi alugado.";
+			mensagem += "Este livro ja foi alugado.";
 		}
 		return mensagem;
 	 }

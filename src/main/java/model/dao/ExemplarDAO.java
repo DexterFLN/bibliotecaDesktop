@@ -315,4 +315,35 @@ public class ExemplarDAO {
 		}
 		return quantidade;
 	}
+
+	public static boolean excluir(Livro livro) {
+		
+		Connection connection = Banco.getConnection();
+		String sql0 = "SET foreign_key_checks = 0";
+		String sql = "DELETE FROM EXEMPLAR WHERE idLivro=?";
+		String sql1 = "SET foreign_key_checks = 1";
+		PreparedStatement preparedStatementCheck0 = Banco.getPreparedStatement(connection, sql0);
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		PreparedStatement preparedStatementCheck1 = Banco.getPreparedStatement(connection, sql1);
+
+		int quantidadeLinhasAfetadas = 0;
+		try {
+			preparedStatement.setInt(1, livro.getId());
+			preparedStatementCheck0.executeQuery(sql0);
+			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
+			preparedStatementCheck0.executeQuery(sql1);
+		} catch (SQLException ex) {
+			System.out.println("Erro ao excluir livro.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closePreparedStatement(preparedStatementCheck0);
+			Banco.closePreparedStatement(preparedStatementCheck1);
+			Banco.closeConnection(connection);
+		}
+
+		boolean excluiu = quantidadeLinhasAfetadas > 0;
+		return excluiu;
+		
+	}
 }

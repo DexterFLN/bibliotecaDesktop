@@ -19,6 +19,7 @@ import javax.swing.text.MaskFormatter;
 import controller.ExemplarController;
 import controller.LivroController;
 import controller.SessaoController;
+import model.vo.Exemplar;
 import model.vo.Livro;
 import model.vo.Sessao;
 import net.miginfocom.swing.MigLayout;
@@ -99,6 +100,8 @@ public class PainelAcervoAlterar extends JPanel {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("###");
 			txfQuantidade = new JFormattedTextField(maskFormatter);
+			txfQuantidade.setEnabled(false);
+			txfQuantidade.setEditable(false);
 			add(txfQuantidade, "cell 3 7,grow");
 		} catch (ParseException e1) {
 			System.out.println("Erro na mascara de formatacao de quantidade no painel de alterar livro.");
@@ -114,7 +117,42 @@ public class PainelAcervoAlterar extends JPanel {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				LivroController livroController = new LivroController();
+				ExemplarController exemplarController = new ExemplarController();
+				Livro livro = new Livro();
+				livro = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
+				
+				int resposta = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o livro " + livro.getNome() 
+					+ " e seu(s) " + ExemplarController.consultarQuantidade(livro.getId()).size() + " exemplar(es)?", "Excluir livro", JOptionPane.YES_NO_OPTION); 
+				
+				if (resposta == JOptionPane.YES_OPTION) {
+					int alugado = 0;
+					
+					ArrayList<Exemplar> exemplares = ExemplarController.consultarQuantidade(livro.getId());
+					for (Exemplar exemplar : exemplares) {
+						if (ExemplarController.consultarStatus(exemplar) == true) {
+							alugado += 1;
+						}
+					}
+					
+					if (alugado > 0) {
+						JOptionPane.showMessageDialog(null, "Impossivel excluir livro enquanto houver exemplares alugados!");
+					} else {
+						if (ExemplarController.excluir(livro) == true) {
+							if (LivroController.excluir(livro) == true) {
+								JOptionPane.showMessageDialog(null, "Livro e exemplares excluidos com sucesso!");
+							} else {
+								JOptionPane.showMessageDialog(null, "Erro ao excluir o livro!");
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro ao excluir os exemplares!");
+						}
+					}
+				}
+				
+				
+				
+				//mensagem += livroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(), txtEdicao.getText());
 			}
 		});
 
