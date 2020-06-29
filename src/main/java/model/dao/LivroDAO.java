@@ -118,11 +118,9 @@ public class LivroDAO {
 			livro.setEditora(resultSet.getString(5));
 			livro.setEdicao(resultSet.getInt(6));
 			livro.setAno(resultSet.getInt(7));
-
-			ExemplarDAO exemplarDAO = new ExemplarDAO();
-			ArrayList<Exemplar> exemplares = exemplarDAO.construirExemplaresDoLivro(livro.getId());
-			livro.setExemplares(exemplares);
-
+			
+			
+			
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir livro do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
