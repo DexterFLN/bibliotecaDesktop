@@ -51,6 +51,28 @@ public class AluguelDAO {
 		
 		return aluguel;
 	}
+	
+	public static boolean excluirAluguelPorUsuario(int id) {
+		Connection connection = Banco.getConnection();
+		String sql = "DELETE FROM ALUGUEL WHERE idUsuario=?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+
+		int quantidadeLinhasAfetadas = 0;
+		try {
+			preparedStatement.setInt(1, id);
+			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir aluguel por usuario.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		boolean excluiu = quantidadeLinhasAfetadas > 0;
+
+		return excluiu;
+	}
 
 	public static boolean excluir(Aluguel aluguel) {
 		Connection connection = Banco.getConnection();
