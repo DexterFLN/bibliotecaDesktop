@@ -25,4 +25,7 @@ public class UsuarioBO {
 	public static boolean existeUsuarioPorCpf(Usuario usuario) {
 		return UsuarioDAO.existeUsuarioPorCpf(usuario.getCpf());
 	}
+	public boolean excluirUsuario(Usuario usuario) {
+		return UsuarioDAO.excluir(usuario);
+	}
 }

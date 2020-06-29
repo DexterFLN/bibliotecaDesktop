@@ -202,7 +202,7 @@ public class PainelUsuarioAlterar extends JPanel {
 				endereco.setUf(cbUf.getSelectedItem().toString());
 				endereco.setCidade(txtCidade.getText());
 				endereco.setCep(txtCEP.getText());
-				
+
 				EnderecoController enderecoController = new EnderecoController();
 				String message = enderecoController.alterarEndereco(endereco);
 				JOptionPane.showMessageDialog(null, message, "Alterar Endereco", JOptionPane.INFORMATION_MESSAGE);
@@ -213,12 +213,24 @@ public class PainelUsuarioAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				Object[] options = { "Confirmar", "Cancelar" };
-				JOptionPane.showOptionDialog(null, "Deseja excluir o usuario?", "Informacao",
+				
+				int resposta = JOptionPane.showOptionDialog(null, "Deseja excluir o usuário?", "Informação",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+				String message = "";
+				if (resposta == 0) {
+					UsuarioController usuarioController = new UsuarioController();
+
+					if (usuarioController.excluirUsuario(usuarioAlterado)) {
+						message += "Usuário excluido com Sucesso!";
+					}else {
+						message += "Usuário não foi excluído.";
+					}
+				}
+				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		});
-		
+
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));

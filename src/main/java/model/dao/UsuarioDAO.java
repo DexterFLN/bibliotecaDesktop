@@ -74,12 +74,13 @@ public class UsuarioDAO {
 		String sql = "DELETE FROM USUARIO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
+		AluguelDAO.excluirAluguelPorUsuario(usuario.getId());
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setInt(1, usuario.getId());
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println("Erro ao excluir usu�rio.");
+			System.out.println("Erro ao excluir usuario.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
