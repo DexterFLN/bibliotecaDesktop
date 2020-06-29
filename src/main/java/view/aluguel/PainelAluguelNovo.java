@@ -67,7 +67,7 @@ public class PainelAluguelNovo extends JPanel {
 		});
 		add(btnPesquisarLivro, "cell 3 1,grow");
 
-		JLabel lblTitulo = new JLabel("T\u00EDtulo");
+		JLabel lblTitulo = new JLabel("Titulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
 
 		JLabel lblDataDevolucao = new JLabel("Data Devolucao:");
@@ -84,7 +84,7 @@ public class PainelAluguelNovo extends JPanel {
 			txfDataDevolucao = new JFormattedTextField(maskFormatter);
 			add(txfDataDevolucao, "cell 3 3,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			e1.printStackTrace();
 		}
 
@@ -105,7 +105,7 @@ public class PainelAluguelNovo extends JPanel {
 				Usuario usuarioSelecionado = new Usuario();
 				ArrayList<Usuario> usuarios = dao.consultarTodosUsuarios(10);
 
-				usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usu�rio", "Usu�rios",
+				usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuario", "Usuarios",
 						JOptionPane.QUESTION_MESSAGE, null, usuarios.toArray(), null);
 				txtCodigoUser.setText(Integer.toString(usuarioSelecionado.getId()));
 				txtNome.setText(usuarioSelecionado.getNome());
@@ -144,7 +144,7 @@ public class PainelAluguelNovo extends JPanel {
 			add(txfDataNascimento, "cell 3 7,grow");
 
 		} catch (ParseException e1) {
-			System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			e1.printStackTrace();
 		}
 
@@ -160,24 +160,28 @@ public class PainelAluguelNovo extends JPanel {
 				mensagem += controller.validarCamposAlugar(txtCodigoLivro.getText(), txtCodigoUser.getText(),
 						txfDataDevolucao.getText());
 				if (mensagem.isEmpty()) {
-					exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
 					usuario.setId(Integer.parseInt(txtCodigoUser.getText()));
-					aluguel.setDataLocacao(LocalDate.now());
-					aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
-					aluguel.setExemplar(exemplar);
-					aluguel.setUsuario(usuario);
+					if (AluguelController.existeAluguelAtrasado(usuario) == false) {
+						exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
+						aluguel.setDataLocacao(LocalDate.now());
+						aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+						aluguel.setExemplar(exemplar);
+						aluguel.setUsuario(usuario);
 
-					String mensagem2 = AluguelController.consultarStatus(exemplar);
-					if (mensagem2.isEmpty()) {
-						try {
-							controller.salvarAluguel(aluguel);
-						} catch (Exception ex) {
-							System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+						String mensagem2 = AluguelController.consultarStatus(exemplar);
+						if (mensagem2.isEmpty()) {
+							try {
+								controller.salvarAluguel(aluguel);
+							} catch (Exception ex) {
+								System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+							}
+						} else {
+							JOptionPane jOptionPane = new JOptionPane();
+							jOptionPane.showMessageDialog(null, mensagem2);
 						}
-					} else {
-						JOptionPane jOptionPane = new JOptionPane();
-						jOptionPane.showMessageDialog(null, mensagem2);
+						
 					}
+					
 
 				} else {
 					JOptionPane jOptionPane = new JOptionPane();

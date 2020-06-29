@@ -1,16 +1,12 @@
 package controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import model.bo.AluguelBO;
 import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
+import model.vo.Usuario;
 import util.ConversorData;
 
 public class AluguelController {
@@ -111,5 +107,11 @@ public class AluguelController {
 		}
 		return mensagem;
 	 }
+
+
+	public static boolean existeAluguelAtrasado(Usuario usuario) {
+		boolean existe = AluguelBO.existeAluguelAtrasado(usuario);
+		return existe;
+	}
 	
 }

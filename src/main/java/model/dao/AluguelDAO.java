@@ -389,4 +389,35 @@ public class AluguelDAO {
 
 		return sql;
 	}
+
+	public static boolean existeAluguelAtrasado(Usuario usuario) {
+		String sql = "SELECT * FROM ALUGUEL WHERE devolucaoPrevista < ? AND devolucaoEfetiva IS NULL and idUsuario = ?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
+
+		try {
+			preparedStatement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+			preparedStatement.setInt(2, usuario.getId());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Aluguel aluguelSelecionado = construirAluguelDoResultSet(resultSet);
+				alugueis.add(aluguelSelecionado);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os alugueis.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+		
+		return !alugueis.isEmpty();
+	}
 }

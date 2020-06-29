@@ -10,6 +10,7 @@ import model.dao.AluguelDAO;
 import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
+import model.vo.Usuario;
 
 public class AluguelBO {
 	
@@ -73,6 +74,16 @@ public class AluguelBO {
 
 	public ArrayList<Aluguel> consultarAluguelSeletor(AluguelSeletor aluguelSeletor) {
 		return AluguelDAO.consultarAluguelSeletor(aluguelSeletor) ;
+	}
+
+	public static boolean existeAluguelAtrasado(Usuario usuario) {
+		boolean existe = AluguelDAO.existeAluguelAtrasado(usuario);
+		if (existe == true) {
+			JOptionPane.showMessageDialog(null, "Não é possível alugar o exemplar ao usuário! "
+					+ "\nO usuario informado possui outro(s) exemplar(es) alugados que não foram devolvidos dentro da Data Prevista! "
+					+ "\nO usuario deve regularizar sua situacao antes de efetuar novo aluguel.");
+		}
+		return existe;
 	}
 
 }
