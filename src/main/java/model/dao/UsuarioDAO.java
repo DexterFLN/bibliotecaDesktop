@@ -228,7 +228,7 @@ public class UsuarioDAO {
 			sql += " WHERE ";
 
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().trim().isEmpty()) {
-				if (seletor.getBuscarPor() == "Código") {
+				if (seletor.getBuscarPor() == "Codigo") {
 					System.out.println("  - Seletor Código");
 					sql += " id = " + seletor.getTermoPesquisa().toString();
 				} else {
