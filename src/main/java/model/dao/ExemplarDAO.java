@@ -13,10 +13,11 @@ import model.seletor.ExemplarSeletor;
 import model.seletor.LivroSeletor;
 import model.vo.Exemplar;
 import model.vo.Livro;
+import model.vo.Usuario;
 
 public class ExemplarDAO {
-	
-	public Exemplar construirExemplarDoResultSet(ResultSet resultSet) {
+
+	public static Exemplar construirExemplarDoResultSet(ResultSet resultSet) {
 		Exemplar exemplar = new Exemplar();
 
 		try {
@@ -28,12 +29,12 @@ public class ExemplarDAO {
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir exemplar do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
-		} 
+		}
 
 		return exemplar;
 	}
-	
-	public Exemplar construirExemplaresDeLivroDoResultSet(ResultSet resultSet) {
+
+	public static Exemplar construirExemplaresDeLivroDoResultSet(ResultSet resultSet) {
 		Exemplar exemplar = new Exemplar();
 
 		try {
@@ -45,12 +46,12 @@ public class ExemplarDAO {
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir exemplar do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
-		} 
+		}
 
 		return exemplar;
 	}
-	
-	public Exemplar consultarExemplarLivro(int idLivro) {
+
+	public static Exemplar consultarExemplarLivro(int idLivro) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -76,9 +77,8 @@ public class ExemplarDAO {
 
 		return exemplar;
 	}
-	
-  
-	public Exemplar consultarExemplar(int id) {
+
+	public static Exemplar consultarExemplar(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -88,8 +88,8 @@ public class ExemplarDAO {
 		try {
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet != null && resultSet.next()) {
+
+			if (resultSet != null && resultSet.next()) {
 				exemplar.setId(resultSet.getInt("id"));
 
 				LivroDAO livroDAO = new LivroDAO();
@@ -102,24 +102,27 @@ public class ExemplarDAO {
 					exemplar.setStatus(false);
 				}
 			}
-			
+
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir exemplar do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
-		} 
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
 
 		return exemplar;
 	}
 
-
-	public ArrayList<Exemplar> construirExemplaresDoLivro(int idLivro) {
+	public static ArrayList<Exemplar> construirExemplaresDoLivro(int idLivro) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
 		ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
-		
+
 		try {
 			preparedStatement.setInt(1, idLivro);
 			resultSet = preparedStatement.executeQuery();
@@ -140,20 +143,20 @@ public class ExemplarDAO {
 		return exemplares;
 	}
 
-	public void salvar(Livro livro, String quantidade, boolean status) {
+	public static void salvar(Livro livro, String quantidade, boolean status) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO EXEMPLAR (idLivro, status) VALUES (?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
-		
+
 		Exemplar exemplar = new Exemplar();
 		int qtde = Integer.parseInt(quantidade);
 		int alugado = (status) ? 1 : 0;
 		alugado = 0;
-		
+
 		try {
-			
+
 			for (int i = 0; i < qtde; i++) {
 				preparedStatement.setInt(1, livro.getId());
 				preparedStatement.setInt(2, alugado);
@@ -174,10 +177,10 @@ public class ExemplarDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
+
 	}
-	
-	public ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
+
+	public static ArrayList<Exemplar> consultarExemplarLivroSeletor(LivroSeletor livroSeletor) {
 		LivroDAO livroDAO = new LivroDAO();
 		ArrayList<Livro> livros = new ArrayList<Livro>();
 		livros = livroDAO.consultarLivrosPorSeletor(livroSeletor);
@@ -185,7 +188,7 @@ public class ExemplarDAO {
 		for (int i = 0; i < idsLivros.length; i++) {
 			idsLivros[i] = livros.get(i).getId();
 		}
-		
+
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM EXEMPLAR WHERE idLivro IN (" + Arrays.toString(idsLivros) + ");";
 		sql = sql.replaceAll("\\[|\\]", "");
@@ -196,7 +199,7 @@ public class ExemplarDAO {
 		try {
 			resultSet = preparedStatement.executeQuery();
 
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				Exemplar exemplar = construirExemplarDoResultSet(resultSet);
 				exemplares.add(exemplar);
 			}
@@ -208,12 +211,11 @@ public class ExemplarDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		System.out.println(getClass().toString() + " Consulta Exemplar " + sql);
+		System.out.println(" Consulta Exemplar " + sql);
 		return exemplares;
 	}
-	
-  
-	public boolean statusAlugado(Exemplar exemplar) { 	// METODO CONCLUIDO
+
+	public static boolean statusAlugado(Exemplar exemplar) {
 
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
@@ -221,7 +223,7 @@ public class ExemplarDAO {
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
 		exemplar.setStatus(true);
-		
+
 		try {
 			preparedStatement.setBoolean(1, exemplar.isStatus());
 			preparedStatement.setInt(2, exemplar.getId());
@@ -229,19 +231,22 @@ public class ExemplarDAO {
 		} catch (SQLException ex) {
 			System.out.println(" Erro ao alterar status. Causa: " + ex.getMessage());
 
+		} finally {
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
 		}
 
 		return registrosAlterados > 0;
 	}
-	
-	public boolean statusDevolvido(Exemplar exemplar) { 	// METODO CONCLUIDO
+
+	public static boolean statusDevolvido(Exemplar exemplar) {
 		int registrosAlterados = 0;
 		String sql = "UPDATE EXEMPLAR SET status=? WHERE id=?";
 		Connection connection = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
 		exemplar.setStatus(false);
-		
+
 		try {
 			preparedStatement.setBoolean(1, exemplar.isStatus());
 			preparedStatement.setInt(2, exemplar.getId());
@@ -249,14 +254,17 @@ public class ExemplarDAO {
 		} catch (SQLException ex) {
 			System.out.println(" Erro ao alterar status. Causa: " + ex.getMessage());
 
+		} finally {
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
 		}
 
 		return registrosAlterados > 0;
 	}
-	
-	public boolean consultarStatus(Exemplar exemplar) { 	// METODO CONCLUIDO
+
+	public static boolean consultarStatus(Exemplar exemplar) {
 		Connection connection = Banco.getConnection();
-		String sql = "SELECT status FROM EXEMPLAR WHERE ID=?";
+		String sql = "SELECT status FROM EXEMPLAR WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 		ResultSet resultSet = null;
 		Exemplar statusExemplar = new Exemplar();
@@ -265,17 +273,107 @@ public class ExemplarDAO {
 		try {
 			preparedStatement.setInt(1, exemplar.getId());
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet != null && resultSet.next()) {
+
+			if (resultSet != null && resultSet.next()) {
 				statusExemplar.setStatus(resultSet.getBoolean("status"));
 			}
-			
+
 		} catch (SQLException ex) {
 			System.out.println("Erro ao consultar status do exemplar do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
-		} 
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
 		status = statusExemplar.isStatus();
-		
+
 		return status;
+	}
+
+	public static int pesquisarQuantidade(int idLivro) {
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT COUNT(LIVRO.id) FROM LIVRO INNER JOIN EXEMPLAR ON LIVRO.id = EXEMPLAR.idLivro WHERE LIVRO.id = ?";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+		int quantidade = 0;
+
+		try {
+			preparedStatement.setInt(1, idLivro);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet != null && resultSet.next()) {
+				quantidade = resultSet.getInt(1);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro ao consultar status do exemplar do resultSet.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		return quantidade;
+	}
+
+	public static boolean excluir(Livro livro) {
+
+		Connection connection = Banco.getConnection();
+		String sql0 = "SET foreign_key_checks = 0";
+		String sql = "DELETE FROM EXEMPLAR WHERE idLivro=?";
+		String sql1 = "SET foreign_key_checks = 1";
+		PreparedStatement preparedStatementCheck0 = Banco.getPreparedStatement(connection, sql0);
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		PreparedStatement preparedStatementCheck1 = Banco.getPreparedStatement(connection, sql1);
+
+		int quantidadeLinhasAfetadas = 0;
+		try {
+			preparedStatement.setInt(1, livro.getId());
+			preparedStatementCheck0.executeQuery(sql0);
+			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
+			preparedStatementCheck0.executeQuery(sql1);
+		} catch (SQLException ex) {
+			System.out.println("Erro ao excluir livro.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closePreparedStatement(preparedStatementCheck0);
+			Banco.closePreparedStatement(preparedStatementCheck1);
+			Banco.closeConnection(connection);
+		}
+
+		boolean excluiu = quantidadeLinhasAfetadas > 0;
+		return excluiu;
+
+	}
+
+	public static boolean existeIdDeExemplar(Exemplar exemplar) {
+		String sql = "SELECT * FROM EXEMPLAR WHERE id = ?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
+
+		try {
+			preparedStatement.setInt(1, exemplar.getId());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Exemplar exemplarSelecionado = construirExemplarDoResultSet(resultSet);
+				exemplares.add(exemplarSelecionado);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os exemplares.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return !exemplares.isEmpty();
 	}
 }
