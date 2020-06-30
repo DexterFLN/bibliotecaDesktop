@@ -14,10 +14,11 @@ import model.vo.Usuario;
 
 public class UsuarioDAO {
 
-	public Usuario salvar(Usuario usuario) {
+	public static Usuario salvar(Usuario usuario) {
+
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO USUARIO (idBiblioteca, idEndereco, nome, sobrenome, tipo, dataNascimento, email,"
-				+ " dddFixo, foneFixo, dddMovel, foneMovel) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				+ " ddd, fone, cpf) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
@@ -31,25 +32,20 @@ public class UsuarioDAO {
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
-			if (usuario.getDddFixo() != null && !usuario.getDddFixo().isEmpty()) {
-				preparedStatement.setString(8, usuario.getDddFixo());
+			if (usuario.getDdd() != null && !usuario.getDdd().isEmpty()) {
+				preparedStatement.setString(8, usuario.getDdd());
 			} else {
 				preparedStatement.setString(8, null);
 			}
-			if (usuario.getFoneFixo() != null && !usuario.getFoneFixo().isEmpty()) {
-				preparedStatement.setString(9, usuario.getFoneFixo());
+			if (usuario.getFone() != null && !usuario.getFone().isEmpty()) {
+				preparedStatement.setString(9, usuario.getFone());
 			} else {
 				preparedStatement.setString(9, null);
 			}
-			if (usuario.getDddMovel() != null && !usuario.getDddMovel().isEmpty()) {
-				preparedStatement.setString(10, usuario.getDddMovel());
+			if (usuario.getCpf() != null && !usuario.getCpf().isEmpty()) {
+				preparedStatement.setString(10, usuario.getCpf());
 			} else {
 				preparedStatement.setString(10, null);
-			}
-			if (usuario.getFoneMovel() != null && !usuario.getFoneMovel().isEmpty()) {
-				preparedStatement.setString(11, usuario.getFoneMovel());
-			} else {
-				preparedStatement.setString(11, null);
 			}
 
 			preparedStatement.executeUpdate();
@@ -72,17 +68,18 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public boolean excluir(Usuario usuario) {
+	public static boolean excluir(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM USUARIO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
 
+		AluguelDAO.excluirAluguelPorUsuario(usuario.getId());
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setInt(1, usuario.getId());
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 		} catch (SQLException ex) {
-			System.out.println("Erro ao excluir usu�rio.");
+			System.out.println("Erro ao excluir usuario.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -93,13 +90,12 @@ public class UsuarioDAO {
 		return excluiu;
 	}
 
-	// TODO pensar nas regras de neg�cio por tr�s do m�todo (verificar quais atributos podem ser nulos, e quais s�o obrigat�rios).
-	public boolean alterar(Usuario usuario) {
+	public static boolean alterar(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE USUARIO SET idBiblioteca=?, idEndereco=?, nome=?, sobrenome=?, tipo=?, dataNascimento=?, email=?,"
-				+ " dddFixo=?, foneFixo=?, dddMovel=?, foneMovel=? WHERE id=?";
+				+ " ddd=?, fone=? WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
-
+		System.out.println(sql);
 		int quantidadeLinhasAfetadas = 0;
 		try {
 			preparedStatement.setInt(1, usuario.getBiblioteca().getId());
@@ -110,32 +106,22 @@ public class UsuarioDAO {
 			preparedStatement.setDate(6, java.sql.Date.valueOf(usuario.getDataNascimento()));
 			preparedStatement.setString(7, usuario.getEmail());
 
-			if (usuario.getDddFixo() != null && !usuario.getDddFixo().isEmpty()) {
-				preparedStatement.setString(8, usuario.getDddFixo());
+			if (usuario.getDdd() != null && !usuario.getDdd().isEmpty()) {
+				preparedStatement.setString(8, usuario.getDdd());
 			} else {
 				preparedStatement.setString(8, null);
 			}
-			if (usuario.getFoneFixo() != null && !usuario.getFoneFixo().isEmpty()) {
-				preparedStatement.setString(9, usuario.getFoneFixo());
+			if (usuario.getFone() != null && !usuario.getFone().isEmpty()) {
+				preparedStatement.setString(9, usuario.getFone());
 			} else {
 				preparedStatement.setString(9, null);
 			}
-			if (usuario.getDddMovel() != null && !usuario.getDddMovel().isEmpty()) {
-				preparedStatement.setString(10, usuario.getDddMovel());
-			} else {
-				preparedStatement.setString(10, null);
-			}
-			if (usuario.getFoneMovel() != null && !usuario.getFoneMovel().isEmpty()) {
-				preparedStatement.setString(11, usuario.getFoneMovel());
-			} else {
-				preparedStatement.setString(11, null);
-			}
-			preparedStatement.setInt(12, usuario.getId());
+			preparedStatement.setInt(10, usuario.getId());
 
 			quantidadeLinhasAfetadas = preparedStatement.executeUpdate();
 
 		} catch (SQLException ex) {
-			System.out.println("Erro ao alterar usu�rio.");
+			System.out.println("Erro ao alterar usuario.");
 			System.out.println("Erro: " + ex.getMessage());
 		} finally {
 			Banco.closePreparedStatement(preparedStatement);
@@ -145,7 +131,7 @@ public class UsuarioDAO {
 		return quantidadeLinhasAfetadas > 0;
 	}
 
-	public Usuario construirUsuarioDoResultSet(ResultSet resultSet) {
+	public static Usuario construirUsuarioDoResultSet(ResultSet resultSet) {
 		Usuario usuario;
 		usuario = new Usuario();
 
@@ -159,10 +145,11 @@ public class UsuarioDAO {
 			usuario.setSobrenome(resultSet.getString("sobrenome"));
 			usuario.setDataNascimento(resultSet.getDate("dataNascimento").toLocalDate());
 			usuario.setEmail(resultSet.getString("email"));
-			usuario.setDddFixo(resultSet.getString("dddFixo"));
-			usuario.setFoneFixo(resultSet.getString("foneFixo"));
-			usuario.setDddMovel(resultSet.getString("dddMovel"));
-			usuario.setFoneMovel(resultSet.getString("foneMovel"));
+			usuario.setTipo(resultSet.getInt("tipo"));
+			usuario.setDdd(resultSet.getString("ddd"));
+			usuario.setFone(resultSet.getString("fone"));
+			usuario.setCpf(resultSet.getString("cpf"));
+
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir Biblioteca do ResultSet");
 		}
@@ -172,13 +159,13 @@ public class UsuarioDAO {
 			Endereco endereco = enderecoDAO.consultarEnderecoPorId(resultSet.getInt("idEndereco"));
 			usuario.setEndereco(endereco);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao construir Endere�o do ResultSet");
+			System.out.println("Erro ao construir Endereco do ResultSet");
 		}
 
 		return usuario;
 	}
 
-	public Usuario consultarUsuario(Usuario usuario) {
+	public static Usuario consultarUsuario(Usuario usuario) {
 		Connection connection = Banco.getConnection();
 		String sql = "SELECT * FROM USUARIO WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -189,7 +176,7 @@ public class UsuarioDAO {
 			preparedStatement.setInt(1, usuario.getId());
 			resultSet = preparedStatement.executeQuery();
 
-			if(resultSet != null && resultSet.next()) {
+			if (resultSet != null && resultSet.next()) {
 				usuario = construirUsuarioDoResultSet(resultSet);
 			}
 		} catch (SQLException ex) {
@@ -203,8 +190,8 @@ public class UsuarioDAO {
 
 		return usuario;
 	}
-	
-	public ArrayList<Usuario> consultarTodosUsuarios(int limit) {
+
+	public static ArrayList<Usuario> consultarTodosUsuarios(int limit) {
 		String sql = "SELECT * FROM USUARIO LIMIT ?";
 
 		Connection connection = Banco.getConnection();
@@ -230,42 +217,42 @@ public class UsuarioDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
+
 		return usuarios;
 	}
-	
-	private String criarFiltros(String sql, UsuarioSeletor seletor) {
+
+	private static String criarFiltros(String sql, UsuarioSeletor seletor) {
 
 		if (seletor.getTermoPesquisa() != null && !seletor.getTermoPesquisa().trim().isEmpty()) {
-			System.out.println(getClass().toString() + " - Seletor Termo Pesquisa Validado");
+			System.out.println(" - Seletor Termo Pesquisa Validado");
 			sql += " WHERE ";
-			
+
 			if (seletor.getBuscarPor() != null && !seletor.getBuscarPor().trim().isEmpty()) {
-				if(seletor.getBuscarPor() == "Código") {
-					System.out.println(getClass().toString() + "  - Seletor Código");
-					sql += " id = "+ seletor.getTermoPesquisa().toString();
+				if (seletor.getBuscarPor() == "Codigo") {
+					System.out.println("  - Seletor Código");
+					sql += " id = " + seletor.getTermoPesquisa().toString();
 				} else {
-					System.out.println(getClass().toString() + " - Seletor nome");
-					sql += " nome LIKE " + "'%"  + seletor.getTermoPesquisa() + "%'";
+					System.out.println(" - Seletor nome");
+					sql += " nome LIKE " + "'%" + seletor.getTermoPesquisa() + "%'";
 				}
-				
+
 			}
 
 		}
-	
-		System.out.println(	getClass().toString() + " SQL FILTROS: " + sql);
+
+		System.out.println(" SQL FILTROS: " + sql);
 		return sql;
 	}
 
-	public ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
+	public static ArrayList<Usuario> consultarUsuarioPorFiltro(UsuarioSeletor usuarioSeletor) {
 		String sql = "SELECT * FROM USUARIO";
 		Connection connection = Banco.getConnection();
-		
+
 		usuarioSeletor = usuarioSeletor.validarFitros(usuarioSeletor);
-		if(usuarioSeletor.temFiltro()) {
+		if (usuarioSeletor.temFiltro()) {
 			sql = criarFiltros(sql, usuarioSeletor);
 		}
-		
+		System.out.println("Consultar Usuario Filtro - " + sql);
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet resultSet = null;
@@ -287,9 +274,39 @@ public class UsuarioDAO {
 			Banco.closePreparedStatement(preparedStatement);
 			Banco.closeConnection(connection);
 		}
-		
+
 		return usuarios;
-		
+
+	}
+
+	public static boolean existeUsuarioPorCpf(String cpf) {
+		String sql = "SELECT * FROM USUARIO WHERE cpf = ?";
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
+				PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet = null;
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+		try {
+			preparedStatement.setString(1, cpf);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Usuario usuario = construirUsuarioDoResultSet(resultSet);
+				usuarios.add(usuario);
+			}
+
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os usuários.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return !usuarios.isEmpty();
+
 	}
 
 }
