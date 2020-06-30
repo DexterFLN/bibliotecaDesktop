@@ -35,11 +35,11 @@ public class Sessao {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Biblioteca getBiblioteca() {
 		return biblioteca;
 	}
-	
+
 	public void setBiblioteca(Biblioteca biblioteca) {
 		this.biblioteca = biblioteca;
 	}
@@ -50,6 +50,11 @@ public class Sessao {
 
 	public void setLivros(ArrayList<Livro> livros) {
 		this.livros = livros;
+	}
+
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 
 }

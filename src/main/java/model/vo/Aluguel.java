@@ -11,7 +11,6 @@ public class Aluguel {
 	private LocalDate devolucaoEfetiva;
 	private Usuario usuario;
 
-
 	public Aluguel(LocalDate dataLocacao, LocalDate devolucaoPrevista, LocalDate devolucaoEfetiva, Usuario usuario,
 			Exemplar exemplar) {
 		super();
