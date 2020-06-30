@@ -135,7 +135,7 @@ public class PainelAcervoConsulta extends JPanel {
 			novaLinhaDaTabela[3] = exemplar.getLivro().getSessao();
 			novaLinhaDaTabela[4] = exemplar.getLivro().getAno();
 			novaLinhaDaTabela[5] = exemplar.getId();
-			novaLinhaDaTabela[6] = exemplar.isStatus() ? "Alugado" : "Disponível";
+			novaLinhaDaTabela[6] = exemplar.isStatus() ? "Alugado" : "Disponivel";
 
 			model.addRow(novaLinhaDaTabela);
 		}
