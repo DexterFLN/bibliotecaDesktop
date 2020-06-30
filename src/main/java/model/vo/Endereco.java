@@ -4,14 +4,15 @@ public class Endereco {
 
 	private int id;
 	private String rua;
-	private int numeroRua;
+	private String numeroRua;
 	private String bairro;
 	private String cidade;
 	private String uf;
 	private String cep;
 
-	public Endereco(String rua, int numeroRua, String bairro, String cidade, String uf, String cep) {
+	public Endereco(int id, String rua, String numeroRua, String bairro, String cidade, String uf, String cep) {
 		super();
+		this.id = id;
 		this.rua = rua;
 		this.numeroRua = numeroRua;
 		this.bairro = bairro;
@@ -40,11 +41,11 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-	public int getNumeroRua() {
+	public String getNumeroRua() {
 		return numeroRua;
 	}
 
-	public void setNumeroRua(int numeroRua) {
+	public void setNumeroRua(String numeroRua) {
 		this.numeroRua = numeroRua;
 	}
 

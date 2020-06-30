@@ -10,7 +10,7 @@ import model.vo.Biblioteca;
 
 public class BibliotecaDAO {
 
-	public Biblioteca salvar(Biblioteca biblioteca) {
+	public static Biblioteca salvar(Biblioteca biblioteca) {
 		Connection connection = Banco.getConnection();
 		String sql = "INSERT INTO BIBLIOTECA (nome) VALUES (?)";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql,
@@ -37,7 +37,7 @@ public class BibliotecaDAO {
 		return biblioteca;
 	}
 
-	public boolean excluir(Biblioteca biblioteca) {
+	public static boolean excluir(Biblioteca biblioteca) {
 		Connection connection = Banco.getConnection();
 		String sql = "DELETE FROM BIBLIOTECA WHERE id= ?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -59,7 +59,7 @@ public class BibliotecaDAO {
 		return excluiu;
 	}
 
-	public boolean alterar(Biblioteca biblioteca) {
+	public static boolean alterar(Biblioteca biblioteca) {
 		Connection connection = Banco.getConnection();
 		String sql = "UPDATE BIBLIOTECA SET nome=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -79,7 +79,7 @@ public class BibliotecaDAO {
 		return alterou;
 	}
 
-	private Biblioteca construirBibliotecaDoResultSet(ResultSet resultSet) {
+	private static Biblioteca construirBibliotecaDoResultSet(ResultSet resultSet) {
 		Biblioteca biblioteca = new Biblioteca();
 		try {
 			biblioteca.setId(resultSet.getInt("id"));
@@ -91,7 +91,7 @@ public class BibliotecaDAO {
 		return biblioteca;
 	}
 
-	public ArrayList<Biblioteca> consultarTodas(int limit) {
+	public static ArrayList<Biblioteca> consultarTodas(int limit) {
 		Connection connection = Banco.getConnection();
 		String sql = " SELECT * FROM BIBLIOTECA LIMIT ?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -118,7 +118,7 @@ public class BibliotecaDAO {
 		return bibliotecas;
 	}
 
-	public Biblioteca consultarBiblioteca(Biblioteca biblioteca) {
+	public static Biblioteca consultarBiblioteca(Biblioteca biblioteca) {
 		Connection connection = Banco.getConnection();
 		String sql = " SELECT * FROM BIBLIOTECA WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -127,8 +127,8 @@ public class BibliotecaDAO {
 		try {
 			preparedStatement.setInt(1, biblioteca.getId());
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				biblioteca.setId(resultSet.getInt(1));
 				biblioteca.setNome(resultSet.getString(2));
 			}
@@ -142,8 +142,8 @@ public class BibliotecaDAO {
 		}
 		return biblioteca;
 	}
-	
-	public Biblioteca consultarBibliotecaPorId(int id) {
+
+	public static Biblioteca consultarBibliotecaPorId(int id) {
 		Connection connection = Banco.getConnection();
 		String sql = " SELECT * FROM BIBLIOTECA WHERE id=?";
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
@@ -154,8 +154,8 @@ public class BibliotecaDAO {
 			biblioteca = new Biblioteca();
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				biblioteca.setId(resultSet.getInt(1));
 				biblioteca.setNome(resultSet.getString(2));
 			}

@@ -2,25 +2,25 @@ package model.seletor;
 
 import util.Constants;
 
-public class ExemplarSeletor {
+public class AluguelSeletor {
 	private String termoPesquisa;
 	private String buscarPor;
-	private String ano;
 
 	public boolean temFiltro() {
 		boolean temFiltroPreenchido = false;
 
-		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty()) || !buscarPor.trim().isEmpty()
-				|| !ano.trim().isEmpty();
+		temFiltroPreenchido = (termoPesquisa != null && !termoPesquisa.trim().isEmpty()) || !buscarPor.trim().isEmpty();
 
 		return temFiltroPreenchido;
 	}
 
-	public LivroSeletor validarFitros(LivroSeletor seletor) {
+	public AluguelSeletor validarFitros(AluguelSeletor seletor) {
 
-		seletor.setAno(ano = seletor.getAno().equals(Constants.CMBANO) ? "" : seletor.getAno());
 		seletor.setTermoPesquisa(termoPesquisa = seletor.getTermoPesquisa().equals(Constants.PLACECHOLDEDRPESQUISA) ? ""
 				: seletor.getTermoPesquisa());
+
+		seletor.setBuscarPor(
+				buscarPor = seletor.getBuscarPor().equals(Constants.CMBBUSCAR) ? "" : seletor.getBuscarPor());
 
 		return seletor;
 	}
@@ -40,13 +40,4 @@ public class ExemplarSeletor {
 	public void setBuscarPor(String buscarPor) {
 		this.buscarPor = buscarPor;
 	}
-
-	public String getAno() {
-		return ano;
-	}
-
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
-
 }
