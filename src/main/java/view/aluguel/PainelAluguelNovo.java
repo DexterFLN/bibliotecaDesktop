@@ -26,6 +26,7 @@ import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
 
 public class PainelAluguelNovo extends JPanel {
+
 	private JTextField txtTitulo;
 	private JButton btnCadastrar;
 	private JTextField txtCodigoLivro;
@@ -46,7 +47,7 @@ public class PainelAluguelNovo extends JPanel {
 				"[159.00px,grow,fill][100px:154.00px,grow][218px,grow,center][172.00px,grow][144px,grow]",
 				"[45.00px][29.00][35.00px][27.00][34.00px][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 
-		JLabel lblExcluir = new JLabel("Digite o c\u00F3digo do Exemplar");
+		JLabel lblExcluir = new JLabel("Digite o codigo do Exemplar");
 		add(lblExcluir, "cell 1 1,alignx center,aligny center");
 
 		txtCodigoLivro = new JTextField();
@@ -66,10 +67,10 @@ public class PainelAluguelNovo extends JPanel {
 		});
 		add(btnPesquisarLivro, "cell 3 1,grow");
 
-		JLabel lblTitulo = new JLabel("T\u00EDtulo");
+		JLabel lblTitulo = new JLabel("Titulo");
 		add(lblTitulo, "cell 1 2,alignx left,aligny center");
 
-		JLabel lblDataDevolucao = new JLabel("Data Devolu\u00E7\u00E3o:");
+		JLabel lblDataDevolucao = new JLabel("Data Devolucao:");
 		add(lblDataDevolucao, "cell 3 2");
 
 		txtTitulo = new JTextField();
@@ -83,11 +84,11 @@ public class PainelAluguelNovo extends JPanel {
 			txfDataDevolucao = new JFormattedTextField(maskFormatter);
 			add(txfDataDevolucao, "cell 3 3,grow");
 		} catch (ParseException e1) {
-			System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			e1.printStackTrace();
 		}
 
-		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo do Usu\u00E1rio");
+		JLabel lblDigiteOCdigo = new JLabel("Digite o codigo do Usuario");
 		add(lblDigiteOCdigo, "cell 1 5,alignx center,aligny center");
 
 		txtCodigoUser = new JTextField();
@@ -96,7 +97,7 @@ public class PainelAluguelNovo extends JPanel {
 		txtCodigoUser.setColumns(10);
 		txtCodigoUser.setEnabled(false);
 
-		JButton btnPesquisarUsuario = new JButton("Pesquisar Usu\u00E1rio");
+		JButton btnPesquisarUsuario = new JButton("Pesquisar Usuario");
 		btnPesquisarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -104,7 +105,7 @@ public class PainelAluguelNovo extends JPanel {
 				Usuario usuarioSelecionado = new Usuario();
 				ArrayList<Usuario> usuarios = dao.consultarTodosUsuarios(10);
 
-				usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usu�rio", "Usu�rios",
+				usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuario", "Usuarios",
 						JOptionPane.QUESTION_MESSAGE, null, usuarios.toArray(), null);
 				txtCodigoUser.setText(Integer.toString(usuarioSelecionado.getId()));
 				txtNome.setText(usuarioSelecionado.getNome());
@@ -143,7 +144,7 @@ public class PainelAluguelNovo extends JPanel {
 			add(txfDataNascimento, "cell 3 7,grow");
 
 		} catch (ParseException e1) {
-			System.out.println("Erro na m�scara de formata��o de data no painel de cadastro de usu�rio.");
+			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
 			e1.printStackTrace();
 		}
 
@@ -159,23 +160,26 @@ public class PainelAluguelNovo extends JPanel {
 				mensagem += controller.validarCamposAlugar(txtCodigoLivro.getText(), txtCodigoUser.getText(),
 						txfDataDevolucao.getText());
 				if (mensagem.isEmpty()) {
-					exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
 					usuario.setId(Integer.parseInt(txtCodigoUser.getText()));
-					aluguel.setDataLocacao(LocalDate.now());
-					aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
-					aluguel.setExemplar(exemplar);
-					aluguel.setUsuario(usuario);
+					if (AluguelController.existeAluguelAtrasado(usuario) == false) {
+						exemplar.setId(Integer.parseInt(txtCodigoLivro.getText()));
+						aluguel.setDataLocacao(LocalDate.now());
+						aluguel.setDevolucaoPrevista(ConversorData.converterTextoEmData(txfDataDevolucao.getText()));
+						aluguel.setExemplar(exemplar);
+						aluguel.setUsuario(usuario);
 
-					String mensagem2 = AluguelController.exemplarAlugado(exemplar);
-					if (mensagem2.isEmpty()) {
-						try {
-							controller.salvarAluguel(aluguel);
-						} catch (Exception ex) {
-							System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+						String mensagem2 = AluguelController.consultarStatus(exemplar);
+						if (mensagem2.isEmpty()) {
+							try {
+								controller.salvarAluguel(aluguel);
+							} catch (Exception ex) {
+								System.out.println("Erro ao registrar o aluguel: " + ex.getMessage());
+							}
+						} else {
+							JOptionPane jOptionPane = new JOptionPane();
+							jOptionPane.showMessageDialog(null, mensagem2);
 						}
-					} else {
-						JOptionPane jOptionPane = new JOptionPane();
-						jOptionPane.showMessageDialog(null, mensagem2);
+
 					}
 
 				} else {

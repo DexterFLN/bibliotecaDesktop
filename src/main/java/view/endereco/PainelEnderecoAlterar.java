@@ -44,7 +44,6 @@ public class PainelEnderecoAlterar extends JPanel {
 		add(lblIdEndereco, "cell 1 1");
 
 		txtIdEndereco = new JTextField();
-		txtIdEndereco.setText("4");
 		add(txtIdEndereco, "cell 2 1,growx");
 		txtIdEndereco.setColumns(10);
 
@@ -62,12 +61,10 @@ public class PainelEnderecoAlterar extends JPanel {
 		add(lblCidade, "cell 3 2");
 
 		txtRua = new JTextField();
-		txtRua.setText("Flores Belta");
 		add(txtRua, "cell 1 3 2 1,growx");
 		txtRua.setColumns(10);
 
 		txtCidade = new JTextField();
-		txtCidade.setText("S\u00E3o Jos\u00E9");
 		add(txtCidade, "cell 3 3,growx");
 		txtCidade.setColumns(10);
 
@@ -81,7 +78,7 @@ public class PainelEnderecoAlterar extends JPanel {
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 			txtCep = new JFormattedTextField(mascaraCep);
 			txtCep.setBounds(330, 40, 110, 28);
-			txtCep.setText("12345678");
+			txtCep.setText("");
 			add(txtCep, "cell 3 7,growx");
 
 		} catch (ParseException e) {
@@ -90,7 +87,6 @@ public class PainelEnderecoAlterar extends JPanel {
 		}
 
 		txtNumRua = new JTextField();
-		txtNumRua.setText("55");
 		add(txtNumRua, "cell 1 5 2 1,growx");
 		txtNumRua.setColumns(10);
 
@@ -101,7 +97,6 @@ public class PainelEnderecoAlterar extends JPanel {
 		add(lblCep, "cell 3 6");
 
 		txtBairro = new JTextField();
-		txtBairro.setText("celta");
 		add(txtBairro, "cell 1 7 2 1,growx");
 		txtBairro.setColumns(10);
 
@@ -117,7 +112,7 @@ public class PainelEnderecoAlterar extends JPanel {
 
 		add(cbUf, "cell 3 5,growx");
 
-		btnSalvar = new JButton("Salvar Altera\u00E7\u00F5es");
+		btnSalvar = new JButton("Salvar Alteracoes");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -133,7 +128,7 @@ public class PainelEnderecoAlterar extends JPanel {
 				mensagem = EnderecoController.excluirEndereco(endereco);
 				if (mensagem.isEmpty()) {
 					JOptionPane jOptionPane = new JOptionPane();
-					jOptionPane.showMessageDialog(null, "Endereco excluído com sucesso!");
+					jOptionPane.showMessageDialog(null, "Endereco excluido com sucesso!");
 				} else {
 					JOptionPane jOptionPane = new JOptionPane();
 					jOptionPane.showMessageDialog(null, mensagem);

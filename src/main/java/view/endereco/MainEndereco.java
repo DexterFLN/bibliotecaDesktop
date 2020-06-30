@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 public class MainEndereco extends JPanel {
 
 	private JPanel painelEnderecoConsulta = new PainelEnderecoConsulta();
-	private JPanel painelEnderecoCadastro = new PainelEnderecoCadastro();
+
 	private JPanel painelEnderecoAlterar = new PainelEnderecoAlterar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;

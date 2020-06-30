@@ -2,7 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import model.bo.LivroBO;
 import model.seletor.LivroSeletor;
@@ -10,10 +12,11 @@ import model.vo.Livro;
 import model.vo.Sessao;
 
 public class LivroController {
-	
+
 	private LivroBO livroBo = new LivroBO();
 
-	public Livro criarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
+	public Livro criarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno,
+			Sessao sessao) {
 		Livro livro = new Livro();
 		livro.setNome(txtTitulo);
 		livro.setAutor(txtAutor);
@@ -22,84 +25,93 @@ public class LivroController {
 		livro.setAno(Integer.parseInt(cbAno));
 		livro.setSessao(sessao);
 
-        return livro;
-    }
-	
-	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String cbAno, Sessao sessao) {
-        Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, cbAno, sessao);
-        livroBo.salvar(livro);
-        return livro;
-    }
-	
-	public String validarCampos(String titulo, String autor, String editora, String edicao) {
+		return livro;
+	}
+
+	public Livro salvarLivro(String txtTitulo, String txtAutor, String txtEditora, String txtEdicao, String ano,
+			Sessao sessao) {
+		Livro livro = criarLivro(txtTitulo, txtAutor, txtEditora, txtEdicao, ano, sessao);
+		livroBo.salvar(livro);
+		return livro;
+	}
+
+	public static String validarCampos(String titulo, String autor, String editora, String edicao, String ano) {
 		String mensagem = "O(s) campo(s): ";
-		
-		if(titulo.isEmpty()) {
-			mensagem += "T�TULO";
+
+		if (titulo.isEmpty()) {
+			mensagem += "TITULO";
 		}
-		
-		if(autor.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
-				mensagem += "AUTOR ";
-				
+
+		if (autor.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
+				mensagem += "AUTOR";
+
 			} else {
 				mensagem += ", AUTOR";
 			}
 		}
-		
-		if(editora.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (editora.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "EDITORA";
-				
+
 			} else {
 				mensagem += ", EDITORA";
 			}
 		}
-		
-		if(edicao.isEmpty()) {
-			if(mensagem == "O(s) campo(s): ") {
+
+		if (edicao.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
 				mensagem += "EDICAO";
-				
+
 			} else {
 				mensagem += ", EDICAO";
 			}
 		}
-		
-		if(mensagem == "O(s) campo(s): ") {
+
+		if (ano.isEmpty()) {
+			if (mensagem == "O(s) campo(s): ") {
+				mensagem += "ANO";
+
+			} else {
+				mensagem += " e ANO";
+			}
+		}
+
+		if (mensagem == "O(s) campo(s): ") {
 			mensagem = "";
 			return mensagem;
 		} else {
-			mensagem += " n�o pode(m) ficar vazio(s).";
+			mensagem += " nao pode(m) ficar vazio(s).";
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
-		
+
 	}
-	
-	public int validarSessao(String cbSessao) {
-		
-		int sessao;
-		
-		if (cbSessao == "Fic��o" ) {
-			sessao = 1;
-		} else if (cbSessao == "Literatura Cl�ssica" ) {
-			sessao = 2;
-		} else if (cbSessao == "Romance" ) {
-			sessao = 3;
-		} else if (cbSessao == "Auto Ajuda" ) {
-			sessao = 4;
-		} else if (cbSessao == "Suspense" ) {
-			sessao = 5;
-		} else {
-			sessao = 6;
-		}
-		
-		return sessao;
+
+	public Sessao validarSessao(Sessao sessao) {
+		return SessaoController.consultarSessao(sessao.getId());
 	}
-	
-	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor){
+
+	public ArrayList<Livro> consultarLivrosPorSeletor(LivroSeletor seletor) {
 		return livroBo.consultarLivrosPorSeletor(seletor);
-		
 	}
-	
+
+	public Livro consultarLivroPorId(int id) {
+		return livroBo.consultarLivroPorId(id);
+	}
+
+	public Livro consultarLivroPorIdParaExemplares(int id) {
+		return livroBo.consultarLivroPorIdParaExemplares(id);
+	}
+
+	public static boolean excluir(Livro livro) {
+		boolean excluiu = LivroBO.excluir(livro);
+		return excluiu;
+	}
+
+	public static void alterar(Livro livro, Livro dadosNovos) {
+		LivroBO.alterar(livro, dadosNovos);
+	}
+
 }

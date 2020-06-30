@@ -93,20 +93,14 @@ public class Livro {
 	public void setExemplares(ArrayList<Exemplar> exemplares) {
 		this.exemplares = exemplares;
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		return "\nId do Livro: " + this.getId()  
-				+ "\nId da Sessão: " + this.getSessao().getId() 
-				+ "\nNome do Livro: " + this.getNome() 
-				+ "\nAutor: " + this.getAutor()
-				+ "\nEditora: " + this.getEditora()
-				+ "\nEdição: " + this.getEdicao()
-				+ "\nAno: " + this.getAno()
-				+ "\n";
-		
+
+		return "\nId do Livro: " + this.getId() + "\nId da Sessão: " + this.getSessao().getId() + "\nNome do Livro: "
+				+ this.getNome() + "\nAutor: " + this.getAutor() + "\nEditora: " + this.getEditora() + "\nEdição: "
+				+ this.getEdicao() + "\nAno: " + this.getAno() + "\n";
+
 	}
 
 }
-
