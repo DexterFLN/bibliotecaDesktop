@@ -1,9 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.bibliotecaDesktop</groupId>
-  <artifactId>bibliotecaDesktop</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>bibliotecaDesktop</name>
-  <description>Projeto de Gerenciamento de Biblioteca elaborado como requisito de aprovação para a Disciplina de Desenvolvimento Desktop, utilizando a linguagem JAVA.
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.bibliotecaDesktop</groupId>
+	<artifactId>bibliotecaDesktop</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>bibliotecaDesktop</name>
+	<description>Projeto de Gerenciamento de Biblioteca elaborado como requisito de aprovação para a Disciplina de Desenvolvimento Desktop, utilizando a linguagem JAVA.
 (2020-1 - ADS - SENAC Florianópolis)</description>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.20</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+		
+	</dependencies>
 </project>
