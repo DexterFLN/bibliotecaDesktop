@@ -109,22 +109,26 @@ public class PainelAcervoCadastro extends JPanel {
 
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, "Cadastrar livro '" + txtTitulo.getText() + "'?", "Cadastrar Livro",
-						JOptionPane.YES_NO_CANCEL_OPTION);
+				
 				String mensagem = "";
 				LivroController livroController = new LivroController();
 				ExemplarController exemplarController = new ExemplarController();
 				Sessao sessao = new Sessao();
 				Livro livro;
-				sessao = (Sessao) cbSessao.getSelectedItem();
-				livroController.validarSessao(sessao);
-				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-						txtEdicao.getText(), txfAno.getText().trim());
-				if (mensagem.isEmpty()) {
-					livro = livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-							txtEdicao.getText(), txfAno.getText(), sessao);
-					exemplarController.salvarExemplar(livro, (String) cbQuantidade.getSelectedItem(), false);
+				int resposta = JOptionPane.showConfirmDialog(null, "Cadastrar livro '" + txtTitulo.getText() + "'?", "Cadastrar Livro",
+						JOptionPane.YES_NO_OPTION);
+				if (resposta == JOptionPane.YES_OPTION) {
+					sessao = (Sessao) cbSessao.getSelectedItem();
+					livroController.validarSessao(sessao);
+					mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
+							txtEdicao.getText(), txfAno.getText().trim());
+					if (mensagem.isEmpty()) {
+						livro = livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
+								txtEdicao.getText(), txfAno.getText(), sessao);
+						exemplarController.salvarExemplar(livro, (String) cbQuantidade.getSelectedItem(), false);
+					}
 				}
+				
 			}
 		});
 
