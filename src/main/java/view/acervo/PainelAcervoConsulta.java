@@ -28,7 +28,7 @@ public class PainelAcervoConsulta extends JPanel {
 	private JTextField txtPesquisar;
 	private JTable tableResultadoPesquisa;
 	private JButton btnPesquisar;
-	private String[] nomesColunas = { "Titulo", "Autor", "Editora", "Ano", "Codigo" };
+	private String[] nomesColunas = { "Titulo", "Autor", "Editora","Sessao", "Ano", "Codigo", "Status"};
 	private ArrayList<Exemplar> exemplares;
 	private JComboBox cbAno;
 	private JComboBox cbBuscar;
@@ -93,6 +93,9 @@ public class PainelAcervoConsulta extends JPanel {
 				ExemplarController exemplarController = new ExemplarController();
 				exemplares = exemplarController.consultarExemplarLivroSeletor(livroSeletor);
 				System.out.println(exemplares.toString());
+				for (Exemplar exemplar : exemplares) {
+					exemplar.setStatus(ExemplarController.consultarStatus(exemplar));
+				}
 				atualizarTabelaResultadoPesquisa();
 			}
 		});
@@ -122,15 +125,17 @@ public class PainelAcervoConsulta extends JPanel {
 	private void atualizarTabelaResultadoPesquisa() {
 		limparTabelaResultadoPesquisa();
 		DefaultTableModel model = (DefaultTableModel) tableResultadoPesquisa.getModel();
-
+		
 		for (Exemplar exemplar : exemplares) {
-
-			Object[] novaLinhaDaTabela = new Object[5];
+			
+			Object[] novaLinhaDaTabela = new Object[7];
 			novaLinhaDaTabela[0] = exemplar.getLivro().getNome();
 			novaLinhaDaTabela[1] = exemplar.getLivro().getAutor();
 			novaLinhaDaTabela[2] = exemplar.getLivro().getEditora();
-			novaLinhaDaTabela[3] = exemplar.getLivro().getAno();
-			novaLinhaDaTabela[4] = exemplar.getId();
+			novaLinhaDaTabela[3] = exemplar.getLivro().getSessao();
+			novaLinhaDaTabela[4] = exemplar.getLivro().getAno();
+			novaLinhaDaTabela[5] = exemplar.getId();
+			novaLinhaDaTabela[6] = exemplar.isStatus() ? "Alugado" : "Disponível";
 
 			model.addRow(novaLinhaDaTabela);
 		}

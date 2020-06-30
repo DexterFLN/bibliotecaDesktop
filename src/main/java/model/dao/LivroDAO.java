@@ -198,7 +198,7 @@ public class LivroDAO {
 				} else if (seletor.getBuscarPor() == "Editora") {
 					System.out.println("LivroDAO.java - Seletor Editora");
 					sql += " editora LIKE " + "'%" + seletor.getTermoPesquisa().toString() + "%'";
-				} else if (seletor.getBuscarPor() == "Sessão") {
+				} else if (seletor.getBuscarPor() == "Sessao") {
 					System.out.println("LivroDAO.java - Seletor Sessão");
 					sql += " idSessao IN (SELECT ID FROM SESSAO WHERE NOME LIKE " + "'%"
 							+ seletor.getTermoPesquisa().toString() + "%')";
