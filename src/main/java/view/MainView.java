@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
 import view.acervo.MainAcervo;
@@ -34,8 +35,8 @@ public class MainView extends JFrame {
 	private JButton btnUsuario;
 
 	public MainView() {
-
-		this.setTitle("Principal Menu");
+		
+		this.setTitle("ATLAS");
 		this.setBounds(0, 0, 1384, 791);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setBackground(new Color(2, 83, 83));
@@ -45,7 +46,7 @@ public class MainView extends JFrame {
 		layeredPane.setBorder(null);
 		layeredPane.setBackground(new Color(2, 83, 83));
 		layeredPane.setLayout(new MigLayout("", "[][grow][]", "[][grow][]"));
-		
+
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(2, 83, 83));
 		layeredPane.add(panel_1, "cell 1 1,grow");
@@ -74,7 +75,7 @@ public class MainView extends JFrame {
 	public static void switchPanel(JPanel panel) {
 		panel_1.removeAll();
 		layeredPane.removeAll();
-		
+
 		layeredPane.setLayout(new MigLayout("", "[][grow][]", "[][grow][]"));
 		panel_1.setBackground(new Color(2, 83, 83));
 		panel_1.revalidate();
@@ -99,13 +100,15 @@ public class MainView extends JFrame {
 		menuBar.setLayout(new GridLayout(10, 1));
 		panelMenuLateral.add(menuBar, "cell 0 0,grow");
 
-		btnPesquisaGeral = new JButton("");
 		ImageIcon iconSearchMenu = new ImageIcon(MainView.class.getResource("/icons/searchFine.png"));
 		Image imageSearchMenu = iconSearchMenu.getImage();
-		Image newimgIconSearchMenu= imageSearchMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		Image newimgIconSearchMenu = imageSearchMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		iconSearchMenu = new ImageIcon(newimgIconSearchMenu);
+
+		btnPesquisaGeral = new JButton("");
 		btnPesquisaGeral.setBackground(new Color(229, 229, 229, 240));
 		btnPesquisaGeral.setIcon(iconSearchMenu);
+		btnPesquisaGeral.setBorderPainted(false);
 		menuBar.add(btnPesquisaGeral);
 
 		ImageIcon iconBooksMenu = new ImageIcon(MainView.class.getResource("/icons/books.png"));
@@ -116,20 +119,30 @@ public class MainView extends JFrame {
 		btnAcervo = new JButton("");
 		btnAcervo.setBackground(new Color(229, 229, 229, 240));
 		btnAcervo.setIcon(iconBooksMenu);
+		btnAcervo.setBorderPainted(false);
 		menuBar.add(btnAcervo);
-		
-		buttonEmprestimos = new JButton("");
-		
+
+
 		ImageIcon iconEmprestimoMenu = new ImageIcon(MainView.class.getResource("/icons/verify.png"));
 		Image imageEmprestimoMenu = iconEmprestimoMenu.getImage();
 		Image newimgIconEmprestimoMenu = imageEmprestimoMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		iconEmprestimoMenu = new ImageIcon(newimgIconEmprestimoMenu);
+		
+		buttonEmprestimos = new JButton("");
+		buttonEmprestimos.setBackground(new Color(229, 229, 229, 240));
 		buttonEmprestimos.setIcon(iconEmprestimoMenu);
+		buttonEmprestimos.setBorderPainted(false);
 		menuBar.add(buttonEmprestimos);
+
+		ImageIcon iconUserMenu = new ImageIcon(MainView.class.getResource("/icons/user.png"));
+		Image imageUserMenu = iconUserMenu.getImage();
+		Image newimgIconUserMenu = imageUserMenu.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		iconUserMenu = new ImageIcon(newimgIconUserMenu);
 		
 		btnUsuario = new JButton("");
-		btnUsuario.setIcon(new ImageIcon(MainView.class.getResource("/icons/icons8-usu\u00E1rio.png")));
-		
+		btnUsuario.setBackground(new Color(229, 229, 229, 240));
+		btnUsuario.setIcon(iconUserMenu);
+		btnUsuario.setBorderPainted(false);
 		menuBar.add(btnUsuario);
 
 		this.addListeners();
@@ -148,17 +161,63 @@ public class MainView extends JFrame {
 				switchPanel(mainAcervo);
 			}
 		});
-		
+
 		buttonEmprestimos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainAluguel);
 			}
 		});
-		
+
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(mainUsuario);
 			}
+		});
+		
+//		HOVER FUNCTIONS
+		
+		btnUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	btnUsuario.setBackground(new Color(2, 83, 83, 50));
+		    	btnUsuario.setToolTipText("Menu de Usuário");
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	btnUsuario.setBackground(UIManager.getColor(new Color(229, 229, 229, 240)));
+		    }
+		});
+		
+		buttonEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	buttonEmprestimos.setBackground(new Color(2, 83, 83, 50));
+		    	buttonEmprestimos.setToolTipText("Menu de Aluguel");
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	buttonEmprestimos.setBackground(UIManager.getColor(new Color(229, 229, 229, 240)));
+		    }
+		});
+
+		btnAcervo.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	btnAcervo.setBackground(new Color(2, 83, 83, 50));
+		    	btnAcervo.setToolTipText("Menu de Acervo");
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	btnAcervo.setBackground(UIManager.getColor(new Color(229, 229, 229, 240)));
+		    }
+		});
+		
+		btnPesquisaGeral.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	btnPesquisaGeral.setBackground(new Color(2, 83, 83, 50));
+		    	btnPesquisaGeral.setToolTipText("Pesquisa Geral");
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	btnPesquisaGeral.setBackground(UIManager.getColor(new Color(229, 229, 229, 240)));
+		    }
 		});
 		
 	}

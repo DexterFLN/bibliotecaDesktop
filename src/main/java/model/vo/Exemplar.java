@@ -1,8 +1,6 @@
 package model.vo;
 
-
 import java.util.ArrayList;
-
 
 public class Exemplar {
 
@@ -56,16 +54,12 @@ public class Exemplar {
 
 	@Override
 	public String toString() {
-		
-		return "\nId do Exemplar: " + this.getId() + "\nId do Livro: " + this.getLivro().getId() 
-				+ "\nId da Sessão: " + this.getLivro().getSessao().getId() 
-				+ "\nNome do Livro: " + this.getLivro().getNome() 
-				+ "\nAutor: " + this.getLivro().getAutor()
-				+ "\nEditora: " + this.getLivro().getEditora()
-				+ "\nEdição: " + this.getLivro().getEdicao()
-				+ "\nAno: " + this.getLivro().getAno()
-				+ "\n";
-		
+
+		return "\nId do Exemplar: " + this.getId() + "\nId do Livro: " + this.getLivro().getId() + "\nId da Sessão: "
+				+ this.getLivro().getSessao().getId() + "\nNome do Livro: " + this.getLivro().getNome() + "\nAutor: "
+				+ this.getLivro().getAutor() + "\nEditora: " + this.getLivro().getEditora() + "\nEdição: "
+				+ this.getLivro().getEdicao() + "\nAno: " + this.getLivro().getAno() + "\nStatus: "
+				+ ((this.isStatus() == true) ? "Alugado" : "Disponível") + "\n";
+
 	}
 }
-

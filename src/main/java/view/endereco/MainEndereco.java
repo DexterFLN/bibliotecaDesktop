@@ -1,23 +1,23 @@
-package view.usuario;
+package view.endereco;
 
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JMenuItem;
-import javax.swing.border.LineBorder;
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainUsuario extends JPanel {
+import javax.swing.JLayeredPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
-	protected JPanel painelUsuarioConsulta = new PainelUsuarioConsulta();
-	protected JPanel painelUsuarioCadastro = new PainelUsuarioCadastro();
-	protected JPanel painelUsuarioAlterar = new PainelUsuarioAlterar(null);
+import net.miginfocom.swing.MigLayout;
+
+public class MainEndereco extends JPanel {
+
+	private JPanel painelEnderecoConsulta = new PainelEnderecoConsulta();
+
+	private JPanel painelEnderecoAlterar = new PainelEnderecoAlterar();
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmCadastro;
@@ -27,8 +27,9 @@ public class MainUsuario extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MainUsuario() {
-		setLayout(new MigLayout("", "[735.00,grow][grow]", "[74.00px][grow]"));
+	public MainEndereco() {
+
+		setLayout(new MigLayout("", "[735.00,grow][grow]", "[49.00px][grow]"));
 
 		this.initialize();
 
@@ -43,18 +44,21 @@ public class MainUsuario extends JPanel {
 		menuBar = new JMenuBar();
 		panel.add(menuBar);
 
+		mntmCadastro = new JMenuItem("Cadastro");
+		menuBar.add(mntmCadastro);
+
 		mntmConsultar = new JMenuItem("Consultar");
 		menuBar.add(mntmConsultar);
 
-		mntmCadastro = new JMenuItem("Cadastro");
-		menuBar.add(mntmCadastro);
+		mntmAlterar = new JMenuItem("Alterar");
+		menuBar.add(mntmAlterar);
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		add(layeredPane, "cell 0 1 15 11,grow");
 
-		layeredPane.add(painelUsuarioConsulta, "cell 0 0,grow");
+		layeredPane.add(painelEnderecoConsulta, "cell 0 0,grow");
 
 		this.addListeners();
 	}
@@ -63,21 +67,25 @@ public class MainUsuario extends JPanel {
 
 		mntmCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioCadastro);
+				switchPanel(painelEnderecoConsulta);
 			}
 		});
 
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelUsuarioConsulta);
+				switchPanel(painelEnderecoConsulta);
+			}
+		});
+
+		mntmAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(painelEnderecoAlterar);
 			}
 		});
 
 	}
 
-	protected static void switchPanel(JPanel panel) {
-		System.out.println(panel.getClass());
-
+	private static void switchPanel(JPanel panel) {
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
@@ -87,5 +95,4 @@ public class MainUsuario extends JPanel {
 		layeredPane.revalidate();
 
 	}
-
 }
