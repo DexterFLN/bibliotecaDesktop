@@ -34,7 +34,7 @@ public class PainelAluguelConsulta extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelAluguelConsulta() {
-
+		
 		setLayout(new MigLayout("",
 				"[][93.00px,grow][146.00px,grow][79.00px,grow][134.00px,grow][grow][41px,grow,right][144px,grow][92px]",
 				"[31.00px][30.00px][544.00px,grow]"));

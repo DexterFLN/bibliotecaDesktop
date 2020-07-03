@@ -100,6 +100,7 @@ public class PainelPesquisaGeral extends JPanel {
 				livros = livroController.consultarLivrosPorSeletor(livroSeletor);
 				System.out.println(livros.toString());
 				atualizarTabelaResultadoPesquisa();
+				
 			}
 		});
 	}

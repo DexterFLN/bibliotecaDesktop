@@ -118,9 +118,7 @@ public class LivroDAO {
 			livro.setEditora(resultSet.getString(5));
 			livro.setEdicao(resultSet.getInt(6));
 			livro.setAno(resultSet.getInt(7));
-			
-			
-			
+
 		} catch (SQLException ex) {
 			System.out.println("Erro ao construir livro do resultSet.");
 			System.out.println("Erro: " + ex.getMessage());
@@ -200,7 +198,7 @@ public class LivroDAO {
 				} else if (seletor.getBuscarPor() == "Editora") {
 					System.out.println("LivroDAO.java - Seletor Editora");
 					sql += " editora LIKE " + "'%" + seletor.getTermoPesquisa().toString() + "%'";
-				} else if (seletor.getBuscarPor() == "Sessão") {
+				} else if (seletor.getBuscarPor() == "Sessao") {
 					System.out.println("LivroDAO.java - Seletor Sessão");
 					sql += " idSessao IN (SELECT ID FROM SESSAO WHERE NOME LIKE " + "'%"
 							+ seletor.getTermoPesquisa().toString() + "%')";
@@ -212,13 +210,14 @@ public class LivroDAO {
 				primeiro = false;
 			}
 
-			if (seletor.getAno() != null && !seletor.getAno().isEmpty()) {
-				if (!primeiro) {
-					sql += " AND ";
-				}
-				sql += " ano = " + seletor.getAno().toString();
+		}
+		if (seletor.getAno() != null && !seletor.getAno().isEmpty()) {
+			if (!primeiro) {
+				sql += " AND ";
+			}else {
+				sql += " WHERE ";
 			}
-
+			sql += " ano = " + seletor.getAno().toString();
 		}
 
 		System.out.println(" SQL FILTROS: " + sql);
