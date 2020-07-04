@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -112,6 +113,17 @@ public class LivroController {
 
 	public static void alterar(Livro livro, Livro dadosNovos) {
 		LivroBO.alterar(livro, dadosNovos);
+	}
+
+	private static ArrayList<Integer> consultarAnos() {
+		return LivroBO.consultarAnos();
+	}
+	
+	public static void preencherAnoDoBD(JComboBox cbAno) {
+		ArrayList<Integer> anos = LivroController.consultarAnos();
+		for(Integer ano : anos) {
+			cbAno.addItem(ano);
+		}
 	}
 
 }

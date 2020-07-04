@@ -58,7 +58,8 @@ public class PainelAcervoConsulta extends JPanel {
 		add(lblAno, "cell 3 1,alignx right,growy");
 
 		cbAno = new JComboBox();
-		cbAno = Utils.preenchercbAno(cbAno);
+		cbAno.addItem("SELECIONE");
+		LivroController.preencherAnoDoBD(cbAno);
 		add(cbAno, "cell 4 1,grow");
 
 		btnPesquisar = new JButton("Pesquisar");

@@ -51,4 +51,8 @@ public class LivroBO {
 		}
 		return alterou;
 	}
+
+	public static ArrayList<Integer> consultarAnos() {
+		return LivroDAO.consultarAnosExistentes();
+	}
 }

@@ -66,7 +66,8 @@ public class PainelPesquisaGeral extends JPanel {
 		add(lblAno, "cell 3 2,alignx right,growy");
 
 		cbAno = new JComboBox();
-		cbAno = Utils.preenchercbAno(cbAno);
+		cbAno.addItem("SELECIONE");
+		LivroController.preencherAnoDoBD(cbAno);
 		add(cbAno, "cell 4 2,grow");
 
 		btnPesquisar = new JButton("Pesquisar");
