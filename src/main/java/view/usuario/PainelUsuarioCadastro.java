@@ -210,10 +210,10 @@ public class PainelUsuarioCadastro extends JPanel {
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UsuarioController usuarioController = new UsuarioController();
-				String message = usuarioController.cadastrarUsuario(txtNome.getText(), txtSobrenome.getText(),
-						txtEmail.getText(), txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(),
-						txtCpf.getText(), bibliotecas.get(cbBiblioteca.getSelectedIndex()), txtRua.getText(),
-						txtNumero.getText(), txtBairro.getText(), cbUf, txtCidade.getText(), txtCEP.getText());
+				String message = usuarioController.cadastrarUsuario(txtNome.getText().toUpperCase(), txtSobrenome.getText().toUpperCase(),
+						txtEmail.getText().toLowerCase(), txtDdd.getText(), txtTelefone.getText(), txtDataNascimento.getText(),
+						txtCpf.getText(), bibliotecas.get(cbBiblioteca.getSelectedIndex()), txtRua.getText().toUpperCase(),
+						txtNumero.getText(), txtBairro.getText().toUpperCase(), cbUf, txtCidade.getText().toUpperCase(), txtCEP.getText());
 				JOptionPane.showMessageDialog(null, message, "Cadastrar Usuario", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});

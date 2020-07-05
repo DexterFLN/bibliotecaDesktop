@@ -133,8 +133,8 @@ public class PainelUsuarioConsulta extends JPanel {
 
 			Object[] novaLinhaDaTabela = new Object[8];
 			novaLinhaDaTabela[0] = usuario.getId();
-			novaLinhaDaTabela[1] = usuario.getNome();
-			novaLinhaDaTabela[2] = usuario.getSobrenome();
+			novaLinhaDaTabela[1] = usuario.getNome().toUpperCase();
+			novaLinhaDaTabela[2] = usuario.getSobrenome().toUpperCase();
 			
 			String cpf = usuario.getCpf();
 			try {
@@ -149,7 +149,7 @@ public class PainelUsuarioConsulta extends JPanel {
 			
 			novaLinhaDaTabela[4] = usuario.getTipo();
 			novaLinhaDaTabela[5] = usuario.getDataNascimento();
-			novaLinhaDaTabela[6] = usuario.getEmail();
+			novaLinhaDaTabela[6] = usuario.getEmail().toLowerCase();
 			novaLinhaDaTabela[7] = "(" + usuario.getDdd() + ") " + usuario.getFone();
 			System.out.println(usuario.getCpf());
 			model.addRow(novaLinhaDaTabela);

@@ -64,7 +64,7 @@ public class UsuarioController {
 		}
 
 		if (message.trim().isEmpty()) {
-			message += "Usuário cadastrado com sucesso!";
+			message += "Usuario cadastrado com sucesso!";
 		}
 
 		return message;

@@ -125,22 +125,22 @@ public class PainelAcervoAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String mensagem = "";
 
-				mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-						txtEdicao.getText(), txfAno.getText().trim());
+				mensagem += LivroController.validarCampos(txtTitulo.getText().toUpperCase(), txtAutor.getText().toUpperCase(), txtEditora.getText().toUpperCase(),
+						txtEdicao.getText().toUpperCase(), txfAno.getText().trim());
 				if (mensagem.isEmpty()) {
 					LivroController livroController = new LivroController();
 					Livro livroDoBD = new Livro();
 					livroDoBD = livroController.consultarLivroPorId(Integer.parseInt(txtCodigo.getText()));
 
 					Livro dadosNovos = new Livro();
-					dadosNovos.setNome(txtTitulo.getText());
+					dadosNovos.setNome(txtTitulo.getText().toUpperCase());
 					dadosNovos.setAno(Integer.parseInt(txfAno.getText().trim()));
-					dadosNovos.setEditora(txtEditora.getText());
+					dadosNovos.setEditora(txtEditora.getText().toUpperCase());
 					dadosNovos.setEdicao(Integer.parseInt(txtEdicao.getText()));
-					dadosNovos.setAutor(txtAutor.getText());
+					dadosNovos.setAutor(txtAutor.getText().toUpperCase());
 
 					Sessao sessao = new Sessao();
-					sessao.setNome(cbSessao.getSelectedItem().toString());
+					sessao.setNome(cbSessao.getSelectedItem().toString().toUpperCase());
 					sessao = SessaoController.consultarSessaoPorNome(sessao.getNome());
 					dadosNovos.setSessao(sessao);
 
@@ -162,13 +162,13 @@ public class PainelAcervoAlterar extends JPanel {
 		if (livro != null) {
 			System.out.println(livro.getId());
 			txtCodigo.setText(String.valueOf(livro.getId()));
-			txtTitulo.setText(livro.getNome());
-			txtAutor.setText(livro.getAutor());
-			txtEditora.setText(livro.getEditora());
+			txtTitulo.setText(livro.getNome().toUpperCase());
+			txtAutor.setText(livro.getAutor().toUpperCase());
+			txtEditora.setText(livro.getEditora().toUpperCase());
 			txtEdicao.setText(String.valueOf(livro.getEdicao()));
 
 			this.preencherSessao();
-			cbSessao.setSelectedItem(livro.getSessao().getNome());
+			cbSessao.setSelectedItem(livro.getSessao().getNome().toUpperCase());
 
 			txfAno.setText(String.valueOf(livro.getAno()));
 

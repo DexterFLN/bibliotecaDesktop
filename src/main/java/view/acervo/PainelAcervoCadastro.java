@@ -120,11 +120,11 @@ public class PainelAcervoCadastro extends JPanel {
 				if (resposta == JOptionPane.YES_OPTION) {
 					sessao = (Sessao) cbSessao.getSelectedItem();
 					livroController.validarSessao(sessao);
-					mensagem += LivroController.validarCampos(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-							txtEdicao.getText(), txfAno.getText().trim());
+					mensagem += LivroController.validarCampos(txtTitulo.getText().toUpperCase(), txtAutor.getText().toUpperCase(), txtEditora.getText().toUpperCase(),
+							txtEdicao.getText().toUpperCase(), txfAno.getText().trim());
 					if (mensagem.isEmpty()) {
-						livro = livroController.salvarLivro(txtTitulo.getText(), txtAutor.getText(), txtEditora.getText(),
-								txtEdicao.getText(), txfAno.getText(), sessao);
+						livro = livroController.salvarLivro(txtTitulo.getText().toUpperCase(), txtAutor.getText().toUpperCase(), txtEditora.getText().toUpperCase(),
+								txtEdicao.getText().toUpperCase(), txfAno.getText(), sessao);
 						exemplarController.salvarExemplar(livro, (String) cbQuantidade.getSelectedItem(), false);
 					}
 				}

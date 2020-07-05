@@ -203,11 +203,11 @@ public class PainelUsuarioAlterar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Endereco endereco = new Endereco();
 				endereco.setId(usuarioAlterado.getEndereco().getId());
-				endereco.setRua(txtRua.getText());
+				endereco.setRua(txtRua.getText().toUpperCase());
 				endereco.setNumeroRua(txtNumero.getText());
-				endereco.setBairro(txtBairro.getText());
-				endereco.setUf(cbUf.getSelectedItem().toString());
-				endereco.setCidade(txtCidade.getText());
+				endereco.setBairro(txtBairro.getText().toUpperCase());
+				endereco.setUf(cbUf.getSelectedItem().toString().toUpperCase());
+				endereco.setCidade(txtCidade.getText().toUpperCase());
 				endereco.setCep(txtCEP.getText());
 
 				EnderecoController enderecoController = new EnderecoController();
@@ -228,9 +228,9 @@ public class PainelUsuarioAlterar extends JPanel {
 					UsuarioController usuarioController = new UsuarioController();
 
 					if (usuarioController.excluirUsuario(usuarioAlterado)) {
-						message += "Usuário excluido com Sucesso!";
+						message += "Usuario excluido com Sucesso!";
 					} else {
-						message += "Usuário não foi excluído.";
+						message += "Usuario não foi excluído.";
 					}
 				}
 				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -241,9 +241,9 @@ public class PainelUsuarioAlterar extends JPanel {
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));
-				usuarioAlterado.setNome(txtNome.getText());
-				usuarioAlterado.setSobrenome(txtSobrenome.getText());
-				usuarioAlterado.setEmail(txtEmail.getText());
+				usuarioAlterado.setNome(txtNome.getText().toUpperCase());
+				usuarioAlterado.setSobrenome(txtSobrenome.getText().toUpperCase());
+				usuarioAlterado.setEmail(txtEmail.getText().toLowerCase());
 				usuarioAlterado.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
 				usuarioAlterado.setDdd(txtDdd.getText());
 				usuarioAlterado.setFone(txtTelefone.getText());
@@ -270,18 +270,18 @@ public class PainelUsuarioAlterar extends JPanel {
 		if (usuario != null) {
 			usuarioAlterado = usuario;
 			txtIdUsuario.setText(Integer.toString(usuario.getId()));
-			txtNome.setText(usuario.getNome());
-			txtSobrenome.setText(usuario.getSobrenome());
-			txtEmail.setText(usuario.getEmail());
+			txtNome.setText(usuario.getNome().toUpperCase());
+			txtSobrenome.setText(usuario.getSobrenome().toUpperCase());
+			txtEmail.setText(usuario.getEmail().toLowerCase());
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			txtDdd.setText(usuario.getDdd());
 			txtDataNascimento.setText(usuario.getDataNascimento().format(formatter));
 			txtTelefone.setText(usuario.getFone());
 
-			txtRua.setText(usuario.getEndereco().getRua());
+			txtRua.setText(usuario.getEndereco().getRua().toUpperCase());
 			txtNumero.setText(String.valueOf(usuario.getEndereco().getNumeroRua()));
-			txtBairro.setText(usuario.getEndereco().getBairro());
-			txtCidade.setText(usuario.getEndereco().getCidade());
+			txtBairro.setText(usuario.getEndereco().getBairro().toUpperCase());
+			txtCidade.setText(usuario.getEndereco().getCidade().toUpperCase());
 			txtCEP.setText(usuario.getEndereco().getCep());
 
 			this.preencherComboUf();

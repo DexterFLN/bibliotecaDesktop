@@ -60,15 +60,15 @@ public class PainelAluguelAlterar extends JPanel {
 					AluguelController aluguelController = new AluguelController();
 					Aluguel aluguel = new Aluguel();
 					aluguel = aluguelController.consultarAluguelAtual(idExemplar);
-					txtTitulo.setText(aluguel.getExemplar().getLivro().getNome());
+					txtTitulo.setText(aluguel.getExemplar().getLivro().getNome().toUpperCase());
 					LocalDate dataOriginal = aluguel.getDevolucaoPrevista();
 					String dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
 					txfDataDevolucao.setText(dataFormatada);
 					dataOriginal = aluguel.getUsuario().getDataNascimento();
 					dataFormatada = dataOriginal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
 					txfDataNascimento.setText(dataFormatada);
-					txtNome.setText(aluguel.getUsuario().getNome());
-					txtSobrenome.setText(aluguel.getUsuario().getSobrenome());
+					txtNome.setText(aluguel.getUsuario().getNome().toUpperCase());
+					txtSobrenome.setText(aluguel.getUsuario().getSobrenome().toUpperCase());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Erro ao renovar/devolver! O exemplar informado nao se encontra alugado!");
