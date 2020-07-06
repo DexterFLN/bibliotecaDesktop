@@ -1,9 +1,11 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.vo.Biblioteca;
@@ -168,6 +170,31 @@ public class BibliotecaDAO {
 			Banco.closeConnection(connection);
 		}
 		return biblioteca;
+	}
+
+	public static LocalDate consultarData() {
+
+		Connection connection = Banco.getConnection();
+		String sql = "SELECT CURDATE()";
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+
+		Date date = null;
+		try {
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				date = resultSet.getDate(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar Data e hora do banco.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+
+		return date.toLocalDate();
 	}
 
 }
