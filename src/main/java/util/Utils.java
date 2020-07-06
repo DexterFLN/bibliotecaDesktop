@@ -1,5 +1,6 @@
 package util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JComboBox;
+
+import model.dao.BibliotecaDAO;
 
 public class Utils {
 
@@ -56,5 +59,10 @@ public class Utils {
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+	
+	public static LocalDate consultarData() {
+	 return BibliotecaDAO.consultarData();		
+		 
+	}
 
 }
