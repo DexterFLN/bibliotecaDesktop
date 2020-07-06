@@ -82,7 +82,7 @@ public class PainelEnderecoAlterar extends JPanel {
 			add(txtCep, "cell 3 7,growx");
 
 		} catch (ParseException e) {
-			System.out.println("Erro na m�scara de formata��o de cep no painel de cadastro de Endere�o.");
+			System.out.println("Erro na mascara de formatacao de cep no painel de cadastro de Endereco.");
 			e.printStackTrace();
 		}
 

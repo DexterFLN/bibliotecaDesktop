@@ -103,9 +103,9 @@ public class PainelAluguelConsulta extends JPanel {
 			if (ExemplarController.existeIdDeExemplar(aluguel.getExemplar())) {
 				Object[] novaLinhaDaTabela = new Object[6];
 				novaLinhaDaTabela[0] = aluguel.getExemplar().getId();
-				novaLinhaDaTabela[1] = aluguel.getExemplar().getLivro().getNome();
-				novaLinhaDaTabela[2] = aluguel.getExemplar().getLivro().getAutor();
-				novaLinhaDaTabela[3] = aluguel.getUsuario().getNome();
+				novaLinhaDaTabela[1] = aluguel.getExemplar().getLivro().getNome().toUpperCase();
+				novaLinhaDaTabela[2] = aluguel.getExemplar().getLivro().getAutor().toUpperCase();
+				novaLinhaDaTabela[3] = aluguel.getUsuario().getNome().toUpperCase();
 				novaLinhaDaTabela[4] = aluguel.getDevolucaoPrevista();
 				novaLinhaDaTabela[5] = aluguel.getDevolucaoEfetiva();
 

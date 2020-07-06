@@ -62,7 +62,7 @@ public class PainelAluguelNovo extends JPanel {
 				Exemplar exemplarSelecionado = new Exemplar();
 				exemplarSelecionado.setId(Integer.valueOf(txtCodigoLivro.getText()));
 				exemplarSelecionado = dao.consultarExemplar(exemplarSelecionado.getId());
-				txtTitulo.setText(exemplarSelecionado.getLivro().getNome());
+				txtTitulo.setText(exemplarSelecionado.getLivro().getNome().toUpperCase());
 			}
 		});
 		add(btnPesquisarLivro, "cell 3 1,grow");
@@ -108,8 +108,8 @@ public class PainelAluguelNovo extends JPanel {
 				usuarioSelecionado = (Usuario) JOptionPane.showInputDialog(null, "Selecione um usuario", "Usuarios",
 						JOptionPane.QUESTION_MESSAGE, null, usuarios.toArray(), null);
 				txtCodigoUser.setText(Integer.toString(usuarioSelecionado.getId()));
-				txtNome.setText(usuarioSelecionado.getNome());
-				txtSobrenome.setText(usuarioSelecionado.getSobrenome());
+				txtNome.setText(usuarioSelecionado.getNome().toUpperCase());
+				txtSobrenome.setText(usuarioSelecionado.getSobrenome().toUpperCase());
 				LocalDate nascimento = usuarioSelecionado.getDataNascimento();
 				String formattedDate = nascimento.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
 				txfDataNascimento.setText(formattedDate);

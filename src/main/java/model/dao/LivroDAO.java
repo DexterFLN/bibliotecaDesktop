@@ -277,4 +277,47 @@ public class LivroDAO {
 
 		return livro;
 	}
+
+	public static ArrayList<Integer> consultarAnosExistentes() {
+		String sql = "SELECT DISTINCT(ano) FROM LIVRO";
+		
+		Connection connection = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(connection, sql);
+		ResultSet resultSet = null;
+		
+		ArrayList<Integer> anos = new ArrayList<Integer>();
+		
+		try {
+			
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next() && resultSet != null) {
+				Integer ano = construirAnosDoResultSet(resultSet);
+				anos.add(ano);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Erro consultar todos os anos existentes.");
+			System.out.println("Erro: " + ex.getMessage());
+		} finally {
+			Banco.closeResultSet(resultSet);
+			Banco.closePreparedStatement(preparedStatement);
+			Banco.closeConnection(connection);
+		}
+		
+		return anos;
+	}
+
+	private static Integer construirAnosDoResultSet(ResultSet resultSet) {
+		Integer ano = 0;
+
+		try {
+			ano = resultSet.getInt(1);
+
+		} catch (SQLException ex) {
+			System.out.println("Erro ao construir os anos do resultSet.");
+			System.out.println("Erro: " + ex.getMessage());
+		}
+
+		return ano;
+	}
 }

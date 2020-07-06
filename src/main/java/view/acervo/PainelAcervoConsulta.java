@@ -58,7 +58,8 @@ public class PainelAcervoConsulta extends JPanel {
 		add(lblAno, "cell 3 1,alignx right,growy");
 
 		cbAno = new JComboBox();
-		cbAno = Utils.preenchercbAno(cbAno);
+		cbAno.addItem("SELECIONE");
+		LivroController.preencherAnoDoBD(cbAno);
 		add(cbAno, "cell 4 1,grow");
 
 		btnPesquisar = new JButton("Pesquisar");
@@ -92,7 +93,7 @@ public class PainelAcervoConsulta extends JPanel {
 
 				ExemplarController exemplarController = new ExemplarController();
 				exemplares = exemplarController.consultarExemplarLivroSeletor(livroSeletor);
-				System.out.println(exemplares.toString());
+				System.out.println(exemplares.toString().toUpperCase());
 				for (Exemplar exemplar : exemplares) {
 					exemplar.setStatus(ExemplarController.consultarStatus(exemplar));
 				}
@@ -129,13 +130,13 @@ public class PainelAcervoConsulta extends JPanel {
 		for (Exemplar exemplar : exemplares) {
 			
 			Object[] novaLinhaDaTabela = new Object[7];
-			novaLinhaDaTabela[0] = exemplar.getLivro().getNome();
-			novaLinhaDaTabela[1] = exemplar.getLivro().getAutor();
-			novaLinhaDaTabela[2] = exemplar.getLivro().getEditora();
-			novaLinhaDaTabela[3] = exemplar.getLivro().getSessao();
+			novaLinhaDaTabela[0] = exemplar.getLivro().getNome().toUpperCase();
+			novaLinhaDaTabela[1] = exemplar.getLivro().getAutor().toUpperCase();
+			novaLinhaDaTabela[2] = exemplar.getLivro().getEditora().toUpperCase();
+			novaLinhaDaTabela[3] = exemplar.getLivro().getSessao().toString().toUpperCase();
 			novaLinhaDaTabela[4] = exemplar.getLivro().getAno();
 			novaLinhaDaTabela[5] = exemplar.getId();
-			novaLinhaDaTabela[6] = exemplar.isStatus() ? "Alugado" : "Disponivel";
+			novaLinhaDaTabela[6] = exemplar.isStatus() ? "ALUGADO" : "DISPONIVEL";
 
 			model.addRow(novaLinhaDaTabela);
 		}

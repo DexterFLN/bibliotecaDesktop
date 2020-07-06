@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import controller.UsuarioController;
 import model.seletor.UsuarioSeletor;
@@ -130,12 +133,23 @@ public class PainelUsuarioConsulta extends JPanel {
 
 			Object[] novaLinhaDaTabela = new Object[8];
 			novaLinhaDaTabela[0] = usuario.getId();
-			novaLinhaDaTabela[1] = usuario.getNome();
-			novaLinhaDaTabela[2] = usuario.getSobrenome();
-			novaLinhaDaTabela[3] = usuario.getCpf();
+			novaLinhaDaTabela[1] = usuario.getNome().toUpperCase();
+			novaLinhaDaTabela[2] = usuario.getSobrenome().toUpperCase();
+			
+			String cpf = usuario.getCpf();
+			try {
+				MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
+				maskFormatter.setValueContainsLiteralCharacters(false);
+				novaLinhaDaTabela[3] = maskFormatter.valueToString(cpf);
+			} catch (ParseException e) {
+				System.out.println("Erro na mascara de formatacao de CPF no painel de cadastro de usuario.");
+				e.printStackTrace();
+			}
+			
+			
 			novaLinhaDaTabela[4] = usuario.getTipo();
 			novaLinhaDaTabela[5] = usuario.getDataNascimento();
-			novaLinhaDaTabela[6] = usuario.getEmail();
+			novaLinhaDaTabela[6] = usuario.getEmail().toLowerCase();
 			novaLinhaDaTabela[7] = "(" + usuario.getDdd() + ") " + usuario.getFone();
 			System.out.println(usuario.getCpf());
 			model.addRow(novaLinhaDaTabela);

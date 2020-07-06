@@ -66,7 +66,8 @@ public class PainelPesquisaGeral extends JPanel {
 		add(lblAno, "cell 3 2,alignx right,growy");
 
 		cbAno = new JComboBox();
-		cbAno = Utils.preenchercbAno(cbAno);
+		cbAno.addItem("SELECIONE");
+		LivroController.preencherAnoDoBD(cbAno);
 		add(cbAno, "cell 4 2,grow");
 
 		btnPesquisar = new JButton("Pesquisar");
@@ -116,10 +117,10 @@ public class PainelPesquisaGeral extends JPanel {
 		for (Livro livro : livros) {
 
 			Object[] novaLinhaDaTabela = new Object[6];
-			novaLinhaDaTabela[0] = livro.getNome();
-			novaLinhaDaTabela[1] = livro.getAutor();
+			novaLinhaDaTabela[0] = livro.getNome().toUpperCase();
+			novaLinhaDaTabela[1] = livro.getAutor().toUpperCase();
 			novaLinhaDaTabela[2] = livro.getAno();
-			novaLinhaDaTabela[3] = livro.getEditora();
+			novaLinhaDaTabela[3] = livro.getEditora().toUpperCase();
 			novaLinhaDaTabela[4] = livro.getSessao().getNome();
 			novaLinhaDaTabela[5] = ExemplarController.consultarQuantidade(livro.getId()).size();
 
