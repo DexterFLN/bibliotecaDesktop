@@ -50,7 +50,7 @@ public class PainelAluguelAlterar extends JPanel {
 
 		JButton btnPesquisarAluguel = new JButton("Pesquisar");
 		btnPesquisarAluguel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { 
+			public void actionPerformed(ActionEvent e) {
 				ExemplarController exemplarController = new ExemplarController();
 				Exemplar exemplar = new Exemplar();
 				int idExemplar = Integer.valueOf(txtCodigoExemplar.getText());
@@ -82,6 +82,8 @@ public class PainelAluguelAlterar extends JPanel {
 
 		txtTitulo = new JTextField();
 		add(txtTitulo, "cell 1 3 2 1,grow");
+		txtTitulo.setEditable(false);
+		txtTitulo.setEnabled(true);
 		txtTitulo.setColumns(10);
 
 		JLabel lblAutor = new JLabel("Data Devolucao");
@@ -108,15 +110,21 @@ public class PainelAluguelAlterar extends JPanel {
 
 		txtNome = new JTextField();
 		add(txtNome, "cell 1 6,grow");
+		txtNome.setEditable(false);
+		txtNome.setEnabled(true);
 		txtNome.setColumns(10);
 
 		txtSobrenome = new JTextField();
 		add(txtSobrenome, "cell 2 6,grow");
+		txtSobrenome.setEditable(false);
+		txtSobrenome.setEnabled(true);
 		txtSobrenome.setColumns(10);
 
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 			txfDataNascimento = new JFormattedTextField(maskFormatter);
+			txfDataNascimento.setEditable(false);
+			txfDataNascimento.setEnabled(true);
 			add(txfDataNascimento, "cell 3 6,grow");
 		} catch (ParseException e1) {
 			System.out.println("Erro na mascara de formatacao de data no painel de cadastro de usuario.");
