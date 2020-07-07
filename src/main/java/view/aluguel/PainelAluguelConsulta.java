@@ -13,11 +13,17 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.AluguelController;
 import controller.ExemplarController;
+import controller.LivroController;
 import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Livro;
 import net.miginfocom.swing.MigLayout;
+import view.acervo.MainAcervo;
+import view.acervo.PainelAcervoAlterar;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class PainelAluguelConsulta extends JPanel {
@@ -29,6 +35,7 @@ public class PainelAluguelConsulta extends JPanel {
 	private ArrayList<Livro> livros;
 	private ArrayList<Aluguel> alugueis;
 	private JComboBox cbBuscar;
+	private PainelAluguelAlterar painelAluguelAlterar;
 
 	/**
 	 * Create the panel.
@@ -87,6 +94,19 @@ public class PainelAluguelConsulta extends JPanel {
 
 			}
 
+		});
+		
+		tableResultadoPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Cliquei na table na linha " + tableResultadoPesquisa.getSelectedRow());
+				System.out.println(alugueis.get(tableResultadoPesquisa.getSelectedRow() - 1));
+
+				painelAluguelAlterar = new PainelAluguelAlterar(
+						alugueis.get(tableResultadoPesquisa.getSelectedRow() - 1));
+				MainAluguel.switchPanel(painelAluguelAlterar);
+
+			}
 		});
 	}
 
