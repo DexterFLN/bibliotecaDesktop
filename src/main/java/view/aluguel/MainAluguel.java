@@ -17,12 +17,11 @@ public class MainAluguel extends JPanel {
 
 	private JPanel painelAluguelConsulta = new PainelAluguelConsulta();
 	private JPanel painelAluguelCadastro = new PainelAluguelNovo();
-	private JPanel painelAluguelAlterar = new PainelAluguelAlterar();
+	private JPanel painelAluguelAlterar = new PainelAluguelAlterar(null);
 	private static JLayeredPane layeredPane;
 	private JMenuBar menuBar;
 	private JMenuItem mntmNovo;
 	private JMenuItem mntmConsultar;
-	private JMenuItem mntmRenovarDevolver;
 
 	/**
 	 * Create the panel.
@@ -49,10 +48,6 @@ public class MainAluguel extends JPanel {
 		mntmNovo = new JMenuItem("Novo");
 		menuBar.add(mntmNovo);
 
-		mntmRenovarDevolver = new JMenuItem("Renovar/Devolver");
-
-		menuBar.add(mntmRenovarDevolver);
-
 		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		layeredPane.setLayout(new MigLayout("", "[grow]", "[grow]"));
@@ -76,16 +71,10 @@ public class MainAluguel extends JPanel {
 				switchPanel(painelAluguelConsulta);
 			}
 		});
-
-		mntmRenovarDevolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(painelAluguelAlterar);
-			}
-		});
 	}
 
-	private static void switchPanel(JPanel panel) {
-
+	protected static void switchPanel(JPanel panel) {
+ 
 		layeredPane.removeAll();
 		panel.setBackground(Color.WHITE);
 		panel.repaint();
