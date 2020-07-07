@@ -24,6 +24,8 @@ import model.vo.Exemplar;
 import model.vo.Usuario;
 import net.miginfocom.swing.MigLayout;
 import util.ConversorData;
+import util.Utils;
+import java.awt.Font;
 
 public class PainelAluguelNovo extends JPanel {
 
@@ -63,6 +65,9 @@ public class PainelAluguelNovo extends JPanel {
 				exemplarSelecionado.setId(Integer.valueOf(txtCodigoLivro.getText()));
 				exemplarSelecionado = dao.consultarExemplar(exemplarSelecionado.getId());
 				txtTitulo.setText(exemplarSelecionado.getLivro().getNome().toUpperCase());
+				LocalDate data = Utils.consultarData().plusDays(7);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				txfDataDevolucao.setText(Utils.consultarData().plusDays(7).format(formatter));
 			}
 		});
 		add(btnPesquisarLivro, "cell 3 1,grow");
@@ -92,10 +97,11 @@ public class PainelAluguelNovo extends JPanel {
 		add(lblDigiteOCdigo, "cell 1 5,alignx center,aligny center");
 
 		txtCodigoUser = new JTextField();
+		txtCodigoUser.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtCodigoUser.setEditable(false);
 		txtCodigoUser.setText("");
 		add(txtCodigoUser, "cell 2 5,grow");
 		txtCodigoUser.setColumns(10);
-		txtCodigoUser.setEnabled(false);
 
 		JButton btnPesquisarUsuario = new JButton("Pesquisar Usuario");
 		btnPesquisarUsuario.addActionListener(new ActionListener() {
