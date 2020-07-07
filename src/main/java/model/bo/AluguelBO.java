@@ -1,6 +1,5 @@
 package model.bo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -11,16 +10,17 @@ import model.seletor.AluguelSeletor;
 import model.vo.Aluguel;
 import model.vo.Exemplar;
 import model.vo.Usuario;
+import util.Utils;
 
 public class AluguelBO {
 
 	public void salvar(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == false) {
-			if (aluguel.getDevolucaoPrevista().isAfter(LocalDate.now())) {
+			if (aluguel.getDevolucaoPrevista().isAfter(Utils.consultarData())) {
 				AluguelDAO.salvar(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"Erro ao REGISTRAR o aluguel! \nA data informada deve ser superior à data atual!");
+						"Erro ao REGISTRAR o aluguel! \nA data informada deve ser superior ï¿½ data atual!");
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
@@ -31,29 +31,29 @@ public class AluguelBO {
 
 	public void renovar(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == true) {
-			if (aluguel.getDevolucaoPrevista().isAfter(LocalDate.now())) {
+			if (aluguel.getDevolucaoPrevista().isAfter(Utils.consultarData())) {
 				AluguelDAO.renovar(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"Erro ao RENOVAR o aluguel! \nA data informada deve ser superior à data atual!");
+						"Erro ao RENOVAR o aluguel! \nA data informada deve ser superior ï¿½ data atual!");
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao RENOVAR o aluguel. O exemplar informado não se encontra alugado!");
+					"ERRO ao RENOVAR o aluguel. O exemplar informado nï¿½o se encontra alugado!");
 		}
 	}
 
 	public void devolver(Aluguel aluguel) {
 		if (consultarStatus(aluguel.getExemplar()) == true) {
-			if (aluguel.getDevolucaoEfetiva().equals(LocalDate.now())) {
+			if (aluguel.getDevolucaoEfetiva().equals(Utils.consultarData())) {
 				AluguelDAO.devolver(aluguel);
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"Erro ao DEVOLVER o aluguel! \nA data informada deve ser IGUAL à data atual!");
+						"Erro ao DEVOLVER o aluguel! \nA data informada deve ser IGUAL ï¿½ data atual!");
 			}
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"ERRO ao DEVOLVER o ALUGUEL. O exemplar informado não se encontra alugado!");
+					"ERRO ao DEVOLVER o ALUGUEL. O exemplar informado nï¿½o se encontra alugado!");
 		}
 	}
 
@@ -76,8 +76,8 @@ public class AluguelBO {
 	public static boolean existeAluguelAtrasado(Usuario usuario) {
 		boolean existe = AluguelDAO.existeAluguelAtrasado(usuario);
 		if (existe == true) {
-			JOptionPane.showMessageDialog(null, "Não é possível alugar o exemplar ao usuário! "
-					+ "\nO usuario informado possui outro(s) exemplar(es) alugados que não foram devolvidos dentro da Data Prevista! "
+			JOptionPane.showMessageDialog(null, "Nï¿½o ï¿½ possï¿½vel alugar o exemplar ao usuï¿½rio! "
+					+ "\nO usuario informado possui outro(s) exemplar(es) alugados que nï¿½o foram devolvidos dentro da Data Prevista! "
 					+ "\nO usuario deve regularizar sua situacao antes de efetuar novo aluguel.");
 		}
 		return existe;
