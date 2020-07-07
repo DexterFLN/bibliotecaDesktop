@@ -156,7 +156,7 @@ public class PainelUsuarioCadastro extends JPanel {
 		txtEmail.setColumns(10);
 
 		try {
-			MaskFormatter maskFormatter = new MaskFormatter("########");
+			MaskFormatter maskFormatter = new MaskFormatter("#####-###");
 			txtCEP = new JFormattedTextField(maskFormatter);
 			add(txtCEP, "cell 1 11 2 1,grow");
 			txtCEP.setColumns(10);
@@ -184,7 +184,13 @@ public class PainelUsuarioCadastro extends JPanel {
 		add(txtRua, "cell 1 13 2 1,grow");
 		txtRua.setColumns(10);
 
-		txtNumero = new JTextField();
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("#########");
+			txtNumero = new JFormattedTextField(maskFormatter);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		add(txtNumero, "cell 4 13,grow");
 		txtNumero.setColumns(10);
 
