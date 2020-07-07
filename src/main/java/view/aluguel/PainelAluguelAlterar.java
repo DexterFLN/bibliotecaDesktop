@@ -47,6 +47,7 @@ public class PainelAluguelAlterar extends JPanel {
 		add(lblExcluir, "cell 1 1,alignx center,aligny center");
 
 		txtCodigoExemplar = new JTextField();
+		txtCodigoExemplar.setEditable(false);
 		add(txtCodigoExemplar, "cell 2 1,grow");
 		txtCodigoExemplar.setColumns(10);
 
