@@ -174,8 +174,6 @@ public class MainView extends JFrame {
 			}
 		});
 		
-//		HOVER FUNCTIONS
-		
 		btnUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		    	btnUsuario.setBackground(new Color(2, 83, 83, 50));

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class PainelUsuarioAlterar extends JPanel {
 	private JButton btnSalvarUsurio;
 	private JButton btnLimparAlteracoes;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private JTextField txtCpf;
+	private JLabel lblCpf;
 
 	/**
 	 * Create the panel.
@@ -114,17 +117,31 @@ public class PainelUsuarioAlterar extends JPanel {
 		JLabel lblDdd = new JLabel("DDD");
 		add(lblDdd, "cell 4 1,alignx left");
 
+		lblCpf = new JLabel("CPF");
+		add(lblCpf, "cell 5 5");
+
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
+			txtCpf = new JFormattedTextField(maskFormatter);
+			add(txtCpf, "cell 5 6,grow");
+			txtCpf.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de CPF no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+
+		btnSalvarUsurio = new JButton("Salvar Usuario");
+		add(btnSalvarUsurio, "cell 2 8,grow");
+
+		lblCep = new JLabel("CEP");
+		add(lblCep, "cell 1 10");
+
+		lblCidade = new JLabel("Cidade");
+		add(lblCidade, "cell 4 10,alignx left");
+
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
 
-			btnSalvarUsurio = new JButton("Salvar Usuario");
-			add(btnSalvarUsurio, "cell 2 8,grow");
-
-			lblCep = new JLabel("CEP");
-			add(lblCep, "cell 1 10");
-
-			lblCidade = new JLabel("Cidade");
-			add(lblCidade, "cell 4 10,alignx left");
 			txtDataNascimento = new JFormattedTextField(maskFormatter);
 			add(txtDataNascimento, "cell 4 6,grow");
 		} catch (ParseException e1) {
@@ -151,9 +168,15 @@ public class PainelUsuarioAlterar extends JPanel {
 		lblUf = new JLabel("UF");
 		add(lblUf, "cell 5 10,alignx left");
 
-		txtCEP = new JTextField();
-		add(txtCEP, "cell 1 11 2 1,grow");
-		txtCEP.setColumns(10);
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("########");
+			txtCEP = new JFormattedTextField(maskFormatter);
+			add(txtCEP, "cell 1 11 2 1,grow");
+			txtCEP.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de CEP no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
 
 		txtCidade = new JTextField();
 		add(txtCidade, "cell 4 11,grow");
@@ -232,26 +255,30 @@ public class PainelUsuarioAlterar extends JPanel {
 					} else {
 						message += "Usuario não foi excluído.";
 					}
+					JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
 				}
-				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		});
 
 		btnSalvarUsurio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String message = "";
 				usuarioAlterado.setId(Integer.parseInt(txtIdUsuario.getText()));
 				usuarioAlterado.setNome(txtNome.getText().toUpperCase());
 				usuarioAlterado.setSobrenome(txtSobrenome.getText().toUpperCase());
 				usuarioAlterado.setEmail(txtEmail.getText().toLowerCase());
-				usuarioAlterado.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
 				usuarioAlterado.setDdd(txtDdd.getText());
 				usuarioAlterado.setFone(txtTelefone.getText());
-				System.out.println(cbBiblioteca.getSelectedItem().toString() + cbBiblioteca.getSelectedIndex());
 				usuarioAlterado.setBiblioteca(bibliotecas.get(cbBiblioteca.getSelectedIndex()));
-
+				usuarioAlterado.setCpf(txtCpf.getText().replaceAll("[^0-9]", ""));
+				try {
+					usuarioAlterado.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento.getText()));
+				} catch (DateTimeParseException e) {
+					usuarioAlterado.setDataNascimento(null);
+				}
 				UsuarioController usuarioController = new UsuarioController();
-				String message = usuarioController.alterarUsuario(usuarioAlterado);
+				message += usuarioController.alterarUsuario(usuarioAlterado);
 
 				JOptionPane.showMessageDialog(null, message, "Alterar Usuario", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -283,7 +310,7 @@ public class PainelUsuarioAlterar extends JPanel {
 			txtBairro.setText(usuario.getEndereco().getBairro().toUpperCase());
 			txtCidade.setText(usuario.getEndereco().getCidade().toUpperCase());
 			txtCEP.setText(usuario.getEndereco().getCep());
-
+			txtCpf.setText(usuario.getCpf());
 			this.preencherComboUf();
 			cbUf.setSelectedItem(usuario.getEndereco().getUf());
 

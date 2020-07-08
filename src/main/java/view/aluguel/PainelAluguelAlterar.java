@@ -43,10 +43,10 @@ public class PainelAluguelAlterar extends JPanel {
 				"[45.00px][29.00][35.00px][27.00][27.00px][19.00px][30.00px][][30.00px][29.00px][37.00][grow][]"));
 
 		JLabel lblExcluir = new JLabel("Codigo do Exemplar");
-		lblExcluir.setEnabled(false);
 		add(lblExcluir, "cell 1 1,alignx center,aligny center");
 
 		txtCodigoExemplar = new JTextField();
+		txtCodigoExemplar.setEditable(false);
 		add(txtCodigoExemplar, "cell 2 1,grow");
 		txtCodigoExemplar.setColumns(10);
 
