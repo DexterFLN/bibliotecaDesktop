@@ -169,6 +169,7 @@ public class PainelUsuarioAlterar extends JPanel {
 		add(lblUf, "cell 5 10,alignx left");
 
 		try {
+
 			MaskFormatter maskFormatter = new MaskFormatter("########");
 			txtCEP = new JFormattedTextField(maskFormatter);
 			add(txtCEP, "cell 1 11 2 1,grow");
@@ -231,7 +232,7 @@ public class PainelUsuarioAlterar extends JPanel {
 				endereco.setBairro(txtBairro.getText().toUpperCase());
 				endereco.setUf(cbUf.getSelectedItem().toString().toUpperCase());
 				endereco.setCidade(txtCidade.getText().toUpperCase());
-				endereco.setCep(txtCEP.getText());
+				endereco.setCep(txtCEP.getText().replace("-", ""));
 
 				EnderecoController enderecoController = new EnderecoController();
 				String message = enderecoController.alterarEndereco(endereco);

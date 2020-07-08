@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Component;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -11,6 +12,7 @@ import model.bo.LivroBO;
 import model.seletor.LivroSeletor;
 import model.vo.Livro;
 import model.vo.Sessao;
+import util.Utils;
 
 public class LivroController {
 
@@ -79,15 +81,27 @@ public class LivroController {
 			}
 		}
 
+		if (mensagem != "O(s) campo(s): ") {
+			mensagem += " nao pode(m) ficar vazio(s).";
+		}
+		
+		if(Integer.parseInt(ano) > Utils.consultarData().getYear()) {
+			if (mensagem == "O(s) campo(s): ") {
+				mensagem = "O campo ANO deve ser igual ou menor que o ano atual.";
+
+			} else {
+				mensagem += "\nO campo ANO deve ser igual ou menor que o ano atual.";
+			}
+		}
+		
 		if (mensagem == "O(s) campo(s): ") {
 			mensagem = "";
 			return mensagem;
 		} else {
-			mensagem += " nao pode(m) ficar vazio(s).";
 			JOptionPane.showMessageDialog(null, mensagem);
 			return mensagem;
 		}
-
+	
 	}
 
 	public Sessao validarSessao(Sessao sessao) {
