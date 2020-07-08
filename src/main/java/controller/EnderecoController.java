@@ -38,11 +38,16 @@ public class EnderecoController {
 
 	public static String alterarEndereco(Endereco endereco) {
 		String mensagem = "";
-		boolean alterou = EnderecoBO.alterarEndereco(endereco);
-		if (!alterou) {
-			mensagem += "Não foi possível alterar este endereço.";
-		} else {
-			mensagem += "Endereço alterado com sucesso!";
+		
+		mensagem = validarEndereco(endereco);
+		
+		if(mensagem.trim().isEmpty()) {
+			boolean alterou = EnderecoBO.alterarEndereco(endereco);
+			if (!alterou) {
+				mensagem += "Não foi possível alterar este endereço.";
+			} else {
+				mensagem += "Endereço alterado com sucesso!";
+			}
 		}
 		return mensagem;
 	}
@@ -51,15 +56,22 @@ public class EnderecoController {
 		String message = "";
 
 		if (endereco.getCep().trim().replaceAll("[^0-9]", "").length() != 8) {
-			message += "\n CEP Inválido ";
-		} else if (endereco.getBairro().trim().isEmpty()) {
-			message += "\n Bairro Inválido ";
-		} else if (endereco.getCidade().trim().isEmpty()) {
-			message += "\n Cidade Inválida ";
-		} else if (endereco.getRua().trim().isEmpty()) {
-			message += "\n Rua Inválida";
-		} else if (endereco.getUf().trim().isEmpty()) {
-			message += "\n UF Inválido";
+			message += "\nCEP Inválido ";
+		} 
+		if (endereco.getBairro().trim().isEmpty()) {
+			message += "\nBairro Inválido ";
+		} 
+		if (endereco.getCidade().trim().isEmpty()) {
+			message += "\nCidade Inválida ";
+		} 
+		if (endereco.getRua().trim().isEmpty()) {
+			message += "\nRua Inválida";
+		} 
+		if (endereco.getUf().trim().isEmpty()) {
+			message += "\nUF Inválido";
+		}
+		if(endereco.getNumeroRua().trim().isEmpty()){
+			message += "\nNumero Rua Inválido";
 		}
 		return message;
 

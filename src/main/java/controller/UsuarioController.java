@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -40,20 +41,28 @@ public class UsuarioController {
 		message += EnderecoController.validarEndereco(endereco);
 
 		Usuario usuario = new Usuario();
-		usuario.setNome(txtNome.trim());
-		usuario.setSobrenome(txtSobrenome.trim());
-		usuario.setEmail(txtEmail.trim());
-		usuario.setDdd(txtDdd);
-		usuario.setFone(txtTelefone);
-		usuario.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento));
-		usuario.setBiblioteca(biblioteca);
-		usuario.setEndereco(endereco);
-		usuario.setCpf(cpf.trim().replaceAll("[^0-9]", ""));
 
-		message += validarUsuario(usuario);
+		if (message.trim().isEmpty()) {
+			usuario.setNome(txtNome.trim());
+			usuario.setSobrenome(txtSobrenome.trim());
+			usuario.setEmail(txtEmail.trim());
+			usuario.setDdd(txtDdd);
+			usuario.setFone(txtTelefone);
+
+			try {
+				usuario.setDataNascimento(ConversorData.converterTextoEmData(txtDataNascimento));
+			} catch (Exception e) {
+				usuario.setDataNascimento(null);
+			}
+			usuario.setBiblioteca(biblioteca);
+			usuario.setEndereco(endereco);
+			usuario.setCpf(cpf.trim().replaceAll("[^0-9]", ""));
+
+			message += validarUsuario(usuario);
+		}
 
 		if (UsuarioBO.existeUsuarioPorCpf(usuario)) {
-			message += "\n CPF ja utilizado! ";
+			message += "\nCPF ja utilizado! ";
 		}
 
 		if (message.trim().isEmpty()) {
@@ -73,17 +82,9 @@ public class UsuarioController {
 	public String alterarUsuario(Usuario usuarioAlterado) {
 		String message = "";
 
-		if (usuarioAlterado.getNome() == null || usuarioAlterado.getNome().trim().isEmpty()) {
-			message += "Nome inválido ";
-		} else if (usuarioAlterado == null || usuarioAlterado.getDdd().trim().length() != 2) {
-			message += "DDD inválido, o DDD deve ter 2 dígitos";
-		} else if (usuarioAlterado.getSobrenome() == null || usuarioAlterado.getSobrenome().trim().isEmpty()) {
-			message += "Sobrenome inválido ";
-		} else if (!Utils.emailValido(usuarioAlterado.getEmail())) {
-			message += "Email inválido ";
-		}
+		message = validarUsuario(usuarioAlterado);
 
-		if (message.isEmpty()) {
+		if (message.trim().isEmpty()) {
 			if (usuarioBO.alterarUsuario(usuarioAlterado)) {
 				message += "Usuário alterado com sucesso!";
 			} else {
@@ -101,17 +102,25 @@ public class UsuarioController {
 	private String validarUsuario(Usuario usuario) {
 		String message = "";
 		if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
-			message += "Nome inválido ";
-		} else if (usuario == null || usuario.getDdd().trim().length() != 2) {
-			message += "DDD inválido, o DDD deve ter 2 dígitos";
-		} else if (usuario.getSobrenome() == null || usuario.getSobrenome().trim().isEmpty()) {
-			message += "Sobrenome inválido ";
-		} else if (!Utils.emailValido(usuario.getEmail())) {
-			message += "Email inválido ";
-		} else if (usuario.getFone().length() > 8) {
-			message += "Telefone inválido ";
-		} else if (usuario.getCpf().trim().length() != 11) {
-			message += "CPF inválido";
+			message += "\nNome inválido ";
+		}
+		if (usuario == null || usuario.getDdd().trim().length() != 2) {
+			message += "\nDDD inválido, o DDD deve ter 2 dígitos";
+		}
+		if (usuario.getSobrenome() == null || usuario.getSobrenome().trim().isEmpty()) {
+			message += "\nSobrenome inválido ";
+		}
+		if (!Utils.emailValido(usuario.getEmail())) {
+			message += "\nEmail inválido ";
+		}
+		if (usuario.getFone().trim().length() > 8 || usuario.getFone().trim().length() < 8) {
+			message += "\nTelefone inválido ";
+		}
+		if (usuario.getCpf().trim().length() != 11) {
+			message += "\nCPF inválido";
+		}
+		if (usuario.getDataNascimento() == null) {
+			message += "\nData de nascimento inválida";
 		}
 		return message;
 
